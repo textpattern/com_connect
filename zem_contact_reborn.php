@@ -1,3 +1,131 @@
+<?php
+
+// This is a PLUGIN TEMPLATE for Textpattern CMS.
+
+// Copy this file to a new name like abc_myplugin.php.  Edit the code, then
+// run this file at the command line to produce a plugin for distribution:
+// $ php abc_myplugin.php > abc_myplugin-0.1.txt
+
+// Plugin name is optional.  If unset, it will be extracted from the current
+// file name. Plugin names should start with a three letter prefix which is
+// unique and reserved for each plugin author ("abc" is just an example).
+// Uncomment and edit this line to override:
+$plugin['name'] = 'zem_contact_reborn';
+
+// Allow raw HTML help, as opposed to Textile.
+// 0 = Plugin help is in Textile format, no raw HTML allowed (default).
+// 1 = Plugin help is in raw HTML.  Not recommended.
+# $plugin['allow_html_help'] = 1;
+
+$plugin['version'] = '4.5.0.0';
+$plugin['author'] = 'TXP Community';
+$plugin['author_uri'] = 'http://forum.textpattern.com/viewtopic.php?id=23728';
+$plugin['description'] = 'Form mailer for Textpattern';
+
+// Plugin load order:
+// The default value of 5 would fit most plugins, while for instance comment
+// spam evaluators or URL redirectors would probably want to run earlier
+// (1...4) to prepare the environment for everything else that follows.
+// Values 6...9 should be considered for plugins which would work late.
+// This order is user-overrideable.
+$plugin['order'] = '5';
+
+// Plugin 'type' defines where the plugin is loaded
+// 0 = public              : only on the public side of the website (default)
+// 1 = public+admin        : on both the public and admin side
+// 2 = library             : only when include_plugin() or require_plugin() is called
+// 3 = admin               : only on the admin side (no AJAX)
+// 4 = admin+ajax          : only on the admin side (AJAX supported)
+// 5 = public+admin+ajax   : on both the public and admin side (AJAX supported)
+$plugin['type'] = '0';
+
+// Plugin "flags" signal the presence of optional capabilities to the core plugin loader.
+// Use an appropriately OR-ed combination of these flags.
+// The four high-order bits 0xf000 are available for this plugin's private use
+if (!defined('PLUGIN_HAS_PREFS')) define('PLUGIN_HAS_PREFS', 0x0001); // This plugin wants to receive "plugin_prefs.{$plugin['name']}" events
+if (!defined('PLUGIN_LIFECYCLE_NOTIFY')) define('PLUGIN_LIFECYCLE_NOTIFY', 0x0002); // This plugin wants to receive "plugin_lifecycle.{$plugin['name']}" events
+
+$plugin['flags'] = '0';
+
+// Plugin 'textpack' is optional. It provides i18n strings to be used in conjunction with gTxt().
+// Syntax:
+// ## arbitrary comment
+// #@event
+// #@language ISO-LANGUAGE-CODE
+// abc_string_name => Localized String
+$plugin['textpack'] = <<<EOT
+#@public
+zem_contact_checkbox => Checkbox
+zem_contact_contact => Contact
+zem_contact_email => Email
+zem_contact_email_subject => {site} > Inquiry
+zem_contact_email_thanks => Thank you, your message has been sent.
+zem_contact_field_missing => Required field, &#8220;<strong>{field}</strong>&#8221; is missing.
+zem_contact_form_expired => The form has expired, please try again.
+zem_contact_form_used => The form was already submitted, please fill out a new form.
+zem_contact_general_inquiry => General inquiry
+zem_contact_invalid_email => &#8220;<strong>{email}</strong>&#8221; is not a valid email address.
+zem_contact_invalid_host => &#8220;<strong>{host}</strong>&#8221; is not a valid email host.
+zem_contact_invalid_utf8 => &#8220;<strong>{field}</strong>&#8221; contains invalid UTF-8 characters.
+zem_contact_invalid_value => Invalid value for &#8220;<strong>{field}</strong>&#8221;, &#8220;<strong>{value}</strong>&#8221; is not one of the available options.
+zem_contact_mail_sorry => Sorry, unable to send email.
+zem_contact_maxval_warning => &#8220;<strong>{field}</strong>&#8221; must not exceed {value}.
+zem_contact_max_warning => &#8220;<strong>{field}</strong>&#8221; must not contain more than {value} characters.
+zem_contact_message => Message
+zem_contact_minval_warning => &#8220;<strong>{field}</strong>&#8221; must be at least {value}.
+zem_contact_min_warning => &#8220;<strong>{field}</strong>&#8221; must contain at least {value} characters.
+zem_contact_name => Name
+zem_contact_option => Option
+zem_contact_pattern_warning => &#8220;<strong>{field}</strong>&#8221; does not match the pattern {value}.
+zem_contact_radio => Radio
+zem_contact_recipient => Recipient
+zem_contact_refresh => Follow this link if the page does not refresh automatically.
+zem_contact_secret => Secret
+zem_contact_send => Send
+zem_contact_send_article => Send article
+zem_contact_spam => We do not accept spam, thank you!
+zem_contact_text => Text
+zem_contact_to_missing => &#8220;<strong>To</strong>&#8221; email address is missing.
+#@public
+#@language fr-fr
+zem_contact_checkbox => Case à cocher
+zem_contact_contact => Contact
+zem_contact_email => Email
+zem_contact_email_subject => {site} > Demande
+zem_contact_email_thanks => Merci, votre message a bien été envoyé.
+zem_contact_field_missing => Champ obligatoire &#8220;<strong>{field}</strong>&#8221; manquant
+zem_contact_form_expired => Le délai du formulaire vient d'expirer. Veuillez recommencer.
+zem_contact_form_used => Le formulaire a déjà été soumis. Veuillez en remplir un nouveau.
+zem_contact_general_inquiry => Demande d'ordre général
+zem_contact_invalid_email => &#8220;<strong>{email}</strong>&#8221; n'est pas une adresse email valide
+zem_contact_invalid_host => &#8220;<strong>{host}</strong>&#8221; n'est pas correctement rédigé
+zem_contact_invalid_utf8 => &#8220;<strong>{field}</strong>&#8221; contient des caractères invalides
+zem_contact_invalid_value => cette valeur : &#8220;<strong>{value}</strong>&#8221; n'est pas correcte pour &#8220;<strong>{field}</strong>&#8221;.
+zem_contact_mail_sorry => Désolé, impossible d'envoyer votre message dans l'immédiat.
+zem_contact_maxval_warning => &#8220;<strong>{field}</strong>&#8221; ne peux pas être plus grand que {value}.
+zem_contact_max_warning => &#8220;<strong>{field}</strong>&#8221; dépasse {value} caractères.
+zem_contact_message => Message
+zem_contact_minval_warning => &#8220;<strong>{field}</strong>&#8221; doit être au moins {value}.
+zem_contact_min_warning => &#8220;<strong>{field}</strong>&#8221; doit contenir au moins {value} caractères.
+zem_contact_name => Nom
+zem_contact_option => Option
+zem_contact_pattern_warning => &#8220;<strong>{field}</strong>&#8221; doit correspondre à ce modèle {value}.
+zem_contact_radio => Bouton radio
+zem_contact_recipient => Destinataire
+zem_contact_refresh => Cliquez sur ce lien si la page ne se rafraîchissait pas automatiquement.
+zem_contact_secret => Secret
+zem_contact_send => Envoyer
+zem_contact_send_article => Envoyer l'article
+zem_contact_spam => Nous refusons catégoriquement les spam. Bien à vous.
+zem_contact_text => Texte
+zem_contact_to_missing => l'adresse mail &#8220;<strong>To</strong>&#8221; est manquante.
+EOT;
+// End of textpack
+
+if (!defined('txpinterface'))
+        @include_once('zem_tpl.php');
+
+# --- BEGIN PLUGIN CODE ---
 //<?php
 /**
  * zem_contact_reborn: A Textpattern CMS plugin for mail delivery of contact forms.
@@ -1329,3 +1457,656 @@ function zem_contact_if($atts, $thing = null)
 
 	return parse(EvalElse($thing, $cond));
 }
+
+# --- END PLUGIN CODE ---
+if (0) {
+?>
+<!--
+# --- BEGIN PLUGIN HELP ---
+ <style>
+   dt {margin: 1em 0em 0.5em; font-weight: bolder;}
+   pre {padding: 0.5em 1em; background: #eee; border: 1px dashed #ccc;}
+   h1, h2, h3, h3 code {font-family: sans-serif; font-weight: bold;}
+   h1, h2, h3 {margin-left: -1em;}
+   h2, h3 {margin-top: 2em;}
+   h1 {font-size: 3em;}
+   h2 {font-size: 2em;}
+   h3 {font-size: 1.5em;}
+   li code {font-weight: bold;}
+   li a code {font-weight: normal;}
+   .required, .warning {color:red;}
+ </style>
+
+h1(#top). Zem Contact Reborn
+
+Please reports bugs and problems with this plugin in "this forum thread":http://forum.textpattern.com/viewtopic.php?id=21144.
+
+p(required). This plugin requires a separate language plugin called @zem_contact_lang@ to be installed and activated to work properly.
+
+
+h2(#contents). Contents
+
+* <a href="#features">Features</a>
+* <a href="#start">Getting started</a>
+** <a href="#contactform">Contact form</a>
+** <a href="#sendarticle">Send article</a>
+* <a href="#faq">Frequently Asked Questions (FAQ)</a>
+* <a href="#tags">Tags</a>
+** <a href="#zc"> @<txp:zem_contact />@ </a>
+** <a href="#zc_text"> @<txp:zem_contact_text />@ </a>
+** <a href="#zc_email"> @<txp:zem_contact_email />@ </a>
+** <a href="#zc_textarea"> @<txp:zem_contact_textarea />@ </a>
+** <a href="#zc_submit"> @<txp:zem_contact_submit />@ </a>
+** <a href="#zc_select"> @<txp:zem_contact_select />@ </a>
+** <a href="#zc_checkbox"> @<txp:zem_contact_checkbox />@ </a>
+** <a href="#zc_radio"> @<txp:zem_contact_radio />@ </a>
+** <a href="#zc_secret"> @<txp:zem_contact_secret />@ </a>
+** <a href="#zc_server_info"> @<txp:zem_contact_serverinfo />@ </a>
+** <a href="#zc_send_article"> @<txp:zem_contact_send_article />@ </a>
+* <a href="#advanced">Advanced examples</a>
+** <a href="#show_error">Separate input and error forms</a>
+** <a href="#subject_form">User selectable subject field</a>
+** <a href="#to_form">User selectable recipient, without showing email addresses</a>
+* <a href="#styling">Styling</a>
+* <a href="#history">History</a>
+* <a href="#credits">Credits</a>
+* <a href="#api">Plugin API and callback events</a>
+
+
+
+h2(#features). Features
+
+* Arbitrary text fields can be specified, with min/max/required settings for validation.
+* Email address validation, including a check for a valid MX record (Unix only).
+* Safe escaping of input data.
+* UTF-8 safe.
+* Accessible form layout, including @<label>@, @<legend>@ and @<fieldset>@ tags.
+* Various classes and ids to allow easy styling of all parts of the form.
+* A separate language plug-in to enable easy localisation.
+* Spam prevention API (used by Tranquillo's @pap_contact_cleaner@ plugin).
+
+"Back to top":#top
+
+
+h2(#start). Getting started
+
+
+h3(#contactform). Contact form
+
+The simplest form is shown below, which produces a default form with Name, Email and Message fields. Email will be delivered to recipient@example.com, with the user's supplied email as the "From:" address.
+
+bc. <txp:zem_contact to="recipient@example.com" />
+
+To specify fields explicitly, use something like this:
+
+bc. <txp:zem_contact to="recipient@example.com">
+  <txp:zem_contact_email />
+  <txp:zem_contact_text label="Phone" min=7 max=15/>
+  <txp:zem_contact_textarea label="Your question" />
+  <txp:zem_contact_submit label="Send" />
+</txp:zem_contact>
+
+Alternatively, place the field specifications in a Textpattern form, and call it like this:
+
+bc. <txp:zem_contact to="recipient@example.com" form="mycontactform" />
+
+"Back to top":#top
+
+
+h3(#sendarticle). Send article
+
+Within the context of an individual article, this plugin can be used to send the article (or excerpt, if it exists) to an email address specified by the visitor. This requires at least two tags:
+* @zem_contact@, to create form that is initially hidden by setting the @send_article@ attribute. 
+* @zem_contact_send_article@, to create a 'send article' link which reveals the aforementioned form when clicked.
+
+bc. <txp:zem_contact send_article="1" />
+<txp:zem_contact_send_article />
+
+p. By default the form contains fields for your name and email address, the recipient's email address and a personal message, but similar to contact forms you can create your own form layout. Some things you need to know:
+* Set the @send_article@ attribute to @1@ in the @zem_contact@ tag.
+* Use a @zem_contact_email@ tag with the @send_article@ attribute set to @1@. This field will be used as the recipient email address.
+
+bc.. <txp:zem_contact to="you@example.com" send_article="1">
+  <txp:zem_contact_email label="Recipient Email" send_article="1" />
+  <txp:zem_contact_email label="Your Email" />
+  <txp:zem_contact_submit label="Send Article" />
+</txp:zem_contact>
+
+<txp:zem_contact_send_article />
+
+p. "Back to top":#top
+
+
+h2(#faq). Frequently Asked Questions (FAQ)
+
+; How do I remove the legend and fieldset surrounding the contact form?
+: Set the @label@ attribute to an empty value in the @zem_contact@ tag.
+; No email is sent. How do I diagnose and fix the problem?
+: First try a simple contact form, using only the @zem_contact@ tag with the @to@ attribute set to a valid email address. If that doesn't send email, fill out the "SMTP envelope sender address":index.php?event=prefs&step=advanced_prefs in TXP's advanced preferences on the admin tab. If that doesn't help either, take a look at your mail server log files to see what the problem is.
+; Which tag do I use to create the submit button?
+: Just use normal HTML code to create a submit button. For historical reasons this plugin still provides the zem_contact_submit tag, but it provides no extra functionality.
+; How can I get a unique (order) number in the subject of each email?
+: Try using the "rvm_counter":http://vanmelick.com/txp tag in the @subject@ attribute of the @zem_contact@ tag.
+; I want to use the contact form in an article list (one form for each article), but how do I make each form unique?
+: You can make each form unique by making one of its attribute values unique. See previous question for an example of how to do this with the @subject@ attribute.
+; Send article: can I let people specify multiple recipients?
+: No. The 'send article' functionality is spammy enough as it is right now.
+; Send article: can I show the contact form without having to click a link first?
+: Sure, put this just above the @zem_contact@ tag: @<txp:php>$_GET['zem_contact_send_article']='yes';</txp:php>@
+; How can I use this form to upload files?
+: You can't, but have a look at the "sed_afu":http://txp-plugins.netcarving.com/ (anonymous file upload) and "mem_form":https://bitbucket.org/Manfre/txp-plugins/downloads/ plugins.
+; Can I use this plugin to send HTML email?
+: No. HTML email is evil, but if you insist, have a look at the "mem_form":https://bitbucket.org/Manfre/txp-plugins/downloads/ and "mem_postmaster":https://bitbucket.org/Manfre/txp-plugins/downloads/ plugins
+; Can I use this plugin to send newsletters?
+: Nope, but for that purpose you can use the "mem_postmaster":https://bitbucket.org/Manfre/txp-plugins/downloads/ plugin.
+; I have a question that's not listed here
+: First read the plugin documentation (the page you're on right now) once more. If that doesn't answer your question, visit the textpattern forum (see link at the top of this page).
+
+p. "Back to top":#top
+
+
+h2(#tags). Tags
+
+<a href="#zc">@<txp:zem_contact />@</a> produces a flexible, customisable email contact form. It is intended for use as an enquiry form for commercial and private sites, and includes several features to help reduce common problems with such forms (invalid email addresses, missing information).
+
+<a href="#zc_send_article">@<txp:zem_contact_send_article />@</a> can be used to create a "send article" link within an article form, connecting it to the contact form.
+
+All other tags provided by this plugin can only be used inside a @<txp:zem_contact>@ ... @</txp:zem_contact>@ container tag or in a Textpattern form used as the @form@ attribute in the @<txp:zem_contact />@ tag.
+
+"Back to top":#top
+
+
+h3(#zc). @<txp:zem_contact />@
+
+May be used as a self-closing or container tag. Place this where you want the input form to go. Status and error messages, if any, will be displayed before the form.
+
+h4. Attributes
+
+* @to="email address"@ %(required)required%<br />Recipient email address. Multiple recipients can be specified separated by commas.
+* @to_form="form name"@<br />Use specified form (overrides *to* attribute).
+
+* @from="email address"@<br />Email address used in the "From:" field when sending email. Defaults to the sender's email address. If specified, the sender's email address will be placed in the "Reply-To:" field instead.
+* @from_form="form name"@<br />Use specified form (overrides *from* attribute).
+
+* @subject="subject text"@<br />Subject used when sending an email. Default is the site name.
+* @subject_form="form name"@<br />Use specified form (overrides *subject* attribute).
+
+* @thanks="text"@<br />Message shown after successfully submitting a message. Default is *Thank you, your message has been sent*.
+* @thanks_form="form name"@<br />Use specified form (overrides *thanks* attribute).
+* @redirect="URL"@<br />Redirect to specified URL (overrides *thanks* and *thanks_form* attributes). URL must be relative to the Textpattern Site URL. Example: _redirect="monkey"_ would redirect to http://example.com/monkey.
+
+* @label="text"@<br />Label for the contact form. If set to an empty string, display of the fieldset and legend tags will be suppressed. Default is *Contact*.
+* @send_article="boolean"@<br />Whether to use this form to <a href="#article">send an article</a>. Available values: *1* (yes), *0* (no). Default is *0* (no).
+* @copysender="boolean"@<br />Whether to send a copy of the email to the sender's address. Available values: *1* (yes), *0* (no). Default is *0* (no).
+
+* @form="form name"@<br />Use specified form, containing the layout of the contact form fields.
+* @show_input="boolean"@<br /> Whether to display the form input fields. Available values: *1* (yes), *0* (no). Default is *1* (yes).
+* @show_error="boolean"@<br /> Whether to display error and status messages. Available values: *1* (yes), *0* (no). Default is *1* (yes).
+
+h4. Examples
+
+See "Getting started":#contactform and "Advanced examples":#advanced.
+
+"Back to top":#top
+
+
+h3(#zc_text). @<txp:zem_contact_text />@
+
+Creates a text input field and corresponding <code><label></code> tag. The input value will be included in the email, preceded by the label.
+
+h4. Attributes
+
+* @label="text"@<br />Text label displayed to the user. Default is *Text*.
+* @name="value"@<br />Field name, as used in the HTML input tag.
+* @break="tag"@<br />Break tag between the label and input field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
+* @default="value"@<br />Default value when no input is provided.
+* @minlength="integer"@<br />Minimum input length in characters. Default is *0*.
+* @maxlength="integer"@<br />Maximum input length in characters. Default is *100*.
+* @required="boolean"@<br />Whether this text field must be filled out. Available values: *1* (yes), *0* (no). Default is *1* (yes).
+
+h4. Example
+
+bc. <txp:zem_contact_text label="Your name" />
+
+"Back to top":#top
+
+
+h3(#zc_email). @<txp:zem_contact_email />@
+
+Input field for user's email address.
+
+The entered email address will automatically be validated to make sure it is of the form "abc@xxx.yyy[.zzz]". On non-Windows servers, a test will be done to verify that an A or MX record exists for the domain. Neither test prevents spam, but it does help detecting accidental typing errors.
+
+h4. Attributes
+
+* @label="text"@<br />Text label displayed to the user. Default is *Email*.
+* @name="value"@<br />Field name, as used in the HTML input tag.
+* @break="tag"@<br />Break tag between the label and input field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
+* @default="value"@<br />Default value when no input is provided.
+* @minlength="integer"@<br />Minimum input length in characters. Default is *0*.
+* @maxlength="integer"@<br />Maximum input length in characters. Default is *100*.
+* @required="boolean"@<br />Whether this text field must be filled out. Available values: *1* (yes), *0* (no). Default is *1* (yes).
+* @send_article="boolean"@<br />Whether this field is used as the recipient email address when using the send_article function. Available values: *1* (yes), *0* (no). Default is *0* (no).
+
+h4. Example
+
+bc. <txp:zem_contact_email label="Your email address" />
+
+"Back to top":#top
+
+
+h3(#zc_textarea). @<txp:zem_contact_textarea />@
+
+Creates a textarea.
+
+h4. Attributes
+
+* @label="text"@<br />Text label displayed to the user. Default is *Message*.
+* @name="value"@<br />Field name, as used in the HTML input tag.
+* @break="tag"@<br />Break tag between the label and input field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
+* @default="value"@<br />Default value when no input is provided.
+* @minlength="integer"@<br />Minimum input length in characters. Default is *0*.
+* @maxlength="integer"@<br />Maximum input length in characters. Default is *10000*.
+* @required="boolean"@<br />Whether this text field must be filled out. Available values: *1* (yes), *0* (no). Default is *1* (yes).
+
+h4. Example
+
+Textarea that is 40 chars wide, 10 lines high, with a customized label:
+
+bc. <txp:zem_contact_textarea cols="40" rows="10" label="Your question" />
+
+"Back to top":#top
+
+
+h3(#zc_submit). @<txp:zem_contact_submit />@
+
+Creates a submit button.
+When used as a container tag, a "button" element will be used instead of an "input" element.
+
+h4. Attributes:
+
+* @label="text"@<br />Text shown on the submit button. Default is "Send".
+* @button="boolean"@<br />_Deprecated. Use a container tag if you want a button element._
+
+h4. Examples
+
+Standard submit button:
+
+bc. <txp:zem_contact_submit />
+
+Submit button with your own text:
+
+bc. <txp:zem_contact_submit label="Send" />
+
+Usage as a container tag, which allows you to use Textpattern tags and HTML markup in the submit button:
+
+bc. <txp:zem_contact_submit><strong>Send</strong> question</txp:zem_contact_submit>
+
+bc. <txp:zem_contact_submit><img src="path/to/img.png" alt="submit"></txp:zem_contact_submit>
+
+"Back to top":#top
+
+
+h3(#zc_select). @<txp:zem_contact_select />@
+
+Creates a drop-down selection list.
+
+h4. Attributes
+
+* @list="comma-separated values"@ %(required)required%<br />List of items to show in the select box.
+* @selected="value"@<br />List item that is selected by default.
+* @label="text"@<br />Text label displayed to the user. Default is *Option*.
+* @name="value"@<br />Field name, as used in the HTML input tag.
+* @break="tag"@<br />Break tag between the label and input field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
+* @delimiter="character"@<br />Separator character used in the *list* attribute. Default is *,* (comma).
+* @required="boolean"@<br />Whether a non-empty option must be selected. Available values: *1* (yes), *0* (no). Default is *1* (yes).
+
+h4. Examples
+
+Select list labeled 'Department', containing three options and a blank option (due to the comma before 'Marketing') shown by default, forcing the user to make a selection.
+
+bc. <txp:zem_contact_select label="Department" list=",Marketing,Sales,Support" />
+
+Select list containing three options with 'Marketing' selected by default.
+
+bc. <txp:zem_contact_select list="Marketing,Sales,Support" selected="Marketing" />
+
+"Back to top":#top
+
+
+h3(#zc_checkbox). @<txp:zem_contact_checkbox />@
+
+Creates a check box.
+
+h4. Attributes
+
+* @label="text"@<br />Text label displayed to the user. Default is *Checkbox*.
+* @name="value"@<br />Field name, as used in the HTML input tag.
+* @break="tag"@<br />Break tag between the label and input field. Default is @<br />@. Use <code>break=""</code> to put the label and input field on the same line.
+* @checked="boolean"@<br />Whether this box is checked when first displayed. Available values: *1* (yes), *0* (no). Default is "0" (no).
+* @required="boolean"@<br />Whether this checkbox must be filled out. Available values: *1* (yes), *0* (no). Default is *1* (yes).
+
+h4. Examples
+
+Shrink-wrap agreement which must be checked by the user before the email will be sent.
+
+bc. <txp:zem_contact_checkbox label="I accept the terms and conditions" />
+
+Optional checkboxes:
+
+bc. Select which operating systems are you familiar with:<br />
+<txp:zem_contact_checkbox label="Windows" required="0" /><br />
+<txp:zem_contact_checkbox label="Unix/Linux/BSD" required="0" /><br />
+<txp:zem_contact_checkbox label="MacOS" required="0" /><br />
+
+"Back to top":#top
+
+
+h3(#zc_radio). @<txp:zem_contact_radio />@
+
+Creates a radio button.
+
+h4. Attributes
+
+* @group="text"@ %(required)required%<br />Text used in the email to describe this group of radio buttons. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. Default is *Radio*.
+* @label="text"@ %(required)required%<br />Text label displayed to the user as radio button option.
+* @name="value"@<br />Field name, as used in the HTML input tag. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. If it hasn't been set at all, it will be derived from the @group@ attribute.
+* @break="tag"@<br />Break tag between the label and field. Default is a space.
+* @checked="boolean"@<br />Whether this radio option is checked when the form is first displayed. Available values: *1* (yes), *0* (no). Default is *0* (no).
+
+h4. Example
+
+Group mutually exclusive radio buttons by setting the @group@ attribute on the first radio button in a group. Only the chosen radio button from each group will be used in the email message. The message will be output in the form *group: label* for each of the chosen radio buttons.
+
+bc.. <txp:zem_contact_radio label="Medium" group="I like my steak" />
+<txp:zem_contact_radio label="Rare" />
+<txp:zem_contact_radio label="Well done" />
+ 
+<txp:zem_contact_radio label="Wine" group="With a glass of" />
+<txp:zem_contact_radio label="Beer" />
+<txp:zem_contact_radio label="Water" />
+
+p. "Back to top":#top
+
+
+h3(#zc_secret). @<txp:zem_contact_secret />@
+
+This tag has no effect on the form or HTML output, but will include additional information in the email. It can be used as a self-closing tag or as a container tag.
+
+h4. Attributes
+
+* @name="text"@<br />Used internally. Set this only if you have multiple 'secret' form elements with identical labels.
+* @label="text"@<br />Used to identify the field in the email. Default is *Secret*.
+* @value="value"@<br />Some text you want to add to the email.
+
+h4. Examples
+
+Usage as a self-closing tag
+
+bc. <txp:zem_contact_secret value="The answer is 42" />
+
+Usage as a container tag
+
+bc. <txp:zem_contact_secret label="Dear user">
+  Please provide a useful example for this tag!
+</txp:zem_contact_secret>
+
+"Back to top":#top
+
+
+h3(#zc_serverinfo). @<txp:zem_contact_serverinfo />@
+
+This tag has no effect on the form or HTML output, but will include additional information in the email based on the PHP $_SERVER variable.
+
+h4. Attributes
+
+* @name="value"@ %(required)required%<br />Name of the server variable. See the "PHP manual":http://php.net/manual/reserved.variables.php#reserved.variables.server for a full list.
+* @label="text"@<br />Used to identify the field in the email. Defaults to the value of the *name* attribute.
+
+h4. Examples
+
+Add the IP address of the visitor to the email
+
+bc. <txp:zem_contact_serverinfo name="REMOTE_ADDR" label="IP number" />
+
+Add the name of the visitor's browser to the email
+
+bc. <txp:zem_contact_serverinfo name="HTTP_USER_AGENT" label="Browser" />
+
+"Back to top":#top
+
+
+h3(#zc_send_article). @<txp:zem_contact_send_article />@
+
+Use this tag in your individual article form, where you want the "send article" link to be displayed.
+
+
+h4. Attributes:
+
+* @linktext="text"@<br />Text displayed for the link. Default is *send article*
+
+h4. Examples:
+
+See "Getting started":#sendarticle
+
+"Back to top":#top
+
+
+h2(#advanced). Advanced examples
+
+
+h3(#show_error). Separate input and error forms
+
+Using @show_input@ and @show_error@ to display the form and error messages on different parts of a page. A form is used to make sure the contents of both forms are identical, otherwise they would be seen as two independent forms. The first form only shows errors (no input), the second form only shows the input fields (no errors).
+
+bc.. <div id="error">
+  <txp:zem_contact form="contact_form" show_input="0" />
+</div>
+
+<div id="inputform">
+  <txp:zem_contact form="contact_form" show_error="0" />
+</div>
+
+p. Apart from the @show_error@ and @show_input@ attributes, all other attributes must be 100% identical in both forms, otherwise they would be seen as two unrelated forms.
+
+"Back to top":#top
+
+
+h3(#subject_form). User selectable subject field
+
+Specify the @subject_form@ attribute and create a form which includes a @zem_contact_select@ tag:
+
+bc. <txp:zem_contact to="you@example.com" subject_form="my_subject_form" />
+  <txp:zem_contact_text label="Name" /><br />
+  <txp:zem_contact_email /><br />
+  <txp:zem_contact_select label="Choose Subject" list=",Question,Feedback" /><br />
+  <txp:zem_contact_textarea label="Message" /><br />
+</txp:zem_contact>
+
+Create a Textpattern form called "my_subject_form", containing:
+
+bc. <txp:php>
+  global $zem_contact_form;
+  echo $zem_contact_form['Choose Subject'];
+</txp:php>
+
+The @label@ used in the @zem_contact_select@ tag must be identical to the corresponding variable in the @subject_form@. Here we used @Choose subject@.
+
+If you'd prefer to add a common prefix for all subjects, use a @subject_form@ containing:
+
+bc. <txp:php>
+  global $zem_contact_form;
+  echo 'My common prefix - ' . $zem_contact_form['Choose Subject'];
+</txp:php>
+
+"Back to top":#top
+
+
+h3(#to_form). User selectable recipient, without showing email address
+
+Specify the @to_form@ attribute and create a form which includes a @zem_contact_select@ tag:
+
+bc. <txp:zem_contact to_form="my_zem_contact_to_form">
+  <txp:zem_contact_text label="Name" /><br />
+  <txp:zem_contact_email /><br />
+  <txp:zem_contact_select label="Department" list=",Support,Sales" /><br />
+  <txp:zem_contact_textarea label="Message" /><br />
+</txp:zem_contact>
+
+Create a Textpattern form called "my_zem_contact_to_form", containing:
+
+bc. <txp:php>
+  global $zem_contact_form;
+  switch($zem_contact_form['Department'])
+  {
+    case 'Support':
+      echo 'crew@example.com';
+      break;
+    case 'Sales':
+      echo 'showmethemoney@example.com';
+      break;
+    default:
+      echo 'someone@example.com';
+  }
+</txp:php>
+
+The @label@ used in the @zem_contact_select@ tag must be identical to the corresponsing variable in the @to_form@. Here we used @Department@.
+
+A 'default' email address in the @to_form@ is specified to ensure that a valid email address is used in cases where you add or change a select/radio option and forget to update the @to_form@.
+
+p(warning). Never use tags like @zem_contact_text@, @zem_contact_email@ or @zem_contact_textarea@ for setting the recipient address, otherwise your form can be abused to send spam to any email address!
+
+"Back to top":#top
+
+
+h2(#styling). Styling
+
+The form itself has a class *zemContactForm* set on the @FORM@ HTML tag.
+
+The list of error messages (if any) has a class *zemError* set on the @UL@ HTML tag that encloses the list of errors.
+
+All form elements and corresponding labels have the following classes (or ids set):
+# One of *zemText*, *zemTextarea*, *zemSelect*, *zemRadio*, *zemCheckbox*, *zemSubmit*. It should be obvious which class is used for which form element (and corresponding label).
+# *zemRequired* or *errorElement* or *zemRequirederrorElement*, depending on whether the form element is required, an error was found in whatever the visitor entered... or both.
+# An individual "id" or "class" set to the value of the @name@ attribute of the corresponding tag. When styling forms based on this class, you should explicitly set the @name@ attribute because automatically generated names may change in newer zem_contact_reborn versions.
+
+"Back to top":#top
+
+
+h2(#history). History
+
+Only the changes that may affect people who upgrade are detailed below.
+To save space, links to forum topics that detail all the changes in each version have been added. 
+
+* 28 aug 2011: *version 4.4.1*
+** replace split(), which is deprecated since PHP 5.3, with explode()
+** remove zem_contact_mailheader() function, switch to using TXP's encode_mailheader function (TXP 4.0.4+)
+** parse the thanks_form
+** make email work when the mailserver requires the SMTP envelope sender (advanced prefs)
+** Use "From: <email@example.com>" instead of "From: email@example.com" to avoid triggering Spamassassin rule.
+* 23 aug 2007: *version 4.0.3.20* "changelog":http://forum.textpattern.com/viewtopic.php?id=23728
+** escape label attribute values when showing the form in the browser (not in email, plain text there)
+** don’t display empty input values in the email
+* 14 feb 2007: *version 4.0.3.19* "changelog":http://forum.textpattern.com/viewtopic.php?id=21144
+** "send_article":#sendarticle functionality revised, requiring changes when upgrading from earlier versions
+** New language strings: 'send_article' and 'recipient' (replaces 'receiver')
+** Sets of radio buttons require the new "group":#zc_radio attribute 
+** Yes/No values deprecated in favor for the TXP standard 1/0 values (yes/no still work in this version)
+* 20 nov 2006: *version 4.0.3.18* "changelog":http://forum.textpattern.com/viewtopic.php?id=19823
+** IDs 'zemContactForm' and 'zemSubmit' have changed to classes to allow multiple forms per page
+** New language strings: 'form_used', 'invalid_utf8', 'max_warning', 'name', 'refresh', 'secret'
+* 12 mar 2006: *version 4.0.3.17* "changelog":http://forum.textpattern.com/viewtopic.php?id=13416
+* 11 feb 2006: *version .16*
+* 06 feb 2006: *version .15*
+* 03 feb 2006: *version .14*
+** Requires separate zem_contact_lang plugin
+* 29 jan 2006: *version .12*
+* 27 jan 2006: *version .11*
+* 23 jan 2006: *version .09 and .10*
+* 23 jan 2006: *version .08*
+* 17 jan 2006: *version .07*
+* 16 jan 2006: *version .05 and .06*
+* 15 jan 2006: *version .04*
+* 10 jan 2006: *version .03*
+* 19 dec 2005: *version .02*
+
+"Back to top":#top
+
+
+h2(#credits). Credits
+
+* *zem* wrote the zem_contact 0.6 plugin on which this plugin was initially based.
+* *Mary* completely revised the plugin code.
+* *Stuart* Turned it into a plugin, added a revised help text and additional code. Maintained all plugin versions till 4.0.3.17.
+* *wet* added the zem_contact_radio tag.
+* *Tranquillo* added the anti-spam API and zem_contact_send_article functionality.
+* *aslsw66*, *jdykast* and others (?) provided additional code
+* *Ruud* cleaned up and audited the code to weed out bugs and completely revised the help text. Maintainer of versions 4.0.3.18 and up.
+* Supported and tested to destruction by the Textpattern community.
+
+"Back to top":#top
+
+
+h2(#api). Zem Contact Reborn's API
+
+The plugin API of zem contact, developed by Tranquillo, is similar to the comments API of Textpattern, which is explained in the Textbook "Plugin Development Topics":http://textpattern.net/wiki/index.php?title=Plugin_Development_Topics and "Combat Comment Spam":http://textpattern.net/wiki/index.php?title=Combat_Comment_Spam.
+
+Two callback events exist in zem_contact_reborn:
+* @zemcontact.submit@ is called after the form is submitted and the values are checked if empty or valid email addresses, but before the mail is sent.
+* @zemcontact.form@ let's you insert content in the contact form as displayed to the visitor.
+
+For reference here are the commands that will be interesting to plugin developers:
+
+bc.. // This will call your function before the form is submitted
+// So you can analyse the submitted data
+register_callback('abc_myfunction','zemcontact.submit');
+
+// This will call your function and add the output (use return $mystuff)
+// to the contact-form.
+register_callback('abc_myotherfunction2','zemcontact.form');
+
+// To get hold of the form-variables you can use
+global zem_contact_form;
+
+// With the following two lines you can tell zem_contact if your
+// plugin found spam
+$evaluator =& get_zemcontact_evaluator();
+
+// The passed value must be non-zero to mark the content as spam.
+// Value must be a number between 0 and 1.
+$evaluator -> add_zemcontact_status(1);
+
+p. Multiple plugins can be active at the same time and each of them can mark the submitted content as spam and prevent the form from being submitted.
+
+*An example of a plug-in connecting to Zem Contact Reborn's API:*
+
+bc.. register_callback('pap_zemcontact_form','zemcontact.form');
+register_callback('pap_zemcontact_submit','zemcontact.submit');
+
+function pap_zemcontact_form() {
+  $field = '<div style="display:none">'.
+    finput('text','phone',ps('phone'),'','','','','','phone').'<br />'.
+    finput('text','mail',ps('mail'),'','','','','','mail').'</div>';
+  return $field;</code>
+}
+
+function pap_zemcontact_submit() {
+  $checking_mail_field = trim(ps('mail'));
+  $checking_phone_field = trim(ps('phone'));
+
+  $evaluation =& get_zemcontact_evaluator();
+
+  // If the hidden fields are filled out, the contact form won't be submitted!
+  if ($checking_mail_field != '' or $checking_phone_field != '') {
+    $evaluation -> add_zemcontact_status(1);
+  }
+  return;
+}
+
+p. "Back to top":#top
+
+# --- END PLUGIN HELP ---
+-->
+<?php
+}
+?>
