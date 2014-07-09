@@ -1231,8 +1231,8 @@ function zem_contact_strip($str, $header = true)
  *  -> "zemcontact.skip" to skip zem_contact's mailing (i.e. the 3rd party handles mailing) and return 'success'
  *  -> "zemcontact.fail" to skip zem_contact's mailing and return 'fail'
  *
- * By hooking into the callback's step you can target either the 'primary' (main) send
- * process or the 'secondary' (copysender) process.
+ * By hooking into the callback's step you can target either the main 'send'
+ * process or the 'copysender' process.
  *
  * @param string $to      Delivery address
  * @param string $subject Subject of message
@@ -1249,7 +1249,7 @@ function zem_contact_deliver($to, $subject, $body, $headers, $flags)
 		'body'    => $body,
 	);
 
-	$flavour = ($flags['isCopy'] === true) ? 'secondary' : 'primary';
+	$flavour = ($flags['isCopy'] === true) ? 'copysender' : 'send';
 
 	// Allow plugins to override or alter default action (mail) if required.
 	// ToDo: use has_handler() from 4.6.0+
