@@ -1077,7 +1077,6 @@ function zem_contact_submit($atts, $thing = null)
 	global $zem_contact_flags;
 
 	extract(zem_contact_lAtts(array(
-		'button'    => 0,
 		'class'     => 'zemSubmit',
 		'html_form' => $zem_contact_flags['this_form'],
 		'label'     => gTxt('zem_contact_send'),
@@ -1094,14 +1093,14 @@ function zem_contact_submit($atts, $thing = null)
 	// HTML 5 attributes
 	if ($doctype !== 'xhtml') {
 		$attr += zem_contact_build_atts(array(
-			'form'     => $html_form,
+			'form' => $html_form,
 		));
 	}
 
 	// Global attributes
 	$attr += zem_contact_build_atts($zem_contact_globals, $atts);
 
-	if ($button || strlen($thing)) {
+	if (strlen($thing)) {
 		return '<button type="submit" class="' . $class . '" name="zem_contact_submit" value="' . $label . '"' . ($attr ? ' ' . implode(' ', $attr) : '') . '>' . ($thing ? trim(parse($thing)) : $label) . '</button>';
 	} else {
 		return '<input type="submit" class="' . $class . '" name="zem_contact_submit" value="' . $label . '"' . ($attr ? ' ' . implode(' ', $attr) : '') . ' />';
