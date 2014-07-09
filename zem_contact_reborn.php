@@ -346,11 +346,11 @@ function zem_contact($atts, $thing = null)
 
 		safe_update('txp_discuss_nonce', "used = '1', issue_time = '$now_date'", "nonce = '$nonce'");
 
-		if (zem_contact_deliver($to, $subject, $msg, $headers)) {
+		if (zem_contact_deliver($to, $subject, $msg, $headers, array('isCopy' => false))) {
 			$_POST = array();
 
 			if ($copysender && $zem_contact_from) {
-				zem_contact_deliver(zem_contact_strip($zem_contact_from), $subject, $msg, $headers);
+				zem_contact_deliver(zem_contact_strip($zem_contact_from), $subject, $msg, $headers, array('isCopy' => true));
 			}
 
 			if ($redirect) {
@@ -1225,18 +1225,22 @@ function zem_contact_strip($str, $header = true)
  * Handle content delivery of payload.
  *
  * Triggers a 'zemcontact.deliver' callback event to override or augment
- * the delivery mechanism. Third party plugins can return:
- *  -> true to allow this plugin to continue mailing after the plugin completes
- *  -> null to skip zem_contact's mailing and continue to deliver 'success' 
- *  -> false to halt zem_contact's mailing (i.e. the 3rd party handles mailing) and 'fail'
- *  -> alterations to the $payload such as adding Multi-part MIME headers for HTML emails
+ * the delivery mechanism. Third party plugins can make alterations to the $payload
+ * such as adding Multi-part MIME headers for HTML emails, then return one of the strings:
+ *  -> "zemcontact.send" (or no return value) to allow ZCR to continue mailing after the 3rd party plugin completes
+ *  -> "zemcontact.skip" to skip zem_contact's mailing (i.e. the 3rd party handles mailing) and return 'success'
+ *  -> "zemcontact.fail" to skip zem_contact's mailing and return 'fail'
+ *
+ * By hooking into the callback's step you can target either the 'primary' (main) send
+ * process or the 'secondary' (copysender) process.
  *
  * @param string $to      Delivery address
  * @param string $subject Subject of message
  * @param string $body    Message content
  * @param array  $headers Message headers as tuples
+ * @param array  $flags   Signals to govern delivery / callback behaviour
  */
-function zem_contact_deliver($to, $subject, $body, $headers)
+function zem_contact_deliver($to, $subject, $body, $headers, $flags)
 {
 	$payload = array(
 		'to'      => $to,
@@ -1245,13 +1249,15 @@ function zem_contact_deliver($to, $subject, $body, $headers)
 		'body'    => $body,
 	);
 
+	$flavour = ($flags['isCopy'] === true) ? 'secondary' : 'primary';
+
 	// Allow plugins to override or alter default action (mail) if required.
 	// ToDo: use has_handler() from 4.6.0+
-	$ret = callback_event_ref('zemcontact.deliver', '', 0, $payload);
+	$ret = callback_event_ref('zemcontact.deliver', $flavour, 0, $payload);
 
-	if (in_array(false, $ret)) {
+	if (in_array('zemcontact.fail', $ret)) {
 		return false;
-	} elseif (in_array(null, $ret)) {
+	} elseif (in_array('zemcontact.skip', $ret)) {
 		return true;
 	}
 
