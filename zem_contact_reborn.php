@@ -501,7 +501,7 @@ function zem_contact_text($atts)
 
 	// Core attributes
 	$attr = zem_contact_build_atts(array(
-		'id'    => (($id) ? $id : $name),
+		'id'    => (isset($id) ? $id : $name),
 		'name'  => $name,
 		'type'  => $type,
 		'value' => $value,
@@ -678,7 +678,7 @@ function zem_contact_textarea($atts)
 
 	// Core attributes
 	$attr = zem_contact_build_atts(array(
-		'id'        => (($id) ? $id : $name),
+		'id'        => (isset($id) ? $id : $name),
 		'name'      => $name,
 		'cols'      => intval($cols),
 		'rows'      => intval($rows),
@@ -715,7 +715,7 @@ function zem_contact_select($atts, $thing = null)
 {
 	global $zem_contact_error, $zem_contact_submit, $zem_contact_flags;
 
-	// ToDo: multipl attribute?
+	// ToDo: multiple attribute?
 	extract(zem_contact_lAtts(array(
 		'break'     => ' ',
 		'class'     => 'zemSelect',
@@ -768,7 +768,7 @@ function zem_contact_select($atts, $thing = null)
 
 	// Core attributes
 	$attr = zem_contact_build_atts(array(
-		'id'   => (($id) ? $id : $name),
+		'id'   => (isset($id) ? $id : $name),
 		'name' => $name,
 		'size' => intval($size),
 	));
@@ -891,7 +891,7 @@ function zem_contact_checkbox($atts)
 
 	// Core attributes
 	$attr = zem_contact_build_atts(array(
-		'id'    => (($id) ? $id : $name),
+		'id'    => (isset($id) ? $id : $name),
 		'name'  => $name,
 		'value' => $value,
 	));
@@ -1087,7 +1087,7 @@ function zem_contact_submit($atts, $thing = null)
 
 	// Core attributes
 	$attr = zem_contact_build_atts(array(
-		'id'    => $id,
+		'id' => (isset($id) ? $id : null),
 	));
 
 	// HTML 5 attributes
