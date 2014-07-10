@@ -723,12 +723,22 @@ function zem_contact_select($atts, $thing = null)
 		'html_form' => $zem_contact_flags['this_form'],
 		'isError'   => '',
 		'label'     => gTxt('zem_contact_option'),
-		'list'      => gTxt('zem_contact_general_inquiry'),
+		'list'      => '', // ToDo: remove from here in favour of the global list attribute
+		'options'   => gTxt('zem_contact_general_inquiry'),
 		'name'      => '',
 		'required'  => $zem_contact_flags['required'],
 		'selected'  => '',
 		'size'      => '',
 	), $atts));
+
+	// Detect old-school use of the list attribute. Note that deprecated_function_with
+	// isn't strictly the correct error to throw, but it's close enough until core has
+	// a dedicated deprecated_attribute_with string.
+	if (!empty($list) && strpos($list, $delimiter) !== false) {
+		$options = $list;
+		trigger_error(gTxt('deprecated_function_with', array('{name}' => 'list', '{with}' => 'options')), E_USER_NOTICE);
+		unset($list);
+	}
 
 	if (empty($name)) {
 		$name = zem_contact_label2name($label);
@@ -740,19 +750,19 @@ function zem_contact_select($atts, $thing = null)
 	if ($thing) {
 		zem_contact_option(null, $value);
 		$out = parse($thing);
-		$list = zem_contact_option(null, null);
+		$options = zem_contact_option(null, null);
 	} else {
-		$list = array_map('trim', explode($delimiter, preg_replace('/[\r\n\t\s]+/', ' ', $list)));
+		$options = array_map('trim', explode($delimiter, preg_replace('/[\r\n\t\s]+/', ' ', $options)));
 		$out = '';
 
-		foreach ($list as $item) {
+		foreach ($options as $item) {
 			$out .= n.t.'<option' . ($item == $value ? ' selected="selected">' : '>') . (strlen($item) ? txpspecialchars($item) : ' ') . '</option>';
 		}
 	}
 
 	if ($zem_contact_submit) {
 		if (strlen($value)) {
-			if (in_array($value, $list)) {
+			if (in_array($value, $options)) {
 				zem_contact_store($name, $label, $value);
 			} else {
 				$zem_contact_error[] = gTxt('zem_contact_invalid_value', array('{field}' => txpspecialchars($label), '{value}' => txpspecialchars($value)));
@@ -772,7 +782,6 @@ function zem_contact_select($atts, $thing = null)
 		'name' => $name,
 		'size' => intval($size),
 	));
-
 
 	// HTML 5 attributes
 	$required = ($required) ? 'required' : '';
