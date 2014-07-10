@@ -844,7 +844,7 @@ function zem_contact_option($atts, $thing = null)
 		if ($val == $match) {
 			$attr[] = 'selected="selected"';
 		}
-	} elseif ($selected) {
+	} elseif ($selected || $val == $match) {
 		$attr[] = 'selected="selected"';
 	}
 
