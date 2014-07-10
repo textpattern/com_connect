@@ -1192,7 +1192,7 @@ function zem_contact_build_atts($pairs, $defaults = array())
 	$attr = array();
 
 	foreach ($pairs as $key => $value) {
-		if ($value !== '') {
+		if ($value !== '' && $value !== null) {
 			$attr[$key] = $key . '="' . txpspecialchars($value) . '"';
 		} else {
 			if (isset($defaults[$key])) {
