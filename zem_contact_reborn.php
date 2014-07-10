@@ -829,7 +829,6 @@ function zem_contact_option($atts, $thing = null)
 
 	extract(zem_contact_lAtts(array(
 		'class'    => 'zemOption',
-		'id'       => null,
 		'label'    => null,
 		'selected' => null,
 		'value'    => null,
@@ -848,13 +847,18 @@ function zem_contact_option($atts, $thing = null)
 		$attr[] = 'selected="selected"';
 	}
 
+	// Core attributes
 	$attr += zem_contact_build_atts(array(
-		'id'    => $id,
 		'label' => $label,
 		'value' => $value,
 	));
 
-	return '<option ' . implode(' ', $attr) . '>' . txpspecialchars($thing) . '</option>';
+	// Global attributes
+	$attr += zem_contact_build_atts($zem_contact_globals, $atts);
+
+	$classStr = (($class) ? ' class="' . $class . '"' : '');
+
+	return '<option' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . '>' . txpspecialchars($thing) . '</option>';
 }
 
 /**
@@ -1094,10 +1098,7 @@ function zem_contact_submit($atts, $thing = null)
 	$label = txpspecialchars($label);
 	$doctype = get_pref('doctype');
 
-	// Core attributes
-	$attr = zem_contact_build_atts(array(
-		'id' => (isset($id) ? $id : null),
-	));
+	$attr = array();
 
 	// HTML 5 attributes
 	if ($doctype !== 'xhtml') {
