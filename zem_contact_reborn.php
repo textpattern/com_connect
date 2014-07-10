@@ -1057,9 +1057,9 @@ function zem_contact_secret($atts, $thing = null)
 	global $zem_contact_submit;
 
 	extract(zem_contact_lAtts(array(
-		'name'	=> '',
-		'label'	=> gTxt('zem_contact_secret'),
-		'value'	=> '',
+		'name'  => '',
+		'label' => gTxt('zem_contact_secret'),
+		'value' => '',
 	), $atts));
 
 	$name = zem_contact_label2name($name ? $name : $label);
@@ -1411,8 +1411,8 @@ function zem_contact_value($atts)
 	global $zem_contact_values, $zem_contact_form;
 
 	extract(lAtts(array(
-		'name'	=> '',
-		'label'	=> '',
+		'name'  => '',
+		'label' => '',
 	), $atts));
 
 	$str = '';
@@ -1437,7 +1437,7 @@ function zem_contact_label($atts)
 	global $zem_contact_labels;
 
 	extract(lAtts(array(
-		'name'	=> '',
+		'name' => '',
 	), $atts));
 	
 	if ($name) {
@@ -1457,7 +1457,7 @@ function zem_contact_label($atts)
 function zem_contact_if($atts, $thing = null)
 {
 	extract(lAtts(array(
-		'name'	=> '',
+		'name'  => '',
 		'label' => '',
 		'value' => '',
 	), $atts));
