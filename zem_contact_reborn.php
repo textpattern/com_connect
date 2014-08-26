@@ -283,7 +283,7 @@ function zem_contact($atts, $thing = null)
 		$msg = array();
 
 		foreach ($zem_contact_labels as $name => $label) {
-			if (!trim($zem_contact_values[$name])) continue;
+			if (trim($zem_contact_values[$name]) === false) continue;
 			$msg[] = $label . ': ' . $zem_contact_values[$name];
 		}
 
