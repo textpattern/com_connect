@@ -53,6 +53,7 @@ $plugin['flags'] = '0';
 // #@event
 // #@language ISO-LANGUAGE-CODE
 // abc_string_name => Localized String
+
 $plugin['textpack'] = <<<EOT
 #@public
 zem_contact_checkbox => Checkbox
@@ -61,6 +62,7 @@ zem_contact_email => Email
 zem_contact_email_subject => {site} > Inquiry
 zem_contact_email_thanks => Thank you, your message has been sent.
 zem_contact_field_missing => Required field, &#8220;<strong>{field}</strong>&#8221; is missing.
+zem_contact_format_warning => Value {value} in &#8220;<strong>{field}</strong>&#8221; is not of the expected format.
 zem_contact_form_expired => The form has expired, please try again.
 zem_contact_form_used => The form was already submitted, please fill out a new form.
 zem_contact_general_inquiry => General inquiry
@@ -120,7 +122,6 @@ zem_contact_spam => Nous refusons catégoriquement les spam. Bien à vous.
 zem_contact_text => Texte
 zem_contact_to_missing => l'adresse mail &#8220;<strong>To</strong>&#8221; est manquante.
 EOT;
-// End of textpack
 
 if (!defined('txpinterface'))
         @include_once('zem_tpl.php');
@@ -435,8 +436,8 @@ function zem_contact_text($atts)
 		'html_form'    => $zem_contact_flags['this_form'],
 		'isError'      => '',
 		'label'        => gTxt('zem_contact_text'),
-		'max'          => 100,
-		'min'          => 0,
+		'max'          => null,
+		'min'          => null,
 		'name'         => '',
 		'pattern'      => '',
 		'placeholder'  => '',
@@ -446,19 +447,33 @@ function zem_contact_text($atts)
 		'type'         => 'text',
 	), $atts));
 
-	$numeric_types = array(
+	$doctype = get_pref('doctype');
+
+	$datetime_types = array(
 		'date',
 		'datetime',
 		'datetime-local',
 		'month',
-		'number',
-		'range',
 		'time',
 		'week',
 	);
 
+	$numeric_types = array(
+		'number',
+		'range',
+	);
+
+	$is_datetime = (in_array($type, $datetime_types));
 	$is_numeric = (in_array($type, $numeric_types));
-	$doctype = get_pref('doctype');
+
+	// Dates / times get special treatment: no default min/max if not set by tag.
+	if (!$is_datetime && $min === null) {
+		$min = 0;
+	}
+
+	if (!$is_datetime && $max === null) {
+		$max = 100;
+	}
 
 	if (empty($name)) {
 		$name = zem_contact_label2name($label);
@@ -468,16 +483,49 @@ function zem_contact_text($atts)
 		$value = trim(ps($name));
 		$utf8len = preg_match_all("/./su", $value, $utf8ar);
 		$hlabel = txpspecialchars($label);
+		$datetime_ok = true;
+
+		if ($is_datetime) {
+			$minval = $min;
+			$maxval = $max;
+			$cmpval = $value;
+
+			try {
+				$dt = new DateTime($cmpval);
+				$cmpval = $dt->format('U');
+
+				if ($min) {
+					$dt = new DateTime($min);
+					$minval = $dt->format('U');
+				}
+
+				if ($max) {
+					$dt = new DateTime($max);
+					$maxval = $dt->format('U');
+				}
+			} catch (Exception $e) {
+				$datetime_ok = false;
+			}
+		}
 
 		if (strlen($value)) {
 			if (!$utf8len) {
 				$zem_contact_error[] = gTxt('zem_contact_invalid_utf8', array('{field}' => $hlabel));
 				$isError = "errorElement";
-			} elseif ($min && !$is_numeric && $utf8len < $min) {
+			} elseif ($is_datetime && !$datetime_ok) {
+				$zem_contact_error[] = gTxt('zem_contact_format_warning', array('{field}' => $hlabel, '{value}' => $value));
+				$isError = "errorElement";
+			} elseif ($min && !$is_numeric && !$is_datetime && $utf8len < $min) {
 				$zem_contact_error[] = gTxt('zem_contact_min_warning', array('{field}' => $hlabel, '{value}' => $min));
 				$isError = "errorElement";
-			} elseif ($max && !$is_numeric && $utf8len > $max) {
+			} elseif ($max && !$is_numeric && !$is_datetime && $utf8len > $max) {
 				$zem_contact_error[] = gTxt('zem_contact_max_warning', array('{field}' => $hlabel, '{value}' => $max));
+				$isError = "errorElement";
+			} elseif ($min && $is_datetime && $cmpval < $minval) {
+				$zem_contact_error[] = gTxt('zem_contact_minval_warning', array('{field}' => $hlabel, '{value}' => $min));
+				$isError = "errorElement";
+			} elseif ($max && $is_datetime && $cmpval > $maxval) {
+				$zem_contact_error[] = gTxt('zem_contact_maxval_warning', array('{field}' => $hlabel, '{value}' => $max));
 				$isError = "errorElement";
 			} elseif ($min && $is_numeric && $value < $min) {
 				$zem_contact_error[] = gTxt('zem_contact_minval_warning', array('{field}' => $hlabel, '{value}' => $min));
@@ -514,7 +562,7 @@ function zem_contact_text($atts)
 		$attr['maxlength'] = 'maxlength="' . intval($max) . '"';
 	}
 
-	if ($doctype !== 'xhtml' && $is_numeric) {
+	if ($doctype !== 'xhtml' && ($is_numeric || $is_datetime)) {
 		// Not using intval() because min/max/step can be floating point values.
 		$attr += zem_contact_build_atts(array(
 			'min'  => $min,
@@ -925,7 +973,7 @@ function zem_contact_checkbox($atts)
 	$classStr = (($class) ? $class . ' ' : '') . $zemRequired . $isError;
 
 	return '<input type="checkbox" class="' . $classStr . '"' .
-		($value ? ' checked="checked"' : '') . ($attr ? implode(' ', $attr) : '') . ' />' . $break . 
+		($value ? ' checked="checked"' : '') . ($attr ? implode(' ', $attr) : '') . ' />' . $break .
 		'<label for="' . $name . '" class="' . ($classStr ? $classStr . ' ' : '') . $name . '">' . txpspecialchars($label) . '</label>';
 }
 
@@ -1439,7 +1487,7 @@ function zem_contact_label($atts)
 	extract(lAtts(array(
 		'name' => '',
 	), $atts));
-	
+
 	if ($name) {
 		return isset($zem_contact_labels[$name]) ? $zem_contact_labels[$name] : '';
 	}
@@ -1472,7 +1520,6 @@ function zem_contact_if($atts, $thing = null)
 
 	return parse(EvalElse($thing, $cond));
 }
-
 # --- END PLUGIN CODE ---
 if (0) {
 ?>
@@ -2224,7 +2271,6 @@ p. For the delivery callback you signal back to the plugin your intentions so th
 Or simply @exit@ your plugin to halt the entire operation so no ZCR feedback is given.
 
 p. "Back to top":#top
-
 # --- END PLUGIN HELP ---
 -->
 <?php
