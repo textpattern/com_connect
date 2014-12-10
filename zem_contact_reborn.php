@@ -282,10 +282,12 @@ function zem_contact($atts, $thing = null)
 
 		$sep = is_windows() ? "\r\n" : "\n";
 		$msg = array();
+		$fields = array();
 
 		foreach ($zem_contact_labels as $name => $label) {
 			if (trim($zem_contact_values[$name]) === false) continue;
 			$msg[] = $label . ': ' . $zem_contact_values[$name];
+			$fields[$name] = $zem_contact_values[$name];
 		}
 
 		if ($send_article) {
@@ -347,11 +349,11 @@ function zem_contact($atts, $thing = null)
 
 		safe_update('txp_discuss_nonce', "used = '1', issue_time = '$now_date'", "nonce = '$nonce'");
 
-		if (zem_contact_deliver($to, $subject, $msg, $headers, array('isCopy' => false))) {
+		if (zem_contact_deliver($to, $subject, $msg, $headers, $fields, array('isCopy' => false))) {
 			$_POST = array();
 
 			if ($copysender && $zem_contact_from) {
-				zem_contact_deliver(zem_contact_strip($zem_contact_from), $subject, $msg, $headers, array('isCopy' => true));
+				zem_contact_deliver(zem_contact_strip($zem_contact_from), $subject, $msg, $headers, $fields, array('isCopy' => true));
 			}
 
 			if ($redirect) {
@@ -1281,29 +1283,34 @@ function zem_contact_strip($str, $header = true)
 /**
  * Handle content delivery of payload.
  *
- * Triggers a 'zemcontact.deliver' callback event to override or augment
- * the delivery mechanism. Third party plugins can make alterations to the $payload
- * such as adding Multi-part MIME headers for HTML emails, then return one of the strings:
+ * Triggers a 'zemcontact.deliver' callback event to override or augment the
+ * delivery mechanism. Third party plugins can make alterations to the $payload,
+ * then return one of the strings:
  *  -> "zemcontact.send" (or no return value) to allow ZCR to continue mailing after the 3rd party plugin completes
  *  -> "zemcontact.skip" to skip zem_contact's mailing (i.e. the 3rd party handles mailing) and return 'success'
  *  -> "zemcontact.fail" to skip zem_contact's mailing and return 'fail'
  *
  * By hooking into the callback's step you can target either the main 'send'
- * process or the 'copysender' process.
+ * process or the 'copysender' process. Examples of things you could do:
+ * -> Add Multi-part MIME headers for HTML emails.
+ * -> Subscribe people to mailing lists.
+ * -> Handle the mailing process independently of Textpattern.
  *
  * @param string $to      Delivery address
  * @param string $subject Subject of message
  * @param string $body    Message content
  * @param array  $headers Message headers as tuples
+ * @param array  $fields  Message field names and content as tuples
  * @param array  $flags   Signals to govern delivery / callback behaviour
  */
-function zem_contact_deliver($to, $subject, $body, $headers, $flags)
+function zem_contact_deliver($to, $subject, $body, $headers, $fields, $flags)
 {
 	$payload = array(
 		'to'      => $to,
 		'subject' => $subject,
 		'headers' => $headers,
 		'body'    => $body,
+		'fields'  => $fields,
 	);
 
 	$flavour = ($flags['isCopy'] === true) ? 'copysender' : 'send';
