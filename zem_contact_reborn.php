@@ -449,7 +449,7 @@ function zem_contact_text($atts)
 		'type'         => 'text',
 	), $atts));
 
-	$doctype = get_pref('doctype');
+	$doctype = get_pref('doctype', 'xhtml');
 
 	$datetime_types = array(
 		'date',
@@ -698,7 +698,7 @@ function zem_contact_textarea($atts)
 		$name = zem_contact_label2name($label);
 	}
 
-	$doctype = get_pref('doctype');
+	$doctype = get_pref('doctype', 'xhtml');
 
 	if ($zem_contact_submit) {
 		$value = preg_replace('/^\s*[\r\n]/', '', rtrim(ps($name)));
@@ -795,7 +795,7 @@ function zem_contact_select($atts, $thing = null)
 	}
 
 	$value = ($zem_contact_submit) ? trim(ps($name)) : $selected;
-	$doctype = get_pref('doctype');
+	$doctype = get_pref('doctype', 'xhtml');
 
 	if ($thing) {
 		zem_contact_option(null, $value);
@@ -937,7 +937,7 @@ function zem_contact_checkbox($atts)
 		$name = zem_contact_label2name($label);
 	}
 
-	$doctype = get_pref('doctype');
+	$doctype = get_pref('doctype', 'xhtml');
 
 	if ($zem_contact_submit) {
 		$value = (bool) ps($name);
@@ -1026,7 +1026,7 @@ function zem_contact_radio($atts)
 
 	$id = 'q' . md5($name . '=>' . $label);
 	$name = zem_contact_label2name($name);
-	$doctype = get_pref('doctype');
+	$doctype = get_pref('doctype', 'xhtml');
 
 	if ($zem_contact_submit) {
 		$is_checked = (ps($name) == $id);
@@ -1146,7 +1146,7 @@ function zem_contact_submit($atts, $thing = null)
 	), $atts));
 
 	$label = txpspecialchars($label);
-	$doctype = get_pref('doctype');
+	$doctype = get_pref('doctype', 'xhtml');
 
 	$attr = array();
 
