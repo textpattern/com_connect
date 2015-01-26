@@ -1564,6 +1564,7 @@ h2(#contents). Contents
 ** <a href="#zc_textarea">@<txp:zem_contact_textarea />@</a>
 ** <a href="#zc_submit">@<txp:zem_contact_submit />@</a>
 ** <a href="#zc_select">@<txp:zem_contact_select />@</a>
+** <a href="#zc_option">@<txp:zem_contact_option />@</a>
 ** <a href="#zc_checkbox">@<txp:zem_contact_checkbox />@</a>
 ** <a href="#zc_radio">@<txp:zem_contact_radio />@</a>
 ** <a href="#zc_secret">@<txp:zem_contact_secret />@</a>
@@ -1852,13 +1853,13 @@ Creates a drop-down selection list.
 
 h4. Attributes
 
-* @options="comma-separated values"@<br />List of items to show in the select box. May also use the @<txp:zem_contact_option />@ tag inside this tag's container.
+* @options="comma-separated values"@<br /> (previously @list@) List of items to show in the select box. May also use the @<txp:zem_contact_option />@ tag inside this tag's container.
 * @selected="value"@<br />List item that is selected by default.
 * @label="text"@<br />Text label displayed to the user. Default is *Option*.
 * @name="value"@<br />Field name, as used in the HTML input tag.
 * @break="tag"@<br />Break tag between the label and input field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
 * @size@<br/>The vertical size, in entries, of the input field.
-* @delimiter="character"@<br />Separator character used in the *list* attribute. Default is *,* (comma).
+* @delimiter="character"@<br />Separator character between list items if using the *options* attribute. Default is *,* (comma). Ignored if this tag is used as a container.
 * @class="space-separated values"@<br /> Set the CSS class name of the list. Default: @zemSelect@.
 * @required="boolean"@<br />Whether this field must be filled out. Available values: *1* (yes), *0* (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
 * @html_form@<br />The HTML id of the @<form>@ tag to which the textarea is attached. Associated with the contained form by default.
@@ -1886,7 +1887,7 @@ bc. <txp:zem_contact_select list="Marketing,Sales,Support" selected="Marketing" 
 
 h3(#zc_option). @<txp:zem_contact_option />@
 
-Creates a drop-down selection option.
+Creates a drop-down selection option. See "zem_contact_select":#zc_select.
 
 h4. Attributes
 
