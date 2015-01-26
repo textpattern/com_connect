@@ -1548,7 +1548,7 @@ if (0) {
 
 h1(#top). Zem Contact Reborn
 
-Please reports bugs and problems with this plugin in "this forum thread":http://forum.textpattern.com/viewtopic.php?id=YYYYY.
+Please report bugs and problems with this plugin in "this forum thread":http://forum.textpattern.com/viewtopic.php?id=YYYYY.
 
 h2(#contents). Contents
 
@@ -1646,7 +1646,7 @@ h2(#faq). Frequently Asked Questions (FAQ)
 ; No email is sent. How do I diagnose and fix the problem?
 : First try a simple contact form, using only the @zem_contact@ tag with the @to@ attribute set to a valid email address. If that doesn't send email, fill out the "SMTP envelope sender address":index.php?event=prefs&step=advanced_prefs in TXP's advanced preferences on the admin tab. If that doesn't help either, take a look at your mail server log files to see what the problem is.
 ; Which tag do I use to create the submit button?
-: Just use normal HTML code to create a submit button. For historical reasons this plugin still provides the zem_contact_submit tag, but it provides no extra functionality.
+: Just use normal HTML code to create a submit button. For historical reasons this plugin still provides the zem_contact_submit tag, but it provides little extra functionality.
 ; How can I get a unique (order) number in the subject of each email?
 : Try using the "rvm_counter":http://vanmelick.com/txp tag in the @subject@ attribute of the @zem_contact@ tag.
 ; I want to use the contact form in an article list (one form for each article), but how do I make each form unique?
@@ -1660,7 +1660,7 @@ h2(#faq). Frequently Asked Questions (FAQ)
 ; Can I use this plugin to send HTML email?
 : Not without a plugin like "mem_form":https://bitbucket.org/Manfre/txp-plugins/downloads or using the "delivery callback":#api. HTML email is evil.
 ; Can I use this plugin to send newsletters?
-: Nope, but for that purpose you can use the "mem_postmaster":https://bitbucket.org/Manfre/txp-plugins/downloads/ plugin.
+: Not without a plugin, such as "mem_postmaster":https://bitbucket.org/Manfre/txp-plugins/downloads/.
 ; I have a question that's not listed here
 : First read the plugin documentation (the page you're on right now) once more. If that doesn't answer your question, visit the Textpattern forum (see link at the top of this page).
 
@@ -2157,8 +2157,8 @@ h2(#history). History
 Only the changes that may affect people who upgrade are detailed below.
 To save space, links to forum topics that detail all the changes in each version have been added.
 
-* 09 jul 2014: *version 4.5.0.0*
-** Replace @split()@, which is deprecated since PHP 5.3, with @explode()@.
+* 26 Jan 2015: *version 4.5.0.0*
+** Replace @split()@ (deprecated since PHP 5.3) with @explode()@.
 ** Remove zem_contact_mailheader() function, switch to using TXP's encode_mailheader function (TXP 4.0.4+).
 ** Parse the thanks_form.
 ** Make email work when the mailserver requires the SMTP envelope sender (advanced prefs).
@@ -2169,31 +2169,32 @@ To save space, links to forum topics that detail all the changes in each version
 ** Add a host of HTML 5 attributes to tags.
 ** Add @zemcontact.delivery@ callback for enhanced mailing through other plugins.
 ** Remove deprecated @button@ attribute in @<zem_contact_submit />@.
-* 23 aug 2007: *version 4.0.3.20* "changelog":http://forum.textpattern.com/viewtopic.php?id=23728
-** escape label attribute values when showing the form in the browser (not in email, plain text there)
-** don’t display empty input values in the email
-* 14 feb 2007: *version 4.0.3.19* "changelog":http://forum.textpattern.com/viewtopic.php?id=21144
+** Add plugin Textpack, removing the need for separate zem_contact_lang plugin. Translations welcome.
+* 23 Aug 2007: *version 4.0.3.20* "changelog":http://forum.textpattern.com/viewtopic.php?id=23728
+** Escape label attribute values when showing the form in the browser (not in email, plain text there)
+** Don’t display empty input values in the email
+* 14 Feb 2007: *version 4.0.3.19* "changelog":http://forum.textpattern.com/viewtopic.php?id=21144
 ** "send_article":#sendarticle functionality revised, requiring changes when upgrading from earlier versions
 ** New language strings: 'send_article' and 'recipient' (replaces 'receiver')
 ** Sets of radio buttons require the new "group":#zc_radio attribute
 ** Yes/No values deprecated in favor of the TXP standard 1/0 values (yes/no still work in this version)
-* 20 nov 2006: *version 4.0.3.18* "changelog":http://forum.textpattern.com/viewtopic.php?id=19823
+* 20 Nov 2006: *version 4.0.3.18* "changelog":http://forum.textpattern.com/viewtopic.php?id=19823
 ** IDs 'zemContactForm' and 'zemSubmit' have changed to classes to allow multiple forms per page
 ** New language strings: 'form_used', 'invalid_utf8', 'max_warning', 'name', 'refresh', 'secret'
-* 12 mar 2006: *version 4.0.3.17* "changelog":http://forum.textpattern.com/viewtopic.php?id=13416
-* 11 feb 2006: *version .16*
-* 06 feb 2006: *version .15*
-* 03 feb 2006: *version .14*
+* 12 Mar 2006: *version 4.0.3.17* "changelog":http://forum.textpattern.com/viewtopic.php?id=13416
+* 11 Feb 2006: *version .16*
+* 06 Feb 2006: *version .15*
+* 03 Feb 2006: *version .14*
 ** Requires separate zem_contact_lang plugin
-* 29 jan 2006: *version .12*
-* 27 jan 2006: *version .11*
-* 23 jan 2006: *version .09 and .10*
-* 23 jan 2006: *version .08*
-* 17 jan 2006: *version .07*
-* 16 jan 2006: *version .05 and .06*
-* 15 jan 2006: *version .04*
-* 10 jan 2006: *version .03*
-* 19 dec 2005: *version .02*
+* 29 Jan 2006: *version .12*
+* 27 Jan 2006: *version .11*
+* 23 Jan 2006: *version .09 and .10*
+* 23 Jan 2006: *version .08*
+* 17 Jan 2006: *version .07*
+* 16 Jan 2006: *version .05 and .06*
+* 15 Jan 2006: *version .04*
+* 10 Jan 2006: *version .03*
+* 19 Jec 2005: *version .02*
 
 "Back to top":#top
 
@@ -2201,11 +2202,11 @@ h2(#credits). Credits
 
 * *zem* wrote the zem_contact 0.6 plugin on which this plugin was initially based.
 * *Mary* completely revised the plugin code.
-* *Stuart* Turned it into a plugin, added a revised help text and additional code. Maintained all plugin versions till 4.0.3.17.
+* *Stuart* Turned it into a plugin, added a revised help text and additional code. Maintained all plugin versions until 4.0.3.17.
 * *wet* added the zem_contact_radio tag.
 * *Tranquillo* added the anti-spam API and zem_contact_send_article functionality.
 * *aslsw66*, *jdykast* and others (?) provided additional code
-* *Ruud* cleaned up and audited the code to weed out bugs and completely revised the help text. Maintainer of versions 4.0.3.18 and up.
+* *Ruud* cleaned up and audited the code to weed out bugs and completely revised the help text. Maintained all versions until 4.0.3.20.
 * *Bloke* is the maintainer of v4.5.0.0 and up.
 * Supported and tested to destruction by the Textpattern community.
 
@@ -2213,13 +2214,13 @@ h2(#credits). Credits
 
 h2(#api). Zem Contact Reborn's API
 
-The plugin API of zem contact, developed by Tranquillo, is similar to the comments API of Textpattern, which is explained in the Textbook "Plugin Development Topics":http://textpattern.net/wiki/index.php?title=Plugin_Development_Topics and "Combat Comment Spam":http://textpattern.net/wiki/index.php?title=Combat_Comment_Spam.
+The plugin API of zem contact, originally developed by Tranquillo, allows other plugins to interact with contact forms. This permits extra functionality such as "Combatting Comment Spam":http://textpattern.net/wiki/index.php?title=Combat_Comment_Spam, HTML email, newsletter delivery and so forth to be bolted onto the base plugin.
 
 Three callback events exist in zem_contact_reborn:
 
 * @zemcontact.submit@ is called after the form is submitted and the values are checked if empty or valid email addresses, but before the mail is sent.
 * @zemcontact.form@ lets you insert content in the contact form as displayed to the visitor.
-* @zemcontact.deliver@ is called immediately prior to delivery and sends the intended payload so you may manipulate it. For example, you could change the MIME type header to @text/html@ and add some HTML content based on the given body data, then let zem_contact_reborn handle the mailing. Or you could intercept the entire mail process, handle mailing yourself with a third party system, and tell zem_contact_reborn to skip its internal mailing process.
+* @zemcontact.deliver@ is called immediately prior to delivery and advertises the intended payload so you may manipulate it. For example, you could change the MIME type header to @text/html@ and add some HTML content based on the given body data, then let zem_contact_reborn handle the mailing. Or you could intercept the entire mail process, handle mailing yourself with a third party system, and tell zem_contact_reborn to skip its internal mailing process.
 
 For reference here are the commands that will be interesting to plugin developers:
 
@@ -2269,13 +2270,13 @@ function pap_zemcontact_submit() {
   return;
 }
 
-p. For the delivery callback you signal back to the plugin your intentions so that zem_contact_reborn knows what to do after your delivery plugin has executed. Return the following strings:
+p. For the delivery callback, you signal back to the plugin your intentions so that Zem Contact Reborn knows what to do after your delivery plugin has executed. Return the following strings:
 
-* @zemcontact.send@ (or no return value) to allow ZCR to continue mailing.
+* @zemcontact.send@ (or no return value) to allow Zem Contact Reborn to continue mailing the content.
 * @zemcontact.skip@ to skip zem_contact's mailing (i.e. the third party handles the mail process) and return 'success' to the visitor.
 * @zemcontact.fail@ to skip zem_contact's mailing and return 'fail' to the visitor.
 
-Or simply @exit@ your plugin to halt the entire operation so no ZCR feedback is given.
+Or simply @exit@ your plugin to halt the entire operation so no Zem Contact Reborn feedback is given.
 
 p. "Back to top":#top
 # --- END PLUGIN HELP ---
