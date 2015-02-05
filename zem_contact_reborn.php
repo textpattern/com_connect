@@ -956,7 +956,6 @@ function zem_contact_checkbox($atts)
 	$attr = zem_contact_build_atts(array(
 		'id'    => (isset($id) ? $id : $name),
 		'name'  => $name,
-		'value' => $value,
 	));
 
 	// HTML 5 attributes
