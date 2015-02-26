@@ -90,7 +90,9 @@ In addition to the tags detailed in the following sections, every tag accepts a 
 * @title@: usually used for hover tooltip describing the input control's use in your application.
 * @translate@: whether to subject the attribute content to language translation.
 
-h3. <txp:zem_contact />
+h3. zem_contact
+
+bc. <txp:zem_contact />
 
 May be used as a self-closing or container tag. Place this where you want the input form to go. Status and error messages, if any, will be displayed before the form.
 
@@ -131,7 +133,9 @@ bc. <txp:zem_contact to="recipient@example.com">
     <txp:zem_contact_submit label="Send" />
 </txp:zem_contact>
 
-h3. <txp:zem_contact_text />
+h3. zem_contact_text
+
+bc. <txp:zem_contact_text />
 
 Creates a text @<input>@ field and corresponding @<label>@ tag. The input value will be included in the email, preceded by the label.
 
@@ -175,7 +179,9 @@ h5. Example 2
 
 bc. <txp:zem_contact_text type="range" label="UK shoe size" min="1" max="15" />
 
-h3. <txp:zem_contact_email />
+h3. zem_contact_email
+
+bc. <txp:zem_contact_email />
 
 @<input>@ field for user's email address.
 
@@ -193,7 +199,9 @@ h5. Example 1
 
 bc. <txp:zem_contact_email label="Your email address" />
 
-h3. <txp:zem_contact_textarea />
+h3. zem_contact_textarea
+
+bc. <txp:zem_contact_textarea />
 
 Creates a @<textarea>@.
 
@@ -221,7 +229,9 @@ Textarea that is 40 chars wide, 10 lines high, with a customised label:
 
 bc. <txp:zem_contact_textarea cols="40" rows="10" label="Your question" />
 
-h3. <txp:zem_contact_submit />
+h3. zem_contact_submit
+
+bc. <txp:zem_contact_submit />
 
 Creates a submit button. When used as a container tag, a @<button>@ element will be used instead of an @<input>@ element.
 
@@ -257,7 +267,9 @@ As example 3 above, but using an image as the button:
 
 bc. <txp:zem_contact_submit><img src="path/to/img.png" alt="submit"></txp:zem_contact_submit>
 
-h3. <txp:zem_contact_select />
+h3. zem_contact_select
+
+bc. <txp:zem_contact_select />
 
 Creates a drop-down selection @<select>@ list.
 
@@ -295,7 +307,9 @@ Select list containing three options with 'Marketing' selected by default.
 
 bc. <txp:zem_contact_select list="Marketing,Sales,Support" selected="Marketing" />
 
-h3. <txp:zem_contact_option />
+h3. zem_contact_option
+
+bc. <txp:zem_contact_option />
 
 Creates a drop-down selection option. See "zem_contact_select":#zc_select.
 
@@ -306,7 +320,9 @@ h4. Attributes
 * @value="text"@<br />The value associated with this option when submitted. Default is the label.
 * @selected="boolean"@<br />Whether this item is selected, May also be specified in the container tag's @selected@ attribute. Available values: @1@ (yes) or @0@ (no).
 
-h3. <txp:zem_contact_checkbox />
+h3. zem_contact_checkbox
+
+bc. <txp:zem_contact_checkbox />
 
 Creates a check box.
 
@@ -337,7 +353,9 @@ bc. Select which operating systems are you familiar with:<br />
 <txp:zem_contact_checkbox label="Unix/Linux/BSD" required="0" /><br />
 <txp:zem_contact_checkbox label="MacOS" required="0" />
 
-h3. <txp:zem_contact_radio />
+h3. zem_contact_radio
+
+bc. <txp:zem_contact_radio />
 
 Creates a radio button.
 
@@ -365,7 +383,9 @@ bc. <txp:zem_contact_radio label="Medium" group="I like my steak" />
 <txp:zem_contact_radio label="Beer" />
 <txp:zem_contact_radio label="Water" />
 
-h3. <txp:zem_contact_secret />
+h3. zem_contact_secret
+
+bc. <txp:zem_contact_secret />
 
 This tag has no effect on the form or HTML output, but will include additional information in the email. It can be used as a self-closing tag or as a container tag.
 
@@ -391,7 +411,9 @@ bc. <txp:zem_contact_secret label="Dear user">
     Please provide a useful example for this tag!
 </txp:zem_contact_secret>
 
-h3. @<txp:zem_contact_serverinfo />
+h3. zem_contact_serverinfo
+
+bc. <txp:zem_contact_serverinfo />
 
 This tag has no effect on the form or HTML output, but will include additional information in the email based on the PHP @$_SERVER@ variable.
 
@@ -414,7 +436,9 @@ Add the name of the visitor's browser to the email:
 
 bc. <txp:zem_contact_serverinfo name="HTTP_USER_AGENT" label="Browser" />
 
-h3. <txp:zem_contact_send_article />
+h3. zem_contact_send_article
+
+bc. <txp:zem_contact_send_article />
 
 Use this tag in your individual article form, where you want the "send article" link to be displayed.
 
@@ -430,8 +454,9 @@ On an article form:
 
 bc. <txp:zem_contact_send_article linktext="Send this article" />
 
+h3. zem_contact_label
 
-h3. @<txp:zem_contact_label />
+bc. <txp:zem_contact_label />
 
 Return the label for the given attribute name.
 
@@ -439,7 +464,9 @@ h4. Attributes
 
 * @name="text"@<br />The name of the field for which you wish to retrieve the label.
 
-h3. <txp:zem_contact_value />
+h3. zem_contact_value
+
+bc. <txp:zem_contact_value />
 
 Return the value of the given attribute, by name or its label.
 
@@ -448,7 +475,9 @@ h4. Attributes
 * @name="text"@<br />The name of the field for which you wish to retrieve the value.
 * @label="text"@<br />The label of the field for which you wish to retrieve the value.
 
-h3. <txp:zem_contact_if />
+h3. zem_contact_if
+
+bc. <txp:zem_contact_if />
 
 Conditional tag for checking variable conditions, either by name or label.
 
@@ -617,49 +646,49 @@ Or simply @exit@ your plugin to halt the entire operation so no Zem Contact Rebo
 
 h2. Frequently asked questions
 
-h6. How do I remove the legend and fieldset surrounding the contact form?
+h5. How do I remove the legend and fieldset surrounding the contact form?
 
 Set the @label@ attribute to an empty value (@label=""@) in the @zem_contact@ tag.
 
-h6. No email is sent. How do I diagnose and fix the problem?
+h5. No email is sent. How do I diagnose and fix the problem?
 
 First try a simple contact form, using only the @zem_contact@ tag with the @to@ attribute set to a valid email address. If that doesn't send email, fill out the 'SMTP envelope sender address' field in Textpattern's preferences page on the admin tab. If that doesn't help either, take a look at your mail server log files to see what the problem is.
 
-h6. Which tag do I use to create the submit button?
+h5. Which tag do I use to create the submit button?
 
 Just use normal HTML code to create a submit button. For historical reasons this plugin still provides the @zem_contact_submit@ tag, but it provides little extra functionality.
 
-h6. How can I get a unique (order) number in the subject of each email?
+h5. How can I get a unique (order) number in the subject of each email?
 
 Try using the "rvm_counter":http://vanmelick.com/txp tag in the @subject@ attribute of the @zem_contact@ tag.
 
-h6. I want to use the contact form in an article list (one form for each article), but how do I make each form unique?
+h5. I want to use the contact form in an article list (one form for each article), but how do I make each form unique?
 
 You can make each form unique by making one of its attribute values unique. See previous question for an example of how to do this with the @subject@ attribute.
 
-h6. Send article: can I let people specify multiple recipients?
+h5. Send article: can I let people specify multiple recipients?
 
 No. The 'send article' functionality is spammy enough as it is right now.
 
-h6. Send article: can I show the contact form without having to click a link first?
+h5. Send article: can I show the contact form without having to click a link first?
 
 Sure, put this just above the @zem_contact@ tag:
 
 bc. <txp:php>$_GET['zem_contact_send_article']='yes';</txp:php>
 
-h6. How can I use this form to upload files?
+h5. How can I use this form to upload files?
 
 You can't, but have a look at the "sed_afu":http://txp-plugins.netcarving.com/ (anonymous file upload) and "mem_form":https://bitbucket.org/Manfre/txp-plugins/downloads/ plugins.
 
-h6. Can I use this plugin to send HTML email?
+h5. Can I use this plugin to send HTML email?
 
 Not without a plugin like "mem_form":https://bitbucket.org/Manfre/txp-plugins/downloads or using the delivery callback.
 
-h6. Can I use this plugin to send newsletters?
+h5. Can I use this plugin to send newsletters?
 
 Not without a plugin, such as "mem_postmaster":https://bitbucket.org/Manfre/txp-plugins/downloads/.
 
-h6. I have a question that's not listed here
+h5. I have a question that's not listed here
 
 First read the plugin documentation (the page you're on right now) once more. If that doesn't answer your question, visit the "Textpattern forum":http://forum.textpattern.com.
 
