@@ -1,1 +1,114 @@
 h1. Changelog
+
+h2. 4.5.0.0 - 2015-01-26
+
+* Replace @split()@ (deprecated since PHP 5.3) with @explode()@.
+* Remove @zem_contact_mailheader()@ function, switch to using Textpattern's @encode_mailheader@ function (Textpattern 4.0.4+).
+* Parse the @thanks_form@.
+* Make email work when the mailserver requires the SMTP envelope sender (in Textpattern preferences page).
+* Use "From: <email@example.com>" instead of "From: email@example.com" to avoid triggering Spamassassin rule.
+* Add @body_form@ attribute. Not to be confused with the ladies' sanitary product.
+* Add @class@ and @expire@ attributes.
+* Add @<txp:zem_contact_option />@ tag.
+* Add a host of HTML5 attributes to tags.
+* Add @zemcontact.delivery@ callback for enhanced mailing through other plugins.
+* Remove deprecated @button@ attribute in @<zem_contact_submit />@.
+* Add plugin Textpack, removing the need for separate zem_contact_lang plugin. Translations welcome!
+
+h2. 4.0.3.20 - 2007-08-23
+
+* Escape @label@ attribute values when showing the form in the browser (not in email, plain text there).
+* Don't display empty input values in the email.
+
+h2. 4.0.3.19 - 2007-02-14
+
+* @send_article@ functionality revised, requiring changes when upgrading from earlier versions.
+* New language strings: @send_article@ and @recipient@ (replaces @receiver@).
+* Sets of radio buttons require the new @group@ attribute.
+* @yes@/@no@ values deprecated in favour of the Textpattern standard @1@/@0@ values (@yes@/@no@ still work in this version).
+
+h2. 4.0.3.18 - 2006-11-20
+
+* IDs @zemContactForm@ and @zemSubmit@ have changed to classes to allow multiple forms per page.
+* New language strings: @form_used@, @invalid_utf8@, @max_warning@, @name@, @refresh@, @secret@.
+
+h2. 4.0.3.17 - 2006-03-12
+
+* @<zem_contact_radio />@ function added to enable the use of radio buttons (thanks Robert).
+* New attribute @button="yes"@ has been added to the @<zem_contact_submit />@ function to enable the user to choose a @<button>@ element output instead of the normal @<input>@ element.
+* Fixed @isError@ for the @<zem_contact_select />@ function.
+* Reduced @return@ to a single instance for those functions that use @zemRequired@ and thereby reduced the code a bit.
+
+h2. 0.16 - 2006-02-11
+
+* Zem Contact Reborn now has it’s own built-in API. This means that it can be linked to by other plug-ins. Information about how plug-in developers can do that is included in the Help text.
+* Fixed a validation problem in @Strict@ relating to the @for@ attribute used in the @label@ of the @select@ function.
+* Zem Contact Lang has also been updated to 0.02 with the addition of a new line @spam@.
+
+h2. 0.15 - 2006-02-06
+
+* Removes tags from the article when using the "Send article" functions.
+
+h2. 0.14 - 2006-02-03
+
+* *Requires separate zem_contact_lang plugin.* This latest version now splits the language file out into a separate plug-in. You will need both for it to work properly.
+
+h2. 0.13 - Unreleased
+
+h2. 0.12 - 2006-01-29
+
+* Help text has been looked through and any errors or ambiguities removed and formatting improved.
+* Added information relating to localisation.
+
+h2. 0.11 - 2006-01-27
+
+* @errorElement@ @class@ now appended to labels, inputs and the textarea when errors relating to information entered into the form, or not entered, are output.
+* Added some styling information to the Help text to explain the relevant classes.
+
+h2. 0.10 - 2006-01-23
+
+* @copysender@ now uses @Bcc@ instead of @Cc@.
+
+h2. 0.09 - 2006-01-23
+
+* Modified the way that @copysender@ works, in order not to display your address on the email.
+
+h2. 0.08 - 2006-01-23
+
+* New attribute @copysender@ added. When set to @yes@ a copy of the email will be sent to the sender's email address as well as your own (thanks to Anura for explaining 'concatenation').
+* Fixed bug which stopped the @break@ attribute working for the email @<input>@ (thanks to jdykast for spotting that one).
+
+h2. 0.07 - 2006-01-17
+
+* Error messages are output as a @<ul>@ so I have given the @<ul>@ tag a @class="zemError"@. Now you can style the messages.
+* When @required="yes"@, labels will have a second @class@ added to them in the form @class="zemRequired $name"@ so that you can set an overall style for @required@ labels as well as make individual adjustments where necessary. Where @required="no"@, labels will continue to use @class="$name"@.
+* When @required="yes"@, a class=“zemRequired” is also added to the “input” so that you can style those in a different manner as well if you wish.
+
+h2. 0.06 - 2006-01-16
+
+* @id@ added to @<form>@. Now uses @zemContactForm@.
+* @id@ added to @submit@ button. Now uses @zemSubmit@.
+* @id@ added to @checkbox@. Now uses the value for label.
+* @class@ attribute added to all @<label>@ tags. Will now use the same value as the label.
+
+h2. 0.05 - 2006-01-16
+
+* Email @<input>@ box is now sizeable within the tag using the @size@ attribute.
+* If an error is returned, entered values should be retained so they do not need to be re-entered.
+* Bold text for @required@ fields has been removed.
+* "Send Article" now includes a link to the article in the email.
+
+h2. 0.04 - 2006-01-15
+
+* Missing @/@ added for validation (Thanks Els).
+
+h2. 0.03 - 2006-01-19
+
+* Includes tranquillo's code for "Send Article" functionallity. You can now add a link to your individual article form which will, when clicked, open a form allowing your visitor to enter his/her name and an email address for a friend. They can also add an extra message if they wish. The article's title and body will be included in the email automatically.
+* Help text updated.
+* A couple of minor bugs squished (should sort some of the @yes@/@no@ problems out).
+
+h2. 0.02 - 2005-12-19
+
+* Major changes to the help files.
+* Please double-check your attribute names as several have changed. Also @on@/@off@ attributes now use @yes@ and @no@ instead of @1@ and @0@.
