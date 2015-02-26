@@ -106,8 +106,8 @@ h4. Attributes
 * @subject="subject text"@<br />Subject used when sending an email. Default is the site name.
 * @subject_form="form name"@<br />Use specified form (overrides @subject@ attribute).
 * @thanks="text"@<br />Message shown after successfully submitting a message. Default is @Thank you, your message has been sent@.
-* @thanks_form="form name"@<br />Use specified form (overrides *thanks* attribute).
-* @redirect="URL"@<br />Redirect to specified URL (overrides *thanks* and *thanks_form* attributes). URL must be relative to the Textpattern site URL. Example: @redirect="monkey"@ would redirect to @http://example.com/monkey@.
+* @thanks_form="form name"@<br />Use specified form (overrides @thanks@ attribute).
+* @redirect="URL"@<br />Redirect to specified URL (overrides @thanks@ and @thanks_form@ attributes). URL must be relative to the Textpattern site URL. Example: @redirect="monkey"@ would redirect to @http://example.com/monkey@.
 * @expire="number"@<br />Number of seconds after which the form will expire, thus requiring a page refresh before sending. Default is @600@.
 * @label="text"@<br />Label for the contact form. If set to an empty string, display of the fieldset and legend tags will be suppressed. Default is @Contact@.
 * @send_article="boolean"@<br />Whether to use this form to send an article. Available values: @1@ (yes) or @0@ (no). Default is @0@.
@@ -218,7 +218,7 @@ h4. Attributes
 * @placeholder="text"@<br />Text to show as a guide to users, when the  @<textarea>@ is empty.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the  @<textarea>@. Default: @zemTextarea@.
 * @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
-* @wrap="value"@<br/>Governs word-wrap. Available values: *hard* or *soft*.
+* @wrap="value"@<br/>Governs word-wrap. Available values: @hard@ or @soft@.
 * @html_form@<br />The HTML @id@ of the @<form>@ tag to which the @<textarea>@ is attached. Associated with the contained form by default.
 
 h4. Examples
@@ -238,7 +238,7 @@ Creates a submit button. When used as a container tag, a @<button>@ element will
 h4. Attributes:
 
 * @label="text"@<br />Text shown on the submit button. Default is @Send@.
-* @class="space-separated values"@<br /> Set the CSS class name of the tag. Default: @zemSubmit@.
+* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemSubmit@.
 * @html_form@<br />The HTML @id@ of the @<form>@ tag to which the button is attached. Associated with the contained form by default.
 
 h4. Examples
@@ -318,7 +318,7 @@ Creates a drop-down selection option. See "zem_contact_select":#zc_select.
 h4. Attributes
 
 * @label="text"@<br />Text label of this option displayed to the user.
-* @class="space-separated values"@<br /> Set the CSS class name of the option. Default: @zemOption@.
+* @class="space-separated values"@<br /> Set the CSS @class@ name of the option. Default: @zemOption@.
 * @value="text"@<br />The value associated with this option when submitted. Default is the label.
 * @selected="boolean"@<br />Whether this item is selected, May also be specified in the container tag's @selected@ attribute. Available values: @1@ (yes) or @0@ (no).
 
@@ -376,7 +376,7 @@ h4. Examples
 
 h5. Example 1
 
-Group mutually exclusive radio buttons by setting the @group@ attribute on the first radio button in a group. Only the chosen radio button from each group will be used in the email message. The message will be output in the form *group: label* for each of the chosen radio buttons.
+Group mutually exclusive radio buttons by setting the @group@ attribute on the first radio button in a group. Only the chosen radio button from each group will be used in the email message. The message will be output in the form @group: label@ for each of the chosen radio buttons.
 
 bc. <txp:zem_contact_radio label="Medium" group="I like my steak" />
 <txp:zem_contact_radio label="Rare" />
@@ -422,7 +422,7 @@ This tag has no effect on the form or HTML output, but will include additional i
 h4. Attributes
 
 * @name="value"@ *(required)*<br />Name of the server variable. See the "PHP manual":http://php.net/manual/reserved.variables.php#reserved.variables.server for a full list.
-* @label="text"@<br />Used to identify the field in the email. Defaults to the value of the *name* attribute.
+* @label="text"@<br />Used to identify the field in the email. Defaults to the value of the @name@ attribute.
 
 h4. Examples
 
@@ -577,15 +577,15 @@ A 'default' email address in the @to_form@ is specified to ensure that a valid e
 
 h2. Styling
 
-The form itself has a class *zemContactForm* set on the @form@ HTML tag.
+The form itself has a @class@ of @zemContactForm@ set on the @form@ HTML tag.
 
-The list of error messages (if any) has a class *zemError* set on the @ul@ HTML tag that encloses the list of errors.
+The list of error messages (if any) has a @class@ of @zemError@ set on the @ul@ HTML tag that encloses the list of errors.
 
 All form elements and corresponding labels have the following classes (or ids set):
 
-# One of *zemText*, *zemTextarea*, *zemSelect*, *zemOption*, *zemRadio*, *zemCheckbox*, *zemSubmit*. By default, it should be obvious which class is used for which form element (and corresponding label). You can override these names by using your own @class@ attribute.
-# *zemRequired* or *errorElement* or *zemRequirederrorElement*, depending on whether the form element is required, an error was found in whatever the visitor entered... or both.
-# An individual "id" or "class" set to the value of the @name@ attribute of the corresponding tag. When styling forms based on this class, you should explicitly set the @name@ attribute because automatically generated names may change in newer zem_contact_reborn versions.
+# One of @zemText@, @zemTextarea@, @zemSelect@, @zemOption@, @zemRadio@, @zemCheckbox@ or @zemSubmit@. By default, it should be obvious which @class@ is used for which form element (and corresponding label). You can override these names by using your own @class@ attribute.
+# @zemRequired@, @errorElement@ or @zemRequirederrorElement@, depending on whether the form element is required, an error was found in whatever the visitor entered... or both.
+# An individual @id@ or @class@ set to the value of the @name@ attribute of the corresponding tag. When styling forms based on this @class@, you should explicitly set the @name@ attribute because automatically generated names may change in newer zem_contact_reborn versions.
 
 h2. Zem Contact Reborn's API
 
