@@ -98,7 +98,7 @@ May be used as a self-closing or container tag. Place this where you want the in
 
 h4. Attributes
 
-* @to="email address"@ (required)<br />Recipient email address. Multiple recipients can be specified separated by commas.
+* @to="email address"@ *(required)*<br />Recipient email address. Multiple recipients can be specified separated by commas.
 * @to_form="form name"@<br />Use specified form (overrides @to@ attribute).
 * @body_form="form name"@<br />Use specified form for the message body text.
 * @from="email address"@<br />Email address used in the "From:" field when sending email. Defaults to the sender's email address. If specified, the sender's email address will be placed in the "Reply-To:" field instead.
@@ -110,7 +110,7 @@ h4. Attributes
 * @redirect="URL"@<br />Redirect to specified URL (overrides *thanks* and *thanks_form* attributes). URL must be relative to the Textpattern site URL. Example: @redirect="monkey"@ would redirect to @http://example.com/monkey@.
 * @expire="number"@<br />Number of seconds after which the form will expire, thus requiring a page refresh before sending. Default is @600@.
 * @label="text"@<br />Label for the contact form. If set to an empty string, display of the fieldset and legend tags will be suppressed. Default is @Contact@.
-* @send_article="boolean"@<br />Whether to use this form to <a href="#article">send an article</a>. Available values: @1@ (yes) or @0@ (no). Default is @0@.
+* @send_article="boolean"@<br />Whether to use this form to send an article. Available values: @1@ (yes) or @0@ (no). Default is @0@.
 * @copysender="boolean"@<br />Whether to send a copy of the email to the sender's address. Available values: @1@ (yes) or @0@ (no). Default is @0@.
 * @form="form name"@<br />Use specified form, containing the layout of the contact form fields.
 * @show_input="boolean"@<br /> Whether to display the form @<input>@ fields. Available values: @1@ (yes) or @0@ (no). Default is @1@.
@@ -265,7 +265,9 @@ h5. Example 4
 
 As example 3 above, but using an image as the button:
 
-bc. <txp:zem_contact_submit><img src="path/to/img.png" alt="submit"></txp:zem_contact_submit>
+bc. <txp:zem_contact_submit>
+    <img src="path/to/img.png" alt="submit">
+</txp:zem_contact_submit>
 
 h3. zem_contact_select
 
@@ -361,8 +363,8 @@ Creates a radio button.
 
 h4. Attributes
 
-* @group="text"@ (required)<br />Text used in the email to describe this group of radio buttons. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. Default is @Radio@.
-* @label="text"@ (required)<br />Text label displayed to the user as radio button option.
+* @group="text"@ *(required)*<br />Text used in the email to describe this group of radio buttons. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. Default is @Radio@.
+* @label="text"@ *(required)*<br />Text label displayed to the user as radio button option.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. If it hasn't been set at all, it will be derived from the @group@ attribute.
 * @break="tag"@<br />Break tag between the label and field. Default is a space.
 * @checked="boolean"@<br />Whether this radio option is checked when the form is first displayed. Available values: @1@ (yes) or @0@ (no). Default is @0@.
@@ -419,7 +421,7 @@ This tag has no effect on the form or HTML output, but will include additional i
 
 h4. Attributes
 
-* @name="value"@ (required)<br />Name of the server variable. See the "PHP manual":http://php.net/manual/reserved.variables.php#reserved.variables.server for a full list.
+* @name="value"@ *(required)*<br />Name of the server variable. See the "PHP manual":http://php.net/manual/reserved.variables.php#reserved.variables.server for a full list.
 * @label="text"@<br />Used to identify the field in the email. Defaults to the value of the *name* attribute.
 
 h4. Examples
