@@ -78,7 +78,7 @@ In addition to the tags detailed in the following sections, every tag accepts a 
 * @autofocus@: to automatically focus the cursor in this field on page load. Only one field may have this property.
 * @dir@: text direction (@ltr@, @rtl@ or @auto@).
 * @disabled@: whether the input control accepts user input. If set, the element does not get submitted with the form, nor is it subject to any @checkValidity()@ JavaScript calls.
-* @hidden@: the visibility of the @<input>@ control.
+* @hidden@: the visibility of the input control.
 * @id@: the HTML identifier of the control.
 * @lang@: the ISO 639 language short code (e.g. @en-gb@, @de-de@) that govern the field.
 * @list@: used in conjunction with the @<datalist>@ tag to specify a set of options.
@@ -234,7 +234,7 @@ h4. Attributes
 * @autocomplete="value"@<br />This attribute indicates whether the value of the control can be automatically completed by the browser. Possible values are: @off@ (the browser does not automatically complete the entry) or @on@ (the browser can automatically complete the value based on values that the user has entered during previous uses). Default is unset.
 * @break="tag"@<br />Break tag between the @<label>@ and @<textarea>@. Default is @<br />@. Use @break=""@ to put the @<label>@ and @<input>@ field on the same line.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the  @<textarea>@. Default: @zemTextarea@.
-* @cols="integer"@<br/>Number of columns, in characters, of the textarea. Default is @58@.
+* @cols="integer"@<br/>Number of columns, in characters, of the @<textarea>@. Default is @58@.
 * @default="value"@<br />Default value when no input is provided.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the @<textarea>@ is attached. Associated with the contained form by default.
 * @label="text"@<br />Text label displayed to the user. Default is @Message@.
