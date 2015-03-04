@@ -142,20 +142,20 @@ Creates a text @<input>@ field and corresponding @<label>@ tag. The input value 
 h4. Attributes
 
 * @type="value"@<br />Type of text input. Default is @text@. Choose from:
-** @text@
-** @url@
-** @password@
-** @number@
-** @range@
+** @color@
 ** @date@
 ** @datetime@
 ** @datetime-local@
 ** @month@
-** @week@
-** @time@
+** @number@
+** @password@
+** @range@
 ** @search@
-** @color@
 ** @tel@
+** @text@
+** @time@
+** @url@
+** @week@
 * @label="text"@<br />Text label displayed to the user. Default is @Text@.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @break="tag"@<br />Break tag between the @<label>@ and @<input>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
