@@ -2192,47 +2192,7 @@ All form elements and corresponding labels have the following classes (or ids se
 
 h2(#history). History
 
-Only the changes that may affect people who upgrade are detailed below.
-To save space, links to forum topics that detail all the changes in each version have been added.
-
-* 26 Jan 2015: *version 4.5.0.0*
-** Replace @split()@ (deprecated since PHP 5.3) with @explode()@.
-** Remove zem_contact_mailheader() function, switch to using TXP's encode_mailheader function (TXP 4.0.4+).
-** Parse the thanks_form.
-** Make email work when the mailserver requires the SMTP envelope sender (advanced prefs).
-** Use "From: <email@example.com>" instead of "From: email@example.com" to avoid triggering Spamassassin rule.
-** Add @body_form@ attribute. Not to be confused with the ladies' sanitary product.
-** Add @class@ and @expire@ attributes.
-** Add @<txp:zem_contact_option />@ tag.
-** Add a host of HTML5 attributes to tags.
-** Add @zemcontact.delivery@ callback for enhanced mailing through other plugins.
-** Remove deprecated @button@ attribute in @<zem_contact_submit />@.
-** Add plugin Textpack, removing the need for separate zem_contact_lang plugin. Translations welcome.
-* 23 Aug 2007: *version 4.0.3.20* "changelog":http://forum.textpattern.com/viewtopic.php?id=23728
-** Escape label attribute values when showing the form in the browser (not in email, plain text there)
-** Don’t display empty input values in the email
-* 14 Feb 2007: *version 4.0.3.19* "changelog":http://forum.textpattern.com/viewtopic.php?id=21144
-** "send_article":#sendarticle functionality revised, requiring changes when upgrading from earlier versions
-** New language strings: 'send_article' and 'recipient' (replaces 'receiver')
-** Sets of radio buttons require the new "group":#zc_radio attribute
-** Yes/No values deprecated in favor of the TXP standard 1/0 values (yes/no still work in this version)
-* 20 Nov 2006: *version 4.0.3.18* "changelog":http://forum.textpattern.com/viewtopic.php?id=19823
-** IDs 'zemContactForm' and 'zemSubmit' have changed to classes to allow multiple forms per page
-** New language strings: 'form_used', 'invalid_utf8', 'max_warning', 'name', 'refresh', 'secret'
-* 12 Mar 2006: *version 4.0.3.17* "changelog":http://forum.textpattern.com/viewtopic.php?id=13416
-* 11 Feb 2006: *version .16*
-* 06 Feb 2006: *version .15*
-* 03 Feb 2006: *version .14*
-** Requires separate zem_contact_lang plugin
-* 29 Jan 2006: *version .12*
-* 27 Jan 2006: *version .11*
-* 23 Jan 2006: *version .09 and .10*
-* 23 Jan 2006: *version .08*
-* 17 Jan 2006: *version .07*
-* 16 Jan 2006: *version .05 and .06*
-* 15 Jan 2006: *version .04*
-* 10 Jan 2006: *version .03*
-* 19 Jec 2005: *version .02*
+Please see the "changelog on GitHub":https://github.com/Bloke/zem_contact_reborn/blob/master/CHANGELOG.textile.
 
 "Back to top":#top
 

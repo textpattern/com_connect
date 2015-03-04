@@ -720,6 +720,10 @@ h5. I have a question that's not listed here
 
 First read the plugin documentation (the page you're on right now) once more. If that doesn't answer your question, visit the "Textpattern forum":http://forum.textpattern.com.
 
+h2. History
+
+Please see the "changelog on GitHub":https://github.com/Bloke/zem_contact_reborn/blob/master/CHANGELOG.textile.
+
 h2. Author/credits
 
 * *zem* wrote the zem_contact 0.6 plugin on which this plugin was initially based.
