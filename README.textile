@@ -8,7 +8,7 @@ Please report bugs and problems with this plugin at "the GitHub project's issues
 
 h2. Features
 
-* Arbitrary <span class="caps">HTML</span> 5 text fields can be specified, with min/max/required settings for validation.
+* Arbitrary HTML5 text fields can be specified, with min/max/required settings for validation.
 * Email address validation, including a check for a valid MX record (Unix only).
 * Safe escaping of input data.
 * UTF-8 safe.
@@ -49,7 +49,6 @@ Within the context of an individual article, this plugin can be used to send the
 
 # @zem_contact@, to create form that is initially hidden by setting the @send_article@ attribute.
 # @zem_contact_send_article@, to create a 'Send article' link which reveals the aforementioned form when clicked.
-
 
 bc. <txp:zem_contact send_article="1" />
 <txp:zem_contact_send_article />
@@ -613,9 +612,9 @@ All form elements and corresponding labels have the following classes (or ids se
 # @zemRequired@, @errorElement@ or @zemRequirederrorElement@, depending on whether the form element is required, an error was found in whatever the visitor entered... or both.
 # An individual @id@ or @class@ set to the value of the @name@ attribute of the corresponding tag. When styling forms based on this @class@, you should explicitly set the @name@ attribute because automatically generated names may change in newer zem_contact_reborn versions.
 
-h2. Zem Contact Reborn's API
+h2. Plugin API and callback events
 
-The plugin API of zem contact, originally developed by Tranquillo, allows other plugins to interact with contact forms. This permits extra functionality such as "Combatting Comment Spam":http://textpattern.net/wiki/index.php?title=Combat_Comment_Spam, HTML email, newsletter delivery and so forth to be bolted onto the base plugin.
+The plugin API of zem_contact_reborn, originally developed by Tranquillo, allows other plugins to interact with contact forms. This permits extra functionality such as "Combatting Comment Spam":http://textpattern.net/wiki/index.php?title=Combat_Comment_Spam, HTML email, newsletter delivery and so forth to be bolted onto the base plugin.
 
 Three callback events exist in zem_contact_reborn:
 
@@ -724,7 +723,7 @@ h2. History
 
 Please see the "changelog on GitHub":https://github.com/Bloke/zem_contact_reborn/blob/master/CHANGELOG.textile.
 
-h2. Author/credits
+h2. Authors/credits
 
 * *zem* wrote the zem_contact 0.6 plugin on which this plugin was initially based.
 * *Mary* completely revised the plugin code.
