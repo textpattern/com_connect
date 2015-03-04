@@ -1722,7 +1722,7 @@ h4. Attributes
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemText@.
 * @default="value"@<br />Default value when no input is provided.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the field is attached. Associated with the contained form by default.
-* @inputmode="value"@<br />A hint to the browser for which keyboard to display. This attribute applies when the value of the type attribute is @text@, @password@, @email@, or @url@. Possible values are:
+* @inputmode="value"@<br />A hint to the browser for which keyboard to display. This attribute applies when the value of the type attribute is @text@, @password@ or @url@. Possible values are:
 ** @verbatim@: Alphanumeric, non-prose content such as usernames and passwords.
 ** @latin@: Latin-script input in the user's preferred language with typing aids such as text prediction enabled. For human-to-computer communication such as search boxes.
 ** @latin-name@: As latin, but for human names.
