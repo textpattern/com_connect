@@ -141,6 +141,19 @@ Creates a text @<input>@ field and corresponding @<label>@ tag. The input value 
 
 h4. Attributes
 
+* @break="tag"@<br />Break tag between the @<label>@ and @<input>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
+* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemText@.
+* @default="value"@<br />Default value when no input is provided.
+* @html_form@<br />The HTML @id@ of the @<form>@ tag to which the field is attached. Associated with the contained form by default.
+* @label="text"@<br />Text label displayed to the user. Default is @Text@.
+* @max=value"@<br />For character-based inputs, the maximum @<input>@ length in characters. For numeric-based inputs, the maximum value the field accepts. Default is @100@.
+* @min="value"@<br />For character-based inputs, the minimum @<input>@ length in characters. For numeric-based inputs, the minimum value the field accepts. Default is @0@.
+* @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
+* @pattern="regex"@<br />Regular expression that governs the format in which the field data is expected. Only used for character-based inputs.
+* @placeholder="text"@<br />Text to show as a guide, when the @<input>@ field is empty.
+* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
+* @size@<br/>The size, in characters, of the @<input>@ field.
+* @step="value"@<br />For numeric-based inputs, the interval between min and max.
 * @type="value"@<br />Type of text input. Default is @text@. Choose from:
 ** @color@
 ** @date@
@@ -156,19 +169,6 @@ h4. Attributes
 ** @time@
 ** @url@
 ** @week@
-* @label="text"@<br />Text label displayed to the user. Default is @Text@.
-* @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
-* @break="tag"@<br />Break tag between the @<label>@ and @<input>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
-* @default="value"@<br />Default value when no input is provided.
-* @size@<br/>The size, in characters, of the @<input>@ field.
-* @min="value"@<br />For character-based inputs, the minimum @<input>@ length in characters. For numeric-based inputs, the minimum value the field accepts. Default is @0@.
-* @max=value"@<br />For character-based inputs, the maximum @<input>@ length in characters. For numeric-based inputs, the maximum value the field accepts. Default is @100@.
-* @step="value"@<br />For numeric-based inputs, the interval between min and max.
-* @pattern="regex"@<br />Regular expression that governs the format in which the field data is expected. Only used for character-based inputs.
-* @placeholder="text"@<br />Text to show as a guide, when the @<input>@ field is empty.
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemText@.
-* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
-* @html_form@<br />The HTML @id@ of the @<form>@ tag to which the field is attached. Associated with the contained form by default.
 
 h4. Examples
 
@@ -190,9 +190,19 @@ The entered email address will automatically be validated to make sure it is of 
 
 h4. Attributes
 
-Identical as those for "zem_contaxt_text":#zc_text, with the addition of:
-
+* @break="tag"@<br />Break tag between the @<label>@ and @<input>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
+* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemText@.
+* @default="value"@<br />Default value when no input is provided.
+* @html_form@<br />The HTML @id@ of the @<form>@ tag to which the field is attached. Associated with the contained form by default.
+* @label="text"@<br />Text label displayed to the user. Default is @Email@.
+* @max=value"@<br />The maximum @<input>@ length in characters. Default is @100@.
+* @min="value"@<br />The minimum @<input>@ length in characters. Default is @0@.
+* @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
+* @pattern="regex"@<br />Regular expression that governs the format in which the field data is expected. Only used for character-based inputs.
+* @placeholder="text"@<br />Text to show as a guide, when the @<input>@ field is empty.
+* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
 * @send_article="boolean"@<br />Whether this field is used as the recipient email address when using the send_article function. Available values: @1@ (yes) or @0@ (no). Default is @0@.
+* @size@<br/>The size, in characters, of the @<input>@ field.
 
 h4. Examples
 
@@ -208,19 +218,19 @@ Creates a @<textarea>@.
 
 h4. Attributes
 
-* @label="text"@<br />Text label displayed to the user. Default is @Message@.
-* @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @break="tag"@<br />Break tag between the label and input field. Default is @<br />@. Use @break=""@ to put the @<label>@ and @<input>@ field on the same line.
-* @cols="integer"@<br/>Number of columns, in characters, of the textarea. Default is @58@.
-* @rows="integer"@<br/>Number of rows, in characters, of the textarea. Default is @8@.
-* @default="value"@<br />Default value when no input is provided.
-* @min="integer"@<br />Minimum input length in characters. Default is @0@.
-* @max="integer"@<br />Maximum input length in characters. Default is @10000@.
-* @placeholder="text"@<br />Text to show as a guide to users, when the  @<textarea>@ is empty.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the  @<textarea>@. Default: @zemTextarea@.
-* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
-* @wrap="value"@<br/>Governs word-wrap. Available values: @hard@ or @soft@.
+* @cols="integer"@<br/>Number of columns, in characters, of the textarea. Default is @58@.
+* @default="value"@<br />Default value when no input is provided.
 * @html_form@<br />The HTML @id@ of the @<form>@ tag to which the @<textarea>@ is attached. Associated with the contained form by default.
+* @label="text"@<br />Text label displayed to the user. Default is @Message@.
+* @max="integer"@<br />Maximum input length in characters. Default is @10000@.
+* @min="integer"@<br />Minimum input length in characters. Default is @0@.
+* @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
+* @placeholder="text"@<br />Text to show as a guide to users, when the  @<textarea>@ is empty.
+* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
+* @rows="integer"@<br/>Number of rows, in characters, of the textarea. Default is @8@.
+* @wrap="value"@<br/>Governs word-wrap. Available values: @hard@ or @soft@.
 
 h4. Examples
 
@@ -238,9 +248,9 @@ Creates a submit button. When used as a container tag, a @<button>@ element will
 
 h4. Attributes:
 
-* @label="text"@<br />Text shown on the submit button. Default is @Send@.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemSubmit@.
 * @html_form@<br />The HTML @id@ of the @<form>@ tag to which the button is attached. Associated with the contained form by default.
+* @label="text"@<br />Text shown on the submit button. Default is @Send@.
 
 h4. Examples
 
@@ -278,16 +288,16 @@ Creates a drop-down selection @<select>@ list.
 
 h4. Attributes
 
-* @options="comma-separated values"@<br /> List of items (previously @list@) to show in the select box. May also use the @<txp:zem_contact_option />@ tag inside this tag's container.
-* @selected="value"@<br />List item that is selected by default.
-* @label="text"@<br />Text label displayed to the user. Default is @Option@.
-* @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @break="tag"@<br />Break tag between the label and @<input>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
-* @size@<br/>The vertical size, in entries, of the @<input>@ field.
-* @delimiter="character"@<br />Separator character between list items if using the @options@ attribute. Default is @,@ (comma). Ignored if this tag is used as a container.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the list. Default: @zemSelect@.
-* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
+* @delimiter="character"@<br />Separator character between list items if using the @options@ attribute. Default is @,@ (comma). Ignored if this tag is used as a container.
+* @label="text"@<br />Text label displayed to the user. Default is @Option@.
 * @html_form@<br />The HTML @id@ of the @<form>@ tag to which the @<textarea>@ is attached. Associated with the contained form by default.
+* @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
+* @options="comma-separated values"@<br /> List of items (previously @list@) to show in the select box. May also use the @<txp:zem_contact_option />@ tag inside this tag's container.
+* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
+* @selected="value"@<br />List item that is selected by default.
+* @size@<br/>The vertical size, in entries, of the @<input>@ field.
 
 h4. Examples
 
@@ -318,10 +328,10 @@ Creates a drop-down selection option. See "zem_contact_select":#zc_select.
 
 h4. Attributes
 
-* @label="text"@<br />Text label of this option displayed to the user.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the option. Default: @zemOption@.
-* @value="text"@<br />The value associated with this option when submitted. Default is the label.
+* @label="text"@<br />Text label of this option displayed to the user.
 * @selected="boolean"@<br />Whether this item is selected, May also be specified in the container tag's @selected@ attribute. Available values: @1@ (yes) or @0@ (no).
+* @value="text"@<br />The value associated with this option when submitted. Default is the label.
 
 h3. zem_contact_checkbox
 
@@ -331,13 +341,13 @@ Creates a check box.
 
 h4. Attributes
 
-* @label="text"@<br />Text label displayed to the user. Default is @Checkbox@.
-* @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @break="tag"@<br />Break tag between the label and input field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
 * @checked="boolean"@<br />Whether this box is checked when first displayed. Available values: @1@ (yes) or @0@ (no). Default is @0@.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the option. Default: @zemCheckbox@.
-* @required="boolean"@<br />Whether this checkbox must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
 * @html_form@<br />The HTML @id@ of the @<form>@ tag to which the checkbox is attached. Associated with the contained form by default.
+* @label="text"@<br />Text label displayed to the user. Default is @Checkbox@.
+* @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
+* @required="boolean"@<br />Whether this checkbox must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
 
 h4. Examples
 
@@ -364,14 +374,14 @@ Creates a radio button.
 
 h4. Attributes
 
-* @group="text"@ *(required)*<br />Text used in the email to describe this group of radio buttons. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. Default is @Radio@.
-* @label="text"@ *(required)*<br />Text label displayed to the user as radio button option.
-* @name="value"@<br />Field name, as used in the HTML @<input>@ tag. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. If it hasn't been set at all, it will be derived from the @group@ attribute.
 * @break="tag"@<br />Break tag between the label and field. Default is a space.
 * @checked="boolean"@<br />Whether this radio option is checked when the form is first displayed. Available values: @1@ (yes) or @0@ (no). Default is @0@.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the radio button. Default: @zemRadio@.
-* @required="boolean"@<br />Whether this radio set must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute. You may set it on only the first option, or set the same value on all of them in the group.
+* @group="text"@ *(required)*<br />Text used in the email to describe this group of radio buttons. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. Default is @Radio@.
 * @html_form@<br />The HTML @id@ of the @<form>@ tag to which the checkbox is attached. Associated with the contained form by default.
+* @label="text"@ *(required)*<br />Text label displayed to the user as radio button option.
+* @name="value"@<br />Field name, as used in the HTML @<input>@ tag. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. If it hasn't been set at all, it will be derived from the @group@ attribute.
+* @required="boolean"@<br />Whether this radio set must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute. You may set it on only the first option, or set the same value on all of them in the group.
 
 h4. Examples
 
@@ -394,8 +404,8 @@ This tag has no effect on the form or HTML output, but will include additional i
 
 h4. Attributes
 
-* @name="text"@<br />Used internally. Set this only if you have multiple 'secret' form elements with identical labels.
 * @label="text"@<br />Used to identify the field in the email. Default is @Secret@.
+* @name="text"@<br />Used internally. Set this only if you have multiple 'secret' form elements with identical labels.
 * @value="value"@<br />Some text you want to add to the email.
 
 h4. Examples
@@ -422,8 +432,8 @@ This tag has no effect on the form or HTML output, but will include additional i
 
 h4. Attributes
 
-* @name="value"@ *(required)*<br />Name of the server variable. See the "PHP manual":http://php.net/manual/reserved.variables.php#reserved.variables.server for a full list.
 * @label="text"@<br />Used to identify the field in the email. Defaults to the value of the @name@ attribute.
+* @name="value"@ *(required)*<br />Name of the server variable. See the "PHP manual":http://php.net/manual/reserved.variables.php#reserved.variables.server for a full list.
 
 h4. Examples
 
@@ -475,8 +485,8 @@ Return the value of the given attribute, by name or its label.
 
 h4. Attributes
 
-* @name="text"@<br />The name of the field for which you wish to retrieve the value.
 * @label="text"@<br />The label of the field for which you wish to retrieve the value.
+* @name="text"@<br />The name of the field for which you wish to retrieve the value.
 
 h3. zem_contact_if
 
@@ -486,8 +496,8 @@ Conditional tag for checking variable conditions, either by name or label.
 
 h4. Attributes
 
-* @name="text"@<br />The name of the field you wish to check.
 * @label="text"@<br />The label of the field you wish to check.
+* @name="text"@<br />The name of the field you wish to check.
 * @value="text"@<br />The value against which to test the given field. Leave blank to just test if there is any value assigned to the field.
 
 h4. Examples
