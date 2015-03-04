@@ -123,8 +123,9 @@ zem_contact_text => Texte
 zem_contact_to_missing => l'adresse mail &#8220;<strong>To</strong>&#8221; est manquante.
 EOT;
 
-if (!defined('txpinterface'))
-		@include_once('zem_tpl.php');
+if (!defined('txpinterface')) {
+	@include_once('zem_tpl.php');
+}
 
 # --- BEGIN PLUGIN CODE ---
 //<?php
