@@ -1748,12 +1748,12 @@ Creates a text input field and corresponding @<label>@ tag. The input value will
 
 h4. Attributes
 
-* @autocomplete@<br />This attribute indicates whether the value of the control can be automatically completed by the browser. This attribute is ignored if the value of the type attribute is @password@. Possible values are: @off@ (the browser does not automatically complete the entry) or @on@ (the browser can automatically complete the value based on values that the user has entered during previous uses). Default is unset.
+* @autocomplete="value"@<br />This attribute indicates whether the value of the control can be automatically completed by the browser. This attribute is ignored if the value of the type attribute is @password@. Possible values are: @off@ (the browser does not automatically complete the entry) or @on@ (the browser can automatically complete the value based on values that the user has entered during previous uses). Default is unset.
 * @break="tag"@<br />Break tag between the @<label>@ and @<input>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemText@.
 * @default="value"@<br />Default value when no input is provided.
-* @html_form@<br />The HTML @id@ of the @<form>@ tag to which the field is attached. Associated with the contained form by default.
-* @inputmode@<br />A hint to the browser for which keyboard to display. This attribute applies when the value of the type attribute is @text@, @password@, @email@, or @url@. Possible values are:
+* @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the field is attached. Associated with the contained form by default.
+* @inputmode="value"@<br />A hint to the browser for which keyboard to display. This attribute applies when the value of the type attribute is @text@, @password@, @email@, or @url@. Possible values are:
 ** @verbatim@: Alphanumeric, non-prose content such as usernames and passwords.
 ** @latin@: Latin-script input in the user's preferred language with typing aids such as text prediction enabled. For human-to-computer communication such as search boxes.
 ** @latin-name@: As latin, but for human names.
@@ -1772,7 +1772,7 @@ h4. Attributes
 * @pattern="regex"@<br />Regular expression that governs the format in which the field data is expected. Only used for character-based inputs.
 * @placeholder="text"@<br />Text to show as a guide, when the @<input>@ field is empty.
 * @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
-* @size@<br/>The size, in characters, of the @<input>@ field.
+* @size="value"@<br/>The size, in characters, of the @<input>@ field.
 * @step="value"@<br />For numeric-based inputs, the interval between min and max.
 * @type="value"@<br />Type of text input. Default is @text@. Choose from:
 ** @color@
@@ -1806,11 +1806,11 @@ The entered email address will automatically be validated to make sure it is of 
 
 h4. Attributes
 
-* @autocomplete@<br />This attribute indicates whether the value of the control can be automatically completed by the browser. Possible values are: @off@ (the browser does not automatically complete the entry) or @on@ (the browser can automatically complete the value based on values that the user has entered during previous uses). Default is unset.
+* @autocomplete="value"@<br />This attribute indicates whether the value of the control can be automatically completed by the browser. Possible values are: @off@ (the browser does not automatically complete the entry) or @on@ (the browser can automatically complete the value based on values that the user has entered during previous uses). Default is unset.
 * @break="tag"@<br />Break tag between the @<label>@ and @<input>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemText@.
 * @default="value"@<br />Default value when no input is provided.
-* @html_form@<br />The HTML @id@ of the @<form>@ tag to which the field is attached. Associated with the contained form by default.
+* @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the field is attached. Associated with the contained form by default.
 * @label="text"@<br />Text label displayed to the user. Default is @Email@.
 * @min="value"@<br />The minimum @<input>@ length in characters. Default is @0@.
 * @max=value"@<br />The maximum @<input>@ length in characters. Default is @100@.
@@ -1819,7 +1819,7 @@ h4. Attributes
 * @placeholder="text"@<br />Text to show as a guide, when the @<input>@ field is empty.
 * @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
 * @send_article="boolean"@<br />Whether this field is used as the recipient email address when using the send_article function. Available values: @1@ (yes) or @0@ (no). Default is @0@.
-* @size@<br/>The size, in characters, of the @<input>@ field.
+* @size="value"@<br/>The size, in characters, of the @<input>@ field.
 
 h4. Example
 
@@ -1833,12 +1833,12 @@ Creates a textarea.
 
 h4. Attributes
 
-* @autocomplete@<br />This attribute indicates whether the value of the control can be automatically completed by the browser. Possible values are: @off@ (the browser does not automatically complete the entry) or @on@ (the browser can automatically complete the value based on values that the user has entered during previous uses). Default is unset.
+* @autocomplete="value"@<br />This attribute indicates whether the value of the control can be automatically completed by the browser. Possible values are: @off@ (the browser does not automatically complete the entry) or @on@ (the browser can automatically complete the value based on values that the user has entered during previous uses). Default is unset.
 * @break="tag"@<br />Break tag between the @<label>@ and @<textarea>@. Default is @<br />@. Use @break=""@ to put the @<label>@ and @<input>@ field on the same line.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the  @<textarea>@. Default: @zemTextarea@.
 * @cols="integer"@<br/>Number of columns, in characters, of the @<textarea>@. Default is @58@.
 * @default="value"@<br />Default value when no input is provided.
-* @html_form@<br />The HTML @id@ of the @<form>@ tag to which the @<textarea>@ is attached. Associated with the contained form by default.
+* @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the @<textarea>@ is attached. Associated with the contained form by default.
 * @label="text"@<br />Text label displayed to the user. Default is @Message@.
 * @max="integer"@<br />Maximum input length in characters. Default is @10000@.
 * @min="integer"@<br />Minimum input length in characters. Default is @0@.
@@ -1864,7 +1864,7 @@ h4. Attributes:
 
 * @label="text"@<br />Text shown on the submit button. Default is "Send".
 * @class="space-separated values"@<br /> Set the CSS class name of the tag. Default: @zemSubmit@.
-* @html_form@<br />The HTML id of the @<form>@ tag to which the button is attached. Associated with the contained form by default.
+* @html_form="id"@<br />The HTML id of the @<form>@ tag to which the button is attached. Associated with the contained form by default.
 
 h4. Examples
 
@@ -1894,12 +1894,12 @@ h4. Attributes
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the list. Default: @zemSelect@.
 * @delimiter="character"@<br />Separator character between list items if using the @options@ attribute. Default is @,@ (comma). Ignored if this tag is used as a container.
 * @label="text"@<br />Text label displayed to the user. Default is @Option@.
-* @html_form@<br />The HTML @id@ of the @<form>@ tag to which the @<textarea>@ is attached. Associated with the contained form by default.
+* @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the @<textarea>@ is attached. Associated with the contained form by default.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @options="comma-separated values"@<br /> List of items (previously @list@) to show in the select box. May also use the @<txp:zem_contact_option />@ tag inside this tag's container.
 * @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
 * @selected="value"@<br />List item that is selected by default.
-* @size@<br/>The vertical size, in entries, of the @<input>@ field.
+* @size="value"@<br/>The vertical size, in entries, of the @<input>@ field.
 
 h4. Examples
 
@@ -1944,7 +1944,7 @@ h4. Attributes
 * @break="tag"@<br />Break tag between the label and input field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
 * @checked="boolean"@<br />Whether this box is checked when first displayed. Available values: @1@ (yes) or @0@ (no). Default is @0@.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the option. Default: @zemCheckbox@.
-* @html_form@<br />The HTML @id@ of the @<form>@ tag to which the checkbox is attached. Associated with the contained form by default.
+* @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the checkbox is attached. Associated with the contained form by default.
 * @label="text"@<br />Text label displayed to the user. Default is @Checkbox@.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @required="boolean"@<br />Whether this checkbox must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
@@ -1974,7 +1974,7 @@ h4. Attributes
 * @checked="boolean"@<br />Whether this radio option is checked when the form is first displayed. Available values: @1@ (yes) or @0@ (no). Default is @0@.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the radio button. Default: @zemRadio@.
 * @group="text"@ *(required)*<br />Text used in the email to describe this group of radio buttons. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. Default is @Radio@.
-* @html_form@<br />The HTML @id@ of the @<form>@ tag to which the checkbox is attached. Associated with the contained form by default.
+* @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the checkbox is attached. Associated with the contained form by default.
 * @label="text"@ *(required)*<br />Text label displayed to the user as radio button option.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. If it hasn't been set at all, it will be derived from the @group@ attribute.
 * @required="boolean"@<br />Whether this radio set must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute. You may set it on only the first option, or set the same value on all of them in the group.
