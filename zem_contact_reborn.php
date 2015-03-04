@@ -1738,6 +1738,7 @@ Creates a text input field and corresponding @<label>@ tag. The input value will
 
 h4. Attributes
 
+* @autocomplete@<br />This attribute indicates whether the value of the control can be automatically completed by the browser. This attribute is ignored if the value of the type attribute is @password@. Possible values are: @off@ (the browser does not automatically complete the entry) or @on@ (the browser can automatically complete the value based on values that the user has entered during previous uses). Default is unset.
 * @break="tag"@<br />Break tag between the @<label>@ and @<input>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemText@.
 * @default="value"@<br />Default value when no input is provided.
@@ -1783,6 +1784,7 @@ The entered email address will automatically be validated to make sure it is of 
 
 h4. Attributes
 
+* @autocomplete@<br />This attribute indicates whether the value of the control can be automatically completed by the browser. Possible values are: @off@ (the browser does not automatically complete the entry) or @on@ (the browser can automatically complete the value based on values that the user has entered during previous uses). Default is unset.
 * @break="tag"@<br />Break tag between the @<label>@ and @<input>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemText@.
 * @default="value"@<br />Default value when no input is provided.
@@ -1809,9 +1811,10 @@ Creates a textarea.
 
 h4. Attributes
 
-* @break="tag"@<br />Break tag between the label and input field. Default is @<br />@. Use @break=""@ to put the @<label>@ and @<input>@ field on the same line.
+* @autocomplete@<br />This attribute indicates whether the value of the control can be automatically completed by the browser. Possible values are: @off@ (the browser does not automatically complete the entry) or @on@ (the browser can automatically complete the value based on values that the user has entered during previous uses). Default is unset.
+* @break="tag"@<br />Break tag between the @<label>@ and @<textarea>@. Default is @<br />@. Use @break=""@ to put the @<label>@ and @<input>@ field on the same line.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the  @<textarea>@. Default: @zemTextarea@.
-* @cols="integer"@<br/>Number of columns, in characters, of the textarea. Default is @58@.
+* @cols="integer"@<br/>Number of columns, in characters, of the @<textarea>@. Default is @58@.
 * @default="value"@<br />Default value when no input is provided.
 * @html_form@<br />The HTML @id@ of the @<form>@ tag to which the @<textarea>@ is attached. Associated with the contained form by default.
 * @label="text"@<br />Text label displayed to the user. Default is @Message@.
@@ -1820,7 +1823,7 @@ h4. Attributes
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @placeholder="text"@<br />Text to show as a guide to users, when the  @<textarea>@ is empty.
 * @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
-* @rows="integer"@<br/>Number of rows, in characters, of the textarea. Default is @8@.
+* @rows="integer"@<br/>Number of rows, in characters, of the @<textarea>@. Default is @8@.
 * @wrap="value"@<br/>Governs word-wrap. Available values: @hard@ or @soft@.
 
 h4. Example
