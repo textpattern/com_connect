@@ -1824,7 +1824,7 @@ h4. Attributes
 * @placeholder="text"@<br />Text to show as a guide to users, when the  @<textarea>@ is empty.
 * @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
 * @rows="integer"@<br/>Number of rows, in characters, of the @<textarea>@. Default is @8@.
-* @wrap="value"@<br/>Governs word-wrap. Available values: @hard@ or @soft@.
+* @wrap="value"@<br/>Governs word-wrap. Available values: @hard@ or @soft@. If this attribute is not specified, @soft@ is its default value.
 
 h4. Example
 
