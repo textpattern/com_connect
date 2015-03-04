@@ -124,7 +124,7 @@ zem_contact_to_missing => l'adresse mail &#8220;<strong>To</strong>&#8221; est m
 EOT;
 
 if (!defined('txpinterface'))
-        @include_once('zem_tpl.php');
+		@include_once('zem_tpl.php');
 
 # --- BEGIN PLUGIN CODE ---
 //<?php
@@ -580,7 +580,7 @@ function zem_contact_text($atts)
 		$attr += zem_contact_build_atts(array(
 			'autocomplete' => $autocomplete,
 			'form'         => $html_form,
-            'inputmode'    => $inputmode,
+			'inputmode'    => $inputmode,
 			'pattern'      => $pattern,
 			'placeholder'  => $placeholder,
 			'required'     => $required,
@@ -593,7 +593,7 @@ function zem_contact_text($atts)
 	$zemRequired = $required ? 'zemRequired' : '';
 	$classStr = (($class) ? $class . ' ' : '') . $zemRequired . $isError;
 
-    return '<label for="' . $name . '" class="' . ($classStr ? $classStr . ' ' : '') . $name . '">' . txpspecialchars($label) . '</label>' . $break .
+	return '<label for="' . $name . '" class="' . ($classStr ? $classStr . ' ' : '') . $name . '">' . txpspecialchars($label) . '</label>' . $break .
 		'<input class="' . $classStr . '"' . ($attr ? ' ' . implode(' ', $attr) : '') . ' />';
 }
 
