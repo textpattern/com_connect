@@ -644,14 +644,17 @@ h4. Examples
 
 bc.. register_callback('pap_zemcontact_form','zemcontact.form');
 register_callback('pap_zemcontact_submit','zemcontact.submit');
-function pap_zemcontact_form() {
+
+function pap_zemcontact_form()
+{
     $field = '<div style="display:none">'.
         finput('text','phone',ps('phone'),'','','','','','phone').'<br />'.
         finput('text','mail',ps('mail'),'','','','','','mail').'</div>';
     return $field;</code>
 }
 
-function pap_zemcontact_submit() {
+function pap_zemcontact_submit()
+{
     $checking_mail_field = trim(ps('mail'));
     $checking_phone_field = trim(ps('phone'));
     $evaluation =& get_zemcontact_evaluator();
@@ -660,6 +663,7 @@ function pap_zemcontact_submit() {
     if ($checking_mail_field != '' or $checking_phone_field != '') {
         $evaluation -> add_zemcontact_status(1);
     }
+
     return;
 }
 

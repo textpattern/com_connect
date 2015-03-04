@@ -1206,7 +1206,7 @@ function zem_contact_send_article($atts)
  */
 function zem_contact_lAtts($pairs, $atts)
 {
-	foreach(array('button', 'copysender', 'checked', 'required', 'send_article', 'show_input', 'show_error') as $key) {
+	foreach (array('button', 'copysender', 'checked', 'required', 'send_article', 'show_input', 'show_error') as $key) {
 		if (isset($atts[$key])) {
 			$atts[$key] = ($atts[$key] === 'yes' || intval($atts[$key])) ? 1 : 0;
 		}
@@ -1233,7 +1233,7 @@ function zem_contact_lAtts($pairs, $atts)
 		'translate'  => '',
 	);
 
-	foreach($atts as $name => $value) {
+	foreach ($atts as $name => $value) {
 		if (array_key_exists($name, $pairs) || substr($name, 0, 2) === 'on' || array_key_exists($name, $zem_contact_globals)) {
 			$pairs[$name] = $value;
 		} elseif (get_pref('production_status') != 'live') {
@@ -1395,21 +1395,24 @@ class zemcontact_evaluation
 	/**
 	 * Constructor.
 	 */
-	function __construct() {
+	function __construct()
+	{
 		$this->status = 0;
 	}
 
 	/**
 	 * Append the given status to the counter.
 	 */
-	function add_zemcontact_status($check) {
+	function add_zemcontact_status($check)
+	{
 		$this->status += $check;
 	}
 
 	/**
 	 * Fetch the current evaluator status.
 	 */
-	function get_zemcontact_status() {
+	function get_zemcontact_status()
+	{
 		return $this->status;
 	}
 }
@@ -2218,14 +2221,17 @@ h4. Examples
 
 bc.. register_callback('pap_zemcontact_form','zemcontact.form');
 register_callback('pap_zemcontact_submit','zemcontact.submit');
-function pap_zemcontact_form() {
+
+function pap_zemcontact_form()
+{
     $field = '<div style="display:none">'.
         finput('text','phone',ps('phone'),'','','','','','phone').'<br />'.
         finput('text','mail',ps('mail'),'','','','','','mail').'</div>';
     return $field;</code>
 }
 
-function pap_zemcontact_submit() {
+function pap_zemcontact_submit()
+{
     $checking_mail_field = trim(ps('mail'));
     $checking_phone_field = trim(ps('phone'));
     $evaluation =& get_zemcontact_evaluator();
@@ -2234,6 +2240,7 @@ function pap_zemcontact_submit() {
     if ($checking_mail_field != '' or $checking_phone_field != '') {
         $evaluation -> add_zemcontact_status(1);
     }
+
     return;
 }
 
