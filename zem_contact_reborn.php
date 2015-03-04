@@ -675,20 +675,21 @@ function zem_contact_textarea($atts)
 	global $zem_contact_error, $zem_contact_submit, $zem_contact_flags;
 
 	extract(zem_contact_lAtts(array(
-		'break'       => br,
-		'class'       => 'zemTextarea',
-		'cols'        => 58,
-		'default'     => '',
-		'html_form'   => $zem_contact_flags['this_form'],
-		'isError'     => '',
-		'label'       => gTxt('zem_contact_message'),
-		'max'         => 10000,
-		'min'         => 0,
-		'name'        => '',
-		'placeholder' => '',
-		'required'    => $zem_contact_flags['required'],
-		'rows'        => 8,
-		'wrap'        => '',
+		'autocomplete' => '',
+		'break'        => br,
+		'class'        => 'zemTextarea',
+		'cols'         => 58,
+		'default'      => '',
+		'html_form'    => $zem_contact_flags['this_form'],
+		'isError'      => '',
+		'label'        => gTxt('zem_contact_message'),
+		'max'          => 10000,
+		'min'          => 0,
+		'name'         => '',
+		'placeholder'  => '',
+		'required'     => $zem_contact_flags['required'],
+		'rows'         => 8,
+		'wrap'         => '',
 	), $atts));
 
 	$min = intval($min);
@@ -739,9 +740,10 @@ function zem_contact_textarea($atts)
 	$required = ($required) ? 'required' : '';
 	if ($doctype !== 'xhtml') {
 		$attr += zem_contact_build_atts(array(
-			'form'        => $html_form,
-			'placeholder' => $placeholder,
-			'required'    => $required,
+			'autocomplete' => $autocomplete,
+			'form'         => $html_form,
+			'placeholder'  => $placeholder,
+			'required'     => $required,
 		));
 	}
 
