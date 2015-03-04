@@ -1108,8 +1108,8 @@ function zem_contact_secret($atts, $thing = null)
 	global $zem_contact_submit;
 
 	extract(zem_contact_lAtts(array(
-		'name'  => '',
 		'label' => gTxt('zem_contact_secret'),
+		'name'  => '',
 		'value' => '',
 	), $atts));
 
@@ -1214,15 +1214,20 @@ function zem_contact_lAtts($pairs, $atts)
 	}
 
 	$zem_contact_globals = array(
-		'accesskey' => '',
-		'autofocus' => '',
-		'dir' => '', 'disabled' => '',
-		'hidden' => '',
-		'id' => '',
-		'lang' => '', 'list' => '',
-		'readonly' => '',
-		'spellcheck' => '', 'style' => '',
-		'tabindex' => '', 'title' => '', 'translate' => '',
+		'accesskey'  => '',
+		'autofocus'  => '',
+		'dir'        => '',
+		'disabled'   => '',
+		'hidden'     => '',
+		'id'         => '',
+		'lang'       => '',
+		'list'       => '',
+		'readonly'   => '',
+		'spellcheck' => '',
+		'style'      => '',
+		'tabindex'   => '',
+		'title'      => '',
+		'translate'  => '',
 	);
 
 	foreach($atts as $name => $value) {
@@ -1467,8 +1472,8 @@ function zem_contact_value($atts)
 	global $zem_contact_values, $zem_contact_form;
 
 	extract(lAtts(array(
-		'name'  => '',
 		'label' => '',
+		'name'  => '',
 	), $atts));
 
 	$str = '';
@@ -1513,12 +1518,15 @@ function zem_contact_label($atts)
 function zem_contact_if($atts, $thing = null)
 {
 	extract(lAtts(array(
-		'name'  => '',
 		'label' => '',
+		'name'  => '',
 		'value' => '',
 	), $atts));
 
-	$val = zem_contact_value(array('name' => $name, 'label' => $label));
+	$val = zem_contact_value(array(
+		'label' => $label,
+		'name'  => $name,
+	));
 
 	if ($val) {
 		$cond = ($val == $value);
