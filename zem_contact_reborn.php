@@ -437,6 +437,7 @@ function zem_contact_text($atts)
 		'default'      => '',
 		'html_form'    => $zem_contact_flags['this_form'],
 		'isError'      => '',
+		'inputmode'    => '',
 		'label'        => gTxt('zem_contact_text'),
 		'max'          => null,
 		'min'          => null,
@@ -579,6 +580,7 @@ function zem_contact_text($atts)
 		$attr += zem_contact_build_atts(array(
 			'autocomplete' => $autocomplete,
 			'form'         => $html_form,
+            'inputmode'    => $inputmode,
 			'pattern'      => $pattern,
 			'placeholder'  => $placeholder,
 			'required'     => $required,
@@ -1751,6 +1753,18 @@ h4. Attributes
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemText@.
 * @default="value"@<br />Default value when no input is provided.
 * @html_form@<br />The HTML @id@ of the @<form>@ tag to which the field is attached. Associated with the contained form by default.
+* @inputmode@<br />A hint to the browser for which keyboard to display. This attribute applies when the value of the type attribute is @text@, @password@, @email@, or @url@. Possible values are:
+** @verbatim@: Alphanumeric, non-prose content such as usernames and passwords.
+** @latin@: Latin-script input in the user's preferred language with typing aids such as text prediction enabled. For human-to-computer communication such as search boxes.
+** @latin-name@: As latin, but for human names.
+** @latin-prose@: As latin, but with more aggressive typing aids. For human-to-human communication such as instant messaging for email.
+** @full-width-latin@: As latin-prose, but for the user's secondary languages.
+** @kana@: Kana or romaji input, typically hiragana input, using full-width characters, with support for converting to kanji. Intended for Japanese text input.
+** @katakana@: Katakana input, using full-width characters, with support for converting to kanji. Intended for Japanese text input.
+** @numeric@: Numeric input, including keys for the digits 0 to 9, the user's preferred thousands separator character, and the character for indicating negative numbers. Intended for numeric codes, e.g. credit card numbers. For actual numbers, prefer using @type="number"@.
+** @tel@: Telephone input, including asterisk and pound key. Use @type="tel"@ if possible instead.
+** @email@: Email input. Use @<txp:zem_contact_email />@ if possible instead.
+** @url@: URL input. Use @type="url"@ if possible instead.
 * @label="text"@<br />Text label displayed to the user. Default is @Text@.
 * @min="value"@<br />For character-based inputs, the minimum @<input>@ length in characters. For numeric-based inputs, the minimum value the field accepts. Default is @0@.
 * @max=value"@<br />For character-based inputs, the maximum @<input>@ length in characters. For numeric-based inputs, the maximum value the field accepts. Default is @100@.
