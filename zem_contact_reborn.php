@@ -178,7 +178,7 @@ function zem_contact($atts, $thing = null)
 
 	// The $zem_contact_flags['this_form'] global is set if an id is supplied for the <form>.
 	// This value then becomes the default value for all html_form (a.k.a. form=)
-	// attributes for any input tags in this tag's container, providing HTML 5 is in use.
+	// attributes for any input tags in this tag's container, providing HTML5 is in use.
 	$zem_contact_flags['this_form'] = 'zcr' . $zem_contact_form_id;
 
 	// Global toggle for required attribute.
@@ -573,7 +573,7 @@ function zem_contact_text($atts)
 		));
 	}
 
-	// HTML 5 attributes
+	// HTML5 attributes
 	$required = ($required) ? 'required' : '';
 	if ($doctype !== 'xhtml') {
 		$attr += zem_contact_build_atts(array(
@@ -736,7 +736,7 @@ function zem_contact_textarea($atts)
 		'maxlength' => $max,
 	));
 
-	// HTML 5 attributes
+	// HTML5 attributes
 	$required = ($required) ? 'required' : '';
 	if ($doctype !== 'xhtml') {
 		$attr += zem_contact_build_atts(array(
@@ -835,7 +835,7 @@ function zem_contact_select($atts, $thing = null)
 		'size' => intval($size),
 	));
 
-	// HTML 5 attributes
+	// HTML5 attributes
 	$required = ($required) ? 'required' : '';
 	if ($doctype !== 'xhtml') {
 		$attr += zem_contact_build_atts(array(
@@ -960,7 +960,7 @@ function zem_contact_checkbox($atts)
 		'name'  => $name,
 	));
 
-	// HTML 5 attributes
+	// HTML5 attributes
 	$required = ($required) ? 'required' : '';
 	if ($doctype !== 'xhtml') {
 		$attr += zem_contact_build_atts(array(
@@ -1051,7 +1051,7 @@ function zem_contact_radio($atts)
 		'value' => $id,
 	));
 
-	// HTML 5 attributes
+	// HTML5 attributes
 	$required = ($required) ? 'required' : '';
 	if ($doctype !== 'xhtml') {
 		$attr += zem_contact_build_atts(array(
@@ -1151,7 +1151,7 @@ function zem_contact_submit($atts, $thing = null)
 
 	$attr = array();
 
-	// HTML 5 attributes
+	// HTML5 attributes
 	if ($doctype !== 'xhtml') {
 		$attr += zem_contact_build_atts(array(
 			'form' => $html_form,
@@ -1593,7 +1593,7 @@ h2(#contents). Contents
 
 h2(#features). Features
 
-* Arbitrary HTML 5 text fields can be specified, with min/max/required settings for validation.
+* Arbitrary HTML5 text fields can be specified, with min/max/required settings for validation.
 * Email address validation, including a check for a valid MX record (Unix only).
 * Safe escaping of input data.
 * UTF-8 safe.
@@ -2190,7 +2190,7 @@ To save space, links to forum topics that detail all the changes in each version
 ** Add @body_form@ attribute. Not to be confused with the ladies' sanitary product.
 ** Add @class@ and @expire@ attributes.
 ** Add @<txp:zem_contact_option />@ tag.
-** Add a host of HTML 5 attributes to tags.
+** Add a host of HTML5 attributes to tags.
 ** Add @zemcontact.delivery@ callback for enhanced mailing through other plugins.
 ** Remove deprecated @button@ attribute in @<zem_contact_submit />@.
 ** Add plugin Textpack, removing the need for separate zem_contact_lang plugin. Translations welcome.
