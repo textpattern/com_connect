@@ -319,7 +319,7 @@ h5. Example 1
 
 Select list labeled 'Department', containing three options and a blank option (due to the comma before 'Marketing') shown by default, forcing the user to make a selection.
 
-bc. <txp:zem_contact_select label="Department" list=",Marketing,Sales,Support" />
+bc. <txp:zem_contact_select label="Department" options=",Marketing,Sales,Support" />
 
 h5. Example 2
 
@@ -332,7 +332,7 @@ bc. <txp:zem_contact_select label="Department">
 
 Select list containing three options with 'Marketing' selected by default.
 
-bc. <txp:zem_contact_select list="Marketing,Sales,Support" selected="Marketing" />
+bc. <txp:zem_contact_select options="Marketing,Sales,Support" selected="Marketing" />
 
 h3. zem_contact_option
 
@@ -546,7 +546,7 @@ Specify the @subject_form@ attribute and create a form which includes a @zem_con
 bc. <txp:zem_contact to="you@example.com" subject_form="my_subject_form" />
     <txp:zem_contact_text label="Name" /><br />
     <txp:zem_contact_email /><br />
-    <txp:zem_contact_select label="Choose Subject" list=",Question,Feedback" /><br />
+    <txp:zem_contact_select label="Choose Subject" options=",Question,Feedback" /><br />
     <txp:zem_contact_textarea label="Message" /><br />
 </txp:zem_contact>
 
@@ -573,7 +573,7 @@ Specify the @to_form@ attribute and create a form which includes a @zem_contact_
 bc. <txp:zem_contact to_form="my_zem_contact_to_form">
     <txp:zem_contact_text label="Name" /><br />
     <txp:zem_contact_email /><br />
-    <txp:zem_contact_select label="Department" list=",Support,Sales" /><br />
+    <txp:zem_contact_select label="Department" options=",Support,Sales" /><br />
     <txp:zem_contact_textarea label="Message" /><br />
 </txp:zem_contact>
 
