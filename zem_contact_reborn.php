@@ -1778,7 +1778,7 @@ h5. Example 3
 
 Create a telephone field with a validation "pattern for UK telephone number":http://html5pattern.com/Phones format:
 
-bc. <txp:zem_contact_text label="Telephone" type="tel" pattern="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" required="1" />
+bc. <txp:zem_contact_text type="tel" label="Telephone" pattern="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" required="1" />
 
 h3(#zc_email). zem_contact_email
 
