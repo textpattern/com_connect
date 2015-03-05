@@ -1674,7 +1674,7 @@ h3(#zc). zem_contact
 
 bc. <txp:zem_contact />
 
-May be used as a self-closing or container tag. Place this where you want the input form to go. Status and error messages, if any, will be displayed before the form.
+May be used as a single (self-closing) or container tag. Place this where you want the input form to go. Status and error messages, if any, will be displayed before the form.
 
 h4. Attributes
 
@@ -2019,7 +2019,7 @@ h3(#zc_secret). zem_contact_secret
 
 bc. <txp:zem_contact_secret />
 
-This tag has no effect on the form or HTML output, but will include additional information in the email. It can be used as a self-closing tag or as a container tag.
+This tag has no effect on the form or HTML output, but will include additional information in the email. It can be used as a single (self-closing) tag or as a container tag.
 
 h4. Attributes
 
@@ -2031,7 +2031,7 @@ h4. Examples
 
 h5. Example 1
 
-Usage as a self-closing tag:
+Usage as a single (self-closing) tag:
 
 bc. <txp:zem_contact_secret value="The answer is 42" />
 
