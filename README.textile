@@ -18,7 +18,7 @@ h2. Features
 
 h2. Installation, upgrading and uninstallation
 
-Download the plugin from "the GitHub project page":https://github.com/Bloke/zem_contact_reborn, paste the code into the Textpattern Admin → Plugins pane, install and enable the plugin. Visit the "forum thread":http://forum.textpattern.com/viewtopic.php?id=23728 for more info or to report on the success or otherwise of the plugin.
+Download the latest version of the plugin from "the GitHub project page":https://github.com/Bloke/zem_contact_reborn, paste the code into the Textpattern Admin → Plugins pane, install and enable the plugin. Visit the "forum thread":http://forum.textpattern.com/viewtopic.php?id=23728 for more info or to report on the success or otherwise of the plugin.
 
 To uninstall, delete from the Admin → Plugins page.
 

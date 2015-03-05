@@ -1556,6 +1556,7 @@ Please report bugs and problems with this plugin at "the GitHub project's issues
 h2. Contents
 
 * "Features":#features
+* "Upgrading and uninstallation":#install
 * "Usage":#usage
 * "Tags":#tags
 ** <a href="#zc">@<txp:zem_contact />@</a>
@@ -1593,9 +1594,9 @@ h2(#features). Features
 * Various classes and ids to allow easy styling of all parts of the form.
 * Spam prevention API (used by Tranquillo's @pap_contact_cleaner@ plugin) and delivery API.
 
-h2. Installation, upgrading and uninstallation
+h2(#install). Upgrading and uninstallation
 
-Download the plugin from "the GitHub project page":https://github.com/Bloke/zem_contact_reborn, paste the code into the Textpattern Admin → Plugins pane, install and enable the plugin. Visit the "forum thread":http://forum.textpattern.com/viewtopic.php?id=23728 for more info or to report on the success or otherwise of the plugin.
+Download the latest version of the plugin from "the GitHub project page":https://github.com/Bloke/zem_contact_reborn, paste the code into the Textpattern Admin → Plugins pane, install and enable the plugin. Visit the "forum thread":http://forum.textpattern.com/viewtopic.php?id=23728 for more info or to report on the success or otherwise of the plugin.
 
 To uninstall, delete from the Admin → Plugins page.
 
