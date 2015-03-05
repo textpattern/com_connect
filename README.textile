@@ -733,10 +733,10 @@ h2. Authors/credits
 
 * *zem* wrote the zem_contact 0.6 plugin on which this plugin was initially based.
 * *Mary* completely revised the plugin code.
-* *Stuart* Turned it into a plugin, added a revised help text and additional code. Maintained all plugin versions until 4.0.3.17.
-* *wet* added the zem_contact_radio tag.
-* *Tranquillo* added the anti-spam API and zem_contact_send_article functionality.
-* *aslsw66*, *jdykast* and others (?) provided additional code
+* *Stuart* turned it into a plugin, added a revised help text and additional code. Maintained all plugin versions until 4.0.3.17.
+* *wet* added the @zem_contact_radio@ tag.
+* *Tranquillo* added the anti-spam API and @zem_contact_send_article@ functionality.
+* *aslsw66*, *jdykast* and others provided additional code.
 * *Ruud* cleaned up and audited the code to weed out bugs and completely revised the help text. Maintained all versions until 4.0.3.20.
-* *Bloke* is the maintainer of v4.5.0.0 and up.
+* *Bloke* is the maintainer of v4.5.0.0 and up. Many thanks to "all additonal contributors":https://github.com/Bloke/zem_contact_reborn/graphs/contributors.
 * Supported and tested to destruction by the Textpattern community.
