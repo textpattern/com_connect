@@ -1798,7 +1798,6 @@ h4. Attributes
 * @max=value"@<br />The maximum @<input>@ length in characters. Default is @100@.
 * @min="value"@<br />The minimum @<input>@ length in characters. Default is @0@.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
-* @pattern="regex"@<br />Regular expression that governs the format in which the field data is expected. Only used for character-based inputs.
 * @placeholder="text"@<br />Text to show as a guide, when the @<input>@ field is empty.
 * @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
 * @send_article="boolean"@<br />Whether this field is used as the recipient email address when using the send_article function. Available values: @1@ (yes) or @0@ (no). Default is @0@.
