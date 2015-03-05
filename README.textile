@@ -129,7 +129,7 @@ bc. <txp:zem_contact to="recipient@example.com" />
 
 h5. Example 2
 
-Used as a container tag, much more flexibility is allowed, for example:
+When used as a container tag, much more flexibility is allowed, for example:
 
 bc. <txp:zem_contact to="recipient@example.com">
     <txp:zem_contact_email />
