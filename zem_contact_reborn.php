@@ -1773,6 +1773,12 @@ h5. Example 2
 
 bc. <txp:zem_contact_text type="range" label="UK shoe size" min="1" max="15" />
 
+h5. Example 3
+
+Create a telephone field with a validation "pattern for UK telephone number":http://html5pattern.com/Phones format:
+
+bc. <txp:zem_contact_text label="Telephone" type="tel" pattern="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" required="1" />
+
 h3(#zc_email). zem_contact_email
 
 bc. <txp:zem_contact_email />
@@ -1792,7 +1798,6 @@ h4. Attributes
 * @max=value"@<br />The maximum @<input>@ length in characters. Default is @100@.
 * @min="value"@<br />The minimum @<input>@ length in characters. Default is @0@.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
-* @pattern="regex"@<br />Regular expression that governs the format in which the field data is expected. Only used for character-based inputs.
 * @placeholder="text"@<br />Text to show as a guide, when the @<input>@ field is empty.
 * @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
 * @send_article="boolean"@<br />Whether this field is used as the recipient email address when using the send_article function. Available values: @1@ (yes) or @0@ (no). Default is @0@.
@@ -1831,7 +1836,7 @@ h4. Examples
 
 h5. Example 1
 
-Textarea that is 40 chars wide, 10 lines high, with a customised label:
+Create a text area that is 40 characters wide, 10 lines high, with a customised label:
 
 bc. <txp:zem_contact_textarea cols="40" rows="10" label="Your question" />
 
