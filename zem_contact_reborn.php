@@ -1596,9 +1596,11 @@ h2(#features). Features
 
 h2(#install). Upgrading and uninstallation
 
-Download the latest version of the plugin from "the GitHub project page":https://github.com/Bloke/zem_contact_reborn, paste the code into the Textpattern Admin → Plugins pane, install and enable the plugin. Visit the "forum thread":http://forum.textpattern.com/viewtopic.php?id=23728 for more info or to report on the success or otherwise of the plugin.
+Download the latest version of the plugin from "the GitHub project page":https://github.com/Bloke/zem_contact_reborn/releases, paste the code into the Textpattern Admin → Plugins panel, install and enable the plugin. Visit the "forum thread":http://forum.textpattern.com/viewtopic.php?id=23728 for more info or to report on the success or otherwise of the plugin.
 
-To uninstall, delete from the Admin → Plugins page.
+Note that the language strings are part of the plugin itself, so if you are upgrading from v4.0.3.20 or earlier, disable or remove the zem_contact_lang plugin. If you have a translation Textpack available that is not yet incorporated, please submit it for inclusion.
+
+To uninstall, delete from the Admin → Plugins panel.
 
 h2(#usage). Usage
 
@@ -2258,7 +2260,7 @@ h2(#faq). Frequently asked questions
 ; How do I remove the legend and fieldset surrounding the contact form?
 : Set the @label@ attribute to an empty value (@label=""@) in the @zem_contact@ tag.
 ; No email is sent. How do I diagnose and fix the problem?
-: First try a simple contact form, using only the @zem_contact@ tag with the @to@ attribute set to a valid email address. If that doesn't send email, fill out the 'SMTP envelope sender address' field in Textpattern's preferences page on the admin tab. If that doesn't help either, take a look at your mail server log files to see what the problem is.
+: First try a simple contact form, using only the @zem_contact@ tag with the @to@ attribute set to a valid email address. If that doesn't send email, fill out the 'SMTP envelope sender address' field in Textpattern's Admin → Preferences panel. If that doesn't help either, take a look at your mail server log files to see what the problem is.
 ; Which tag do I use to create the submit button?
 : Just use normal HTML code to create a submit button. For historical reasons this plugin still provides the @zem_contact_submit@ tag, but it provides little extra functionality.
 ; How can I get a unique (order) number in the subject of each email?
