@@ -738,5 +738,5 @@ h2. Authors/credits
 * *Tranquillo* added the anti-spam API and @zem_contact_send_article@ functionality.
 * *aslsw66*, *jdykast* and others provided additional code.
 * *Ruud* cleaned up and audited the code to weed out bugs and completely revised the help text. Maintained all versions until 4.0.3.20.
-* *Bloke* is the maintainer of v4.5.0.0 and up. Many thanks to "all additonal contributors":https://github.com/Bloke/zem_contact_reborn/graphs/contributors.
+* *Bloke* is the maintainer of v4.5.0.0 and up. Many thanks to "all additional contributors":https://github.com/Bloke/zem_contact_reborn/graphs/contributors.
 * Supported and tested to destruction by the Textpattern community.
