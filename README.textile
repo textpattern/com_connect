@@ -123,9 +123,13 @@ h4. Examples
 
 h5. Example 1
 
+When used as a single tag, produces a default form with 'Name', 'Email' and 'Message' fields. Email will be delivered to <code>recipient@example.com</code>, with the user's supplied email as the @From:@ address:
+
 bc. <txp:zem_contact to="recipient@example.com" />
 
 h5. Example 2
+
+When used as a container tag, much more flexibility is allowed, for example:
 
 bc. <txp:zem_contact to="recipient@example.com">
     <txp:zem_contact_email />
@@ -133,6 +137,23 @@ bc. <txp:zem_contact to="recipient@example.com">
     <txp:zem_contact_textarea label="Your question" />
     <txp:zem_contact_submit label="Send" />
 </txp:zem_contact>
+
+h5. Example 3
+
+Example with custom email message formatting, called via the @body_form@ attribute:
+
+bc. <txp:zem_contact to="recipient@example.com" body_form="message-formatting" />
+
+And the @body_form@ form template named @message-formatting@ is as follows:
+
+bc.. ============
+Email received.
+
+<txp:zem_contact_if name="email"><txp:zem_contact_label name="email" />: <txp:zem_contact_value name="email" /><txp:else />Mr. Nobody</txp:zem_contact_if> wrote:
+
+<txp:zem_contact_if name="message"><txp:zem_contact_value name="message" /><txp:else />Nothing much :(</txp:zem_contact_if>
+
+============
 
 h3. zem_contact_text
 
