@@ -1677,7 +1677,7 @@ May be used as a self-closing or container tag. Place this where you want the in
 
 h4. Attributes
 
-* @to="email address"@ %(warning)required%<br />Recipient email address. Multiple recipients can be specified separated by commas.
+* @to="email address"@ %(warning)required%<br />Recipient email address. Multiple recipients can be specified, separated by commas.
 * @to_form="form name"@<br />Use specified form (overrides @to@ attribute).
 * @body_form="form name"@<br />Use specified form for the message body text.
 * @from="email address"@<br />Email address used in the "From:" field when sending email. Defaults to the sender's email address. If specified, the sender's email address will be placed in the "Reply-To:" field instead.
@@ -1717,6 +1717,7 @@ h3(#zc_text). zem_contact_text
 bc. <txp:zem_contact_text />
 
 Creates a text @<input>@ field and corresponding @<label>@ tag. The input value will be included in the email, preceded by the label.
+Creates a text @<input>@ field. The input value will be included in the email, preceded by the label.
 
 h4. Attributes
 
@@ -1778,7 +1779,7 @@ bc. <txp:zem_contact_email />
 
 @<input>@ field for user's email address.
 
-The entered email address will automatically be validated to make sure it is of the form "abc@xxx.yyy[.zzz]". On non-Windows servers, a test will be done to verify that an A or MX record exists for the domain. Neither test prevents spam, but it does help detecting accidental typing errors.
+The entered email address will automatically be validated to make sure it is of the form "abc@xxx.yyy[.zzz]". On non-Windows servers, a test will be done to verify that an A or MX record exists for the domain. Neither test prevents spam, but it does help detect accidental typing errors.
 
 h4. Attributes
 
@@ -1955,7 +1956,7 @@ h5. Example 2
 
 Optional checkboxes:
 
-bc. Select which operating systems are you familiar with:<br />
+bc. With which operating systems are you familiar?<br />
 <txp:zem_contact_checkbox label="Windows" required="0" /><br />
 <txp:zem_contact_checkbox label="Unix/Linux/BSD" required="0" /><br />
 <txp:zem_contact_checkbox label="MacOS" required="0" />
