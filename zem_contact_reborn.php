@@ -1885,7 +1885,7 @@ h3(#zc_select). zem_contact_select
 
 bc. <txp:zem_contact_select />
 
-Creates a drop-down selection @<select>@ list.
+Container tag that creates a drop-down selection @<select>@ list.
 
 h4. Attributes
 
@@ -1904,20 +1904,20 @@ h4. Examples
 
 h5. Example 1
 
-Select list labeled 'Department', containing three options and a blank option (due to the comma before 'Marketing') shown by default, forcing the user to make a selection.
+Drop-down selection list labeled 'Department', containing three options and a blank option (due to the comma before 'Marketing') shown by default, forcing the user to make a selection.
 
 bc. <txp:zem_contact_select label="Department" options=",Marketing,Sales,Support" />
 
 h5. Example 2
 
-bc. <txp:zem_contact_select label="Department">
+bc. <txp:zem_contact_select label="Department" selected="Sales">
     <txp:zem_contact_option />
-    <txp:zem_contact_option value="marketing">Marketing</txp:zem_contact_option>
-    <txp:zem_contact_option value="sales">Sales</txp:zem_contact_option>
-    <txp:zem_contact_option value="support">Support</txp:zem_contact_option>
+    <txp:zem_contact_option label="Marketing" />
+    <txp:zem_contact_option label="Sales" />
+    <txp:zem_contact_option label="Support" />
 </txp:zem_contact_select>
 
-Select list containing three options with 'Marketing' selected by default.
+Drop-down selection list containing three options plus a blank option (also see @zem_contact_option@ tag below), with 'Sales' selected by default.
 
 bc. <txp:zem_contact_select options="Marketing,Sales,Support" selected="Marketing" />
 
@@ -1925,7 +1925,7 @@ h3(#zc_option). zem_contact_option
 
 bc. <txp:zem_contact_option />
 
-Creates a drop-down selection option. See "zem_contact_select":#zc_select.
+Creates a drop-down selection option. May be used as a single (self-closing) or container tag. Also see @zem_contact_select@ tag above.
 
 h4. Attributes
 
@@ -1933,6 +1933,26 @@ h4. Attributes
 * @label="text"@<br />Text label of this option displayed to the user.
 * @selected="boolean"@<br />Whether this item is selected, May also be specified in the container tag's @selected@ attribute. Available values: @1@ (yes) or @0@ (no).
 * @value="text"@<br />The value associated with this option when submitted. Default is the label.
+
+h5. Example 1
+
+bc. <txp:zem_contact_select label="Department">
+    <txp:zem_contact_option label="Marketing" />
+    <txp:zem_contact_option label="Sales" />
+    <txp:zem_contact_option label="Support" />
+</txp:zem_contact_select>
+
+Drop-down selection list containing three options as single tags.
+
+h5. Example 2
+
+bc. <txp:zem_contact_select label="Department">
+    <txp:zem_contact_option value="contact-marketing">Marketing</txp:zem_contact_option>
+    <txp:zem_contact_option value="contact-sales" selected="1">Sales</txp:zem_contact_option>
+    <txp:zem_contact_option value="contact-support">Support</txp:zem_contact_option>
+</txp:zem_contact_select>
+
+Drop-down selection list containing three options as container tags with 'Sales' selected by default.
 
 h3(#zc_checkbox). zem_contact_checkbox
 
