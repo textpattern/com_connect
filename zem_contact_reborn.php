@@ -1919,8 +1919,6 @@ bc. <txp:zem_contact_select label="Department" selected="Sales">
 
 Drop-down selection list containing three options plus a blank option (also see @zem_contact_option@ tag below), with 'Sales' selected by default.
 
-bc. <txp:zem_contact_select options="Marketing,Sales,Support" selected="Marketing" />
-
 h3(#zc_option). zem_contact_option
 
 bc. <txp:zem_contact_option />
