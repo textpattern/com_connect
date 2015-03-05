@@ -1604,7 +1604,7 @@ h2(#usage). Usage
 
 h3. Contact form
 
-The simplest form is shown below, which produces a default form with 'Name', 'Email' and 'Message' fields. Email will be delivered to @recipient@example.com@, with the user's supplied email as the @From:@ address.
+The simplest form is shown below, which produces a default form with 'Name', 'Email' and 'Message' fields. Email will be delivered to <code>recipient@example.com</code>, with the user's supplied email as the @From:@ address.
 
 bc. <txp:zem_contact to="recipient@example.com" />
 
