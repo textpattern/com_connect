@@ -1527,7 +1527,7 @@ function zem_contact_if($atts, $thing = null)
 	extract(lAtts(array(
 		'label' => '',
 		'name'  => '',
-		'value' => '',
+		'value' => null,
 	), $atts));
 
 	$val = zem_contact_value(array(
@@ -1536,9 +1536,9 @@ function zem_contact_if($atts, $thing = null)
 	));
 
 	if ($val) {
-		$cond = ($val == $value);
+		$cond = ($value === null || $val == $value);
 	} else {
-		$cond = ($value || $value == zem_contact_gTxt('yes'));
+		$cond = false;
 	}
 
 	return parse(EvalElse($thing, $cond));
