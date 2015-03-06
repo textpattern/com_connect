@@ -186,7 +186,7 @@ h4. Attributes
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @pattern="regex"@<br />Regular expression that governs the format in which the field data is expected. Only used for character-based inputs.
 * @placeholder="text"@<br />Text to show as a guide, when the @<input>@ field is empty.
-* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute - if neither attribute is set then default is @1@.
+* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact>@'s @required@ attribute - if neither attribute is set then default is @1@.
 * @size="value"@<br/>The size, in characters, of the @<input>@ field.
 * @step="value"@<br />For numeric-based inputs, the interval between min and max.
 * @type="value"@<br />Type of text input. Default is @text@. Choose from:
@@ -241,7 +241,7 @@ h4. Attributes
 * @min="value"@<br />The minimum @<input>@ length in characters. Default is @0@.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @placeholder="text"@<br />Text to show as a guide, when the @<input>@ field is empty.
-* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute - if neither attribute is set then default is @1@.
+* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact>@'s @required@ attribute - if neither attribute is set then default is @1@.
 * @send_article="boolean"@<br />Whether this field is used as the recipient email address when using the send_article function. Available values: @1@ (yes) or @0@ (no). Default is @0@.
 * @size="value"@<br/>The size, in characters, of the @<input>@ field.
 
@@ -270,7 +270,7 @@ h4. Attributes
 * @min="integer"@<br />Minimum input length in characters. Default is @0@.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @placeholder="text"@<br />Text to show as a guide to users, when the  @<textarea>@ is empty.
-* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute - if neither attribute is set then default is @1@.
+* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact>@'s @required@ attribute - if neither attribute is set then default is @1@.
 * @rows="integer"@<br/>Number of rows, in characters, of the @<textarea>@. Default is @8@.
 * @wrap="value"@<br/>Governs word-wrap. Available values: @hard@ or @soft@. If this attribute is not specified, @soft@ is its default value.
 
@@ -337,7 +337,7 @@ h4. Attributes
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the @<textarea>@ is attached. Associated with the contained form by default.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @options="comma-separated values"@<br /> List of items (previously @list@) to show in the select box. May also use the @<txp:zem_contact_option />@ tag inside this tag's container.
-* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute - if neither attribute is set then default is @1@.
+* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact>@'s @required@ attribute - if neither attribute is set then default is @1@.
 * @selected="value"@<br />List item that is selected by default.
 * @size="value"@<br/>The vertical size, in entries, of the @<input>@ field.
 
@@ -407,7 +407,7 @@ h4. Attributes
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the checkbox is attached. Associated with the contained form by default.
 * @label="text"@<br />Text label displayed to the user. Default is @Checkbox@.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
-* @required="boolean"@<br />Whether this checkbox must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute - if neither attribute is set then default is @1@.
+* @required="boolean"@<br />Whether this checkbox must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact>@'s @required@ attribute - if neither attribute is set then default is @1@.
 
 h4. Examples
 
@@ -441,7 +441,7 @@ h4. Attributes
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the checkbox is attached. Associated with the contained form by default.
 * @label="text"@ *(required)*<br />Text label displayed to the user as radio button option.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. If it hasn't been set at all, it will be derived from the @group@ attribute.
-* @required="boolean"@<br />Whether this radio set must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute - if neither attribute is set then default is @1@. You may set it on only the first option, or set the same value on all of them in the group.
+* @required="boolean"@<br />Whether this radio set must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact>@'s @required@ attribute - if neither attribute is set then default is @1@. You may set it on only the first option, or set the same value on all of them in the group.
 
 h4. Examples
 
