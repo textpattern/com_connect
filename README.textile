@@ -99,25 +99,25 @@ May be used as a single (self-closing) or container tag. Place this where you wa
 
 h4. Attributes
 
-* @to="email address"@ *(required)*<br />Recipient email address. Multiple recipients can be specified, separated by commas.
-* @to_form="form name"@<br />Use specified form (overrides @to@ attribute).
 * @body_form="form name"@<br />Use specified form for the message body text.
+* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemContactForm@.
+* @copysender="boolean"@<br />Whether to send a copy of the email to the sender's address. Available values: @1@ (yes) or @0@ (no). Default is @0@.
+* @expire="number"@<br />Number of seconds after which the form will expire, thus requiring a page refresh before sending. Default is @600@.
+* @form="form name"@<br />Use specified form, containing the layout of the contact form fields.
 * @from="email address"@<br />Email address used in the "From:" field when sending email. Defaults to the sender's email address. If specified, the sender's email address will be placed in the "Reply-To:" field instead.
 * @from_form="form name"@<br />Use specified form (overrides @from@ attribute).
+* @label="text"@<br />Label for the contact form. If set to an empty string, display of the fieldset and legend tags will be suppressed. Default is @Contact@.
+* @redirect="URL"@<br />Redirect to specified URL (overrides @thanks@ and @thanks_form@ attributes). URL must be relative to the Textpattern site URL. Example: @redirect="monkey"@ would redirect to @http://example.com/monkey@.
+* @required="boolean"@<br /> Whether to require all tags in this contact form to be completed before the form can be submitted. Can be overridden on a field-by-field basis by using the @required@ attribute in the relevant tag. Available values: @1@ (yes) or @0@ (no). Default is @1@.
+* @send_article="boolean"@<br />Whether to use this form to send an article. Available values: @1@ (yes) or @0@ (no). Default is @0@.
+* @show_error="boolean"@<br /> Whether to display error and status messages. Available values: @1@ (yes) or @0@ (no). Default is @1@.
+* @show_input="boolean"@<br /> Whether to display the form @<input>@ fields. Available values: @1@ (yes) or @0@ (no). Default is @1@.
 * @subject="subject text"@<br />Subject used when sending an email. Default is the site name.
 * @subject_form="form name"@<br />Use specified form (overrides @subject@ attribute).
 * @thanks="text"@<br />Message shown after successfully submitting a message. Default is @Thank you, your message has been sent@.
 * @thanks_form="form name"@<br />Use specified form (overrides @thanks@ attribute).
-* @redirect="URL"@<br />Redirect to specified URL (overrides @thanks@ and @thanks_form@ attributes). URL must be relative to the Textpattern site URL. Example: @redirect="monkey"@ would redirect to @http://example.com/monkey@.
-* @expire="number"@<br />Number of seconds after which the form will expire, thus requiring a page refresh before sending. Default is @600@.
-* @label="text"@<br />Label for the contact form. If set to an empty string, display of the fieldset and legend tags will be suppressed. Default is @Contact@.
-* @send_article="boolean"@<br />Whether to use this form to send an article. Available values: @1@ (yes) or @0@ (no). Default is @0@.
-* @copysender="boolean"@<br />Whether to send a copy of the email to the sender's address. Available values: @1@ (yes) or @0@ (no). Default is @0@.
-* @form="form name"@<br />Use specified form, containing the layout of the contact form fields.
-* @show_input="boolean"@<br /> Whether to display the form @<input>@ fields. Available values: @1@ (yes) or @0@ (no). Default is @1@.
-* @show_error="boolean"@<br /> Whether to display error and status messages. Available values: @1@ (yes) or @0@ (no). Default is @1@.
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemContactForm@.
-* @required="boolean"@<br /> Whether to require all tags in this contact form to be completed before the form can be submitted. Can be overridden on a field-by-field basis by using the @required@ attribute in the relevant tag. Available values: @1@ (yes) or @0@ (no). Default is @1@.
+* @to="email address"@ *(required)*<br />Recipient email address. Multiple recipients can be specified, separated by commas.
+* @to_form="form name"@<br />Use specified form (overrides @to@ attribute).
 
 h4. Examples
 
@@ -186,7 +186,7 @@ h4. Attributes
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @pattern="regex"@<br />Regular expression that governs the format in which the field data is expected. Only used for character-based inputs.
 * @placeholder="text"@<br />Text to show as a guide, when the @<input>@ field is empty.
-* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
+* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute - if neither attribute is set then default is @1@.
 * @size="value"@<br/>The size, in characters, of the @<input>@ field.
 * @step="value"@<br />For numeric-based inputs, the interval between min and max.
 * @type="value"@<br />Type of text input. Default is @text@. Choose from:
@@ -233,7 +233,7 @@ h4. Attributes
 
 * @autocomplete="value"@<br />Indicates whether the value of the control can be automatically completed by the browser. Possible values are: @off@ (the browser does not automatically complete the entry) or @on@ (the browser can automatically complete the value based on values that the user has entered during previous uses). Default is unset.
 * @break="tag"@<br />Break tag between the @<label>@ and @<input>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemText@.
+* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemEmail@.
 * @default="value"@<br />Default value when no input is provided.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the field is attached. Associated with the contained form by default.
 * @label="text"@<br />Text label displayed to the user. Default is @Email@.
@@ -241,7 +241,7 @@ h4. Attributes
 * @min="value"@<br />The minimum @<input>@ length in characters. Default is @0@.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @placeholder="text"@<br />Text to show as a guide, when the @<input>@ field is empty.
-* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
+* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute - if neither attribute is set then default is @1@.
 * @send_article="boolean"@<br />Whether this field is used as the recipient email address when using the send_article function. Available values: @1@ (yes) or @0@ (no). Default is @0@.
 * @size="value"@<br/>The size, in characters, of the @<input>@ field.
 
@@ -270,7 +270,7 @@ h4. Attributes
 * @min="integer"@<br />Minimum input length in characters. Default is @0@.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @placeholder="text"@<br />Text to show as a guide to users, when the  @<textarea>@ is empty.
-* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
+* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute - if neither attribute is set then default is @1@.
 * @rows="integer"@<br/>Number of rows, in characters, of the @<textarea>@. Default is @8@.
 * @wrap="value"@<br/>Governs word-wrap. Available values: @hard@ or @soft@. If this attribute is not specified, @soft@ is its default value.
 
@@ -337,7 +337,7 @@ h4. Attributes
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the @<textarea>@ is attached. Associated with the contained form by default.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @options="comma-separated values"@<br /> List of items (previously @list@) to show in the select box. May also use the @<txp:zem_contact_option />@ tag inside this tag's container.
-* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
+* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute - if neither attribute is set then default is @1@.
 * @selected="value"@<br />List item that is selected by default.
 * @size="value"@<br/>The vertical size, in entries, of the @<input>@ field.
 
@@ -407,7 +407,7 @@ h4. Attributes
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the checkbox is attached. Associated with the contained form by default.
 * @label="text"@<br />Text label displayed to the user. Default is @Checkbox@.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
-* @required="boolean"@<br />Whether this checkbox must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute.
+* @required="boolean"@<br />Whether this checkbox must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute - if neither attribute is set then default is @1@.
 
 h4. Examples
 
@@ -441,7 +441,7 @@ h4. Attributes
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the checkbox is attached. Associated with the contained form by default.
 * @label="text"@ *(required)*<br />Text label displayed to the user as radio button option.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. If it hasn't been set at all, it will be derived from the @group@ attribute.
-* @required="boolean"@<br />Whether this radio set must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute. You may set it on only the first option, or set the same value on all of them in the group.
+* @required="boolean"@<br />Whether this radio set must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact_form>@'s @required@ attribute - if neither attribute is set then default is @1@. You may set it on only the first option, or set the same value on all of them in the group.
 
 h4. Examples
 
@@ -654,7 +654,7 @@ The list of error messages (if any) has a @class@ of @zemError@ set on the @ul@ 
 
 All form elements and corresponding labels have the following classes (or ids set):
 
-# One of @zemText@, @zemTextarea@, @zemSelect@, @zemOption@, @zemRadio@, @zemCheckbox@ or @zemSubmit@. By default, it should be obvious which @class@ is used for which form element (and corresponding label). You can override these names by using your own @class@ attribute.
+# One of @zemText@, @zemEmail@, @zemTextarea@, @zemSelect@, @zemOption@, @zemRadio@, @zemCheckbox@ or @zemSubmit@. By default, it should be obvious which @class@ is used for which form element (and corresponding label). You can override these names by using your own @class@ attribute.
 # @zemRequired@, @errorElement@ or @zemRequirederrorElement@, depending on whether the form element is required, an error was found in whatever the visitor entered... or both.
 # An individual @id@ or @class@ set to the value of the @name@ attribute of the corresponding tag. When styling forms based on this @class@, you should explicitly set the @name@ attribute because automatically generated names may change in newer zem_contact_reborn versions.
 
