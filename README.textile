@@ -76,20 +76,20 @@ All other tags provided by this plugin can only be used inside a @<txp:zem_conta
 
 In addition to the tags detailed in the following sections, every tag accepts a core set of common attributes. These are:
 
-* @accesskey@: shortcut key to set focus on the field.
-* @autofocus@: to automatically focus the cursor in this field on page load. Only one field may have this property.
-* @dir@: text direction (@ltr@, @rtl@ or @auto@).
-* @disabled@: whether the input control accepts user input. If set, the element does not get submitted with the form, nor is it subject to any @checkValidity()@ JavaScript calls.
-* @hidden@: the visibility of the input control.
-* @id@: the HTML identifier of the control.
-* @lang@: the ISO 639 language short code (e.g. @en-gb@, @de-de@) that govern the field.
-* @list@: used in conjunction with the @<datalist>@ tag to specify a set of options.
-* @readonly@: control does not accept user input, but will be processed on form submission and can be validated.
-* @spellcheck@: whether the field is subject to spell checking.
-* @style@: inline CSS @style@ rules to apply to the input control.
-* @tabindex@: the order in which the cursor jumps between elements when using the tab key.
-* @title@: usually used for hover tooltip describing the input control's use in your application.
-* @translate@: whether to subject the attribute content to language translation.
+* @accesskey="character"@: shortcut key to set focus on the field.
+* @autofocus="boolean"@: to automatically focus the cursor in this field on page load. Only one field may have this property.
+* @dir="value"@: text direction (@ltr@, @rtl@ or @auto@).
+* @disabled="boolean"@: whether the input control accepts user input. If set, the element does not get submitted with the form, nor is it subject to any @checkValidity()@ JavaScript calls.
+* @hidden="boolean"@: the visibility of the input control.
+* @id="id"@: the HTML identifier for the control.
+* @lang="value"@: the ISO 639 language short code (e.g. @en-gb@, @de-de@) that govern the field.
+* @list="id"@: used in conjunction with the @<datalist>@ tag to specify a set of options. The id is the reference to the datalist to use.
+* @readonly="boolean"@: control does not accept user input, but will be processed on form submission and can be validated.
+* @spellcheck="value"@: whether the field is subject to spell checking (@true@ = yes, @default@ = browser decides, or @false@ = no).
+* @style="style rules"@: inline CSS @style@ rules to apply to the input control.
+* @tabindex="number"@: the order in which the cursor jumps between elements when using the tab key.
+* @title="value"@: usually used for hover tooltip describing the input control's use in your application.
+* @translate="boolean"@: whether to subject the attribute content to language translation.
 
 h3. zem_contact
 
