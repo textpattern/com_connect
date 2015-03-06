@@ -596,7 +596,7 @@ function zem_contact_text($atts)
 	$zemRequired = $required ? 'zemRequired' : '';
 	$classStr = (($class) ? $class . ' ' : '') . $zemRequired . $isError;
 
-	return '<label for="' . $name . '"' . ($classStr ? ' class="' . $classStr . '"' : '') . '>' . txpspecialchars($label) . '</label>' . $break .
+	return '<label for="' . $name . '"' . ($classStr ? ' class="' . $classStr . ' ' . $name . '"' : '') . '>' . txpspecialchars($label) . '</label>' . $break .
 		'<input' . ($classStr ? ' class="' . $classStr . '"' : '') . ($attr ? ' ' . implode(' ', $attr) : '') . ' />';
 }
 
@@ -758,7 +758,7 @@ function zem_contact_textarea($atts)
 	$zemRequired = $required ? 'zemRequired' : '';
 	$classStr = (($class) ? $class . ' ' : '') . $zemRequired . $isError;
 
-	return '<label for="' . $name . '"' . ($classStr ? ' class="' . $classStr . '"' : '') . '>' . txpspecialchars($label) . '</label>' . $break .
+	return '<label for="' . $name . '"' . ($classStr ? ' class="' . $classStr . ' ' . $name . '"' : '') . '>' . txpspecialchars($label) . '</label>' . $break .
 		'<textarea' . ($classStr ? ' class="' . $classStr . '"' : '') . ($attr ? ' ' . implode(' ', $attr) : '') . '>' . txpspecialchars($value) . '</textarea>';
 }
 
@@ -855,7 +855,7 @@ function zem_contact_select($atts, $thing = null)
 	$zemRequired = $required ? 'zemRequired' : '';
 	$classStr = (($class) ? $class . ' ' : '') . $zemRequired . $isError;
 
-	return '<label for="' . $name . '"' . ($classStr ? ' class="' . $classStr . '"' : '') . '>' . txpspecialchars($label) . '</label>' . $break .
+	return '<label for="' . $name . '"' . ($classStr ? ' class="' . $classStr . ' ' . $name . '"' : '') . '>' . txpspecialchars($label) . '</label>' . $break .
 		n . '<select' . ($classStr ? ' class="' . $classStr . '"' : '') . ($attr ? ' ' . implode(' ', $attr) : '') . '>' .
 			$out .
 		n . '</select>';
