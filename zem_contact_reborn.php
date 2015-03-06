@@ -982,7 +982,7 @@ function zem_contact_checkbox($atts)
 
 	return '<input type="checkbox"' . ($classStr ? ' class="' . $classStr . '"' : '') .
 		($value ? ' checked="checked"' : '') . ($attr ? implode(' ', $attr) : '') . ' />' . $break .
-		'<label for="' . $name . '" class="' . ($classStr ? $classStr . ' ' : '') . $name . '">' . txpspecialchars($label) . '</label>';
+		'<label for="' . $name . '"' . ($classStr ? ' class="' . $classStr . ' ' . $name . '"' : '') . '">' . txpspecialchars($label) . '</label>';
 }
 
 /**
@@ -1073,7 +1073,7 @@ function zem_contact_radio($atts)
 
 	return '<input type="radio" class="' . $classStr . '"' . ($attr ? ' ' . implode(' ', $attr) : '') .
 		( $is_checked ? ' checked="checked" />' : ' />') . $break .
-		'<label for="' . $id . '" class="' . $classStr . '">' . txpspecialchars($label) . '</label>';
+		'<label for="' . $id . '"' . ($classStr ? ' class="' . $classStr . '"' : '') . '">' . txpspecialchars($label) . '</label>';
 }
 
 /**
@@ -1681,7 +1681,7 @@ May be used as a single (self-closing) or container tag. Place this where you wa
 h4. Attributes
 
 * @body_form="form name"@<br />Use specified form for the message body text.
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemContactForm@.
+* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemContactForm@. To remove @class@ attribute from the element entirely, use @class=""@.
 * @copysender="boolean"@<br />Whether to send a copy of the email to the sender's address. Available values: @1@ (yes) or @0@ (no). Default is @0@.
 * @expire="number"@<br />Number of seconds after which the form will expire, thus requiring a page refresh before sending. Default is @600@.
 * @form="form name"@<br />Use specified form, containing the layout of the contact form fields.
@@ -1747,7 +1747,7 @@ h4. Attributes
 
 * @autocomplete="value"@<br />Indicates whether the value of the control can be automatically completed by the browser. This attribute is ignored if the value of the type attribute is @password@. Possible values are: @off@ (the browser does not automatically complete the entry) or @on@ (the browser can automatically complete the value based on values that the user has entered during previous uses). Default is unset.
 * @break="tag"@<br />Break tag between the @<label>@ and @<input>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemText@.
+* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemText@. To remove @class@ attribute from the element entirely, use @class=""@.
 * @default="value"@<br />Default value when no input is provided.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the field is attached. Associated with the contained form by default.
 * @inputmode="value"@<br />A hint to the browser for which keyboard to display. This attribute applies when the value of the type attribute is @text@, @password@ or @url@. Possible values are:
@@ -1815,7 +1815,7 @@ h4. Attributes
 
 * @autocomplete="value"@<br />Indicates whether the value of the control can be automatically completed by the browser. Possible values are: @off@ (the browser does not automatically complete the entry) or @on@ (the browser can automatically complete the value based on values that the user has entered during previous uses). Default is unset.
 * @break="tag"@<br />Break tag between the @<label>@ and @<input>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemEmail@.
+* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemEmail@. To remove @class@ attribute from the element entirely, use @class=""@.
 * @default="value"@<br />Default value when no input is provided.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the field is attached. Associated with the contained form by default.
 * @label="text"@<br />Text label displayed to the user. Default is @Email@.
@@ -1843,7 +1843,7 @@ h4. Attributes
 
 * @autocomplete="value"@<br />Indicates whether the value of the control can be automatically completed by the browser. Possible values are: @off@ (the browser does not automatically complete the entry) or @on@ (the browser can automatically complete the value based on values that the user has entered during previous uses). Default is unset.
 * @break="tag"@<br />Break tag between the @<label>@ and @<textarea>@. Default is @<br />@. Use @break=""@ to put the @<label>@ and @<input>@ field on the same line.
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the  @<textarea>@. Default: @zemTextarea@.
+* @class="space-separated values"@<br /> Set the CSS @class@ name of the  @<textarea>@. Default: @zemTextarea@. To remove @class@ attribute from the element entirely, use @class=""@.
 * @cols="integer"@<br/>Number of columns, in characters, of the @<textarea>@. Default is @58@.
 * @default="value"@<br />Default value when no input is provided.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the @<textarea>@ is attached. Associated with the contained form by default.
@@ -1872,7 +1872,7 @@ Creates a submit button. When used as a container tag, a @<button>@ element will
 
 h4. Attributes:
 
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemSubmit@.
+* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemSubmit@. To remove @class@ attribute from the element entirely, use @class=""@.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the button is attached. Associated with the contained form by default.
 * @label="text"@<br />Text shown on the submit button. Default is @Send@.
 
@@ -1913,7 +1913,7 @@ Container tag that creates a drop-down selection @<select>@ list.
 h4. Attributes
 
 * @break="tag"@<br />Break tag between the label and @<input>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the list. Default: @zemSelect@.
+* @class="space-separated values"@<br /> Set the CSS @class@ name of the list. Default: @zemSelect@. To remove @class@ attribute from the element entirely, use @class=""@.
 * @delimiter="character"@<br />Separator character between list items if using the @options@ attribute. Default is @,@ (comma). Ignored if this tag is used as a container.
 * @label="text"@<br />Text label displayed to the user. Default is @Option@.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the @<textarea>@ is attached. Associated with the contained form by default.
@@ -1950,7 +1950,7 @@ Creates a drop-down selection option. May be used as a single (self-closing) or 
 
 h4. Attributes
 
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the option. Default: @zemOption@.
+* @class="space-separated values"@<br /> Set the CSS @class@ name of the option. Default: @zemOption@. To remove @class@ attribute from the element entirely, use @class=""@.
 * @label="text"@<br />Text label of this option displayed to the user.
 * @selected="boolean"@<br />Whether this item is selected, May also be specified in the container tag's @selected@ attribute. Available values: @1@ (yes) or @0@ (no).
 * @value="text"@<br />The value associated with this option when submitted. Default is the label.
@@ -1985,7 +1985,7 @@ h4. Attributes
 
 * @break="tag"@<br />Break tag between the label and input field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
 * @checked="boolean"@<br />Whether this box is checked when first displayed. Available values: @1@ (yes) or @0@ (no). Default is @0@.
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the option. Default: @zemCheckbox@.
+* @class="space-separated values"@<br /> Set the CSS @class@ name of the option. Default: @zemCheckbox@. To remove @class@ attribute from the element entirely, use @class=""@.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the checkbox is attached. Associated with the contained form by default.
 * @label="text"@<br />Text label displayed to the user. Default is @Checkbox@.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
@@ -2018,7 +2018,7 @@ h4. Attributes
 
 * @break="tag"@<br />Break tag between the label and field. Default is a space.
 * @checked="boolean"@<br />Whether this radio option is checked when the form is first displayed. Available values: @1@ (yes) or @0@ (no). Default is @0@.
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the radio button. Default: @zemRadio@.
+* @class="space-separated values"@<br /> Set the CSS @class@ name of the radio button. Default: @zemRadio@. To remove @class@ attribute from the element entirely, use @class=""@.
 * @group="text"@ %(warning)required%<br />Text used in the email to describe this group of radio buttons. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. Default is @Radio@.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the checkbox is attached. Associated with the contained form by default.
 * @label="text"@ %(warning)required%<br />Text label displayed to the user as radio button option.
