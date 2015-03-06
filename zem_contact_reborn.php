@@ -1678,25 +1678,25 @@ May be used as a single (self-closing) or container tag. Place this where you wa
 
 h4. Attributes
 
-* @to="email address"@ %(warning)required%<br />Recipient email address. Multiple recipients can be specified, separated by commas.
-* @to_form="form name"@<br />Use specified form (overrides @to@ attribute).
 * @body_form="form name"@<br />Use specified form for the message body text.
+* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemContactForm@.
+* @copysender="boolean"@<br />Whether to send a copy of the email to the sender's address. Available values: @1@ (yes) or @0@ (no). Default is @0@.
+* @expire="number"@<br />Number of seconds after which the form will expire, thus requiring a page refresh before sending. Default is @600@.
+* @form="form name"@<br />Use specified form, containing the layout of the contact form fields.
 * @from="email address"@<br />Email address used in the "From:" field when sending email. Defaults to the sender's email address. If specified, the sender's email address will be placed in the "Reply-To:" field instead.
 * @from_form="form name"@<br />Use specified form (overrides @from@ attribute).
+* @label="text"@<br />Label for the contact form. If set to an empty string, display of the fieldset and legend tags will be suppressed. Default is @Contact@.
+* @redirect="URL"@<br />Redirect to specified URL (overrides @thanks@ and @thanks_form@ attributes). URL must be relative to the Textpattern site URL. Example: @redirect="monkey"@ would redirect to @http://example.com/monkey@.
+* @required="boolean"@<br /> Whether to require all tags in this contact form to be completed before the form can be submitted. Can be overridden on a field-by-field basis by using the @required@ attribute in the relevant tag. Available values: @1@ (yes) or @0@ (no). Default is @1@.
+* @send_article="boolean"@<br />Whether to use this form to send an article. Available values: @1@ (yes) or @0@ (no). Default is @0@.
+* @show_error="boolean"@<br /> Whether to display error and status messages. Available values: @1@ (yes) or @0@ (no). Default is @1@.
+* @show_input="boolean"@<br /> Whether to display the form @<input>@ fields. Available values: @1@ (yes) or @0@ (no). Default is @1@.
 * @subject="subject text"@<br />Subject used when sending an email. Default is the site name.
 * @subject_form="form name"@<br />Use specified form (overrides @subject@ attribute).
 * @thanks="text"@<br />Message shown after successfully submitting a message. Default is @Thank you, your message has been sent@.
 * @thanks_form="form name"@<br />Use specified form (overrides @thanks@ attribute).
-* @redirect="URL"@<br />Redirect to specified URL (overrides @thanks@ and @thanks_form@ attributes). URL must be relative to the Textpattern site URL. Example: @redirect="monkey"@ would redirect to @http://example.com/monkey@.
-* @expire="number"@<br />Number of seconds after which the form will expire, thus requiring a page refresh before sending. Default is @600@.
-* @label="text"@<br />Label for the contact form. If set to an empty string, display of the fieldset and legend tags will be suppressed. Default is @Contact@.
-* @send_article="boolean"@<br />Whether to use this form to send an article. Available values: @1@ (yes) or @0@ (no). Default is @0@.
-* @copysender="boolean"@<br />Whether to send a copy of the email to the sender's address. Available values: @1@ (yes) or @0@ (no). Default is @0@.
-* @form="form name"@<br />Use specified form, containing the layout of the contact form fields.
-* @show_input="boolean"@<br /> Whether to display the form @<input>@ fields. Available values: @1@ (yes) or @0@ (no). Default is @1@.
-* @show_error="boolean"@<br /> Whether to display error and status messages. Available values: @1@ (yes) or @0@ (no). Default is @1@.
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemContactForm@.
-* @required="boolean"@<br /> Whether to require all tags in this contact form to be completed before the form can be submitted. Can be overridden on a field-by-field basis by using the @required@ attribute in the relevant tag. Available values: @1@ (yes) or @0@ (no). Default is @1@.
+* @to="email address"@ *(required)*<br />Recipient email address. Multiple recipients can be specified, separated by commas.
+* @to_form="form name"@<br />Use specified form (overrides @to@ attribute).
 
 h4. Examples
 
