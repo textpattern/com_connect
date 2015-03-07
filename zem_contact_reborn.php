@@ -1714,7 +1714,7 @@ When used as a container tag, much more flexibility is allowed, for example:
 
 bc. <txp:zem_contact to="recipient@example.com">
     <txp:zem_contact_email />
-    <txp:zem_contact_text label="Phone" min="7" max="15" />
+    <txp:zem_contact_text type="tel" label="Phone" min="7" max="15" />
     <txp:zem_contact_textarea label="Your question" />
     <txp:zem_contact_submit label="Send" />
 </txp:zem_contact>
@@ -1764,7 +1764,7 @@ h4. Attributes
 ** @url@: URL input. Use @type="url"@ if possible instead.
 * @label="text"@<br />Text label displayed to the user. Default is @Text@.
 * @max=value"@<br />For character-based inputs, the maximum @<input>@ length in characters. For numeric-based inputs, the maximum value the field accepts. Default is @100@.
-* @min="value"@<br />For character-based inputs, the minimum @<input>@ length in characters. For numeric-based inputs, the minimum value the field accepts. Default is @0@.
+* @min="value"@<br />For character-based inputs, the minimum @<input>@ length in characters. For numeric-based inputs, the minimum value the field accepts. Default is unset, i.e., no minimum limit.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @pattern="regex"@<br />Regular expression that governs the format in which the field data is expected. Only used for character-based inputs.
 * @placeholder="text"@<br />Text to show as a guide, when the @<input>@ field is empty.
@@ -1820,7 +1820,7 @@ h4. Attributes
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the field is attached. Associated with the contained form by default.
 * @label="text"@<br />Text label displayed to the user. Default is @Email@.
 * @max=value"@<br />The maximum @<input>@ length in characters. Default is @100@.
-* @min="value"@<br />The minimum @<input>@ length in characters. Default is @0@.
+* @min="value"@<br />The minimum @<input>@ length in characters. Default is unset, i.e., no minimum limit.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @placeholder="text"@<br />Text to show as a guide, when the @<input>@ field is empty.
 * @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
@@ -1849,7 +1849,7 @@ h4. Attributes
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the @<textarea>@ is attached. Associated with the contained form by default.
 * @label="text"@<br />Text label displayed to the user. Default is @Message@.
 * @max="integer"@<br />Maximum input length in characters. Default is @10000@.
-* @min="integer"@<br />Minimum input length in characters. Default is @0@.
+* @min="integer"@<br />Minimum input length in characters. Default is unset, i.e., no minimum limit.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @placeholder="text"@<br />Text to show as a guide to users, when the  @<textarea>@ is empty.
 * @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
