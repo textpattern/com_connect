@@ -598,8 +598,15 @@ function zem_contact_text($atts)
 	// Global attributes
 	$attr += zem_contact_build_atts($zem_contact_globals, $atts);
 
-	$zemRequired = $required ? 'zemRequired' : '';
-	$classStr = (($class) ? $class . ' ' : '') . $zemRequired . $isError;
+	$classes = array();
+
+	foreach (array($class, ($required ? 'zemRequired' : ''), $isError) as $cls) {
+		if ($cls) {
+			$classes[] = $cls;
+		}
+	}
+
+	$classStr = implode(' ', $classes);
 
 	return '<label for="' . $name . '"' . ($classStr ? ' class="' . $classStr . ' ' . $name . '"' : '') . '>' . txpspecialchars($label) . '</label>' . $break .
 		'<input' . ($classStr ? ' class="' . $classStr . '"' : '') . ($attr ? ' ' . implode(' ', $attr) : '') . ' />';
@@ -760,8 +767,15 @@ function zem_contact_textarea($atts)
 	// Global attributes
 	$attr += zem_contact_build_atts($zem_contact_globals, $atts);
 
-	$zemRequired = $required ? 'zemRequired' : '';
-	$classStr = (($class) ? $class . ' ' : '') . $zemRequired . $isError;
+	$classes = array();
+
+	foreach (array($class, ($required ? 'zemRequired' : ''), $isError) as $cls) {
+		if ($cls) {
+			$classes[] = $cls;
+		}
+	}
+
+	$classStr = implode(' ', $classes);
 
 	return '<label for="' . $name . '"' . ($classStr ? ' class="' . $classStr . ' ' . $name . '"' : '') . '>' . txpspecialchars($label) . '</label>' . $break .
 		'<textarea' . ($classStr ? ' class="' . $classStr . '"' : '') . ($attr ? ' ' . implode(' ', $attr) : '') . '>' . txpspecialchars($value) . '</textarea>';
@@ -857,8 +871,15 @@ function zem_contact_select($atts, $thing = null)
 	// Global attributes
 	$attr += zem_contact_build_atts($zem_contact_globals, $atts);
 
-	$zemRequired = $required ? 'zemRequired' : '';
-	$classStr = (($class) ? $class . ' ' : '') . $zemRequired . $isError;
+	$classes = array();
+
+	foreach (array($class, ($required ? 'zemRequired' : ''), $isError) as $cls) {
+		if ($cls) {
+			$classes[] = $cls;
+		}
+	}
+
+	$classStr = implode(' ', $classes);
 
 	return '<label for="' . $name . '"' . ($classStr ? ' class="' . $classStr . ' ' . $name . '"' : '') . '>' . txpspecialchars($label) . '</label>' . $break .
 		n . '<select' . ($classStr ? ' class="' . $classStr . '"' : '') . ($attr ? ' ' . implode(' ', $attr) : '') . '>' .
@@ -982,8 +1003,15 @@ function zem_contact_checkbox($atts)
 	// Global attributes
 	$attr += zem_contact_build_atts($zem_contact_globals, $atts);
 
-	$zemRequired = $required ? 'zemRequired' : '';
-	$classStr = (($class) ? $class . ' ' : '') . $zemRequired . $isError;
+	$classes = array();
+
+	foreach (array($class, ($required ? 'zemRequired' : ''), $isError) as $cls) {
+		if ($cls) {
+			$classes[] = $cls;
+		}
+	}
+
+	$classStr = implode(' ', $classes);
 
 	return '<input type="checkbox"' . ($classStr ? ' class="' . $classStr . '"' : '') .
 		($value ? ' checked="checked"' : '') . ($attr ? ' ' . implode(' ', $attr) : '') . ' />' . $break .
@@ -1073,8 +1101,15 @@ function zem_contact_radio($atts)
 	// Global attributes
 	$attr += zem_contact_build_atts($zem_contact_globals, $atts);
 
-	$zemRequired = $required ? 'zemRequired' : '';
-	$classStr = $name . (($class) ? ' ' . $class : '') . ' ' . $zemRequired . $isError;
+	$classes = array();
+
+	foreach (array($name, $class, ($required ? 'zemRequired' : ''), $isError) as $cls) {
+		if ($cls) {
+			$classes[] = $cls;
+		}
+	}
+
+	$classStr = implode(' ', $classes);
 
 	return '<input type="radio" class="' . $classStr . '"' . ($attr ? ' ' . implode(' ', $attr) : '') .
 		( $is_checked ? ' checked="checked" />' : ' />') . $break .
