@@ -981,7 +981,7 @@ function zem_contact_checkbox($atts)
 	$classStr = (($class) ? $class . ' ' : '') . $zemRequired . $isError;
 
 	return '<input type="checkbox"' . ($classStr ? ' class="' . $classStr . '"' : '') .
-		($value ? ' checked="checked"' : '') . ($attr ? implode(' ', $attr) : '') . ' />' . $break .
+		($value ? ' checked="checked"' : '') . ($attr ? ' ' . implode(' ', $attr) : '') . ' />' . $break .
 		'<label for="' . $name . '" class="' . ($classStr ? $classStr . ' ' : '') . $name . '">' . txpspecialchars($label) . '</label>';
 }
 
