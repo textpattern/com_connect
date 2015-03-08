@@ -564,6 +564,11 @@ function zem_contact_text($atts)
 	if ($size && !$is_numeric) {
 		$attr['size'] = 'size="' . intval($size) . '"';
 	}
+
+	if ($min && !$is_numeric) {
+		$attr['minlength'] = 'minlength="' . intval($min) . '"';
+	}
+
 	if ($max && !$is_numeric) {
 		$attr['maxlength'] = 'maxlength="' . intval($max) . '"';
 	}
