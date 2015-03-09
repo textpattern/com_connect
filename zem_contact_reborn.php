@@ -243,6 +243,11 @@ function zem_contact($atts, $thing = null)
 
 	$form = parse($form);
 
+	// Perform aggregate functions for checking radio sets.
+	if ($zem_contact_submit) {
+		zem_contact_group_validate();
+	}
+
 	if ($to_form) {
 		$to = parse_form($to_form);
 	}
@@ -1015,7 +1020,7 @@ function zem_contact_checkbox($atts)
 
 	return '<input type="checkbox"' . ($classStr ? ' class="' . $classStr . '"' : '') .
 		($value ? ' checked="checked"' : '') . ($attr ? ' ' . implode(' ', $attr) : '') . ' />' . $break .
-		'<label for="' . $name . '"' . ($classStr ? ' class="' . $classStr . ' ' . $name . '"' : '') . '">' . txpspecialchars($label) . '</label>';
+		'<label for="' . $name . '"' . ($classStr ? ' class="' . $classStr . ' ' . $name . '"' : '') . '>' . txpspecialchars($label) . '</label>';
 }
 
 /**
@@ -1026,7 +1031,7 @@ function zem_contact_checkbox($atts)
  */
 function zem_contact_radio($atts)
 {
-	global $zem_contact_error, $zem_contact_submit, $zem_contact_values, $zem_contact_flags;
+	global $zem_contact_error, $zem_contact_submit, $zem_contact_values, $zem_contact_flags, $zem_contact_group;
 
 	extract(zem_contact_lAtts(array(
 		'break'     => ' ',
@@ -1037,16 +1042,22 @@ function zem_contact_radio($atts)
 		'isError'   => '',
 		'label'     => gTxt('zem_contact_option'),
 		'name'      => '',
-		'required'  => $zem_contact_flags['required'],
+		'required'  => null,
 	), $atts));
 
 	static $cur_name = '';
 	static $cur_group = '';
+	static $cur_req = null;
 
 	if (!$name && !$group && !$cur_name && !$cur_group) {
 		$cur_group = gTxt('zem_contact_radio');
 		$cur_name = $cur_group;
 	}
+
+	if ($required === null && $cur_req === null) {
+		$cur_req = $zem_contact_flags['required'];
+	}
+
 	if ($group && !$name && $group != $cur_group) {
 		$name = $group;
 	}
@@ -1063,20 +1074,24 @@ function zem_contact_radio($atts)
 		$group = $cur_group;
 	}
 
+	if ($required !== null) {
+		$cur_req = $required;
+	} else {
+		$required = $cur_req;
+	}
+
 	$id = 'q' . md5($name . '=>' . $label);
 	$name = zem_contact_label2name($name);
 	$doctype = get_pref('doctype', 'xhtml');
+	$zem_contact_group[$name][$id]['req'] = $required;
+	$zem_contact_group[$name][$id]['label'] = $group;
 
 	if ($zem_contact_submit) {
 		$is_checked = (ps($name) == $id);
+		$zem_contact_group[$name][$id]['isSet'] = $is_checked;
 
-		if ($required && !$is_checked) {
-			$zem_contact_error[] = gTxt('zem_contact_field_missing', array('{field}' => txpspecialchars($label)));
-			$isError = "errorElement";
-		} else {
-			if ($is_checked || $checked && !isset($zem_contact_values[$name])) {
-				zem_contact_store($name, $group, $label);
-			}
+		if ($is_checked || $checked && !isset($zem_contact_values[$name])) {
+			zem_contact_store($name, $group, $label);
 		}
 	} else {
 		$is_checked = $checked;
@@ -1113,7 +1128,7 @@ function zem_contact_radio($atts)
 
 	return '<input type="radio" class="' . $classStr . '"' . ($attr ? ' ' . implode(' ', $attr) : '') .
 		( $is_checked ? ' checked="checked" />' : ' />') . $break .
-		'<label for="' . $id . '"' . ($classStr ? ' class="' . $classStr . '"' : '') . '">' . txpspecialchars($label) . '</label>';
+		'<label for="' . $id . '"' . ($classStr ? ' class="' . $classStr . '"' : '') . '>' . txpspecialchars($label) . '</label>';
 }
 
 /**
@@ -1230,6 +1245,39 @@ function zem_contact_send_article($atts)
 	}
 
 	return;
+}
+
+/**
+ * Perform post-processing for aggregate (group) controls like radio sets.
+ *
+ * @todo Can this be done any neater?
+ * @todo Should this be exposed as a callback to allow plugins to extend the functionality?
+ */
+function zem_contact_group_validate()
+{
+	global $zem_contact_group, $zem_contact_error;
+	$flags = array();
+
+	foreach ($zem_contact_group as $key => $grp) {
+		foreach ($grp as $id => $atts) {
+			$flags[$key]['label'] = $atts['label'];
+
+			if ($atts['req'] && !isset($flags[$key]['req'])) {
+				$flags[$key]['req'] = 1;
+			}
+
+			if ($atts['isSet'] && !isset($flags[$key]['isSet'])) {
+				$flags[$key]['isSet'] = 1;
+			}
+		}
+	}
+
+	foreach ($flags as $key => $data) {
+		if ($data['req'] === 1 && !isset($data['isSet'])) {
+			$zem_contact_error[] = gTxt('zem_contact_field_missing', array('{field}' => txpspecialchars($data['label'])));
+			$isError = "errorElement";
+		}
+	}
 }
 
 /**
