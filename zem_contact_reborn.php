@@ -1256,6 +1256,7 @@ function zem_contact_send_article($atts)
 function zem_contact_group_validate()
 {
 	global $zem_contact_group, $zem_contact_error;
+
 	$flags = array();
 
 	foreach ($zem_contact_group as $key => $grp) {
@@ -1275,7 +1276,6 @@ function zem_contact_group_validate()
 	foreach ($flags as $key => $data) {
 		if ($data['req'] === 1 && !isset($data['isSet'])) {
 			$zem_contact_error[] = gTxt('zem_contact_field_missing', array('{field}' => txpspecialchars($data['label'])));
-			$isError = "errorElement";
 		}
 	}
 }
