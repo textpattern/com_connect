@@ -861,8 +861,11 @@ function zem_contact_select($atts, $thing = null)
 	$attr = zem_contact_build_atts(array(
 		'id'   => (isset($id) ? $id : $name),
 		'name' => $name,
-		'size' => intval($size),
 	));
+
+	if ($size && is_numeric($size)) {
+		$attr['size'] = 'size="' . intval($size) . '"';
+	}
 
 	// HTML5 attributes
 	$required = ($required) ? 'required' : '';
