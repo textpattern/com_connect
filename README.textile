@@ -181,6 +181,7 @@ h4. Attributes
 ** @email@: Email input. Use @<txp:zem_contact_email />@ if possible instead.
 ** @url@: URL input. Use @type="url"@ if possible instead.
 * @label="text"@<br />Text label displayed to the user. Default is @Text@.
+* @label_position="text"@<br />Position of the label in relation to the @<input>@ field. Available values: @before@ or @after@. Default is @before@.
 * @max=value"@<br />For character-based inputs, the maximum input value length in characters, using the HTML5 @maxlength@ attribute. To remove @maxlength@ attribute from the element entirely (not recommended), use @max=""@. For numeric-based inputs, the maximum input value the field accepts, using the HTML5 @max@ attribute (can be a negative value). Default is @100@. To remove @max@ attribute from the numerical input element entirely, use @max=""@.
 * @min="value"@<br />For character-based inputs, the minimum input value length in characters, using the HTML5 @minlength@ attribute. Default is unset, i.e., no minimum limit. For numeric-based inputs, the minimum input value the field accepts, using the HTML5 @min@ attribute (can be a negative value). Default is @0@. To remove @min@ attribute from the numerical input element entirely, use @min=""@.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
@@ -237,6 +238,7 @@ h4. Attributes
 * @default="value"@<br />Default value when no input is provided.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the field is attached. Associated with the contained form by default.
 * @label="text"@<br />Text label displayed to the user. Default is @Email@.
+* @label_position="text"@<br />Position of the label in relation to the @<input>@ field. Available values: @before@ or @after@. Default is @before@.
 * @max="integer"@<br />Maximum input value length in characters, using the HTML5 @maxlength@ attribute. Default is @100@. To remove @maxlength@ attribute from the element entirely (not recommended), use @max=""@.
 * @min="integer"@<br />Minimum input value length in characters, using the HTML5 @minlength@ attribute. Default is unset, i.e., no minimum limit.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
@@ -266,6 +268,7 @@ h4. Attributes
 * @default="value"@<br />Default value when no input is provided.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the @<textarea>@ is attached. Associated with the contained form by default.
 * @label="text"@<br />Text label displayed to the user. Default is @Message@.
+* @label_position="text"@<br />Position of the label in relation to the @<textarea>@ field. Available values: @before@ or @after@. Default is @before@.
 * @max="integer"@<br />Maximum input value length in characters, using the HTML5 @maxlength@ attribute. Default is @10000@. To remove @maxlength@ attribute from the element entirely (not recommended), use @max=""@.
 * @min="integer"@<br />Minimum input value length in characters, using the HTML5 @minlength@ attribute. Default is unset, i.e., no minimum limit.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
@@ -334,6 +337,7 @@ h4. Attributes
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the list. Default: @zemSelect@. To remove @class@ attribute from the element entirely, use @class=""@.
 * @delimiter="character"@<br />Separator character between list items if using the @options@ attribute. Default is @,@ (comma). Ignored if this tag is used as a container.
 * @label="text"@<br />Text label displayed to the user. Default is @Option@.
+* @label_position="text"@<br />Position of the label in relation to the @<select>@ field. Available values: @before@ or @after@. Default is @before@.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the @<select>@ is attached. Associated with the contained form by default.
 * @name="value"@<br />Field name, as used in the HTML @<select>@ tag.
 * @options="comma-separated values"@<br /> List of items (previously @list@) to show in the select box. May also use the @<txp:zem_contact_option />@ tag inside this tag's container.
@@ -406,6 +410,7 @@ h4. Attributes
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the option. Default: @zemCheckbox@. To remove @class@ attribute from the element entirely, use @class=""@.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the checkbox is attached. Associated with the contained form by default.
 * @label="text"@<br />Text label displayed to the user. Default is @Checkbox@.
+* @label_position="text"@<br />Position of the label in relation to the @<input>@ field. Available values: @before@ or @after@. Default is @after@.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @required="boolean"@<br />Whether this checkbox must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
 
@@ -440,6 +445,7 @@ h4. Attributes
 * @group="text"@ *(required)*<br />Text used in the email to describe this group of radio buttons. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. Default is @Radio@.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the radio button is attached. Associated with the contained form by default.
 * @label="text"@ *(required)*<br />Text label displayed to the user as radio button option.
+* @label_position="text"@<br />Position of the label in relation to the @<input>@ field. Available values: @before@ or @after@. Default is @after@.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. If it hasn't been set at all, it will be derived from the @group@ attribute.
 * @required="boolean"@<br />Whether this radio set must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact>@ tag's @required@ attribute - if neither attribute is set then default is @1@. You may set it on only the first option, or set the same value on all of them in the group.
 
