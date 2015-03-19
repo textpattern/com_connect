@@ -326,20 +326,20 @@ h3. zem_contact_select
 
 bc. <txp:zem_contact_select />
 
-Container tag that creates a drop-down selection @<select>@ list.
+Container tag that creates a drop-down selection @<select>@ list, or scrolled @<select>@ list box (by utilising the @size@ attribute).
 
 h4. Attributes
 
-* @break="tag"@<br />Break tag between the label and @<input>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
+* @break="tag"@<br />Break tag between the label and @<select>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the list. Default: @zemSelect@. To remove @class@ attribute from the element entirely, use @class=""@.
 * @delimiter="character"@<br />Separator character between list items if using the @options@ attribute. Default is @,@ (comma). Ignored if this tag is used as a container.
 * @label="text"@<br />Text label displayed to the user. Default is @Option@.
-* @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the @<textarea>@ is attached. Associated with the contained form by default.
-* @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
+* @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the @<select>@ is attached. Associated with the contained form by default.
+* @name="value"@<br />Field name, as used in the HTML @<select>@ tag.
 * @options="comma-separated values"@<br /> List of items (previously @list@) to show in the select box. May also use the @<txp:zem_contact_option />@ tag inside this tag's container.
 * @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
 * @selected="value"@<br />List item that is selected by default.
-* @size="value"@<br/>The vertical size, in entries, of the @<input>@ field.
+* @size="value"@<br/>If the @<select>@ is to be presented as a scrolled list box, this attribute represents the number of rows in the list that should be visible at one time. Default is unset (i.e., a drop-down selection @<select>@ list).
 
 h4. Examples
 
@@ -397,11 +397,11 @@ h3. zem_contact_checkbox
 
 bc. <txp:zem_contact_checkbox />
 
-Creates a check box.
+Creates a checkbox.
 
 h4. Attributes
 
-* @break="tag"@<br />Break tag between the label and input field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
+* @break="tag"@<br />Break tag between the checkbox button and label. Default is one space. Use @break="br"@ to put the checkbox and label on separate lines.
 * @checked="boolean"@<br />Whether this box is checked when first displayed. Available values: @1@ (yes) or @0@ (no). Default is @0@.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the option. Default: @zemCheckbox@. To remove @class@ attribute from the element entirely, use @class=""@.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the checkbox is attached. Associated with the contained form by default.
@@ -434,11 +434,11 @@ Creates a radio button.
 
 h4. Attributes
 
-* @break="tag"@<br />Break tag between the label and field. Default is a space.
+* @break="tag"@<br />Break tag between the radio button and label. Default is one space. Use @break="br"@ to put the radio button and label on separate lines.
 * @checked="boolean"@<br />Whether this radio option is checked when the form is first displayed. Available values: @1@ (yes) or @0@ (no). Default is @0@.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the radio button. Default: @zemRadio@. To remove @class@ attribute from the element entirely, use @class=""@.
 * @group="text"@ *(required)*<br />Text used in the email to describe this group of radio buttons. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. Default is @Radio@.
-* @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the checkbox is attached. Associated with the contained form by default.
+* @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the radio button is attached. Associated with the contained form by default.
 * @label="text"@ *(required)*<br />Text label displayed to the user as radio button option.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. If it hasn't been set at all, it will be derived from the @group@ attribute.
 * @required="boolean"@<br />Whether this radio set must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact>@ tag's @required@ attribute - if neither attribute is set then default is @1@. You may set it on only the first option, or set the same value on all of them in the group.
