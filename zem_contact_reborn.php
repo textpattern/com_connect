@@ -2067,11 +2067,11 @@ h3(#zc_checkbox). zem_contact_checkbox
 
 bc. <txp:zem_contact_checkbox />
 
-Creates a check box.
+Creates a checkbox.
 
 h4. Attributes
 
-* @break="tag"@<br />Break tag between the label and input field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
+* @break="tag"@<br />Break tag between the checkbox button and label. Default is @ @ (a space). Use @break="br"@ to put the checkbox and label on seperate lines.
 * @checked="boolean"@<br />Whether this box is checked when first displayed. Available values: @1@ (yes) or @0@ (no). Default is @0@.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the option. Default: @zemCheckbox@. To remove @class@ attribute from the element entirely, use @class=""@.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the checkbox is attached. Associated with the contained form by default.
@@ -2104,11 +2104,11 @@ Creates a radio button.
 
 h4. Attributes
 
-* @break="tag"@<br />Break tag between the label and field. Default is a space.
+* @break="tag"@<br />Break tag between the radio button and label. Default is @ @ (a space). Use @break="br"@ to put the radio button and label on seperate lines.
 * @checked="boolean"@<br />Whether this radio option is checked when the form is first displayed. Available values: @1@ (yes) or @0@ (no). Default is @0@.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the radio button. Default: @zemRadio@. To remove @class@ attribute from the element entirely, use @class=""@.
 * @group="text"@ %(warning)required%<br />Text used in the email to describe this group of radio buttons. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. Default is @Radio@.
-* @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the checkbox is attached. Associated with the contained form by default.
+* @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the radio button is attached. Associated with the contained form by default.
 * @label="text"@ %(warning)required%<br />Text label displayed to the user as radio button option.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. If it hasn't been set at all, it will be derived from the @group@ attribute.
 * @required="boolean"@<br />Whether this radio set must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact>@ tag's @required@ attribute - if neither attribute is set then default is @1@. You may set it on only the first option, or set the same value on all of them in the group.
