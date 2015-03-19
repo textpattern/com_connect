@@ -611,10 +611,10 @@ function zem_contact_text($atts)
 		}
 	}
 
-	$classStr = implode(' ', $classes);
+	$classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
 
-	return '<label for="' . $name . '"' . ($classStr ? ' class="' . $classStr . ' ' . $name . '"' : '') . '>' . txpspecialchars($label) . '</label>' . $break .
-		'<input' . ($classStr ? ' class="' . $classStr . '"' : '') . ($attr ? ' ' . implode(' ', $attr) : '') . ' />';
+	return '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>' . $break .
+		'<input' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . ' />';
 }
 
 /**
@@ -780,10 +780,10 @@ function zem_contact_textarea($atts)
 		}
 	}
 
-	$classStr = implode(' ', $classes);
+	$classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
 
-	return '<label for="' . $name . '"' . ($classStr ? ' class="' . $classStr . ' ' . $name . '"' : '') . '>' . txpspecialchars($label) . '</label>' . $break .
-		'<textarea' . ($classStr ? ' class="' . $classStr . '"' : '') . ($attr ? ' ' . implode(' ', $attr) : '') . '>' . txpspecialchars($value) . '</textarea>';
+	return '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>' . $break .
+		'<textarea' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . '>' . txpspecialchars($value) . '</textarea>';
 }
 
 /**
@@ -884,10 +884,10 @@ function zem_contact_select($atts, $thing = null)
 		}
 	}
 
-	$classStr = implode(' ', $classes);
+	$classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
 
-	return '<label for="' . $name . '"' . ($classStr ? ' class="' . $classStr . ' ' . $name . '"' : '') . '>' . txpspecialchars($label) . '</label>' . $break .
-		n . '<select' . ($classStr ? ' class="' . $classStr . '"' : '') . ($attr ? ' ' . implode(' ', $attr) : '') . '>' .
+	return '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>' . $break .
+		n . '<select' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . '>' .
 			$out .
 		n . '</select>';
 }
@@ -1016,11 +1016,11 @@ function zem_contact_checkbox($atts)
 		}
 	}
 
-	$classStr = implode(' ', $classes);
+	$classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
 
-	return '<input type="checkbox"' . ($classStr ? ' class="' . $classStr . '"' : '') .
+	return '<input type="checkbox"' . $classStr .
 		($value ? ' checked="checked"' : '') . ($attr ? ' ' . implode(' ', $attr) : '') . ' />' . $break .
-		'<label for="' . $name . '"' . ($classStr ? ' class="' . $classStr . ' ' . $name . '"' : '') . '>' . txpspecialchars($label) . '</label>';
+		'<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
 }
 
 /**
@@ -1118,17 +1118,17 @@ function zem_contact_radio($atts)
 
 	$classes = array();
 
-	foreach (array($name, $class, ($required ? 'zemRequired' : ''), $isError) as $cls) {
+	foreach (array($class, ($required ? 'zemRequired' : ''), $isError) as $cls) {
 		if ($cls) {
 			$classes[] = $cls;
 		}
 	}
 
-	$classStr = implode(' ', $classes);
+	$classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
 
-	return '<input type="radio" class="' . $classStr . '"' . ($attr ? ' ' . implode(' ', $attr) : '') .
+	return '<input type="radio"'. $classStr . ($attr ? ' ' . implode(' ', $attr) : '') .
 		( $is_checked ? ' checked="checked" />' : ' />') . $break .
-		'<label for="' . $id . '"' . ($classStr ? ' class="' . $classStr . '"' : '') . '>' . txpspecialchars($label) . '</label>';
+		'<label for="' . $id . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
 }
 
 /**
@@ -1221,10 +1221,12 @@ function zem_contact_submit($atts, $thing = null)
 	// Global attributes
 	$attr += zem_contact_build_atts($zem_contact_globals, $atts);
 
+	$classStr = ($class ? ' class="' . $class . '"' : '');
+
 	if (strlen($thing)) {
-		return '<button type="submit"' . ($class ? ' class="' . $class . '"' : '') . ' name="zem_contact_submit" value="' . $label . '"' . ($attr ? ' ' . implode(' ', $attr) : '') . '>' . ($thing ? trim(parse($thing)) : $label) . '</button>';
+		return '<button type="submit"' . $classStr . ' name="zem_contact_submit" value="' . $label . '"' . ($attr ? ' ' . implode(' ', $attr) : '') . '>' . ($thing ? trim(parse($thing)) : $label) . '</button>';
 	} else {
-		return '<input type="submit"' . ($class ? ' class="' . $class . '"' : '') . ' name="zem_contact_submit" value="' . $label . '"' . ($attr ? ' ' . implode(' ', $attr) : '') . ' />';
+		return '<input type="submit"' . $classStr . ' name="zem_contact_submit" value="' . $label . '"' . ($attr ? ' ' . implode(' ', $attr) : '') . ' />';
 	}
 }
 
