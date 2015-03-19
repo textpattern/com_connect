@@ -8,7 +8,7 @@ h2. 4.5.0.0 - 2015-01-26
 * Make email work when the mailserver requires the SMTP envelope sender (in Textpattern preferences page).
 * Use "From: <email@example.com>" instead of "From: email@example.com" to avoid triggering Spamassassin rule.
 * Add @body_form@ attribute. Not to be confused with the ladies' sanitary product.
-* Add @class@ and @expire@ attributes.
+* Add @class@, @expire@ and @label_position@ attributes.
 * Add @<txp:zem_contact_option />@ tag.
 * Add a host of HTML5 attributes to tags.
 * Add @zemcontact.delivery@ callback for enhanced mailing through other plugins.

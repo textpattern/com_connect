@@ -402,8 +402,8 @@ END;
 
 	if ($show_input && !$send_article || gps('zem_contact_send_article')) {
 		return '<form method="post"' . ((!$show_error && $zem_contact_error) ? '' : ' id="zcr' . $zem_contact_form_id . '"') .
-            ($class ? ' class="' . $class . '"' : '') .
-            ' action="' . txpspecialchars(serverSet('REQUEST_URI')) . '#zcr' . $zem_contact_form_id . '">' .
+			($class ? ' class="' . $class . '"' : '') .
+			' action="' . txpspecialchars(serverSet('REQUEST_URI')) . '#zcr' . $zem_contact_form_id . '">' .
 			($label ? n . '<fieldset>' : n . '<div>') .
 			($label ? n . '<legend>' . txpspecialchars($label) . '</legend>' : '') .
 			$out .
@@ -439,23 +439,24 @@ function zem_contact_text($atts)
 	global $zem_contact_error, $zem_contact_submit, $zem_contact_flags;
 
 	extract(zem_contact_lAtts(array(
-		'autocomplete' => '',
-		'break'        => br,
-		'class'        => 'zemText',
-		'default'      => '',
-		'html_form'    => $zem_contact_flags['this_form'],
-		'isError'      => '',
-		'inputmode'    => '',
-		'label'        => gTxt('zem_contact_text'),
-		'max'          => null,
-		'min'          => null,
-		'name'         => '',
-		'pattern'      => '',
-		'placeholder'  => '',
-		'required'     => $zem_contact_flags['required'],
-		'size'         => '',
-		'step'         => '',
-		'type'         => 'text',
+		'autocomplete'   => '',
+		'break'          => br,
+		'class'          => 'zemText',
+		'default'        => '',
+		'html_form'      => $zem_contact_flags['this_form'],
+		'isError'        => '',
+		'inputmode'      => '',
+		'label'          => gTxt('zem_contact_text'),
+		'label_position' => 'before',
+		'max'            => null,
+		'min'            => null,
+		'name'           => '',
+		'pattern'        => '',
+		'placeholder'    => '',
+		'required'       => $zem_contact_flags['required'],
+		'size'           => '',
+		'step'           => '',
+		'type'           => 'text',
 	), $atts));
 
 	$doctype = get_pref('doctype', 'xhtml');
@@ -612,9 +613,11 @@ function zem_contact_text($atts)
 	}
 
 	$classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
+	$labelStr = '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
 
-	return '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>' . $break .
-		'<input' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . ' />';
+	return ($label_position === 'before' ? $labelStr . $break : '') .
+		'<input' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . ' />' .
+		($label_position === 'after' ? $break . $labelStr : '');
 }
 
 /**
@@ -629,23 +632,25 @@ function zem_contact_email($atts)
 
 	// ToDo: 'multiple' attribute?
 	$defaults = array(
-		'autocomplete' => '',
-		'break'        => br,
-		'class'        => 'zemEmail',
-		'default'      => '',
-		'html_form'    => $zem_contact_flags['this_form'],
-		'isError'      => '',
-		'label'        => gTxt('zem_contact_email'),
-		'max'          => 100,
-		'min'          => 0,
-		'name'         => '',
-		'pattern'      => '',
-		'placeholder'  => '',
-		'required'     => $zem_contact_flags['required'],
-		'send_article' => 0,
-		'size'         => '',
-		'type'         => 'email',
+		'autocomplete'   => '',
+		'break'          => br,
+		'class'          => 'zemEmail',
+		'default'        => '',
+		'html_form'      => $zem_contact_flags['this_form'],
+		'isError'        => '',
+		'label'          => gTxt('zem_contact_email'),
+		'label_position' => 'before',
+		'max'            => 100,
+		'min'            => 0,
+		'name'           => '',
+		'pattern'        => '',
+		'placeholder'    => '',
+		'required'       => $zem_contact_flags['required'],
+		'send_article'   => 0,
+		'size'           => '',
+		'type'           => 'email',
 	);
+
 	extract(zem_contact_lAtts($defaults, $atts));
 
 	if (empty($name)) {
@@ -676,6 +681,7 @@ function zem_contact_email($atts)
 	}
 
 	$passed_atts = array();
+
 	foreach ($defaults as $key => $value) {
 		$passed_atts[$key] = $$key;
 	}
@@ -697,21 +703,22 @@ function zem_contact_textarea($atts)
 	global $zem_contact_error, $zem_contact_submit, $zem_contact_flags;
 
 	extract(zem_contact_lAtts(array(
-		'autocomplete' => '',
-		'break'        => br,
-		'class'        => 'zemTextarea',
-		'cols'         => 58,
-		'default'      => '',
-		'html_form'    => $zem_contact_flags['this_form'],
-		'isError'      => '',
-		'label'        => gTxt('zem_contact_message'),
-		'max'          => 10000,
-		'min'          => 0,
-		'name'         => '',
-		'placeholder'  => '',
-		'required'     => $zem_contact_flags['required'],
-		'rows'         => 8,
-		'wrap'         => '',
+		'autocomplete'   => '',
+		'break'          => br,
+		'class'          => 'zemTextarea',
+		'cols'           => 58,
+		'default'        => '',
+		'html_form'      => $zem_contact_flags['this_form'],
+		'isError'        => '',
+		'label'          => gTxt('zem_contact_message'),
+		'label_position' => 'before',
+		'max'            => 10000,
+		'min'            => 0,
+		'name'           => '',
+		'placeholder'    => '',
+		'required'       => $zem_contact_flags['required'],
+		'rows'           => 8,
+		'wrap'           => '',
 	), $atts));
 
 	$min = intval($min);
@@ -781,9 +788,11 @@ function zem_contact_textarea($atts)
 	}
 
 	$classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
+	$labelStr = '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
 
-	return '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>' . $break .
-		'<textarea' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . '>' . txpspecialchars($value) . '</textarea>';
+	return ($label_position === 'before' ? $labelStr . $break : '') .
+		'<textarea' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . '>' . txpspecialchars($value) . '</textarea>' .
+		($label_position === 'after' ? $break . $labelStr : '');
 }
 
 /**
@@ -798,18 +807,19 @@ function zem_contact_select($atts, $thing = null)
 
 	// ToDo: multiple attribute?
 	extract(zem_contact_lAtts(array(
-		'break'     => br,
-		'class'     => 'zemSelect',
-		'delimiter' => ',',
-		'html_form' => $zem_contact_flags['this_form'],
-		'isError'   => '',
-		'label'     => gTxt('zem_contact_option'),
-		'list'      => '', // ToDo: remove from here in favour of the global list attribute
-		'options'   => gTxt('zem_contact_general_inquiry'),
-		'name'      => '',
-		'required'  => $zem_contact_flags['required'],
-		'selected'  => '',
-		'size'      => '',
+		'break'          => br,
+		'class'          => 'zemSelect',
+		'delimiter'      => ',',
+		'html_form'      => $zem_contact_flags['this_form'],
+		'isError'        => '',
+		'label'          => gTxt('zem_contact_option'),
+		'label_position' => 'before',
+		'list'           => '', // ToDo: remove from here in favour of the global list attribute
+		'options'        => gTxt('zem_contact_general_inquiry'),
+		'name'           => '',
+		'required'       => $zem_contact_flags['required'],
+		'selected'       => '',
+		'size'           => '',
 	), $atts));
 
 	// Detect old-school use of the list attribute. Note that deprecated_function_with
@@ -888,11 +898,13 @@ function zem_contact_select($atts, $thing = null)
 	}
 
 	$classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
+	$labelStr = '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
 
-	return '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>' . $break .
+	return ($label_position === 'before' ? $labelStr . $break : '') .
 		n . '<select' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . '>' .
 			$out .
-		n . '</select>';
+		n . '</select>' .
+		($label_position === 'after' ? $break . $labelStr : '');
 }
 
 /**
@@ -964,14 +976,15 @@ function zem_contact_checkbox($atts)
 	global $zem_contact_error, $zem_contact_submit, $zem_contact_flags;
 
 	extract(zem_contact_lAtts(array(
-		'break'     => ' ',
-		'checked'   => 0,
-		'class'     => 'zemCheckbox',
-		'html_form' => $zem_contact_flags['this_form'],
-		'isError'   => '',
-		'label'     => gTxt('zem_contact_checkbox'),
-		'name'      => '',
-		'required'  => $zem_contact_flags['required'],
+		'break'          => ' ',
+		'checked'        => 0,
+		'class'          => 'zemCheckbox',
+		'html_form'      => $zem_contact_flags['this_form'],
+		'isError'        => '',
+		'label'          => gTxt('zem_contact_checkbox'),
+		'label_position' => 'after',
+		'name'           => '',
+		'required'       => $zem_contact_flags['required'],
 	), $atts));
 
 	if (empty($name)) {
@@ -1020,10 +1033,12 @@ function zem_contact_checkbox($atts)
 	}
 
 	$classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
+	$labelStr = '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
 
-	return '<input type="checkbox"' . $classStr .
-		($value ? ' checked="checked"' : '') . ($attr ? ' ' . implode(' ', $attr) : '') . ' />' . $break .
-		'<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
+	return ($label_position === 'before' ? $labelStr . $break : '') .
+		'<input type="checkbox"' . $classStr .
+			($value ? ' checked="checked"' : '') . ($attr ? ' ' . implode(' ', $attr) : '') . ' />' .
+		($label_position === 'after' ? $break . $labelStr : '');
 }
 
 /**
@@ -1037,15 +1052,16 @@ function zem_contact_radio($atts)
 	global $zem_contact_error, $zem_contact_submit, $zem_contact_values, $zem_contact_flags, $zem_contact_group;
 
 	extract(zem_contact_lAtts(array(
-		'break'     => ' ',
-		'checked'   => 0,
-		'class'     => 'zemRadio',
-		'group'     => '',
-		'html_form' => $zem_contact_flags['this_form'],
-		'isError'   => '',
-		'label'     => gTxt('zem_contact_option'),
-		'name'      => '',
-		'required'  => null,
+		'break'          => ' ',
+		'checked'        => 0,
+		'class'          => 'zemRadio',
+		'group'          => '',
+		'html_form'      => $zem_contact_flags['this_form'],
+		'isError'        => '',
+		'label'          => gTxt('zem_contact_option'),
+		'label_position' => 'after',
+		'name'           => '',
+		'required'       => null,
 	), $atts));
 
 	static $cur_name = '';
@@ -1128,10 +1144,12 @@ function zem_contact_radio($atts)
 	}
 
 	$classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
+	$labelStr = '<label for="' . $id . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
 
-	return '<input type="radio"'. $classStr . ($attr ? ' ' . implode(' ', $attr) : '') .
-		( $is_checked ? ' checked="checked" />' : ' />') . $break .
-		'<label for="' . $id . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
+	return ($label_position === 'before' ? $labelStr . $break : '') .
+		'<input type="radio"'. $classStr . ($attr ? ' ' . implode(' ', $attr) : '') .
+			( $is_checked ? ' checked="checked" />' : ' />') .
+		($label_position === 'after' ? $break . $labelStr : '');
 }
 
 /**
@@ -1856,6 +1874,7 @@ h4. Attributes
 ** @email@: Email input. Use @<txp:zem_contact_email />@ if possible instead.
 ** @url@: URL input. Use @type="url"@ if possible instead.
 * @label="text"@<br />Text label displayed to the user. Default is @Text@.
+* @label_position="text"@<br />Position of the label in relation to the @<input>@ field. Available values: @before@ or @after@. Default is @before@.
 * @max=value"@<br />For character-based inputs, the maximum input value length in characters, using the HTML5 @maxlength@ attribute. To remove @maxlength@ attribute from the element entirely (not recommended), use @max=""@. For numeric-based inputs, the maximum input value the field accepts, using the HTML5 @max@ attribute (can be a negative value). Default is @100@. To remove @max@ attribute from the numerical input element entirely, use @max=""@.
 * @min="value"@<br />For character-based inputs, the minimum input value length in characters, using the HTML5 @minlength@ attribute. Default is unset, i.e., no minimum limit. For numeric-based inputs, the minimum input value the field accepts, using the HTML5 @min@ attribute (can be a negative value). Default is @0@. To remove @min@ attribute from the numerical input element entirely, use @min=""@.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
@@ -1912,6 +1931,7 @@ h4. Attributes
 * @default="value"@<br />Default value when no input is provided.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the field is attached. Associated with the contained form by default.
 * @label="text"@<br />Text label displayed to the user. Default is @Email@.
+* @label_position="text"@<br />Position of the label in relation to the @<input>@ field. Available values: @before@ or @after@. Default is @before@.
 * @max="integer"@<br />Maximum input value length in characters, using the HTML5 @maxlength@ attribute. Default is @100@. To remove @maxlength@ attribute from the element entirely (not recommended), use @max=""@.
 * @min="integer"@<br />Minimum input value length in characters, using the HTML5 @minlength@ attribute. Default is unset, i.e., no minimum limit.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
@@ -1941,6 +1961,7 @@ h4. Attributes
 * @default="value"@<br />Default value when no input is provided.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the @<textarea>@ is attached. Associated with the contained form by default.
 * @label="text"@<br />Text label displayed to the user. Default is @Message@.
+* @label_position="text"@<br />Position of the label in relation to the @<textarea>@ field. Available values: @before@ or @after@. Default is @before@.
 * @max="integer"@<br />Maximum input value length in characters, using the HTML5 @maxlength@ attribute. Default is @10000@. To remove @maxlength@ attribute from the element entirely (not recommended), use @max=""@.
 * @min="integer"@<br />Minimum input value length in characters, using the HTML5 @minlength@ attribute. Default is unset, i.e., no minimum limit.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
@@ -2009,6 +2030,7 @@ h4. Attributes
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the list. Default: @zemSelect@. To remove @class@ attribute from the element entirely, use @class=""@.
 * @delimiter="character"@<br />Separator character between list items if using the @options@ attribute. Default is @,@ (comma). Ignored if this tag is used as a container.
 * @label="text"@<br />Text label displayed to the user. Default is @Option@.
+* @label_position="text"@<br />Position of the label in relation to the @<select>@ field. Available values: @before@ or @after@. Default is @before@.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the @<select>@ is attached. Associated with the contained form by default.
 * @name="value"@<br />Field name, as used in the HTML @<select>@ tag.
 * @options="comma-separated values"@<br /> List of items (previously @list@) to show in the select box. May also use the @<txp:zem_contact_option />@ tag inside this tag's container.
@@ -2081,6 +2103,7 @@ h4. Attributes
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the option. Default: @zemCheckbox@. To remove @class@ attribute from the element entirely, use @class=""@.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the checkbox is attached. Associated with the contained form by default.
 * @label="text"@<br />Text label displayed to the user. Default is @Checkbox@.
+* @label_position="text"@<br />Position of the label in relation to the @<input>@ field. Available values: @before@ or @after@. Default is @after@.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @required="boolean"@<br />Whether this checkbox must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
 
