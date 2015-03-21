@@ -1768,20 +1768,20 @@ All other tags provided by this plugin can only be used inside a @<txp:zem_conta
 
 In addition to the tags detailed in the following sections, every tag accepts a core set of common attributes. These are:
 
-* @accesskey="character"@: shortcut key to set focus on the field.
-* @autofocus="boolean"@: to automatically focus the cursor in this field on page load. Only one field may have this property.
-* @dir="value"@: text direction (@ltr@, @rtl@ or @auto@).
-* @disabled="boolean"@: whether the input control accepts user input. If set, the element does not get submitted with the form, nor is it subject to any @checkValidity()@ JavaScript calls.
-* @hidden="boolean"@: the visibility of the input control.
-* @id="id"@: the HTML identifier for the control.
-* @lang="value"@: the ISO 639 language short code (e.g. @en-gb@, @de-de@) that govern the field.
-* @list="id"@: used in conjunction with the @<datalist>@ tag to specify a set of options. The id is the reference to the datalist to use.
-* @readonly="boolean"@: control does not accept user input, but will be processed on form submission and can be validated.
-* @spellcheck="value"@: whether the field is subject to spell checking (@true@ = yes, @default@ = browser decides, or @false@ = no).
-* @style="style rules"@: inline CSS @style@ rules to apply to the input control.
-* @tabindex="number"@: the order in which the cursor jumps between elements when using the tab key.
-* @title="value"@: usually used for hover tooltip describing the input control's use in your application.
-* @translate="boolean"@: whether to subject the attribute content to language translation.
+* @accesskey="character"@<br />Shortcut key to set focus on the field.
+* @autofocus="boolean"@<br />To automatically focus the cursor in this field on page load. Only one field may have this property.
+* @dir="value"@<br />Text direction (@ltr@, @rtl@ or @auto@).
+* @disabled="boolean"@<br />Whether the input control accepts user input. If set, the element does not get submitted with the form, nor is it subject to any @checkValidity()@ JavaScript calls.
+* @hidden="boolean"@<br />The visibility of the input control.
+* @id="id"@<br />The HTML identifier for the control.
+* @lang="value"@<br />The ISO 639 language short code (e.g. @en-gb@, @de-de@) that govern the field.
+* @list="id"@<br />Used in conjunction with the @<datalist>@ tag to specify a set of options. The id is the reference to the datalist to use.
+* @readonly="boolean"@<br />Control does not accept user input, but will be processed on form submission and can be validated.
+* @spellcheck="value"@<br />Whether the field is subject to spell checking (@true@ = yes, @default@ = browser decides, or @false@ = no).
+* @style="style rules"@<br />Inline CSS @style@ rules to apply to the input control.
+* @tabindex="number"@<br />The order in which the cursor jumps between elements when using the tab key.
+* @title="value"@<br />Usually used for hover tooltip describing the input control's use in your application.
+* @translate="boolean"@<br />Whether to subject the attribute content to language translation.
 
 h3(#zc). zem_contact
 
@@ -1792,7 +1792,7 @@ May be used as a single (self-closing) or container tag. Place this where you wa
 h4. Attributes
 
 * @body_form="form name"@<br />Use specified form for the message body text.
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @zemContactForm@. To remove @class@ attribute from the element entirely, use @class=""@.
+* @class="space-separated values"@<br />Set the CSS @class@ name of the tag. Default: @zemContactForm@. To remove @class@ attribute from the element entirely, use @class=""@.
 * @copysender="boolean"@<br />Whether to send a copy of the email to the sender's address. Available values: @1@ (yes) or @0@ (no). Default is @0@.
 * @expire="number"@<br />Number of seconds after which the form will expire, thus requiring a page refresh before sending. Default is @600@.
 * @form="form name"@<br />Use specified form, containing the layout of the contact form fields.
@@ -1800,10 +1800,10 @@ h4. Attributes
 * @from_form="form name"@<br />Use specified form (overrides @from@ attribute).
 * @label="text"@<br />Label for the contact form. If set to an empty string, display of the fieldset and legend tags will be suppressed. Default is @Contact@.
 * @redirect="URL"@<br />Redirect to specified URL (overrides @thanks@ and @thanks_form@ attributes). URL must be relative to the Textpattern site URL. Example: @redirect="monkey"@ would redirect to @http://example.com/monkey@.
-* @required="boolean"@<br /> Whether to require all tags in this contact form to be completed before the form can be submitted. Can be overridden on a field-by-field basis by using the @required@ attribute in the relevant tag. Available values: @1@ (yes) or @0@ (no). Default is @1@.
+* @required="boolean"@<br />Whether to require all tags in this contact form to be completed before the form can be submitted. Can be overridden on a field-by-field basis by using the @required@ attribute in the relevant tag. Available values: @1@ (yes) or @0@ (no). Default is @1@.
 * @send_article="boolean"@<br />Whether to use this form to send an article. Available values: @1@ (yes) or @0@ (no). Default is @0@.
-* @show_error="boolean"@<br /> Whether to display error and status messages. Available values: @1@ (yes) or @0@ (no). Default is @1@.
-* @show_input="boolean"@<br /> Whether to display the form @<input>@ fields. Available values: @1@ (yes) or @0@ (no). Default is @1@.
+* @show_error="boolean"@<br />Whether to display error and status messages. Available values: @1@ (yes) or @0@ (no). Default is @1@.
+* @show_input="boolean"@<br />Whether to display the form @<input>@ fields. Available values: @1@ (yes) or @0@ (no). Default is @1@.
 * @subject="subject text"@<br />Subject used when sending an email. Default is the site name.
 * @subject_form="form name"@<br />Use specified form (overrides @subject@ attribute).
 * @thanks="text"@<br />Message shown after successfully submitting a message. Default is @Thank you, your message has been sent@.
