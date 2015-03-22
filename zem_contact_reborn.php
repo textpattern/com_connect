@@ -1673,21 +1673,21 @@ h2. Contents
 * "Upgrading and uninstallation":#install
 * "Usage":#usage
 * "Tags":#tags
-** "<txp:zem_contact /> tag":#zc
-** "<txp:zem_contact_text /> tag":#zc_text
-** "<txp:zem_contact_email /> tag":#zc_email
-** "<txp:zem_contact_textarea /> tag":#zc_textarea
-** "<txp:zem_contact_submit /> tag":#zc_submit
-** "<txp:zem_contact_select /> tag":#zc_select
-** "<txp:zem_contact_option /> tag":#zc_option
-** "<txp:zem_contact_checkbox /> tag":#zc_checkbox
-** "<txp:zem_contact_radio /> tag":#zc_radio
-** "<txp:zem_contact_secret /> tag":#zc_secret
-** "<txp:zem_contact_serverinfo /> tag":#zc_serverinfo
-** "<txp:zem_contact_send_article /> tag":#zc_send_article
-** "<txp:zem_contact_label /> tag":#zc_label
-** "<txp:zem_contact_value /> tag":#zc_value
-** "<txp:zem_contact_if /> tag":#zc_if
+** "zem_contact tag":#zc
+** "zem_contact_text tag":#zc_text
+** "zem_contact_email tag":#zc_email
+** "zem_contact_textarea tag":#zc_textarea
+** "zem_contact_submit tag":#zc_submit
+** "zem_contact_select tag":#zc_select
+** "zem_contact_option tag":#zc_option
+** "zem_contact_checkbox tag":#zc_checkbox
+** "zem_contact_radio tag":#zc_radio
+** "zem_contact_secret tag":#zc_secret
+** "zem_contact_serverinfo tag":#zc_serverinfo
+** "zem_contact_send_article tag":#zc_send_article
+** "zem_contact_label tag":#zc_label
+** "zem_contact_value tag":#zc_value
+** "zem_contact_if tag":#zc_if
 * "Advanced examples":#advanced
 ** "Separate input and error forms":#advanced1
 ** "User selectable subject field":#advanced2
