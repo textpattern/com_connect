@@ -1673,21 +1673,21 @@ h2. Contents
 * "Upgrading and uninstallation":#install
 * "Usage":#usage
 * "Tags":#tags
-** <a href="#zc">@<txp:zem_contact />@</a>
-** <a href="#zc_text">@<txp:zem_contact_text />@</a>
-** <a href="#zc_email">@<txp:zem_contact_email />@</a>
-** <a href="#zc_textarea">@<txp:zem_contact_textarea />@</a>
-** <a href="#zc_submit">@<txp:zem_contact_submit />@</a>
-** <a href="#zc_select">@<txp:zem_contact_select />@</a>
-** <a href="#zc_option">@<txp:zem_contact_option />@</a>
-** <a href="#zc_checkbox">@<txp:zem_contact_checkbox />@</a>
-** <a href="#zc_radio">@<txp:zem_contact_radio />@</a>
-** <a href="#zc_secret">@<txp:zem_contact_secret />@</a>
-** <a href="#zc_serverinfo">@<txp:zem_contact_serverinfo />@</a>
-** <a href="#zc_send_article">@<txp:zem_contact_send_article />@</a>
-** <a href="#zc_label">@<txp:zem_contact_label />@</a>
-** <a href="#zc_value">@<txp:zem_contact_value />@</a>
-** <a href="#zc_if">@<txp:zem_contact_if />@</a>
+** "<txp:zem_contact /> tag":#zc
+** "<txp:zem_contact_text /> tag":#zc_text
+** "<txp:zem_contact_email /> tag":#zc_email
+** "<txp:zem_contact_textarea /> tag":#zc_textarea
+** "<txp:zem_contact_submit /> tag":#zc_submit
+** "<txp:zem_contact_select /> tag":#zc_select
+** "<txp:zem_contact_option /> tag":#zc_option
+** "<txp:zem_contact_checkbox /> tag":#zc_checkbox
+** "<txp:zem_contact_radio /> tag":#zc_radio
+** "<txp:zem_contact_secret /> tag":#zc_secret
+** "<txp:zem_contact_serverinfo /> tag":#zc_serverinfo
+** "<txp:zem_contact_send_article /> tag":#zc_send_article
+** "<txp:zem_contact_label /> tag":#zc_label
+** "<txp:zem_contact_value /> tag":#zc_value
+** "<txp:zem_contact_if /> tag":#zc_if
 * "Advanced examples":#advanced
 ** "Separate input and error forms":#advanced1
 ** "User selectable subject field":#advanced2
@@ -1783,7 +1783,7 @@ In addition to the tags detailed in the following sections, every tag accepts a 
 * @title="value"@<br />Usually used for hover tooltip describing the input control's use in your application.
 * @translate="boolean"@<br />Whether to subject the attribute content to language translation.
 
-h3(#zc). zem_contact
+h3(#zc). zem_contact tag
 
 bc. <txp:zem_contact />
 
@@ -1847,7 +1847,7 @@ Email received.
 
 ============
 
-h3(#zc_text). zem_contact_text
+h3(#zc_text). zem_contact_text tag
 
 bc. <txp:zem_contact_text />
 
@@ -1915,7 +1915,7 @@ Create a telephone field with a "validation pattern for UK telephone number":htt
 
 bc. <txp:zem_contact_text type="tel" label="Telephone" pattern="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" required="1" />
 
-h3(#zc_email). zem_contact_email
+h3(#zc_email). zem_contact_email tag
 
 bc. <txp:zem_contact_email />
 
@@ -1946,7 +1946,7 @@ h5. Example 1
 
 bc. <txp:zem_contact_email label="Your email address" />
 
-h3(#zc_textarea). zem_contact_textarea
+h3(#zc_textarea). zem_contact_textarea tag
 
 bc. <txp:zem_contact_textarea />
 
@@ -1978,7 +1978,7 @@ Create a text area that is 40 characters wide, 10 lines high, with a customised 
 
 bc. <txp:zem_contact_textarea cols="40" rows="10" label="Your question" />
 
-h3(#zc_submit). zem_contact_submit
+h3(#zc_submit). zem_contact_submit tag
 
 bc. <txp:zem_contact_submit />
 
@@ -2018,7 +2018,7 @@ bc. <txp:zem_contact_submit>
     <img src="path/to/img.png" alt="submit">
 </txp:zem_contact_submit>
 
-h3(#zc_select). zem_contact_select
+h3(#zc_select). zem_contact_select tag
 
 bc. <txp:zem_contact_select />
 
@@ -2057,7 +2057,7 @@ bc. <txp:zem_contact_select label="Department" selected="Sales">
 
 Drop-down selection list containing three options plus a blank option (also see @zem_contact_option@ tag below), with 'Sales' selected by default.
 
-h3(#zc_option). zem_contact_option
+h3(#zc_option). zem_contact_option tag
 
 bc. <txp:zem_contact_option />
 
@@ -2090,7 +2090,7 @@ bc. <txp:zem_contact_select label="Department">
 
 Drop-down selection list containing three options as container tags with 'Sales' selected by default.
 
-h3(#zc_checkbox). zem_contact_checkbox
+h3(#zc_checkbox). zem_contact_checkbox tag
 
 bc. <txp:zem_contact_checkbox />
 
@@ -2124,7 +2124,7 @@ bc. With which operating systems are you familiar?<br />
 <txp:zem_contact_checkbox label="Unix/Linux/BSD" required="0" /><br />
 <txp:zem_contact_checkbox label="MacOS" required="0" />
 
-h3(#zc_radio). zem_contact_radio
+h3(#zc_radio). zem_contact_radio tag
 
 bc. <txp:zem_contact_radio />
 
@@ -2154,7 +2154,7 @@ bc. <txp:zem_contact_radio label="Medium" group="I like my steak" />
 <txp:zem_contact_radio label="Beer" />
 <txp:zem_contact_radio label="Water" />
 
-h3(#zc_secret). zem_contact_secret
+h3(#zc_secret). zem_contact_secret tag
 
 bc. <txp:zem_contact_secret />
 
@@ -2182,7 +2182,7 @@ bc. <txp:zem_contact_secret label="Dear user">
     Please provide a useful example for this tag!
 </txp:zem_contact_secret>
 
-h3(#zc_serverinfo). zem_contact_serverinfo
+h3(#zc_serverinfo). zem_contact_serverinfo tag
 
 bc. <txp:zem_contact_serverinfo />
 
@@ -2207,7 +2207,7 @@ Add the name of the visitor's browser to the email:
 
 bc. <txp:zem_contact_serverinfo name="HTTP_USER_AGENT" label="Browser" />
 
-h3(#zc_send_article). zem_contact_send_article
+h3(#zc_send_article). zem_contact_send_article tag
 
 bc. <txp:zem_contact_send_article />
 
@@ -2225,7 +2225,7 @@ On an article form:
 
 bc. <txp:zem_contact_send_article linktext="Send this article" />
 
-h3(#zc_label). zem_contact_label
+h3(#zc_label). zem_contact_label tag
 
 bc. <txp:zem_contact_label />
 
@@ -2235,7 +2235,7 @@ h4. Attributes
 
 * @name="text"@<br />The name of the field for which you wish to retrieve the label.
 
-h3(#zc_value). zem_contact_value
+h3(#zc_value). zem_contact_value tag
 
 bc. <txp:zem_contact_value />
 
@@ -2246,7 +2246,7 @@ h4. Attributes
 * @label="text"@<br />The label of the field for which you wish to retrieve the value.
 * @name="text"@<br />The name of the field for which you wish to retrieve the value.
 
-h3(#zc_if). zem_contact_if
+h3(#zc_if). zem_contact_if tag
 
 bc. <txp:zem_contact_if />
 
