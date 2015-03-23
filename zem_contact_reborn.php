@@ -10,6 +10,7 @@
 // file name. Plugin names should start with a three letter prefix which is
 // unique and reserved for each plugin author ("abc" is just an example).
 // Uncomment and edit this line to override:
+
 $plugin['name'] = 'zem_contact_reborn';
 
 // Allow raw HTML help, as opposed to Textile.
@@ -28,6 +29,7 @@ $plugin['description'] = 'Form mailer for Textpattern';
 // (1...4) to prepare the environment for everything else that follows.
 // Values 6...9 should be considered for plugins which would work late.
 // This order is user-overrideable.
+
 $plugin['order'] = '5';
 
 // Plugin 'type' defines where the plugin is loaded
@@ -37,13 +39,20 @@ $plugin['order'] = '5';
 // 3 = admin               : only on the admin side (no AJAX)
 // 4 = admin+ajax          : only on the admin side (AJAX supported)
 // 5 = public+admin+ajax   : on both the public and admin side (AJAX supported)
+
 $plugin['type'] = '0';
 
 // Plugin "flags" signal the presence of optional capabilities to the core plugin loader.
 // Use an appropriately OR-ed combination of these flags.
 // The four high-order bits 0xf000 are available for this plugin's private use
-if (!defined('PLUGIN_HAS_PREFS')) define('PLUGIN_HAS_PREFS', 0x0001); // This plugin wants to receive "plugin_prefs.{$plugin['name']}" events
-if (!defined('PLUGIN_LIFECYCLE_NOTIFY')) define('PLUGIN_LIFECYCLE_NOTIFY', 0x0002); // This plugin wants to receive "plugin_lifecycle.{$plugin['name']}" events
+
+if (!defined('PLUGIN_HAS_PREFS')) {
+    define('PLUGIN_HAS_PREFS', 0x0001);
+} // This plugin wants to receive "plugin_prefs.{$plugin['name']}" events
+
+if (!defined('PLUGIN_LIFECYCLE_NOTIFY')) {
+    define('PLUGIN_LIFECYCLE_NOTIFY', 0x0002);
+} // This plugin wants to receive "plugin_lifecycle.{$plugin['name']}" events
 
 $plugin['flags'] = '0';
 
@@ -164,7 +173,7 @@ function zem_contact($atts, $thing = null)
         'show_error'   => 1,
         'show_input'   => 1,
         'send_article' => 0,
-        'subject'      => gTxt('zem_contact_email_subject', array('{site}' => html_entity_decode($sitename,ENT_QUOTES))),
+        'subject'      => gTxt('zem_contact_email_subject', array('{site}' => html_entity_decode($sitename, ENT_QUOTES))),
         'subject_form' => '',
         'to'           => '',
         'to_form'      => '',
@@ -173,14 +182,14 @@ function zem_contact($atts, $thing = null)
     ), $atts));
 
     unset($atts['show_error'], $atts['show_input']);
-    $zem_contact_form_id = md5(serialize($atts) . preg_replace('/[\t\s\r\n]/', '', $thing));
+    $zem_contact_form_id = md5(serialize($atts).preg_replace('/[\t\s\r\n]/', '', $thing));
     $zem_contact_submit = (ps('zem_contact_form_id') == $zem_contact_form_id);
     $override_email_charset = (get_pref('override_emailcharset') && is_callable('utf8_decode'));
 
     // The $zem_contact_flags['this_form'] global is set if an id is supplied for the <form>.
     // This value then becomes the default value for all html_form (a.k.a. form=)
     // attributes for any input tags in this tag's container, providing HTML5 is in use.
-    $zem_contact_flags['this_form'] = 'zcr' . $zem_contact_form_id;
+    $zem_contact_flags['this_form'] = 'zcr'.$zem_contact_form_id;
 
     // Global toggle for required attribute.
     $zem_contact_flags['required'] = $required;
@@ -191,9 +200,10 @@ function zem_contact($atts, $thing = null)
     $expire = abs(assert_int($expire));
 
     static $headers_sent = false;
+
     if (!$headers_sent) {
-        header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $now - (3600 * 24 * 7)) . ' GMT');
-        header('Expires: ' . gmdate('D, d M Y H:i:s', $now + $expire) . ' GMT');
+        header('Last-Modified: '.gmdate('D, d M Y H:i:s', $now - (3600 * 24 * 7)).' GMT');
+        header('Expires: '.gmdate('D, d M Y H:i:s', $now + $expire).' GMT');
         header('Cache-Control: no-cache, must-revalidate');
         $headers_sent = true;
     }
@@ -204,15 +214,16 @@ function zem_contact($atts, $thing = null)
     if ($zem_contact_submit) {
         // Could use "interval $expire second" but multiple zem_contact forms could delete data
         // that might be in use by other forms.
-        // ToDo: use max(600, $expire)? Not perfect, but ensures a safe minimum deletion rate.
+        // TODO: use max(600, $expire)? Not perfect, but ensures a safe minimum deletion rate.
         safe_delete('txp_discuss_nonce', "issue_time < date_sub('$now_date', interval 10 minute)");
+
         if ($rs = safe_row('used', 'txp_discuss_nonce', "nonce = '$nonce'")) {
             if ($rs['used']) {
                 unset($zem_contact_error);
                 $zem_contact_error[] = gTxt('zem_contact_form_used');
                 $renonce = true;
                 $_POST = array();
-                $_POST['zem_contact_submit'] = TRUE;
+                $_POST['zem_contact_submit'] = true;
                 $_POST['zem_contact_form_id'] = $zem_contact_form_id;
                 $_POST['zem_contact_nonce'] = $nonce;
             }
@@ -226,7 +237,7 @@ function zem_contact($atts, $thing = null)
         $zem_contact_nonce = $nonce;
     } elseif (!$show_error || $show_input) {
         $zem_contact_nonce = md5(uniqid(rand(), true));
-        safe_insert('txp_discuss_nonce', "issue_time = '" . $now_date . "', nonce = '$zem_contact_nonce'");
+        safe_insert('txp_discuss_nonce', "issue_time = '".$now_date."', nonce = '$zem_contact_nonce'");
     }
 
     $form = ($form) ? fetch_form($form) : $thing;
@@ -259,7 +270,7 @@ function zem_contact($atts, $thing = null)
     $out = '';
 
     if (!$zem_contact_submit) {
-        // Don't show errors or send mail
+        // Don't show errors or send mail.
     } elseif (!empty($zem_contact_error)) {
         if ($show_error || !$show_input) {
             $out .= n.doWrap(array_unique($zem_contact_error), 'ul', 'li', 'zemError').n;
@@ -271,7 +282,7 @@ function zem_contact($atts, $thing = null)
     } elseif ($show_input && is_array($zem_contact_form)) {
         // Load and check spam plugins.
         callback_event('zemcontact.submit');
-        $evaluation =& get_zemcontact_evaluator();
+        $evaluation = & get_zemcontact_evaluator();
         $clean = $evaluation->get_zemcontact_status();
 
         if ($clean != 0) {
@@ -291,8 +302,11 @@ function zem_contact($atts, $thing = null)
         $fields = array();
 
         foreach ($zem_contact_labels as $name => $label) {
-            if (trim($zem_contact_values[$name]) === false) continue;
-            $msg[] = $label . ': ' . $zem_contact_values[$name];
+            if (trim($zem_contact_values[$name]) === false) {
+                continue;
+            }
+
+            $msg[] = $label.': '.$zem_contact_values[$name];
             $fields[$name] = $zem_contact_values[$name];
         }
 
@@ -310,7 +324,7 @@ function zem_contact($atts, $thing = null)
                 $r_ar = array('‘', '’', '“', '”', '’', '?', '?', '…', '–', '—', '×', '™', '®', '©', '<', '>', '"', '&', '&', ' ', "\n<p");
             }
 
-            $msg[] = trim(strip_tags(str_replace($s_ar,$r_ar,(trim(strip_tags($thisarticle['excerpt'])) ? $thisarticle['excerpt'] : $thisarticle['body']))));
+            $msg[] = trim(strip_tags(str_replace($s_ar, $r_ar, (trim(strip_tags($thisarticle['excerpt'])) ? $thisarticle['excerpt'] : $thisarticle['body']))));
 
             if (empty($zem_contact_recipient)) {
                 return gTxt('zem_contact_field_missing', array('{field}' => gTxt('zem_contact_recipient')));
@@ -341,7 +355,7 @@ function zem_contact($atts, $thing = null)
             $charset = 'UTF-8';
         }
 
-        // ToDo: function deprecated in 4.6.0
+        // TODO: function deprecated in 4.6.0.
         $subject = encode_mailheader($subject, 'text');
 
         $headers = array(
@@ -364,7 +378,7 @@ function zem_contact($atts, $thing = null)
 
             if ($redirect) {
                 while (@ob_end_clean());
-                $uri = hu.ltrim($redirect,'/');
+                $uri = hu.ltrim($redirect, '/');
 
                 if (empty($_SERVER['FCGI_ROLE']) && empty($_ENV['FCGI_ROLE'])) {
                     txp_status_header('303 See Other');
@@ -391,8 +405,8 @@ END;
 
                 exit;
             } else {
-                return '<div class="zemThanks" id="zcr'.$zem_contact_form_id.'">' .
-                    ($thanks_form ? parse_form($thanks_form) : $thanks) .
+                return '<div class="zemThanks" id="zcr'.$zem_contact_form_id.'">'.
+                    ($thanks_form ? parse_form($thanks_form) : $thanks).
                     '</div>';
             }
         } else {
@@ -401,18 +415,18 @@ END;
     }
 
     if ($show_input && !$send_article || gps('zem_contact_send_article')) {
-        return '<form method="post"' . ((!$show_error && $zem_contact_error) ? '' : ' id="zcr' . $zem_contact_form_id . '"') .
-            ($class ? ' class="' . $class . '"' : '') .
-            ' action="' . txpspecialchars(serverSet('REQUEST_URI')) . '#zcr' . $zem_contact_form_id . '">' .
-            ($label ? n . '<fieldset>' : n . '<div>') .
-            ($label ? n . '<legend>' . txpspecialchars($label) . '</legend>' : '') .
-            $out .
-            n . '<input type="hidden" name="zem_contact_nonce" value="' . $zem_contact_nonce . '" />' .
-            n . '<input type="hidden" name="zem_contact_form_id" value="' . $zem_contact_form_id . '" />' .
-            $form .
-            callback_event('zemcontact.form') .
-            ($label ? (n . '</fieldset>') : (n . '</div>')) .
-            n . '</form>';
+        return '<form method="post"'.((!$show_error && $zem_contact_error) ? '' : ' id="zcr'.$zem_contact_form_id.'"').
+            ($class ? ' class="'.$class.'"' : '').
+            ' action="'.txpspecialchars(serverSet('REQUEST_URI')).'#zcr'.$zem_contact_form_id.'">'.
+            ($label ? n.'<fieldset>' : n.'<div>').
+            ($label ? n.'<legend>'.txpspecialchars($label).'</legend>' : '').
+            $out.
+            n.'<input type="hidden" name="zem_contact_nonce" value="'.$zem_contact_nonce.'" />'.
+            n.'<input type="hidden" name="zem_contact_form_id" value="'.$zem_contact_form_id.'" />'.
+            $form.
+            callback_event('zemcontact.form').
+            ($label ? (n.'</fieldset>') : (n.'</div>')).
+            n.'</form>';
     }
 
     return '';
@@ -478,7 +492,7 @@ function zem_contact_text($atts)
     $is_datetime = (in_array($type, $datetime_types));
     $is_numeric = (in_array($type, $numeric_types));
 
-    // Dates / times get special treatment: no default min/max if not set by tag.
+    // Dates/times get special treatment: no default min/max if not set by tag.
     if (!$is_datetime && $min === null) {
         $min = 0;
     }
@@ -559,7 +573,7 @@ function zem_contact_text($atts)
         $value = $default;
     }
 
-    // Core attributes
+    // Core attributes.
     $attr = zem_contact_build_atts(array(
         'id'    => (isset($id) ? $id : $name),
         'name'  => $name,
@@ -568,15 +582,15 @@ function zem_contact_text($atts)
     ));
 
     if ($size && !$is_numeric) {
-        $attr['size'] = 'size="' . intval($size) . '"';
+        $attr['size'] = 'size="'.intval($size).'"';
     }
 
     if ($min && !$is_numeric) {
-        $attr['minlength'] = 'minlength="' . intval($min) . '"';
+        $attr['minlength'] = 'minlength="'.intval($min).'"';
     }
 
     if ($max && !$is_numeric) {
-        $attr['maxlength'] = 'maxlength="' . intval($max) . '"';
+        $attr['maxlength'] = 'maxlength="'.intval($max).'"';
     }
 
     if ($doctype !== 'xhtml' && ($is_numeric || $is_datetime)) {
@@ -588,8 +602,9 @@ function zem_contact_text($atts)
         ));
     }
 
-    // HTML5 attributes
+    // HTML5 attributes.
     $required = ($required) ? 'required' : '';
+
     if ($doctype !== 'xhtml') {
         $attr += zem_contact_build_atts(array(
             'autocomplete' => $autocomplete,
@@ -601,9 +616,8 @@ function zem_contact_text($atts)
         ));
     }
 
-    // Global attributes
+    // Global attributes.
     $attr += zem_contact_build_atts($zem_contact_globals, $atts);
-
     $classes = array();
 
     foreach (array($class, ($required ? 'zemRequired' : ''), $isError) as $cls) {
@@ -612,12 +626,12 @@ function zem_contact_text($atts)
         }
     }
 
-    $classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
-    $labelStr = '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
+    $classStr = ($classes ? ' class="'.implode(' ', $classes).'"' : '');
+    $labelStr = '<label for="'.$name.'"'.$classStr.'>'.txpspecialchars($label).'</label>';
 
-    return ($label_position === 'before' ? $labelStr . $break : '') .
-        '<input' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . ' />' .
-        ($label_position === 'after' ? $break . $labelStr : '');
+    return ($label_position === 'before' ? $labelStr.$break : '').
+        '<input'.$classStr.($attr ? ' '.implode(' ', $attr) : '').' />'.
+        ($label_position === 'after' ? $break.$labelStr : '');
 }
 
 /**
@@ -630,7 +644,7 @@ function zem_contact_email($atts)
 {
     global $zem_contact_error, $zem_contact_submit, $zem_contact_from, $zem_contact_recipient, $zem_contact_flags;
 
-    // ToDo: 'multiple' attribute?
+    // TODO: 'multiple' attribute?
     $defaults = array(
         'autocomplete'   => '',
         'break'          => br,
@@ -667,7 +681,7 @@ function zem_contact_email($atts)
             preg_match("/@(.+)$/", $email, $match);
             $domain = $match[1];
 
-            if (is_callable('checkdnsrr') && checkdnsrr('textpattern.com.','A') && !checkdnsrr($domain.'.','MX') && !checkdnsrr($domain.'.','A')) {
+            if (is_callable('checkdnsrr') && checkdnsrr('textpattern.com.', 'A') && !checkdnsrr($domain.'.', 'MX') && !checkdnsrr($domain.'.', 'A')) {
                 $zem_contact_error[] = gTxt('zem_contact_invalid_host', array('{host}' => txpspecialchars($domain)));
                 $isError = "errorElement";
             } else {
@@ -687,7 +701,7 @@ function zem_contact_email($atts)
     }
 
     $passed_atts['isError'] = $isError;
-    unset ($passed_atts['send_article']);
+    unset($passed_atts['send_article']);
 
     return zem_contact_text($passed_atts);
 }
@@ -756,7 +770,7 @@ function zem_contact_textarea($atts)
         $value = $default;
     }
 
-    // Core attributes
+    // Core attributes.
     $attr = zem_contact_build_atts(array(
         'id'        => (isset($id) ? $id : $name),
         'name'      => $name,
@@ -765,8 +779,9 @@ function zem_contact_textarea($atts)
         'maxlength' => $max,
     ));
 
-    // HTML5 attributes
+    // HTML5 attributes.
     $required = ($required) ? 'required' : '';
+
     if ($doctype !== 'xhtml') {
         $attr += zem_contact_build_atts(array(
             'autocomplete' => $autocomplete,
@@ -776,9 +791,8 @@ function zem_contact_textarea($atts)
         ));
     }
 
-    // Global attributes
+    // Global attributes.
     $attr += zem_contact_build_atts($zem_contact_globals, $atts);
-
     $classes = array();
 
     foreach (array($class, ($required ? 'zemRequired' : ''), $isError) as $cls) {
@@ -787,12 +801,12 @@ function zem_contact_textarea($atts)
         }
     }
 
-    $classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
-    $labelStr = '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
+    $classStr = ($classes ? ' class="'.implode(' ', $classes).'"' : '');
+    $labelStr = '<label for="'.$name.'"'.$classStr.'>'.txpspecialchars($label).'</label>';
 
-    return ($label_position === 'before' ? $labelStr . $break : '') .
-        '<textarea' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . '>' . txpspecialchars($value) . '</textarea>' .
-        ($label_position === 'after' ? $break . $labelStr : '');
+    return ($label_position === 'before' ? $labelStr.$break : '').
+        '<textarea'.$classStr.($attr ? ' '.implode(' ', $attr) : '').'>'.txpspecialchars($value).'</textarea>'.
+        ($label_position === 'after' ? $break.$labelStr : '');
 }
 
 /**
@@ -847,7 +861,7 @@ function zem_contact_select($atts, $thing = null)
         $out = '';
 
         foreach ($options as $item) {
-            $out .= n.t.'<option' . ($item == $value ? ' selected="selected">' : '>') . (strlen($item) ? txpspecialchars($item) : ' ') . '</option>';
+            $out .= n.t.'<option'.($item == $value ? ' selected="selected">' : '>').(strlen($item) ? txpspecialchars($item) : ' ').'</option>';
         }
     }
 
@@ -867,18 +881,19 @@ function zem_contact_select($atts, $thing = null)
         $value = $selected;
     }
 
-    // Core attributes
+    // Core attributes.
     $attr = zem_contact_build_atts(array(
         'id'   => (isset($id) ? $id : $name),
         'name' => $name,
     ));
 
     if ($size && is_numeric($size)) {
-        $attr['size'] = 'size="' . intval($size) . '"';
+        $attr['size'] = 'size="'.intval($size).'"';
     }
 
-    // HTML5 attributes
+    // HTML5 attributes.
     $required = ($required) ? 'required' : '';
+
     if ($doctype !== 'xhtml') {
         $attr += zem_contact_build_atts(array(
             'form'     => $html_form,
@@ -886,9 +901,8 @@ function zem_contact_select($atts, $thing = null)
         ));
     }
 
-    // Global attributes
+    // Global attributes.
     $attr += zem_contact_build_atts($zem_contact_globals, $atts);
-
     $classes = array();
 
     foreach (array($class, ($required ? 'zemRequired' : ''), $isError) as $cls) {
@@ -897,14 +911,14 @@ function zem_contact_select($atts, $thing = null)
         }
     }
 
-    $classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
-    $labelStr = '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
+    $classStr = ($classes ? ' class="'.implode(' ', $classes).'"' : '');
+    $labelStr = '<label for="'.$name.'"'.$classStr.'>'.txpspecialchars($label).'</label>';
 
-    return ($label_position === 'before' ? $labelStr . $break : '') .
-        n . '<select' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . '>' .
-            $out .
-        n . '</select>' .
-        ($label_position === 'after' ? $break . $labelStr : '');
+    return ($label_position === 'before' ? $labelStr.$break : '').
+        n.'<select'.$classStr.($attr ? ' '.implode(' ', $attr) : '').'>'.
+            $out.
+        n.'</select>'.
+        ($label_position === 'after' ? $break.$labelStr : '');
 }
 
 /**
@@ -924,6 +938,7 @@ function zem_contact_option($atts, $thing = null)
             return $options;
         } else {
             $match = $thing;
+
             return;
         }
     }
@@ -950,18 +965,17 @@ function zem_contact_option($atts, $thing = null)
         $attr[] = 'selected="selected"';
     }
 
-    // Core attributes
+    // Core attributes.
     $attr += zem_contact_build_atts(array(
         'label' => $label,
         'value' => $value,
     ));
 
-    // Global attributes
+    // Global attributes.
     $attr += zem_contact_build_atts($zem_contact_globals, $atts);
+    $classStr = (($class) ? ' class="'.$class.'"' : '');
 
-    $classStr = (($class) ? ' class="' . $class . '"' : '');
-
-    return '<option' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . '>' . txpspecialchars($thing) . '</option>';
+    return '<option'.$classStr.($attr ? ' '.implode(' ', $attr) : '').'>'.txpspecialchars($thing).'</option>';
 }
 
 /**
@@ -1006,14 +1020,15 @@ function zem_contact_checkbox($atts)
         $value = $checked;
     }
 
-    // Core attributes
+    // Core attributes.
     $attr = zem_contact_build_atts(array(
         'id'    => (isset($id) ? $id : $name),
         'name'  => $name,
     ));
 
-    // HTML5 attributes
+    // HTML5 attributes.
     $required = ($required) ? 'required' : '';
+
     if ($doctype !== 'xhtml') {
         $attr += zem_contact_build_atts(array(
             'form'     => $html_form,
@@ -1021,9 +1036,8 @@ function zem_contact_checkbox($atts)
         ));
     }
 
-    // Global attributes
+    // Global attributes.
     $attr += zem_contact_build_atts($zem_contact_globals, $atts);
-
     $classes = array();
 
     foreach (array($class, ($required ? 'zemRequired' : ''), $isError) as $cls) {
@@ -1032,13 +1046,13 @@ function zem_contact_checkbox($atts)
         }
     }
 
-    $classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
-    $labelStr = '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
+    $classStr = ($classes ? ' class="'.implode(' ', $classes).'"' : '');
+    $labelStr = '<label for="'.$name.'"'.$classStr.'>'.txpspecialchars($label).'</label>';
 
-    return ($label_position === 'before' ? $labelStr . $break : '') .
-        '<input type="checkbox"' . $classStr .
-            ($value ? ' checked="checked"' : '') . ($attr ? ' ' . implode(' ', $attr) : '') . ' />' .
-        ($label_position === 'after' ? $break . $labelStr : '');
+    return ($label_position === 'before' ? $labelStr.$break : '').
+        '<input type="checkbox"'.$classStr.
+            ($value ? ' checked="checked"' : '').($attr ? ' '.implode(' ', $attr) : '').' />'.
+        ($label_position === 'after' ? $break.$labelStr : '');
 }
 
 /**
@@ -1099,7 +1113,7 @@ function zem_contact_radio($atts)
         $required = $cur_req;
     }
 
-    $id = 'q' . md5($name . '=>' . $label);
+    $id = 'q'.md5($name.'=>'.$label);
     $name = zem_contact_label2name($name);
     $doctype = get_pref('doctype', 'xhtml');
     $zem_contact_group[$name][$id]['req'] = $required;
@@ -1116,14 +1130,14 @@ function zem_contact_radio($atts)
         $is_checked = $checked;
     }
 
-    // Core attributes
+    // Core attributes.
     $attr = zem_contact_build_atts(array(
         'id'    => $id,
         'name'  => $name,
         'value' => $id,
     ));
 
-    // HTML5 attributes
+    // HTML5 attributes.
     $required = ($required) ? 'required' : '';
     if ($doctype !== 'xhtml') {
         $attr += zem_contact_build_atts(array(
@@ -1132,9 +1146,8 @@ function zem_contact_radio($atts)
         ));
     }
 
-    // Global attributes
+    // Global attributes.
     $attr += zem_contact_build_atts($zem_contact_globals, $atts);
-
     $classes = array();
 
     foreach (array($class, ($required ? 'zemRequired' : ''), $isError) as $cls) {
@@ -1143,13 +1156,13 @@ function zem_contact_radio($atts)
         }
     }
 
-    $classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
-    $labelStr = '<label for="' . $id . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
+    $classStr = ($classes ? ' class="'.implode(' ', $classes).'"' : '');
+    $labelStr = '<label for="'.$id.'"'.$classStr.'>'.txpspecialchars($label).'</label>';
 
-    return ($label_position === 'before' ? $labelStr . $break : '') .
-        '<input type="radio"'. $classStr . ($attr ? ' ' . implode(' ', $attr) : '') .
-            ( $is_checked ? ' checked="checked" />' : ' />') .
-        ($label_position === 'after' ? $break . $labelStr : '');
+    return ($label_position === 'before' ? $labelStr.$break : '').
+        '<input type="radio"'.$classStr.($attr ? ' '.implode(' ', $attr) : '').
+            ($is_checked ? ' checked="checked" />' : ' />').
+        ($label_position === 'after' ? $break.$labelStr : '');
 }
 
 /**
@@ -1232,22 +1245,21 @@ function zem_contact_submit($atts, $thing = null)
 
     $attr = array();
 
-    // HTML5 attributes
+    // HTML5 attributes.
     if ($doctype !== 'xhtml') {
         $attr += zem_contact_build_atts(array(
             'form' => $html_form,
         ));
     }
 
-    // Global attributes
+    // Global attributes.
     $attr += zem_contact_build_atts($zem_contact_globals, $atts);
-
-    $classStr = ($class ? ' class="' . $class . '"' : '');
+    $classStr = ($class ? ' class="'.$class.'"' : '');
 
     if (strlen($thing)) {
-        return '<button type="submit"' . $classStr . ' name="zem_contact_submit" value="' . $label . '"' . ($attr ? ' ' . implode(' ', $attr) : '') . '>' . ($thing ? trim(parse($thing)) : $label) . '</button>';
+        return '<button type="submit"'.$classStr.' name="zem_contact_submit" value="'.$label.'"'.($attr ? ' '.implode(' ', $attr) : '').'>'.($thing ? trim(parse($thing)) : $label).'</button>';
     } else {
-        return '<input type="submit"' . $classStr . ' name="zem_contact_submit" value="' . $label . '"' . ($attr ? ' ' . implode(' ', $attr) : '') . ' />';
+        return '<input type="submit"'.$classStr.' name="zem_contact_submit" value="'.$label.'"'.($attr ? ' '.implode(' ', $attr) : '').' />';
     }
 }
 
@@ -1262,9 +1274,9 @@ function zem_contact_send_article($atts)
     if (!isset($_REQUEST['zem_contact_send_article'])) {
         $linktext = (empty($atts['linktext'])) ? gTxt('zem_contact_send_article') : $atts['linktext'];
         $join = (empty($_SERVER['QUERY_STRING'])) ? '?' : '&';
-        $href = $_SERVER['REQUEST_URI'] . $join . 'zem_contact_send_article=yes';
+        $href = $_SERVER['REQUEST_URI'].$join.'zem_contact_send_article=yes';
 
-        return '<a href="' . txpspecialchars($href) . '" rel="nofollow">' . txpspecialchars($linktext) . '</a>';
+        return '<a href="'.txpspecialchars($href).'" rel="nofollow">'.txpspecialchars($linktext).'</a>';
     }
 
     return;
@@ -1375,10 +1387,10 @@ function zem_contact_build_atts($pairs, $defaults = array())
 
     foreach ($pairs as $key => $value) {
         if ($value !== '' && $value !== null) {
-            $attr[$key] = $key . '="' . txpspecialchars($value) . '"';
+            $attr[$key] = $key.'="'.txpspecialchars($value).'"';
         } else {
             if (isset($defaults[$key])) {
-                $attr[$key] = $key . '="' . txpspecialchars($defaults[$key]) . '"';
+                $attr[$key] = $key.'="'.txpspecialchars($defaults[$key]).'"';
             }
         }
     }
@@ -1395,7 +1407,7 @@ function zem_contact_build_atts($pairs, $defaults = array())
 function zem_contact_strip($str, $header = true)
 {
     if ($header) {
-        // ToDo: strip_rn will be deprecated in 4.6.0.
+        // TODO: strip_rn will be deprecated in 4.6.0.
         $str = strip_rn($str);
     }
 
@@ -1439,7 +1451,7 @@ function zem_contact_deliver($to, $subject, $body, $headers, $fields, $flags)
     $flavour = ($flags['isCopy'] === true) ? 'copysender' : 'send';
 
     // Allow plugins to override or alter default action (mail) if required.
-    // ToDo: use has_handler() from 4.6.0+
+    // TODO: use has_handler() from 4.6.0+.
     $ret = callback_event_ref('zemcontact.deliver', $flavour, 0, $payload);
 
     if (in_array('zemcontact.fail', $ret)) {
@@ -1465,12 +1477,12 @@ function zem_contact_deliver($to, $subject, $body, $headers, $fields, $flags)
     $charset = (!empty($headers['charset'])) ? $headers['charset'] : 'UTF-8';
     $x_mailer = (!empty($headers['x_mailer'])) ? $headers['x_mailer'] : 'Textpattern (zem_contact_reborn)';
 
-    $header_string = 'From: ' . $headers['from'] .
-        ($reply ? ($sep . 'Reply-To: ' . $reply) : '') .
-        $sep . 'X-Mailer: ' . $x_mailer .
-        $sep . 'X-Originating-IP: ' . zem_contact_strip((!empty($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] . ' via ' : '') . $_SERVER['REMOTE_ADDR']) .
-        $sep . 'Content-Transfer-Encoding: ' . $xfer_encoding .
-        $sep . 'Content-Type: ' . $content_type . '; charset="' . $charset . '"';
+    $header_string = 'From: '.$headers['from'].
+        ($reply ? ($sep.'Reply-To: '.$reply) : '').
+        $sep.'X-Mailer: '.$x_mailer.
+        $sep.'X-Originating-IP: '.zem_contact_strip((!empty($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'].' via ' : '').$_SERVER['REMOTE_ADDR']).
+        $sep.'Content-Transfer-Encoding: '.$xfer_encoding.
+        $sep.'Content-Type: '.$content_type.'; charset="'.$charset.'"';
 
     // Remove all the header entries that have already been handled.
     unset(
@@ -1485,7 +1497,7 @@ function zem_contact_deliver($to, $subject, $body, $headers, $fields, $flags)
 
     // Any remaining headers set by plugins are appended as-is.
     foreach ($headers as $name => $value) {
-        $header_string .= $sep . $name . ': ' . $value;
+        $header_string .= $sep.$name.': '.$value;
     }
 
     if (is_valid_email($smtp_from)) {
@@ -1561,7 +1573,7 @@ function zem_contact_label2name($label)
     if (strlen($label) <= 32 && preg_match('/^[a-zA-Z][A-Za-z0-9:_-]*$/', $label)) {
         return $label;
     } else {
-        return 'q' . md5($label);
+        return 'q'.md5($label);
     }
 }
 
