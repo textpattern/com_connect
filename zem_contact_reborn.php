@@ -2353,7 +2353,7 @@ The list of error messages (if any) has a @class@ of @zemError@ set on the @ul@ 
 All form elements and corresponding labels have the following classes (or ids set):
 
 # One of @zemText@, @zemEmail@, @zemTextarea@, @zemSelect@, @zemOption@, @zemRadio@, @zemCheckbox@ or @zemSubmit@. By default, it should be obvious which @class@ is used for which form element (and corresponding label). You can override these names by using your own @class@ attribute.
-# @zemRequired@, @errorElement@ or @zemRequirederrorElement@, depending on whether the form element is required, an error was found in whatever the visitor entered... or both.
+# @zemRequired@ and/or @errorElement@, depending on whether the form element is required, an error was found in whatever the visitor entered... or both.
 # An individual @id@ or @class@ set to the value of the @name@ attribute of the corresponding tag. When styling forms based on this @class@, you should explicitly set the @name@ attribute because automatically generated names may change in newer zem_contact_reborn versions.
 
 h2(#api). Zem Contact Reborn's API
