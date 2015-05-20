@@ -291,8 +291,14 @@ function zem_contact($atts, $thing = null)
 		$fields = array();
 
 		foreach ($zem_contact_labels as $name => $label) {
-			if (trim($zem_contact_values[$name]) === false) continue;
-			$msg[] = $label . ': ' . $zem_contact_values[$name];
+			if (!is_array($zem_contact_values[$name])) {
+				if (trim($zem_contact_values[$name]) === false) {
+					continue;
+				}
+
+				$msg[] = $label . ': ' . $zem_contact_values[$name];
+			}
+
 			$fields[$name] = $zem_contact_values[$name];
 		}
 
@@ -310,7 +316,7 @@ function zem_contact($atts, $thing = null)
 				$r_ar = array('‘', '’', '“', '”', '’', '?', '?', '…', '–', '—', '×', '™', '®', '©', '<', '>', '"', '&', '&', ' ', "\n<p");
 			}
 
-			$msg[] = trim(strip_tags(str_replace($s_ar,$r_ar,(trim(strip_tags($thisarticle['excerpt'])) ? $thisarticle['excerpt'] : $thisarticle['body']))));
+			$msg[] = trim(strip_tags(str_replace($s_ar, $r_ar, (trim(strip_tags($thisarticle['excerpt'])) ? $thisarticle['excerpt'] : $thisarticle['body']))));
 
 			if (empty($zem_contact_recipient)) {
 				return gTxt('zem_contact_field_missing', array('{field}' => gTxt('zem_contact_recipient')));
@@ -396,6 +402,8 @@ END;
 					'</div>';
 			}
 		} else {
+			// Todo: consider allowing zem_contact_error to be displayed here if third party plugin
+			// returned anything more specific.
 			$out .= graf(gTxt('zem_contact_mail_sorry'));
 		}
 	}
@@ -1282,23 +1290,25 @@ function zem_contact_group_validate()
 
 	$flags = array();
 
-	foreach ($zem_contact_group as $key => $grp) {
-		foreach ($grp as $id => $atts) {
-			$flags[$key]['label'] = $atts['label'];
+	if ($zem_contact_group) {
+		foreach ($zem_contact_group as $key => $grp) {
+			foreach ($grp as $id => $atts) {
+				$flags[$key]['label'] = $atts['label'];
 
-			if ($atts['req'] && !isset($flags[$key]['req'])) {
-				$flags[$key]['req'] = 1;
-			}
+				if ($atts['req'] && !isset($flags[$key]['req'])) {
+					$flags[$key]['req'] = 1;
+				}
 
-			if ($atts['isSet'] && !isset($flags[$key]['isSet'])) {
-				$flags[$key]['isSet'] = 1;
+				if ($atts['isSet'] && !isset($flags[$key]['isSet'])) {
+					$flags[$key]['isSet'] = 1;
+				}
 			}
 		}
-	}
 
-	foreach ($flags as $key => $data) {
-		if ($data['req'] === 1 && !isset($data['isSet'])) {
-			$zem_contact_error[] = gTxt('zem_contact_field_missing', array('{field}' => txpspecialchars($data['label'])));
+		foreach ($flags as $key => $data) {
+			if ($data['req'] === 1 && !isset($data['isSet'])) {
+				$zem_contact_error[] = gTxt('zem_contact_field_missing', array('{field}' => txpspecialchars($data['label'])));
+			}
 		}
 	}
 }
