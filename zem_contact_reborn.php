@@ -204,7 +204,7 @@ function zem_contact($atts, $thing = null)
     if ($zem_contact_submit) {
         // Could use "interval $expire second" but multiple zem_contact forms could delete data
         // that might be in use by other forms.
-        // ToDo: use max(600, $expire)? Not perfect, but ensures a safe minimum deletion rate.
+        // TODO: use max(600, $expire)? Not perfect, but ensures a safe minimum deletion rate.
         safe_delete('txp_discuss_nonce', "issue_time < date_sub('$now_date', interval 10 minute)");
         if ($rs = safe_row('used', 'txp_discuss_nonce', "nonce = '$nonce'")) {
             if ($rs['used']) {
@@ -212,7 +212,7 @@ function zem_contact($atts, $thing = null)
                 $zem_contact_error[] = gTxt('zem_contact_form_used');
                 $renonce = true;
                 $_POST = array();
-                $_POST['zem_contact_submit'] = TRUE;
+                $_POST['zem_contact_submit'] = true;
                 $_POST['zem_contact_form_id'] = $zem_contact_form_id;
                 $_POST['zem_contact_nonce'] = $nonce;
             }
@@ -259,7 +259,7 @@ function zem_contact($atts, $thing = null)
     $out = '';
 
     if (!$zem_contact_submit) {
-        // Don't show errors or send mail
+        // Don't show errors or send mail.
     } elseif (!empty($zem_contact_error)) {
         if ($show_error || !$show_input) {
             $out .= n.doWrap(array_unique($zem_contact_error), 'ul', 'li', 'zemError').n;
@@ -347,7 +347,7 @@ function zem_contact($atts, $thing = null)
             $charset = 'UTF-8';
         }
 
-        // ToDo: function deprecated in 4.6.0
+        // TODO: function deprecated in 4.6.0.
         $subject = encode_mailheader($subject, 'text');
 
         $headers = array(
@@ -402,7 +402,7 @@ END;
                     '</div>';
             }
         } else {
-            // Todo: consider allowing zem_contact_error to be displayed here if third party plugin
+            // TODO: consider allowing zem_contact_error to be displayed here if third party plugin
             // returned anything more specific.
             $out .= graf(gTxt('zem_contact_mail_sorry'));
         }
@@ -567,7 +567,7 @@ function zem_contact_text($atts)
         $value = $default;
     }
 
-    // Core attributes
+    // Core attributes.
     $attr = zem_contact_build_atts(array(
         'id'    => (isset($id) ? $id : $name),
         'name'  => $name,
@@ -596,7 +596,7 @@ function zem_contact_text($atts)
         ));
     }
 
-    // HTML5 attributes
+    // HTML5 attributes.
     $required = ($required) ? 'required' : '';
     if ($doctype !== 'xhtml') {
         $attr += zem_contact_build_atts(array(
@@ -609,7 +609,7 @@ function zem_contact_text($atts)
         ));
     }
 
-    // Global attributes
+    // Global attributes.
     $attr += zem_contact_build_atts($zem_contact_globals, $atts);
 
     $classes = array();
@@ -638,7 +638,7 @@ function zem_contact_email($atts)
 {
     global $zem_contact_error, $zem_contact_submit, $zem_contact_from, $zem_contact_recipient, $zem_contact_flags;
 
-    // ToDo: 'multiple' attribute?
+    // TODO: 'multiple' attribute?
     $defaults = array(
         'autocomplete'   => '',
         'break'          => br,
@@ -764,7 +764,7 @@ function zem_contact_textarea($atts)
         $value = $default;
     }
 
-    // Core attributes
+    // Core attributes.
     $attr = zem_contact_build_atts(array(
         'id'        => (isset($id) ? $id : $name),
         'name'      => $name,
@@ -773,7 +773,7 @@ function zem_contact_textarea($atts)
         'maxlength' => $max,
     ));
 
-    // HTML5 attributes
+    // HTML5 attributes.
     $required = ($required) ? 'required' : '';
     if ($doctype !== 'xhtml') {
         $attr += zem_contact_build_atts(array(
@@ -784,7 +784,7 @@ function zem_contact_textarea($atts)
         ));
     }
 
-    // Global attributes
+    // Global attributes.
     $attr += zem_contact_build_atts($zem_contact_globals, $atts);
 
     $classes = array();
@@ -813,7 +813,7 @@ function zem_contact_select($atts, $thing = null)
 {
     global $zem_contact_error, $zem_contact_submit, $zem_contact_flags;
 
-    // ToDo: multiple attribute?
+    // TODO: multiple attribute?
     extract(zem_contact_lAtts(array(
         'break'          => br,
         'class'          => 'zemSelect',
@@ -822,7 +822,7 @@ function zem_contact_select($atts, $thing = null)
         'isError'        => '',
         'label'          => gTxt('zem_contact_option'),
         'label_position' => 'before',
-        'list'           => '', // ToDo: remove from here in favour of the global list attribute
+        'list'           => '', // TODO: remove from here in favour of the global list attribute.
         'options'        => gTxt('zem_contact_general_inquiry'),
         'name'           => '',
         'required'       => $zem_contact_flags['required'],
@@ -875,7 +875,7 @@ function zem_contact_select($atts, $thing = null)
         $value = $selected;
     }
 
-    // Core attributes
+    // Core attributes.
     $attr = zem_contact_build_atts(array(
         'id'   => (isset($id) ? $id : $name),
         'name' => $name,
@@ -885,7 +885,7 @@ function zem_contact_select($atts, $thing = null)
         $attr['size'] = 'size="' . intval($size) . '"';
     }
 
-    // HTML5 attributes
+    // HTML5 attributes.
     $required = ($required) ? 'required' : '';
     if ($doctype !== 'xhtml') {
         $attr += zem_contact_build_atts(array(
@@ -894,7 +894,7 @@ function zem_contact_select($atts, $thing = null)
         ));
     }
 
-    // Global attributes
+    // Global attributes.
     $attr += zem_contact_build_atts($zem_contact_globals, $atts);
 
     $classes = array();
@@ -958,13 +958,13 @@ function zem_contact_option($atts, $thing = null)
         $attr[] = 'selected="selected"';
     }
 
-    // Core attributes
+    // Core attributes.
     $attr += zem_contact_build_atts(array(
         'label' => $label,
         'value' => $value,
     ));
 
-    // Global attributes
+    // Global attributes.
     $attr += zem_contact_build_atts($zem_contact_globals, $atts);
 
     $classStr = (($class) ? ' class="' . $class . '"' : '');
@@ -1014,13 +1014,13 @@ function zem_contact_checkbox($atts)
         $value = $checked;
     }
 
-    // Core attributes
+    // Core attributes.
     $attr = zem_contact_build_atts(array(
         'id'    => (isset($id) ? $id : $name),
         'name'  => $name,
     ));
 
-    // HTML5 attributes
+    // HTML5 attributes.
     $required = ($required) ? 'required' : '';
     if ($doctype !== 'xhtml') {
         $attr += zem_contact_build_atts(array(
@@ -1029,7 +1029,7 @@ function zem_contact_checkbox($atts)
         ));
     }
 
-    // Global attributes
+    // Global attributes.
     $attr += zem_contact_build_atts($zem_contact_globals, $atts);
 
     $classes = array();
@@ -1124,14 +1124,14 @@ function zem_contact_radio($atts)
         $is_checked = $checked;
     }
 
-    // Core attributes
+    // Core attributes.
     $attr = zem_contact_build_atts(array(
         'id'    => $id,
         'name'  => $name,
         'value' => $id,
     ));
 
-    // HTML5 attributes
+    // HTML5 attributes.
     $required = ($required) ? 'required' : '';
     if ($doctype !== 'xhtml') {
         $attr += zem_contact_build_atts(array(
@@ -1140,7 +1140,7 @@ function zem_contact_radio($atts)
         ));
     }
 
-    // Global attributes
+    // Global attributes.
     $attr += zem_contact_build_atts($zem_contact_globals, $atts);
 
     $classes = array();
@@ -1240,14 +1240,14 @@ function zem_contact_submit($atts, $thing = null)
 
     $attr = array();
 
-    // HTML5 attributes
+    // HTML5 attributes.
     if ($doctype !== 'xhtml') {
         $attr += zem_contact_build_atts(array(
             'form' => $html_form,
         ));
     }
 
-    // Global attributes
+    // Global attributes.
     $attr += zem_contact_build_atts($zem_contact_globals, $atts);
 
     $classStr = ($class ? ' class="' . $class . '"' : '');
@@ -1405,7 +1405,7 @@ function zem_contact_build_atts($pairs, $defaults = array())
 function zem_contact_strip($str, $header = true)
 {
     if ($header) {
-        // ToDo: strip_rn will be deprecated in 4.6.0.
+        // TODO: strip_rn will be deprecated in 4.6.0.
         $str = strip_rn($str);
     }
 
@@ -1449,7 +1449,7 @@ function zem_contact_deliver($to, $subject, $body, $headers, $fields, $flags)
     $flavour = ($flags['isCopy'] === true) ? 'copysender' : 'send';
 
     // Allow plugins to override or alter default action (mail) if required.
-    // ToDo: use has_handler() from 4.6.0+
+    // TODO: use has_handler() from 4.6.0+.
     $ret = callback_event_ref('zemcontact.deliver', $flavour, 0, $payload);
 
     if (in_array('zemcontact.fail', $ret)) {
