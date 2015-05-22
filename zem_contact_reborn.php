@@ -836,7 +836,7 @@ function zem_contact_select($atts, $thing = null)
     if (!empty($list) && strpos($list, $delimiter) !== false) {
         $options = $list;
         trigger_error(gTxt('deprecated_function_with', array('{name}' => 'list', '{with}' => 'options')), E_USER_NOTICE);
-        unset($list);
+        unset($list, $atts['list']);
     }
 
     if (empty($name)) {
