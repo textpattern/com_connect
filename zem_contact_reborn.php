@@ -409,7 +409,7 @@ END;
     }
 
     if ($show_input && !$send_article || gps('zem_contact_send_article')) {
-        return '<form method="post"' . ((!$show_error && $zem_contact_error) ? '' : ' id="zcr' . $zem_contact_form_id . '"') .
+        $out = '<form method="post"' . ((!$show_error && $zem_contact_error) ? '' : ' id="zcr' . $zem_contact_form_id . '"') .
             ($class ? ' class="' . $class . '"' : '') .
             ' action="' . txpspecialchars(serverSet('REQUEST_URI')) . '#zcr' . $zem_contact_form_id . '">' .
             ($label ? n . '<fieldset>' : n . '<div>') .
@@ -421,6 +421,10 @@ END;
             callback_event('zemcontact.form') .
             ($label ? (n . '</fieldset>') : (n . '</div>')) .
             n . '</form>';
+
+        callback_event_ref('zemcontact.render', '', 0, $out, $atts);
+
+        return $out;
     }
 
     return '';
