@@ -133,6 +133,26 @@ if (!defined('txpinterface')) {
  * zem_contact_reborn: A Textpattern CMS plugin for mail delivery of contact forms.
  */
 
+// Register tags if necessary.
+if (class_exists('\Textpattern\Tag\Registry')) {
+    Txp::get('\Textpattern\Tag\Registry')
+        ->register('zem_contact')
+        ->register('zem_contact_text')
+        ->register('zem_contact_email')
+        ->register('zem_contact_textarea')
+        ->register('zem_contact_select')
+        ->register('zem_contact_option')
+        ->register('zem_contact_checkbox')
+        ->register('zem_contact_radio')
+        ->register('zem_contact_serverinfo')
+        ->register('zem_contact_secret')
+        ->register('zem_contact_submit')
+        ->register('zem_contact_send_article')
+        ->register('zem_contact_value')
+        ->register('zem_contact_label')
+        ->register('zem_contact_if');
+}
+
 /**
  * Tag: encapsulate a contact form.
  *
