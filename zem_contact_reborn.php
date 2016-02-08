@@ -133,6 +133,26 @@ if (!defined('txpinterface')) {
  * zem_contact_reborn: A Textpattern CMS plugin for mail delivery of contact forms.
  */
 
+// Register tags if necessary.
+if (class_exists('\Textpattern\Tag\Registry')) {
+    Txp::get('\Textpattern\Tag\Registry')
+        ->register('zem_contact')
+        ->register('zem_contact_text')
+        ->register('zem_contact_email')
+        ->register('zem_contact_textarea')
+        ->register('zem_contact_select')
+        ->register('zem_contact_option')
+        ->register('zem_contact_checkbox')
+        ->register('zem_contact_radio')
+        ->register('zem_contact_serverinfo')
+        ->register('zem_contact_secret')
+        ->register('zem_contact_submit')
+        ->register('zem_contact_send_article')
+        ->register('zem_contact_value')
+        ->register('zem_contact_label')
+        ->register('zem_contact_if');
+}
+
 /**
  * Tag: encapsulate a contact form.
  *
@@ -409,7 +429,7 @@ END;
     }
 
     if ($show_input && !$send_article || gps('zem_contact_send_article')) {
-        return '<form method="post"' . ((!$show_error && $zem_contact_error) ? '' : ' id="zcr' . $zem_contact_form_id . '"') .
+        $out = '<form method="post"' . ((!$show_error && $zem_contact_error) ? '' : ' id="zcr' . $zem_contact_form_id . '"') .
             ($class ? ' class="' . $class . '"' : '') .
             ' action="' . txpspecialchars(serverSet('REQUEST_URI')) . '#zcr' . $zem_contact_form_id . '">' .
             ($label ? n . '<fieldset>' : n . '<div>') .
@@ -421,6 +441,10 @@ END;
             callback_event('zemcontact.form') .
             ($label ? (n . '</fieldset>') : (n . '</div>')) .
             n . '</form>';
+
+        callback_event_ref('zemcontact.render', '', 0, $out, $atts);
+
+        return $out;
     }
 
     return '';
@@ -2370,10 +2394,11 @@ h2(#api). Zem Contact Reborn's API
 
 The plugin API of zem_contact_reborn, originally developed by Tranquillo, allows other plugins to interact with contact forms. This permits extra functionality such as "Combatting Comment Spam":http://textpattern.net/wiki/index.php?title=Combat_Comment_Spam, HTML email, newsletter delivery and so forth to be bolted onto the base plugin.
 
-Three callback events exist in zem_contact_reborn:
+Four callback events exist in zem_contact_reborn:
 
 * @zemcontact.submit@ is called after the form is submitted and the values are checked if empty or valid email addresses, but before the mail is sent.
-* @zemcontact.form@ lets you insert content in the contact form as displayed to the visitor.
+* @zemcontact.form@ lets you inject content (fields) in the contact form as displayed to the visitor.
+* @zemcontact.render@ lets you inject or alter markup of the entire @<form>@. Useful for editing thing like @enctype@ (e.g. for file attachment modules that link into this plugin).
 * @zemcontact.deliver@ is called immediately prior to delivery and advertises the intended payload so you may manipulate it. For example, you could do something as simple as adding CC: or BCC: fields. Or change the MIME type header to @text/html@ and add some HTML content based on the given body data, then let zem_contact_reborn handle the mailing. Or you could intercept the entire mail process, handle mailing yourself with a third party system, and tell zem_contact_reborn to skip its internal mailing process.
 
 For reference here are the commands that will be interesting to plugin developers:
