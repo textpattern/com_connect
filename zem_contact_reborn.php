@@ -1429,12 +1429,23 @@ function zem_contact_build_atts($pairs, $defaults = array())
 {
     $attr = array();
 
+    $booleans = array(
+        'autofocus',
+        'checked',
+        'disabled',
+        'hidden',
+        'multiple',
+        'readonly',
+        'required',
+        'selected',
+        );
+
     foreach ($pairs as $key => $value) {
         if ($value !== '' && $value !== null) {
-            $attr[$key] = $key . '="' . txpspecialchars($value) . '"';
+            $attr[$key] = $key . (in_array($key, $booleans) ? '' : '="' . txpspecialchars($value) . '"');
         } else {
             if (isset($defaults[$key])) {
-                $attr[$key] = $key . '="' . txpspecialchars($defaults[$key]) . '"';
+                $attr[$key] = $key . (in_array($key, $booleans) ? '' : '="' . txpspecialchars($defaults[$key]) . '"');
             }
         }
     }
