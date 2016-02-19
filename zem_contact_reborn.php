@@ -173,6 +173,7 @@ function zem_contact($atts, $thing = null)
     extract(zem_contact_lAtts(array(
         'body_form'    => '',
         'class'        => 'zemContactForm',
+        'classes'      => '',
         'copysender'   => 0,
         'expire'       => 600,
         'form'         => '',
@@ -193,9 +194,30 @@ function zem_contact($atts, $thing = null)
     ), $atts));
 
     unset($atts['show_error'], $atts['show_input']);
+
+    $defaultClassNames = array(
+        'element'  => 'errorElement',
+        'wrapper'  => 'zemError',
+        'required' => 'zemRequired',
+        'thanks'   => 'zemThanks',
+        );
+
     $zem_contact_form_id = md5(serialize($atts) . preg_replace('/[\t\s\r\n]/', '', $thing));
     $zem_contact_submit = (ps('zem_contact_form_id') == $zem_contact_form_id);
     $override_email_charset = (get_pref('override_emailcharset') && is_callable('utf8_decode'));
+    $userClassNames = do_list($classes);
+
+    foreach (array_merge($defaultClassNames, $userClassNames) as $classKey => $classValue) {
+        if (strpos($classValue, ':') !== false) {
+            $classParts = do_list($classValue, ':');
+
+            if (count($classParts) === 2) {
+                $zem_contact_flags['cls_' . $classParts[0]] = $classParts[1];
+            }
+        } elseif ($classKey && $classValue) {
+            $zem_contact_flags['cls_' . $classKey] = $classValue;
+        }
+    }
 
     // The $zem_contact_flags['this_form'] global is set if an id is supplied for the <form>.
     // This value then becomes the default value for all html_form (a.k.a. form=)
@@ -282,7 +304,7 @@ function zem_contact($atts, $thing = null)
         // Don't show errors or send mail.
     } elseif (!empty($zem_contact_error)) {
         if ($show_error || !$show_input) {
-            $out .= n.doWrap(array_unique($zem_contact_error), 'ul', 'li', 'zemError').n;
+            $out .= n.doWrap(array_unique($zem_contact_error), 'ul', 'li', $zem_contact_flags['cls_wrapper']).n;
 
             if (!$show_input) {
                 return $out;
@@ -417,7 +439,7 @@ END;
 
                 exit;
             } else {
-                return '<div class="zemThanks" id="zcr'.$zem_contact_form_id.'">' .
+                return '<div class="' . $zem_contact_flags['cls_thanks'] . '" id="zcr'.$zem_contact_form_id.'">' .
                     ($thanks_form ? parse_form($thanks_form) : $thanks) .
                     '</div>';
             }
@@ -555,37 +577,37 @@ function zem_contact_text($atts)
         if (strlen($value)) {
             if (!$utf8len) {
                 $zem_contact_error[] = gTxt('zem_contact_invalid_utf8', array('{field}' => $hlabel));
-                $isError = "errorElement";
+                $isError = $zem_contact_flags['cls_element'];
             } elseif ($is_datetime && !$datetime_ok) {
                 $zem_contact_error[] = gTxt('zem_contact_format_warning', array('{field}' => $hlabel, '{value}' => $value));
-                $isError = "errorElement";
+                $isError = $zem_contact_flags['cls_element'];
             } elseif ($min && !$is_numeric && !$is_datetime && $utf8len < $min) {
                 $zem_contact_error[] = gTxt('zem_contact_min_warning', array('{field}' => $hlabel, '{value}' => $min));
-                $isError = "errorElement";
+                $isError = $zem_contact_flags['cls_element'];
             } elseif ($max && !$is_numeric && !$is_datetime && $utf8len > $max) {
                 $zem_contact_error[] = gTxt('zem_contact_max_warning', array('{field}' => $hlabel, '{value}' => $max));
-                $isError = "errorElement";
+                $isError = $zem_contact_flags['cls_element'];
             } elseif ($min && $is_datetime && $cmpval < $minval) {
                 $zem_contact_error[] = gTxt('zem_contact_minval_warning', array('{field}' => $hlabel, '{value}' => $min));
-                $isError = "errorElement";
+                $isError = $zem_contact_flags['cls_element'];
             } elseif ($max && $is_datetime && $cmpval > $maxval) {
                 $zem_contact_error[] = gTxt('zem_contact_maxval_warning', array('{field}' => $hlabel, '{value}' => $max));
-                $isError = "errorElement";
+                $isError = $zem_contact_flags['cls_element'];
             } elseif ($min && $is_numeric && $value < $min) {
                 $zem_contact_error[] = gTxt('zem_contact_minval_warning', array('{field}' => $hlabel, '{value}' => $min));
-                $isError = "errorElement";
+                $isError = $zem_contact_flags['cls_element'];
             } elseif ($max && $is_numeric && $value > $max) {
                 $zem_contact_error[] = gTxt('zem_contact_maxval_warning', array('{field}' => $hlabel, '{value}' => $max));
-                $isError = "errorElement";
+                $isError = $zem_contact_flags['cls_element'];
             } elseif ($pattern and !preg_match('/^'.$pattern.'$/', $value)) {
                 $zem_contact_error[] = gTxt('zem_contact_pattern_warning', array('{field}' => $hlabel, '{value}' => $pattern));
-                $isError = "errorElement";
+                $isError = $zem_contact_flags['cls_element'];
             } else {
                 zem_contact_store($name, $label, $value);
             }
         } elseif ($required) {
             $zem_contact_error[] = gTxt('zem_contact_field_missing', array('{field}' => $hlabel));
-            $isError = "errorElement";
+            $isError = $zem_contact_flags['cls_element'];
         }
     } else {
         $value = $default;
@@ -638,7 +660,7 @@ function zem_contact_text($atts)
 
     $classes = array();
 
-    foreach (array($class, ($required ? 'zemRequired' : ''), $isError) as $cls) {
+    foreach (array($class, ($required ? $zem_contact_flags['cls_required'] : ''), $isError) as $cls) {
         if ($cls) {
             $classes[] = $cls;
         }
@@ -694,14 +716,14 @@ function zem_contact_email($atts)
     if ($zem_contact_submit && strlen($email)) {
         if (!is_valid_email($email)) {
             $zem_contact_error[] = gTxt('zem_contact_invalid_email', array('{email}' => txpspecialchars($email)));
-            $isError = "errorElement";
+            $isError = $zem_contact_flags['cls_element'];
         } else {
             preg_match("/@(.+)$/", $email, $match);
             $domain = $match[1];
 
             if (is_callable('checkdnsrr') && checkdnsrr('textpattern.com.','A') && !checkdnsrr($domain.'.','MX') && !checkdnsrr($domain.'.','A')) {
                 $zem_contact_error[] = gTxt('zem_contact_invalid_host', array('{host}' => txpspecialchars($domain)));
-                $isError = "errorElement";
+                $isError = $zem_contact_flags['cls_element'];
             } else {
                 if ($send_article) {
                     $zem_contact_recipient = $email;
@@ -770,19 +792,19 @@ function zem_contact_textarea($atts)
         if (strlen(ltrim($value))) {
             if (!$utf8len) {
                 $zem_contact_error[] = gTxt('zem_contact_invalid_utf8', array('{field}' => $hlabel));
-                $isError = "errorElement";
+                $isError = $zem_contact_flags['cls_element'];
             } elseif ($min && $utf8len < $min) {
                 $zem_contact_error[] = gTxt('zem_contact_min_warning', array('{field}' => $hlabel, '{value}' => $min));
-                $isError = "errorElement";
+                $isError = $zem_contact_flags['cls_element'];
             } elseif ($max && $utf8len > $max) {
                 $zem_contact_error[] = gTxt('zem_contact_max_warning', array('{field}' => $hlabel, '{value}' => $max));
-                $isError = "errorElement";
+                $isError = $zem_contact_flags['cls_element'];
             } else {
                 zem_contact_store($name, $label, $value);
             }
         } elseif ($required) {
             $zem_contact_error[] = gTxt('zem_contact_field_missing', array('{field}' => $hlabel));
-            $isError = "errorElement";
+            $isError = $zem_contact_flags['cls_element'];
         }
     } else {
         $value = $default;
@@ -813,7 +835,7 @@ function zem_contact_textarea($atts)
 
     $classes = array();
 
-    foreach (array($class, ($required ? 'zemRequired' : ''), $isError) as $cls) {
+    foreach (array($class, ($required ? $zem_contact_flags['cls_required'] : ''), $isError) as $cls) {
         if ($cls) {
             $classes[] = $cls;
         }
@@ -889,11 +911,11 @@ function zem_contact_select($atts, $thing = null)
                 zem_contact_store($name, $label, $value);
             } else {
                 $zem_contact_error[] = gTxt('zem_contact_invalid_value', array('{field}' => txpspecialchars($label), '{value}' => txpspecialchars($value)));
-                $isError = "errorElement";
+                $isError = $zem_contact_flags['cls_element'];
             }
         } elseif ($required) {
             $zem_contact_error[] = gTxt('zem_contact_field_missing', array('{field}' => txpspecialchars($label)));
-            $isError = "errorElement";
+            $isError = $zem_contact_flags['cls_element'];
         }
     } else {
         $value = $selected;
@@ -923,7 +945,7 @@ function zem_contact_select($atts, $thing = null)
 
     $classes = array();
 
-    foreach (array($class, ($required ? 'zemRequired' : ''), $isError) as $cls) {
+    foreach (array($class, ($required ? $zem_contact_flags['cls_required'] : ''), $isError) as $cls) {
         if ($cls) {
             $classes[] = $cls;
         }
@@ -1030,7 +1052,7 @@ function zem_contact_checkbox($atts)
 
         if ($required && !$value) {
             $zem_contact_error[] = gTxt('zem_contact_field_missing', array('{field}' => txpspecialchars($label)));
-            $isError = "errorElement";
+            $isError = $zem_contact_flags['cls_element'];
         } else {
             zem_contact_store($name, $label, $value ? gTxt('yes') : gTxt('no'));
         }
@@ -1058,7 +1080,7 @@ function zem_contact_checkbox($atts)
 
     $classes = array();
 
-    foreach (array($class, ($required ? 'zemRequired' : ''), $isError) as $cls) {
+    foreach (array($class, ($required ? $zem_contact_flags['cls_required'] : ''), $isError) as $cls) {
         if ($cls) {
             $classes[] = $cls;
         }
@@ -1169,7 +1191,7 @@ function zem_contact_radio($atts)
 
     $classes = array();
 
-    foreach (array($class, ($required ? 'zemRequired' : ''), $isError) as $cls) {
+    foreach (array($class, ($required ? $zem_contact_flags['cls_required'] : ''), $isError) as $cls) {
         if ($cls) {
             $classes[] = $cls;
         }
@@ -1744,6 +1766,8 @@ h2(#features). Features
 
 h2(#install). Upgrading and uninstallation
 
+*Requires Textpattern 4.5.0+*
+
 Download the latest version of the plugin from "the GitHub project page":https://github.com/Bloke/zem_contact_reborn/releases, paste the code into the Textpattern Admin → Plugins panel, install and enable the plugin. Visit the "forum thread":http://forum.textpattern.com/viewtopic.php?id=23728 for more info or to report on the success or otherwise of the plugin.
 
 Note that the language strings are part of the plugin itself, so if you are upgrading from v4.0.3.20 or earlier, disable or remove the zem_contact_lang plugin. If you have a translation Textpack available that is not yet incorporated, please submit it for inclusion.
@@ -1827,6 +1851,11 @@ h4. Attributes
 
 * @body_form="form name"@<br />Use specified form for the message body text.
 * @class="space-separated values"@<br />Set the CSS @class@ name of the tag. Default: @zemContactForm@. To remove @class@ attribute from the element entirely, use @class=""@.
+* @classes="comma-separated key:value pairs"@<br />Set the CSS classes for error / information conditions. Specify each as a pair of values separated by a colon, e.g. @classes="required: req_field, element: warn_field"@. There are up to four available to customise:
+** @element@: Set for each form field that fails validation for any reason. Default: @errorElement@.
+** @wrapper@: The class to surround the list of errors shown above the form. Default: @zemError@.
+** @required@: Class assigned when a required element is not completed. Default: @zemRequired@.
+** @thanks@: Class applied to the wrapper around the @thanks_form@. Default: @zemThanks@.
 * @copysender="boolean"@<br />Whether to send a copy of the email to the sender's address. Available values: @1@ (yes) or @0@ (no). Default is @0@.
 * @expire="number"@<br />Number of seconds after which the form will expire, thus requiring a page refresh before sending. Default is @600@.
 * @form="form name"@<br />Use specified form, containing the layout of the contact form fields.
@@ -2382,12 +2411,12 @@ h2(#styling). Styling
 
 The form itself has a @class@ of @zemContactForm@ set on the @form@ HTML tag.
 
-The list of error messages (if any) has a @class@ of @zemError@ set on the @ul@ HTML tag that encloses the list of errors.
+The list of error messages (if any) has a @class@ of @zemError@ set on the @ul@ HTML tag that encloses the list of errors. This class name may be overridden using the @classes@ attribute of the @zem_contact@ tag.
 
-All form elements and corresponding labels have the following classes (or ids set):
+All form elements and corresponding labels have the following classes (or ids set by default):
 
 # One of @zemText@, @zemEmail@, @zemTextarea@, @zemSelect@, @zemOption@, @zemRadio@, @zemCheckbox@ or @zemSubmit@. By default, it should be obvious which @class@ is used for which form element (and corresponding label). You can override these names by using your own @class@ attribute.
-# @zemRequired@ and/or @errorElement@, depending on whether the form element is required, an error was found in whatever the visitor entered... or both.
+# @zemRequired@ and/or @errorElement@, depending on whether the form element is required, an error was found in whatever the visitor entered, or both. These can be overriden using the @classes@ attribute on the @zem_contact@ tag.
 # An individual @id@ or @class@ set to the value of the @name@ attribute of the corresponding tag. When styling forms based on this @class@, you should explicitly set the @name@ attribute because automatically generated names may change in newer zem_contact_reborn versions.
 
 h2(#api). Zem Contact Reborn's API
