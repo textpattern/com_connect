@@ -121,11 +121,44 @@ zem_contact_send_article => Envoyer l'article
 zem_contact_spam => Nous refusons catégoriquement les spam. Bien à vous.
 zem_contact_text => Texte
 zem_contact_to_missing => l'adresse mail &#8220;<strong>To</strong>&#8221; est manquante.
+#@public
+#@language es-es
+zem_contact_checkbox => Checkbox
+zem_contact_contact => Contacto
+zem_contact_email => Email
+zem_contact_email_subject => {site} > Consulta
+zem_contact_email_thanks => Gracias, tu mensaje ha sido enviado.
+zem_contact_field_missing => falta el campo obligatorio &#8220;<strong>{field}</strong>&#8221;.
+zem_contact_format_warning => El valor {value} en &#8220;<strong>{field}</strong>&#8221; no es el formato esperado.
+zem_contact_form_expired => El formulario ha caducado, por favor inténtalo de nuevo.
+zem_contact_form_used => El formulario ya había sido enviado, por favor rellena el formulario de nuevo.
+zem_contact_general_inquiry => Consulta general
+zem_contact_invalid_email => &#8220;<strong>{email}</strong>&#8221; no es un email válido.
+zem_contact_invalid_host => &#8220;<strong>{host}</strong>&#8221; no es un dominio de email válido.
+zem_contact_invalid_utf8 => &#8220;<strong>{field}</strong>&#8221; contiene caracteres UTF-8 no válidos.
+zem_contact_invalid_value => Valor incorrecto para &#8220;<strong>{field}</strong>&#8221;, &#8220;<strong>{value}</strong>&#8221; No es una de las opciones disponibles.
+zem_contact_mail_sorry => Lo siento, no se pudo enviar el email.
+zem_contact_maxval_warning => &#8220;<strong>{field}</strong>&#8221; no debe exceder {value}.
+zem_contact_max_warning => &#8220;<strong>{field}</strong>&#8221; no debe contener más de {value} caracteres.
+zem_contact_message => Message
+zem_contact_minval_warning => &#8220;<strong>{field}</strong>&#8221; debe tener al menos {value}.
+zem_contact_min_warning => &#8220;<strong>{field}</strong>&#8221; debe contener al menos {value} caracteres.
+zem_contact_name => Name
+zem_contact_option => Option
+zem_contact_pattern_warning => &#8220;<strong>{field}</strong>&#8221; no encaja con el patrón {value}.
+zem_contact_radio => Radio
+zem_contact_recipient => Recipient
+zem_contact_refresh => Pincha aquí si la página no se recarga automáticamente.
+zem_contact_secret => Secreto
+zem_contact_send => Enviar
+zem_contact_send_article => Enviar artículo
+zem_contact_spam => Gracias, pero no aceptamos correo basura
+zem_contact_text => Texto
+zem_contact_to_missing => &#8220;<strong>To</strong>&#8221; falta la dirección de email.
 EOT;
 
-if (!defined('txpinterface')) {
-	@include_once('zem_tpl.php');
-}
+if (!defined('txpinterface'))
+        @include_once('zem_tpl.php');
 
 # --- BEGIN PLUGIN CODE ---
 //<?php
