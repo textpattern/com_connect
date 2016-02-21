@@ -2471,7 +2471,7 @@ Four callback events exist in zem_contact_reborn:
 
 * @zemcontact.submit@ is called after the form is submitted and the values are checked if empty or valid email addresses, but before the mail is sent.
 * @zemcontact.form@ lets you inject content (fields) in the contact form as displayed to the visitor.
-* @zemcontact.render@ lets you inject or alter markup of the entire @<form>@. Useful for editing thing like @enctype@ (e.g. for file attachment modules that link into this plugin).
+* @zemcontact.render@ lets you inject or alter markup of the entire @<form>@. Useful for editing things like @enctype@ (e.g. for file attachment modules that link into this plugin).
 * @zemcontact.deliver@ is called immediately prior to delivery and advertises the intended payload so you may manipulate it. For example, you could do something as simple as adding CC: or BCC: fields. Or change the MIME type header to @text/html@ and add some HTML content based on the given body data, then let zem_contact_reborn handle the mailing. Or you could intercept the entire mail process, handle mailing yourself with a third party system, and tell zem_contact_reborn to skip its internal mailing process.
 
 For reference here are the commands that will be interesting to plugin developers:
