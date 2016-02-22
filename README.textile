@@ -1,12 +1,41 @@
-h1. zem_contact_reborn
-
-*Requires Textpattern 4.5.0+*
+h1. Zem Contact Reborn
 
 A Textpattern CMS form mailer plugin. @<txp:zem_contact />@ produces a flexible, customisable email contact form. It is intended for use as an enquiry form for commercial and private sites, and includes several features to help reduce common problems with such forms (invalid email addresses, missing information).
 
 Please report bugs and problems with this plugin at "the GitHub project's issues page":https://github.com/Bloke/zem_contact_reborn/issues.
 
-h2. Features
+h2. Contents
+
+* "Features":#features
+* "Upgrading and uninstallation":#install
+* "Usage":#usage
+* "Tags":#tags
+** "zem_contact tag":#zc
+** "zem_contact_text tag":#zc_text
+** "zem_contact_email tag":#zc_email
+** "zem_contact_textarea tag":#zc_textarea
+** "zem_contact_submit tag":#zc_submit
+** "zem_contact_select tag":#zc_select
+** "zem_contact_option tag":#zc_option
+** "zem_contact_checkbox tag":#zc_checkbox
+** "zem_contact_radio tag":#zc_radio
+** "zem_contact_secret tag":#zc_secret
+** "zem_contact_serverinfo tag":#zc_serverinfo
+** "zem_contact_send_article tag":#zc_send_article
+** "zem_contact_label tag":#zc_label
+** "zem_contact_value tag":#zc_value
+** "zem_contact_if tag":#zc_if
+* "Advanced examples":#advanced
+** "Separate input and error forms":#advanced1
+** "User selectable subject field":#advanced2
+** "User selectable recipient, without showing email address":#advanced3
+* "Styling":#styling
+* "Plugin API and callback events":#api
+* "Frequently asked questions":#faq
+* "History":#history
+* "Authors/credits":#credits
+
+h2(#features). Features
 
 * Arbitrary HTML5 text fields can be specified, with min/max/required settings for validation.
 * Email address validation, including a check for a valid MX record (Unix only).
@@ -16,7 +45,9 @@ h2. Features
 * Various classes and ids to allow easy styling of all parts of the form.
 * Spam prevention API (used by Tranquillo's @pap_contact_cleaner@ plugin) and delivery API.
 
-h2. Installation, upgrading and uninstallation
+h2(#install). Upgrading and uninstallation
+
+*Requires Textpattern 4.5.0+*
 
 Download the latest version of the plugin from "the GitHub project page":https://github.com/Bloke/zem_contact_reborn/releases, paste the code into the Textpattern Admin → Plugins panel, install and enable the plugin. Visit the "forum thread":http://forum.textpattern.com/viewtopic.php?id=23728 for more info or to report on the success or otherwise of the plugin.
 
@@ -24,7 +55,7 @@ Note that the language strings are part of the plugin itself, so if you are upgr
 
 To uninstall, delete from the Admin → Plugins panel.
 
-h2. Usage
+h2(#usage). Usage
 
 h3. Contact form
 
@@ -68,7 +99,7 @@ bc.. <txp:zem_contact to="you@example.com" send_article="1">
 
 <txp:zem_contact_send_article />
 
-h2. Tags
+h2(#tags). Tags
 
 @<txp:zem_contact_send_article />@ can be used to create a 'Send article' link within an article form, connecting it to the contact form.
 
@@ -91,7 +122,7 @@ In addition to the tags detailed in the following sections, every tag accepts a 
 * @title="value"@<br />Usually used for hover tooltip describing the input control's use in your application.
 * @translate="boolean"@<br />Whether to subject the attribute content to language translation.
 
-h3. zem_contact tag
+h3(#zc). zem_contact tag
 
 bc. <txp:zem_contact />
 
@@ -101,6 +132,11 @@ h4. Attributes
 
 * @body_form="form name"@<br />Use specified form for the message body text.
 * @class="space-separated values"@<br />Set the CSS @class@ name of the tag. Default: @zemContactForm@. To remove @class@ attribute from the element entirely, use @class=""@.
+* @classes="comma-separated key:value pairs"@<br />Set the CSS classes for error / information conditions. Specify each as a pair of values separated by a colon, e.g. @classes="required: req_field, element: warn_field"@. There are up to four available to customise:
+** @element@: Set for each form field that fails validation for any reason. Default: @errorElement@.
+** @wrapper@: The class to surround the list of errors shown above the form. Default: @zemError@.
+** @required@: Class assigned when a required element is not completed. Default: @zemRequired@.
+** @thanks@: Class applied to the wrapper around the @thanks_form@. Default: @zemThanks@.
 * @copysender="boolean"@<br />Whether to send a copy of the email to the sender's address. Available values: @1@ (yes) or @0@ (no). Default is @0@.
 * @expire="number"@<br />Number of seconds after which the form will expire, thus requiring a page refresh before sending. Default is @600@.
 * @form="form name"@<br />Use specified form, containing the layout of the contact form fields.
@@ -116,7 +152,7 @@ h4. Attributes
 * @subject_form="form name"@<br />Use specified form (overrides @subject@ attribute).
 * @thanks="text"@<br />Message shown after successfully submitting a message. Default is @Thank you, your message has been sent@.
 * @thanks_form="form name"@<br />Use specified form (overrides @thanks@ attribute).
-* @to="email address"@ *(required)*<br />Recipient email address. Multiple recipients can be specified, separated by commas.
+* @to="email address"@ %(warning)required%<br />Recipient email address. Multiple recipients can be specified, separated by commas.
 * @to_form="form name"@<br />Use specified form (overrides @to@ attribute).
 
 h4. Examples
@@ -133,7 +169,7 @@ When used as a container tag, much more flexibility is allowed, for example:
 
 bc. <txp:zem_contact to="recipient@example.com">
     <txp:zem_contact_email />
-    <txp:zem_contact_text label="Phone" min="7" max="15" />
+    <txp:zem_contact_text type="tel" label="Phone" min="7" max="15" />
     <txp:zem_contact_textarea label="Your question" />
     <txp:zem_contact_submit label="Send" />
 </txp:zem_contact>
@@ -155,10 +191,11 @@ Email received.
 
 ============
 
-h3. zem_contact_text tag
+h3(#zc_text). zem_contact_text tag
 
 bc. <txp:zem_contact_text />
 
+Creates a text @<input>@ field and corresponding @<label>@ tag. The input value will be included in the email, preceded by the label.
 Creates a text @<input>@ field. The input value will be included in the email, preceded by the label.
 
 h4. Attributes
@@ -222,7 +259,7 @@ Create a telephone field with a "validation pattern for UK telephone number":htt
 
 bc. <txp:zem_contact_text type="tel" label="Telephone" pattern="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" required="1" />
 
-h3. zem_contact_email tag
+h3(#zc_email). zem_contact_email tag
 
 bc. <txp:zem_contact_email />
 
@@ -253,7 +290,7 @@ h5. Example 1
 
 bc. <txp:zem_contact_email label="Your email address" />
 
-h3. zem_contact_textarea tag
+h3(#zc_textarea). zem_contact_textarea tag
 
 bc. <txp:zem_contact_textarea />
 
@@ -285,11 +322,11 @@ Create a text area that is 40 characters wide, 10 lines high, with a customised 
 
 bc. <txp:zem_contact_textarea cols="40" rows="10" label="Your question" />
 
-h3. zem_contact_submit tag
+h3(#zc_submit). zem_contact_submit tag
 
 bc. <txp:zem_contact_submit />
 
-Creates a submit button. May be used as a single (self-closing) or container tag. When used as a container tag, a @<button>@ element will be used instead of an @<input>@ element.
+Creates a submit button. When used as a container tag, a @<button>@ element will be used instead of an @<input>@ element.
 
 h4. Attributes:
 
@@ -325,7 +362,7 @@ bc. <txp:zem_contact_submit>
     <img src="path/to/img.png" alt="submit">
 </txp:zem_contact_submit>
 
-h3. zem_contact_select tag
+h3(#zc_select). zem_contact_select tag
 
 bc. <txp:zem_contact_select />
 
@@ -364,7 +401,7 @@ bc. <txp:zem_contact_select label="Department" selected="Sales">
 
 Drop-down selection list containing three options plus a blank option (also see @zem_contact_option@ tag below), with 'Sales' selected by default.
 
-h3. zem_contact_option tag
+h3(#zc_option). zem_contact_option tag
 
 bc. <txp:zem_contact_option />
 
@@ -397,7 +434,7 @@ bc. <txp:zem_contact_select label="Department">
 
 Drop-down selection list containing three options as container tags with 'Sales' selected by default.
 
-h3. zem_contact_checkbox tag
+h3(#zc_checkbox). zem_contact_checkbox tag
 
 bc. <txp:zem_contact_checkbox />
 
@@ -431,7 +468,7 @@ bc. With which operating systems are you familiar?<br />
 <txp:zem_contact_checkbox label="Unix/Linux/BSD" required="0" /><br />
 <txp:zem_contact_checkbox label="MacOS" required="0" />
 
-h3. zem_contact_radio tag
+h3(#zc_radio). zem_contact_radio tag
 
 bc. <txp:zem_contact_radio />
 
@@ -442,11 +479,10 @@ h4. Attributes
 * @break="tag"@<br />Break tag between the radio button and label. Default is one space. Use @break="br"@ to put the radio button and label on separate lines.
 * @checked="boolean"@<br />Whether this radio option is checked when the form is first displayed. Available values: @1@ (yes) or @0@ (no). Default is @0@.
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the radio button. Default: @zemRadio@. To remove @class@ attribute from the element entirely, use @class=""@.
-* @group="text"@ *(required)*<br />Text used in the email to describe this group of radio buttons. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. Default is @Radio@.
+* @group="text"@ %(warning)required%<br />Text used in the email to describe this group of radio buttons. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. Default is @Radio@.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the radio button is attached. Associated with the contained form by default.
-* @label="text"@ *(required)*<br />Text label displayed to the user as radio button option.
-* @label_position="text"@<br />Position of the label in relation to the @<input>@ field. Available values: @before@ or @after@. Default is @after@.
-* @name="value"@ *(recommended)*<br />Field name, as used in the HTML @<input>@ tag. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. If it hasn't been set at all, it will be derived from the @group@ attribute.
+* @label="text"@ %(warning)required%<br />Text label displayed to the user as radio button option.
+* @name="value"@ %(warning)recommended%<br />Field name, as used in the HTML @<input>@ tag. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. If it hasn't been set at all, it will be derived from the @group@ attribute.
 * @required="boolean"@<br />Whether this radio set must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact>@ tag's @required@ attribute - if neither attribute is set then default is @1@. *You should set the @required@ attribute on only the first radio button of the group, or set the same identical attribute value on all radio buttons in the group.*
 
 h4. Examples
@@ -462,7 +498,7 @@ bc. <txp:zem_contact_radio label="Medium" group="I like my steak" />
 <txp:zem_contact_radio label="Beer" />
 <txp:zem_contact_radio label="Water" />
 
-h3. zem_contact_secret tag
+h3(#zc_secret). zem_contact_secret tag
 
 bc. <txp:zem_contact_secret />
 
@@ -490,7 +526,7 @@ bc. <txp:zem_contact_secret label="Dear user">
     Please provide a useful example for this tag!
 </txp:zem_contact_secret>
 
-h3. zem_contact_serverinfo tag
+h3(#zc_serverinfo). zem_contact_serverinfo tag
 
 bc. <txp:zem_contact_serverinfo />
 
@@ -499,7 +535,7 @@ This tag has no effect on the form or HTML output, but will include additional i
 h4. Attributes
 
 * @label="text"@<br />Used to identify the field in the email. Defaults to the value of the @name@ attribute.
-* @name="value"@ *(required)*<br />Name of the server variable. See the "PHP manual":http://php.net/manual/reserved.variables.php#reserved.variables.server for a full list.
+* @name="value"@ %(warning)required%<br />Name of the server variable. See the "PHP manual":http://php.net/manual/reserved.variables.php#reserved.variables.server for a full list.
 
 h4. Examples
 
@@ -515,7 +551,7 @@ Add the name of the visitor's browser to the email:
 
 bc. <txp:zem_contact_serverinfo name="HTTP_USER_AGENT" label="Browser" />
 
-h3. zem_contact_send_article tag
+h3(#zc_send_article). zem_contact_send_article tag
 
 bc. <txp:zem_contact_send_article />
 
@@ -533,7 +569,7 @@ On an article form:
 
 bc. <txp:zem_contact_send_article linktext="Send this article" />
 
-h3. zem_contact_label tag
+h3(#zc_label). zem_contact_label tag
 
 bc. <txp:zem_contact_label />
 
@@ -543,7 +579,7 @@ h4. Attributes
 
 * @name="text"@<br />The name of the field for which you wish to retrieve the label.
 
-h3. zem_contact_value tag
+h3(#zc_value). zem_contact_value tag
 
 bc. <txp:zem_contact_value />
 
@@ -554,7 +590,7 @@ h4. Attributes
 * @label="text"@<br />The label of the field for which you wish to retrieve the value.
 * @name="text"@<br />The name of the field for which you wish to retrieve the value.
 
-h3. zem_contact_if tag
+h3(#zc_if). zem_contact_if tag
 
 bc. <txp:zem_contact_if />
 
@@ -576,9 +612,9 @@ bc. <txp:zem_contact_if name="delivery" value="courier">
 
 Please note, this option incurs an additional charge, @</txp:zem_contact_if>@.
 
-h2. Advanced examples
+h2(#advanced). Advanced examples
 
-h3. Separate input and error forms
+h3(#advanced1). Separate input and error forms
 
 Using @show_input@ and @show_error@ to display the form and error messages on different parts of a page. A form is used to make sure the contents of both forms are identical, otherwise they would be seen as two independent forms. The first form only shows errors (no input), the second form only shows the input fields (no errors).
 
@@ -591,7 +627,7 @@ bc. <div id="error">
 
 Apart from the @show_error@ and @show_input@ attributes, all other attributes must be 100% identical in both forms, otherwise they would be seen as two unrelated forms.
 
-h3. User selectable subject field
+h3(#advanced2). User selectable subject field
 
 Specify the @subject_form@ attribute and create a form which includes a @zem_contact_select@ tag:
 
@@ -618,7 +654,7 @@ bc. <txp:php>
     echo 'My common prefix - ' . $zem_contact_form['Choose Subject'];
 </txp:php>
 
-h3. User selectable recipient, without showing email address
+h3(#advanced3). User selectable recipient, without showing email address
 
 Specify the @to_form@ attribute and create a form which includes a @zem_contact_select@ tag:
 
@@ -650,21 +686,21 @@ The @label@ used in the @zem_contact_select@ tag must be identical to the corres
 
 A 'default' email address in the @to_form@ is specified to ensure that a valid email address is used in cases where you add or change a select/radio option and forget to update the @to_form@.
 
-*Warning:* Never use tags like @zem_contact_text@, @zem_contact_email@ or @zem_contact_textarea@ for setting the recipient address, otherwise your form can be abused to send spam to any email address!
+p(alert-block warning). *Warning:* Never use tags like @zem_contact_text@, @zem_contact_email@ or @zem_contact_textarea@ for setting the recipient address, otherwise your form can be abused to send spam to any email address!
 
-h2. Styling
+h2(#styling). Styling
 
 The form itself has a @class@ of @zemContactForm@ set on the @form@ HTML tag.
 
-The list of error messages (if any) has a @class@ of @zemError@ set on the @ul@ HTML tag that encloses the list of errors.
+The list of error messages (if any) has a @class@ of @zemError@ set on the @ul@ HTML tag that encloses the list of errors. This class name may be overridden using the @classes@ attribute of the @zem_contact@ tag.
 
-All form elements and corresponding labels have the following classes (or ids set):
+All form elements and corresponding labels have the following classes (or ids set by default):
 
 # One of @zemText@, @zemEmail@, @zemTextarea@, @zemSelect@, @zemOption@, @zemRadio@, @zemCheckbox@ or @zemSubmit@. By default, it should be obvious which @class@ is used for which form element (and corresponding label). You can override these names by using your own @class@ attribute.
-# @zemRequired@ and/or @errorElement@, depending on whether the form element is required, an error was found in whatever the visitor entered... or both.
+# @zemRequired@ and/or @errorElement@, depending on whether the form element is required, an error was found in whatever the visitor entered, or both. These can be overriden using the @classes@ attribute on the @zem_contact@ tag.
 # An individual @id@ or @class@ set to the value of the @name@ attribute of the corresponding tag. When styling forms based on this @class@, you should explicitly set the @name@ attribute because automatically generated names may change in newer zem_contact_reborn versions.
 
-h2. Plugin API and callback events
+h2(#api). Zem Contact Reborn's API
 
 The plugin API of zem_contact_reborn, originally developed by Tranquillo, allows other plugins to interact with contact forms. This permits extra functionality such as "Combatting Comment Spam":http://textpattern.net/wiki/index.php?title=Combat_Comment_Spam, HTML email, newsletter delivery and so forth to be bolted onto the base plugin.
 
@@ -672,7 +708,7 @@ Four callback events exist in zem_contact_reborn:
 
 * @zemcontact.submit@ is called after the form is submitted and the values are checked if empty or valid email addresses, but before the mail is sent.
 * @zemcontact.form@ lets you inject content (fields) in the contact form as displayed to the visitor.
-* @zemcontact.render@ lets you inject or alter markup of the entire @<form>@. Useful for editing thing like @enctype@ (e.g. for file attachment modules that link into this plugin).
+* @zemcontact.render@ lets you inject or alter markup of the entire @<form>@. Useful for editing things like @enctype@ (e.g. for file attachment modules that link into this plugin).
 * @zemcontact.deliver@ is called immediately prior to delivery and advertises the intended payload so you may manipulate it. For example, you could do something as simple as adding CC: or BCC: fields. Or change the MIME type header to @text/html@ and add some HTML content based on the given body data, then let zem_contact_reborn handle the mailing. Or you could intercept the entire mail process, handle mailing yourself with a third party system, and tell zem_contact_reborn to skip its internal mailing process.
 
 For reference here are the commands that will be interesting to plugin developers:
