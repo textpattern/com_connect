@@ -487,14 +487,14 @@ END;
         $out = '<form method="post"' . ((!$show_error && $zem_contact_error) ? '' : ' id="zcr' . $zem_contact_form_id . '"') .
             ($class ? ' class="' . $class . '"' : '') .
             ' action="' . txpspecialchars(serverSet('REQUEST_URI')) . '#zcr' . $zem_contact_form_id . '">' .
-            ($label ? n . '<fieldset>' : n . '<div>') .
+            ($label ? n . '<fieldset>' : '') .
             ($label ? n . '<legend>' . txpspecialchars($label) . '</legend>' : '') .
             $out .
             n . '<input type="hidden" name="zem_contact_nonce" value="' . $zem_contact_nonce . '" />' .
             n . '<input type="hidden" name="zem_contact_form_id" value="' . $zem_contact_form_id . '" />' .
             $form .
             callback_event('zemcontact.form') .
-            ($label ? (n . '</fieldset>') : (n . '</div>')) .
+            ($label ? (n . '</fieldset>') : '') .
             n . '</form>';
 
         callback_event_ref('zemcontact.render', '', 0, $out, $atts);
