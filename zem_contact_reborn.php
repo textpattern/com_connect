@@ -89,6 +89,40 @@ zem_contact_spam => We do not accept spam, thank you!
 zem_contact_text => Text
 zem_contact_to_missing => &#8220;<strong>To</strong>&#8221; email address is missing.
 #@public
+#@language pt-br
+zem_contact_checkbox => Checkbox
+zem_contact_contact => Contato
+zem_contact_email => Email
+zem_contact_email_subject => {site} > Contato
+zem_contact_email_thanks => Obrigado, sua mensagem foi enviada.
+zem_contact_field_missing => Faltou preencher o campo requerido &#8220;<strong>{field}</strong>&#8221;.
+zem_contact_format_warning => O valor {value} em &#8220;<strong>{field}</strong>&#8221; não está formato esperado.
+zem_contact_form_expired => O formulário expirou, por favor tente novamente.
+zem_contact_form_used => O formulário já foi enviado, por favor preencha o formulário novamente.
+zem_contact_general_inquiry => Assuntos gerais
+zem_contact_invalid_email => &#8220;<strong>{email}</strong>&#8221; não é um endereço de email válido.
+zem_contact_invalid_host => &#8220;<strong>{host}</strong>&#8221; não é um domínio de email válido.
+zem_contact_invalid_utf8 => &#8220;<strong>{field}</strong>&#8221; contém caracteres UTF-8 inválidos.
+zem_contact_invalid_value => Valor incorreto para &#8220;<strong>{field}</strong>&#8221;, &#8220;<strong>{value}</strong>&#8221; Não é uma das opções disponíveis.
+zem_contact_mail_sorry => Desculpe, não foi possível enviar o email.
+zem_contact_maxval_warning => &#8220;<strong>{field}</strong>&#8221; não pode exceder {value}.
+zem_contact_max_warning => &#8220;<strong>{field}</strong>&#8221; não pode conter mais que {value} caracteres.
+zem_contact_message => Mensagem
+zem_contact_minval_warning => &#8220;<strong>{field}</strong>&#8221; deve ter ao menos {value}.
+zem_contact_min_warning => &#8220;<strong>{field}</strong>&#8221; deve conter ao menos {value} caracteres.
+zem_contact_name => Nome
+zem_contact_option => Opção
+zem_contact_pattern_warning => &#8220;<strong>{field}</strong>&#8221; não se encaixa no formato {value}.
+zem_contact_radio => Rádio
+zem_contact_recipient => Destinatário
+zem_contact_refresh => Clique neste link caso a página não se atualize automaticamente.
+zem_contact_secret => Secreto
+zem_contact_send => Enviar
+zem_contact_send_article => Enviar artigo
+zem_contact_spam => Não aceitamos SPAM, obrigado!
+zem_contact_text => Texto
+zem_contact_to_missing => &#8220;<strong>To</strong>&#8221; falta o endereço de email.
+#@public
 #@language fr-fr
 zem_contact_checkbox => Case à cocher
 zem_contact_contact => Contact
