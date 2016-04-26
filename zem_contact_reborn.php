@@ -246,23 +246,36 @@ function zem_contact($atts, $thing = null)
         'form'         => '',
         'from'         => '',
         'from_form'    => '',
-        'label'        => gTxt('zem_contact_contact'),
+        'label'        => '',
         'redirect'     => '',
         'required'     => '1',
         'show_error'   => 1,
         'show_input'   => 1,
         'send_article' => 0,
-        'subject'      => gTxt('zem_contact_email_subject', array('{site}' => html_entity_decode($sitename,ENT_QUOTES))),
+        'subject'      => '',
         'subject_form' => '',
         'to'           => '',
         'to_form'      => '',
-        'thanks'       => graf(gTxt('zem_contact_email_thanks')),
+        'thanks'       => '',
         'thanks_form'  => ''
     ), $atts));
 
     if ($lang) {
         $strings = zem_contact_load_lang($lang);
         $textarray = array_merge($textarray, $strings);
+    }
+
+    // Set defaults, in the local language if necessary.
+    if ($label === '') {
+        $label = gTxt('zem_contact_contact');
+    }
+
+    if ($subject === '') {
+        $subject = gTxt('zem_contact_email_subject', array('{site}' => html_entity_decode($sitename,ENT_QUOTES)));
+    }
+
+    if ($thanks === '') {
+        $thanks = graf(gTxt('zem_contact_email_thanks'));
     }
 
     unset($atts['show_error'], $atts['show_input']);
@@ -1980,7 +1993,7 @@ h4. Attributes
 * @thanks_form="form name"@<br />Use specified form (overrides @thanks@ attribute).
 * @to="email address"@ %(warning)required%<br />Recipient email address. Multiple recipients can be specified, separated by commas.
 * @to_form="form name"@<br />Use specified form (overrides @to@ attribute).
-
+* @lang="lang-code"@<br />Override the language strings that would normally be used from the current admin-side language in force. e.g. @lang="fr=fr"@ would load the French language strings. A Textpack must already exist for the chosen language.
 h4. Examples
 
 h5. Example 1
