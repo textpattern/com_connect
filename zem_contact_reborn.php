@@ -1994,6 +1994,7 @@ h4. Attributes
 * @to="email address"@ %(warning)required%<br />Recipient email address. Multiple recipients can be specified, separated by commas.
 * @to_form="form name"@<br />Use specified form (overrides @to@ attribute).
 * @lang="lang-code"@<br />Override the language strings that would normally be used from the current admin-side language in force. e.g. @lang="fr=fr"@ would load the French language strings. A Textpack must already exist for the chosen language.
+
 h4. Examples
 
 h5. Example 1
