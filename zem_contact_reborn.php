@@ -233,7 +233,7 @@ if (class_exists('\Textpattern\Tag\Registry')) {
  */
 function zem_contact($atts, $thing = null)
 {
-    global $sitename, $zem_contact_flags, $zem_contact_from,
+    global $sitename, $textarray, $zem_contact_flags, $zem_contact_from,
         $zem_contact_recipient, $zem_contact_error, $zem_contact_submit,
         $zem_contact_form, $zem_contact_labels, $zem_contact_values;
 
@@ -259,6 +259,11 @@ function zem_contact($atts, $thing = null)
         'thanks'       => graf(gTxt('zem_contact_email_thanks')),
         'thanks_form'  => ''
     ), $atts));
+
+    if ($lang) {
+        $strings = zem_contact_load_lang($lang);
+        $textarray = array_merge($textarray, $strings);
+    }
 
     unset($atts['show_error'], $atts['show_input']);
 
@@ -1713,6 +1718,30 @@ function zem_contact_store($name, $label, $value)
     $zem_contact_form[$label] = $value;
     $zem_contact_labels[$name] = $label;
     $zem_contact_values[$name] = $value;
+}
+
+/**
+ * Override the language strings if necessary.
+ *
+ * @param  string $lang Language designator (e.g. fr-fr)
+ * @return array        Partial language array to merge with $textarray
+ */
+function zem_contact_load_lang($lang = LANG)
+{
+    $out = array();
+
+    if ($lang != LANG) {
+
+        $rs = safe_rows("name, data", 'txp_lang', "lang = '" . doSlash($lang) . "' AND name like 'zem\_contact\_%'");
+
+        if (!empty($rs)) {
+            foreach ($rs as $a) {
+                $out[$a['name']] = $a['data'];
+            }
+        }
+    }
+
+    return $out;
 }
 
 /**
