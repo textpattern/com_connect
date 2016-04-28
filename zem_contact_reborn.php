@@ -246,17 +246,17 @@ function zem_contact($atts, $thing = null)
         'form'         => '',
         'from'         => '',
         'from_form'    => '',
-        'label'        => '',
+        'label'        => null,
         'redirect'     => '',
         'required'     => '1',
         'show_error'   => 1,
         'show_input'   => 1,
         'send_article' => 0,
-        'subject'      => '',
+        'subject'      => null,
         'subject_form' => '',
         'to'           => '',
         'to_form'      => '',
-        'thanks'       => '',
+        'thanks'       => null,
         'thanks_form'  => ''
     ), $atts));
 
@@ -266,15 +266,15 @@ function zem_contact($atts, $thing = null)
     }
 
     // Set defaults, in the local language if necessary.
-    if ($label === '') {
+    if ($label === null) {
         $label = gTxt('zem_contact_contact');
     }
 
-    if ($subject === '') {
+    if ($subject === null) {
         $subject = gTxt('zem_contact_email_subject', array('{site}' => html_entity_decode($sitename,ENT_QUOTES)));
     }
 
-    if ($thanks === '') {
+    if ($thanks === null) {
         $thanks = graf(gTxt('zem_contact_email_thanks'));
     }
 
