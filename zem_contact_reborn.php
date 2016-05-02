@@ -260,7 +260,7 @@ function zem_contact($atts, $thing = null)
         'thanks_form'  => ''
     ), $atts));
 
-    if ($lang) {
+    if (!empty($lang)) {
         $strings = zem_contact_load_lang($lang);
         $textarray = array_merge($textarray, $strings);
     }
