@@ -986,7 +986,7 @@ function zem_contact_select($atts, $thing = null)
         $out = '';
 
         foreach ($options as $item) {
-            $out .= n.t.'<option' . ($item == $value ? ' selected="selected">' : '>') . (strlen($item) ? txpspecialchars($item) : ' ') . '</option>';
+            $out .= n.t.'<option' . ($item == $value ? ' selected' . (($doctype === 'xhtml') ? '="selected"' : '') . '>' : '>') . (strlen($item) ? txpspecialchars($item) : ' ') . '</option>';
         }
     }
 
@@ -1077,22 +1077,27 @@ function zem_contact_option($atts, $thing = null)
     ), $atts));
 
     $val = ($value !== null) ? $value : $thing;
+
+    if (empty($val)) {
+        $val = $label;
+    }
+
     $attr = array();
+    $doctype = get_pref('doctype', 'xhtml');
 
     if ($zem_contact_submit) {
         $options[] = $val;
 
-        if ($val == $match) {
-            $attr[] = 'selected="selected"';
+        if ($val !== null && ((string)$val === (string)$match)) {
+            $attr[] = 'selected' . (($doctype === 'xhtml') ? '="selected"' : '');
         }
-    } elseif ($selected || $val == $match) {
-        $attr[] = 'selected="selected"';
+    } elseif ($selected || ($val !== null && ((string)$val === (string)$match))) {
+        $attr[] = 'selected' . (($doctype === 'xhtml') ? '="selected"' : '');
     }
 
     // Core attributes.
     $attr += zem_contact_build_atts(array(
-        'label' => $label,
-        'value' => $value,
+        'value' => $val,
     ));
 
     // Global attributes.
@@ -1100,7 +1105,7 @@ function zem_contact_option($atts, $thing = null)
 
     $classStr = (($class) ? ' class="' . $class . '"' : '');
 
-    return '<option' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . '>' . txpspecialchars($thing) . '</option>';
+    return '<option' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . '>' . txpspecialchars($val) . '</option>';
 }
 
 /**
@@ -1176,7 +1181,7 @@ function zem_contact_checkbox($atts)
 
     return ($label_position === 'before' ? $labelStr . $break : '') .
         '<input type="checkbox"' . $classStr .
-            ($value ? ' checked="checked"' : '') . ($attr ? ' ' . implode(' ', $attr) : '') . ' />' .
+            ($value ? ' checked' . (($doctype === 'xhtml') ? '="checked"' : '') : '') . ($attr ? ' ' . implode(' ', $attr) : '') . ' />' .
         ($label_position === 'after' ? $break . $labelStr : '');
 }
 
@@ -1287,7 +1292,7 @@ function zem_contact_radio($atts)
 
     return ($label_position === 'before' ? $labelStr . $break : '') .
         '<input type="radio"'. $classStr . ($attr ? ' ' . implode(' ', $attr) : '') .
-            ( $is_checked ? ' checked="checked" />' : ' />') .
+            ( $is_checked ? ' checked' . (($doctype === 'xhtml') ? '="checked"' : ''). '" />' : ' />') .
         ($label_position === 'after' ? $break . $labelStr : '');
 }
 
@@ -2250,7 +2255,7 @@ Creates a drop-down selection option. May be used as a single (self-closing) or 
 h4. Attributes
 
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the option. Default: @zemOption@. To remove @class@ attribute from the element entirely, use @class=""@.
-* @label="text"@<br />Text label of this option displayed to the user.
+* @label="text"@ %(warning)required%<br />Text label of this option displayed to the user.
 * @selected="boolean"@<br />Whether this item is selected, May also be specified in the container tag's @selected@ attribute. Available values: @1@ (yes) or @0@ (no).
 * @value="text"@<br />The value associated with this option when submitted. Default is the label.
 
