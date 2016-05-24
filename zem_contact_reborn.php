@@ -740,6 +740,12 @@ function zem_contact_text($atts)
             'placeholder'  => $placeholder,
             'required'     => $required,
         ));
+
+        if ($isError) {
+            $attr += zem_contact_build_atts(array(
+                'aria-invalid' => 'true',
+            ));
+        }
     }
 
     // Global attributes.
@@ -915,6 +921,12 @@ function zem_contact_textarea($atts)
             'placeholder'  => $placeholder,
             'required'     => $required,
         ));
+
+        if ($isError) {
+            $attr += zem_contact_build_atts(array(
+                'aria-invalid' => 'true',
+            ));
+        }
     }
 
     // Global attributes.
@@ -1025,6 +1037,12 @@ function zem_contact_select($atts, $thing = null)
             'form'     => $html_form,
             'required' => $required,
         ));
+
+        if ($isError) {
+            $attr += zem_contact_build_atts(array(
+                'aria-invalid' => 'true',
+            ));
+        }
     }
 
     // Global attributes.
@@ -1173,6 +1191,12 @@ function zem_contact_checkbox($atts)
             'form'     => $html_form,
             'required' => $required,
         ));
+
+        if ($isError) {
+            $attr += zem_contact_build_atts(array(
+                'aria-invalid' => 'true',
+            ));
+        }
     }
 
     // Global attributes.
