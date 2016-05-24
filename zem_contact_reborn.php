@@ -89,39 +89,39 @@ zem_contact_spam => We do not accept spam, thank you!
 zem_contact_text => Text
 zem_contact_to_missing => &#8220;<strong>To</strong>&#8221; email address is missing.
 #@public
-#@language pt-br
+#@language es-es
 zem_contact_checkbox => Checkbox
-zem_contact_contact => Contato
+zem_contact_contact => Contacto
 zem_contact_email => Email
-zem_contact_email_subject => {site} > Contato
-zem_contact_email_thanks => Obrigado, sua mensagem foi enviada.
-zem_contact_field_missing => Faltou preencher o campo requerido &#8220;<strong>{field}</strong>&#8221;.
-zem_contact_format_warning => O valor {value} em &#8220;<strong>{field}</strong>&#8221; não está formato esperado.
-zem_contact_form_expired => O formulário expirou, por favor tente novamente.
-zem_contact_form_used => O formulário já foi enviado, por favor preencha o formulário novamente.
-zem_contact_general_inquiry => Assuntos gerais
-zem_contact_invalid_email => &#8220;<strong>{email}</strong>&#8221; não é um endereço de email válido.
-zem_contact_invalid_host => &#8220;<strong>{host}</strong>&#8221; não é um domínio de email válido.
-zem_contact_invalid_utf8 => &#8220;<strong>{field}</strong>&#8221; contém caracteres UTF-8 inválidos.
-zem_contact_invalid_value => Valor incorreto para &#8220;<strong>{field}</strong>&#8221;, &#8220;<strong>{value}</strong>&#8221; Não é uma das opções disponíveis.
-zem_contact_mail_sorry => Desculpe, não foi possível enviar o email.
-zem_contact_maxval_warning => &#8220;<strong>{field}</strong>&#8221; não pode exceder {value}.
-zem_contact_max_warning => &#8220;<strong>{field}</strong>&#8221; não pode conter mais que {value} caracteres.
-zem_contact_message => Mensagem
-zem_contact_minval_warning => &#8220;<strong>{field}</strong>&#8221; deve ter ao menos {value}.
-zem_contact_min_warning => &#8220;<strong>{field}</strong>&#8221; deve conter ao menos {value} caracteres.
-zem_contact_name => Nome
-zem_contact_option => Opção
-zem_contact_pattern_warning => &#8220;<strong>{field}</strong>&#8221; não se encaixa no formato {value}.
-zem_contact_radio => Rádio
-zem_contact_recipient => Destinatário
-zem_contact_refresh => Clique neste link caso a página não se atualize automaticamente.
+zem_contact_email_subject => {site} > Consulta
+zem_contact_email_thanks => Gracias, tu mensaje ha sido enviado.
+zem_contact_field_missing => falta el campo obligatorio &#8220;<strong>{field}</strong>&#8221;.
+zem_contact_format_warning => El valor {value} en &#8220;<strong>{field}</strong>&#8221; no es el formato esperado.
+zem_contact_form_expired => El formulario ha caducado, por favor inténtalo de nuevo.
+zem_contact_form_used => El formulario ya había sido enviado, por favor rellena el formulario de nuevo.
+zem_contact_general_inquiry => Consulta general
+zem_contact_invalid_email => &#8220;<strong>{email}</strong>&#8221; no es un email válido.
+zem_contact_invalid_host => &#8220;<strong>{host}</strong>&#8221; no es un dominio de email válido.
+zem_contact_invalid_utf8 => &#8220;<strong>{field}</strong>&#8221; contiene caracteres UTF-8 no válidos.
+zem_contact_invalid_value => Valor incorrecto para &#8220;<strong>{field}</strong>&#8221;, &#8220;<strong>{value}</strong>&#8221; No es una de las opciones disponibles.
+zem_contact_mail_sorry => Lo siento, no se pudo enviar el email.
+zem_contact_maxval_warning => &#8220;<strong>{field}</strong>&#8221; no debe exceder {value}.
+zem_contact_max_warning => &#8220;<strong>{field}</strong>&#8221; no debe contener más de {value} caracteres.
+zem_contact_message => Message
+zem_contact_minval_warning => &#8220;<strong>{field}</strong>&#8221; debe tener al menos {value}.
+zem_contact_min_warning => &#8220;<strong>{field}</strong>&#8221; debe contener al menos {value} caracteres.
+zem_contact_name => Name
+zem_contact_option => Option
+zem_contact_pattern_warning => &#8220;<strong>{field}</strong>&#8221; no encaja con el patrón {value}.
+zem_contact_radio => Radio
+zem_contact_recipient => Recipient
+zem_contact_refresh => Pincha aquí si la página no se recarga automáticamente.
 zem_contact_secret => Secreto
 zem_contact_send => Enviar
-zem_contact_send_article => Enviar artigo
-zem_contact_spam => Não aceitamos SPAM, obrigado!
+zem_contact_send_article => Enviar artículo
+zem_contact_spam => Gracias, pero no aceptamos correo basura
 zem_contact_text => Texto
-zem_contact_to_missing => &#8220;<strong>To</strong>&#8221; falta o endereço de email.
+zem_contact_to_missing => &#8220;<strong>To</strong>&#8221; falta la dirección de email.
 #@public
 #@language fr-fr
 zem_contact_checkbox => Case à cocher
@@ -156,39 +156,39 @@ zem_contact_spam => Nous refusons catégoriquement les spam. Bien à vous.
 zem_contact_text => Texte
 zem_contact_to_missing => l'adresse mail &#8220;<strong>To</strong>&#8221; est manquante.
 #@public
-#@language es-es
+#@language pt-br
 zem_contact_checkbox => Checkbox
-zem_contact_contact => Contacto
+zem_contact_contact => Contato
 zem_contact_email => Email
-zem_contact_email_subject => {site} > Consulta
-zem_contact_email_thanks => Gracias, tu mensaje ha sido enviado.
-zem_contact_field_missing => falta el campo obligatorio &#8220;<strong>{field}</strong>&#8221;.
-zem_contact_format_warning => El valor {value} en &#8220;<strong>{field}</strong>&#8221; no es el formato esperado.
-zem_contact_form_expired => El formulario ha caducado, por favor inténtalo de nuevo.
-zem_contact_form_used => El formulario ya había sido enviado, por favor rellena el formulario de nuevo.
-zem_contact_general_inquiry => Consulta general
-zem_contact_invalid_email => &#8220;<strong>{email}</strong>&#8221; no es un email válido.
-zem_contact_invalid_host => &#8220;<strong>{host}</strong>&#8221; no es un dominio de email válido.
-zem_contact_invalid_utf8 => &#8220;<strong>{field}</strong>&#8221; contiene caracteres UTF-8 no válidos.
-zem_contact_invalid_value => Valor incorrecto para &#8220;<strong>{field}</strong>&#8221;, &#8220;<strong>{value}</strong>&#8221; No es una de las opciones disponibles.
-zem_contact_mail_sorry => Lo siento, no se pudo enviar el email.
-zem_contact_maxval_warning => &#8220;<strong>{field}</strong>&#8221; no debe exceder {value}.
-zem_contact_max_warning => &#8220;<strong>{field}</strong>&#8221; no debe contener más de {value} caracteres.
-zem_contact_message => Message
-zem_contact_minval_warning => &#8220;<strong>{field}</strong>&#8221; debe tener al menos {value}.
-zem_contact_min_warning => &#8220;<strong>{field}</strong>&#8221; debe contener al menos {value} caracteres.
-zem_contact_name => Name
-zem_contact_option => Option
-zem_contact_pattern_warning => &#8220;<strong>{field}</strong>&#8221; no encaja con el patrón {value}.
-zem_contact_radio => Radio
-zem_contact_recipient => Recipient
-zem_contact_refresh => Pincha aquí si la página no se recarga automáticamente.
+zem_contact_email_subject => {site} > Contato
+zem_contact_email_thanks => Obrigado, sua mensagem foi enviada.
+zem_contact_field_missing => Faltou preencher o campo requerido &#8220;<strong>{field}</strong>&#8221;.
+zem_contact_format_warning => O valor {value} em &#8220;<strong>{field}</strong>&#8221; não está formato esperado.
+zem_contact_form_expired => O formulário expirou, por favor tente novamente.
+zem_contact_form_used => O formulário já foi enviado, por favor preencha o formulário novamente.
+zem_contact_general_inquiry => Assuntos gerais
+zem_contact_invalid_email => &#8220;<strong>{email}</strong>&#8221; não é um endereço de email válido.
+zem_contact_invalid_host => &#8220;<strong>{host}</strong>&#8221; não é um domínio de email válido.
+zem_contact_invalid_utf8 => &#8220;<strong>{field}</strong>&#8221; contém caracteres UTF-8 inválidos.
+zem_contact_invalid_value => Valor incorreto para &#8220;<strong>{field}</strong>&#8221;, &#8220;<strong>{value}</strong>&#8221; Não é uma das opções disponíveis.
+zem_contact_mail_sorry => Desculpe, não foi possível enviar o email.
+zem_contact_maxval_warning => &#8220;<strong>{field}</strong>&#8221; não pode exceder {value}.
+zem_contact_max_warning => &#8220;<strong>{field}</strong>&#8221; não pode conter mais que {value} caracteres.
+zem_contact_message => Mensagem
+zem_contact_minval_warning => &#8220;<strong>{field}</strong>&#8221; deve ter ao menos {value}.
+zem_contact_min_warning => &#8220;<strong>{field}</strong>&#8221; deve conter ao menos {value} caracteres.
+zem_contact_name => Nome
+zem_contact_option => Opção
+zem_contact_pattern_warning => &#8220;<strong>{field}</strong>&#8221; não se encaixa no formato {value}.
+zem_contact_radio => Rádio
+zem_contact_recipient => Destinatário
+zem_contact_refresh => Clique neste link caso a página não se atualize automaticamente.
 zem_contact_secret => Secreto
 zem_contact_send => Enviar
-zem_contact_send_article => Enviar artículo
-zem_contact_spam => Gracias, pero no aceptamos correo basura
+zem_contact_send_article => Enviar artigo
+zem_contact_spam => Não aceitamos SPAM, obrigado!
 zem_contact_text => Texto
-zem_contact_to_missing => &#8220;<strong>To</strong>&#8221; falta la dirección de email.
+zem_contact_to_missing => &#8220;<strong>To</strong>&#8221; falta o endereço de email.
 EOT;
 
 if (!defined('txpinterface'))
@@ -247,6 +247,7 @@ function zem_contact($atts, $thing = null)
         'from'         => '',
         'from_form'    => '',
         'label'        => null,
+        'novalidate'   => 0,
         'redirect'     => '',
         'required'     => '1',
         'show_error'   => 1,
@@ -538,6 +539,7 @@ END;
     if ($show_input && !$send_article || gps('zem_contact_send_article')) {
         $out = '<form method="post"' . ((!$show_error && $zem_contact_error) ? '' : ' id="zcr' . $zem_contact_form_id . '"') .
             ($class ? ' class="' . $class . '"' : '') .
+            ($novalidate ? ' novalidate' : '') .
             ' action="' . txpspecialchars(serverSet('REQUEST_URI')) . '#zcr' . $zem_contact_form_id . '">' .
             ($label ? n . '<fieldset>' : n . '<div>') .
             ($label ? n . '<legend>' . txpspecialchars($label) . '</legend>' : '') .
@@ -1208,40 +1210,47 @@ function zem_contact_radio($atts)
         'required'       => null,
     ), $atts));
 
-    static $cur_name = '';
-    static $cur_group = '';
-    static $cur_req = null;
+    static $cur_name = array();
+    static $cur_req = array();
+    static $cur_group = null;
 
-    if (!$name && !$group && !$cur_name && !$cur_group) {
-        $cur_group = gTxt('zem_contact_radio');
-        $cur_name = $cur_group;
-    }
-
-    if ($required === null && $cur_req === null) {
-        $cur_req = $zem_contact_flags['required'];
-    }
-
-    if ($group && !$name && $group != $cur_group) {
-        $name = $group;
-    }
-
-    if ($name) {
-        $cur_name = $name;
+    if (!$group) {
+        if ($cur_group === null) {
+            $group = gTxt('zem_contact_radio');
+        } else {
+            $group = $cur_group;
+        }
     } else {
-        $name = $cur_name;
+        if (!$name) {
+            $name = $group;
+        }
     }
 
-    if ($group) {
-        $cur_group = $group;
+    if (isset($cur_name[$group])) {
+        if (!$name) {
+            $name = $cur_name[$group];
+        }
     } else {
-        $group = $cur_group;
+        if ($name) {
+            $cur_name[$group] = $name;
+        } else {
+            $name = $cur_name[$group] = gTxt('zem_contact_radio');
+        }
     }
 
-    if ($required !== null) {
-        $cur_req = $required;
+    if (isset($cur_req[$group])) {
+        if ($required === null) {
+            $required = $cur_req[$group];
+        }
     } else {
-        $required = $cur_req;
+        if ($required === null) {
+            $required = $cur_req[$group] = $zem_contact_flags['required'];
+        } else {
+            $cur_req[$group] = $required;
+        }
     }
+
+    $cur_group = $group;
 
     $id = 'q' . md5($name . '=>' . $label);
     $name = zem_contact_label2name($name);
@@ -1292,7 +1301,7 @@ function zem_contact_radio($atts)
 
     return ($label_position === 'before' ? $labelStr . $break : '') .
         '<input type="radio"'. $classStr . ($attr ? ' ' . implode(' ', $attr) : '') .
-            ( $is_checked ? ' checked' . (($doctype === 'xhtml') ? '="checked"' : ''). '" />' : ' />') .
+            ( $is_checked ? ' checked' . (($doctype === 'xhtml') ? '="checked"' : ''). ' />' : ' />') .
         ($label_position === 'after' ? $break . $labelStr : '');
 }
 
@@ -1431,18 +1440,18 @@ function zem_contact_group_validate()
             foreach ($grp as $id => $atts) {
                 $flags[$key]['label'] = $atts['label'];
 
-                if ($atts['req'] && !isset($flags[$key]['req'])) {
+                if (!empty($atts['req']) && !isset($flags[$key]['req'])) {
                     $flags[$key]['req'] = 1;
                 }
 
-                if ($atts['isSet'] && !isset($flags[$key]['isSet'])) {
+                if (!empty($atts['isSet']) && !isset($flags[$key]['isSet'])) {
                     $flags[$key]['isSet'] = 1;
                 }
             }
         }
 
         foreach ($flags as $key => $data) {
-            if ($data['req'] === 1 && !isset($data['isSet'])) {
+            if (!empty($data['req']) && !isset($data['isSet'])) {
                 $zem_contact_error[] = gTxt('zem_contact_field_missing', array('{field}' => txpspecialchars($data['label'])));
             }
         }
@@ -1851,7 +1860,8 @@ Please report bugs and problems with this plugin at "the GitHub project's issues
 h2. Contents
 
 * "Features":#features
-* "Upgrading and uninstallation":#install
+* "Installing and upgrading":#install
+* "Differences from previous version":#differences
 * "Usage":#usage
 * "Tags":#tags
 ** "zem_contact tag":#zc
@@ -1887,17 +1897,24 @@ h2(#features). Features
 * UTF-8 safe.
 * Accessible form layout, including @<label>@, @<legend>@ and @<fieldset>@ tags.
 * Various classes and ids to allow easy styling of all parts of the form.
-* Spam prevention API (used by Tranquillo's @pap_contact_cleaner@ plugin) and delivery API.
+* Spam prevention API (used by Tranquillo's @pap_contact_cleaner@ plugin) and delivery API for altering or extending the plugin's capabilities.
 
-h2(#install). Upgrading and uninstallation
+h2(#install). Installing and upgrading
 
 *Requires Textpattern 4.5.0+*
 
-Download the latest version of the plugin from "the GitHub project page":https://github.com/Bloke/zem_contact_reborn/releases, paste the code into the Textpattern Admin → Plugins panel, install and enable the plugin. Visit the "forum thread":http://forum.textpattern.com/viewtopic.php?id=23728 for more info or to report on the success or otherwise of the plugin.
-
-Note that the language strings are part of the plugin itself, so if you are upgrading from v4.0.3.20 or earlier, disable or remove the zem_contact_lang plugin. If you have a translation Textpack available that is not yet incorporated, please submit it for inclusion.
+Download the latest release of the plugin from "the GitHub project page":https://github.com/Bloke/zem_contact_reborn/releases, paste the code into the Textpattern Admin → Plugins panel, install and enable the plugin. Visit the "forum thread":http://forum.textpattern.com/viewtopic.php?id=46798 for more info or to report on the success or otherwise of the plugin.
 
 To uninstall, delete from the Admin → Plugins panel.
+
+h2(#differences). Differences from previous version
+
+If upgrading from v4.0.3.20, please note these differences:
+
+* Disable or remove the zem_contact_lang plugin. Language strings are now bundled as part of the plugin itself. If you have a translation Textpack available that is not yet bundled, please submit it for inclusion.
+* Classes based on the input element @name@ are no longer automatically applied. Only default class names beginning with @zem@ are set. To employ custom classses, use the @class@ attribute for each tag, or the global @classes@ attribute to set nanes for error and information messages.
+* If your site's Doctype preference is set to @html5@ you may use HTML5 attributes in your tags. Otherwise, they will be ignored.
+* Validation of required elements and min/max constraints is done by the browser first, and the plugin second. So if you specify a field is required and it is left empty, the browser will usually prevent the form being submitted. To bypass (most of) the browser checks, specify @novalidate="1"@ in your @<txp:zem_contact />@ tag.
 
 h2(#usage). Usage
 
@@ -1987,6 +2004,8 @@ h4. Attributes
 * @from="email address"@<br />Email address used in the "From:" field when sending email. Defaults to the sender's email address. If specified, the sender's email address will be placed in the "Reply-To:" field instead.
 * @from_form="form name"@<br />Use specified form (overrides @from@ attribute).
 * @label="text"@<br />Label for the contact form. If set to an empty string, display of the fieldset and legend tags will be suppressed. Default is @Contact@.
+* @lang="lang-code"@<br />Override the language strings that would normally be used from the current admin-side language in force. e.g. @lang="fr-fr"@ would load the French language strings. A Textpack must already exist for the chosen language.
+* @novalidate="boolean"@<br />Set to 1 if you wish to prevent the browser from validating form field values and the required status of input elements. The plugin itself is then solely responsible for validation and will indicate error conditions after submission. Default is @0@.
 * @redirect="URL"@<br />Redirect to specified URL (overrides @thanks@ and @thanks_form@ attributes). URL must be relative to the Textpattern site URL. Example: @redirect="monkey"@ would redirect to @http://example.com/monkey@.
 * @required="boolean"@<br />Whether to require all tags in this contact form to be completed before the form can be submitted. Can be overridden on a field-by-field basis by using the @required@ attribute in the relevant tag. Available values: @1@ (yes) or @0@ (no). Default is @1@.
 * @send_article="boolean"@<br />Whether to use this form to send an article. Available values: @1@ (yes) or @0@ (no). Default is @0@.
@@ -1998,7 +2017,6 @@ h4. Attributes
 * @thanks_form="form name"@<br />Use specified form (overrides @thanks@ attribute).
 * @to="email address"@ %(warning)required%<br />Recipient email address. Multiple recipients can be specified, separated by commas.
 * @to_form="form name"@<br />Use specified form (overrides @to@ attribute).
-* @lang="lang-code"@<br />Override the language strings that would normally be used from the current admin-side language in force. e.g. @lang="fr-fr"@ would load the French language strings. A Textpack must already exist for the chosen language.
 
 h4. Examples
 
