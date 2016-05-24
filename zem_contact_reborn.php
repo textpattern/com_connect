@@ -1131,6 +1131,7 @@ function zem_contact_checkbox($atts)
         'label_position' => 'after',
         'name'           => '',
         'required'       => $zem_contact_flags['required'],
+        'value'          => null,
     ), $atts));
 
     if (empty($name)) {
@@ -1140,16 +1141,17 @@ function zem_contact_checkbox($atts)
     $doctype = get_pref('doctype', 'xhtml');
 
     if ($zem_contact_submit) {
-        $value = (bool) ps($name);
+        $theValue = (bool) ps($name);
 
-        if ($required && !$value) {
+        if ($required && !$theValue) {
             $zem_contact_error[] = gTxt('zem_contact_field_missing', array('{field}' => txpspecialchars($label)));
             $isError = $zem_contact_flags['cls_element'];
         } else {
-            zem_contact_store($name, $label, $value ? gTxt('yes') : gTxt('no'));
+            $toStore = (($value !== null && $theValue) ? $value : ($theValue ? gTxt('yes') : gTxt('no')));
+            zem_contact_store($name, $label, $toStore);
         }
     } else {
-        $value = $checked;
+        $theValue = $checked;
     }
 
     // Core attributes.
@@ -1157,6 +1159,12 @@ function zem_contact_checkbox($atts)
         'id'    => (isset($id) ? $id : $name),
         'name'  => $name,
     ));
+
+    if ($value !== null) {
+        $attr += zem_contact_build_atts(array(
+            'value' => $value,
+        ));
+    }
 
     // HTML5 attributes.
     $required = ($required) ? 'required' : '';
@@ -1183,7 +1191,7 @@ function zem_contact_checkbox($atts)
 
     return ($label_position === 'before' ? $labelStr . $break : '') .
         '<input type="checkbox"' . $classStr .
-            ($value ? ' checked' . (($doctype === 'xhtml') ? '="checked"' : '') : '') . ($attr ? ' ' . implode(' ', $attr) : '') . ' />' .
+            ($theValue ? ' checked' . (($doctype === 'xhtml') ? '="checked"' : '') : '') . ($attr ? ' ' . implode(' ', $attr) : '') . ' />' .
         ($label_position === 'after' ? $break . $labelStr : '');
 }
 
@@ -1208,6 +1216,7 @@ function zem_contact_radio($atts)
         'label_position' => 'after',
         'name'           => '',
         'required'       => null,
+        'value'          => null,
     ), $atts));
 
     static $cur_name = array();
@@ -1259,11 +1268,12 @@ function zem_contact_radio($atts)
     $zem_contact_group[$name][$id]['label'] = $group;
 
     if ($zem_contact_submit) {
-        $is_checked = (ps($name) == $id);
+        $toCompare = ($value === null ? $id : $value);
+        $is_checked = (ps($name) == $toCompare);
         $zem_contact_group[$name][$id]['isSet'] = $is_checked;
 
         if ($is_checked || $checked && !isset($zem_contact_values[$name])) {
-            zem_contact_store($name, $group, $label);
+            zem_contact_store($name, $group, ($value !== null ? $value : $label));
         }
     } else {
         $is_checked = $checked;
@@ -1273,7 +1283,7 @@ function zem_contact_radio($atts)
     $attr = zem_contact_build_atts(array(
         'id'    => $id,
         'name'  => $name,
-        'value' => $id,
+        'value' => ($value !== null ? $value : $id),
     ));
 
     // HTML5 attributes.
@@ -2313,6 +2323,7 @@ h4. Attributes
 * @label_position="text"@<br />Position of the label in relation to the @<input>@ field. Available values: @before@ or @after@. Default is @after@.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @required="boolean"@<br />Whether this checkbox must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
+* @value="text"@<br />Value to send in the email if the option is checked. Uses yes/no if not set.
 
 h4. Examples
 
@@ -2347,6 +2358,7 @@ h4. Attributes
 * @label="text"@ %(warning)required%<br />Text label displayed to the user as radio button option.
 * @name="value"@ %(warning)recommended%<br />Field name, as used in the HTML @<input>@ tag. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. If it hasn't been set at all, it will be derived from the @group@ attribute.
 * @required="boolean"@<br />Whether this radio set must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact>@ tag's @required@ attribute - if neither attribute is set then default is @1@. *You should set the @required@ attribute on only the first radio button of the group, or set the same identical attribute value on all radio buttons in the group.*
+* @value="text"@<br />Value to send in the email if the option is checked. Uses label if not set.
 
 h4. Examples
 

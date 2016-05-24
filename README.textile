@@ -420,7 +420,7 @@ Creates a drop-down selection option. May be used as a single (self-closing) or 
 h4. Attributes
 
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the option. Default: @zemOption@. To remove @class@ attribute from the element entirely, use @class=""@.
-* @label="text"@<br />Text label of this option displayed to the user.
+* @label="text"@ %(warning)required%<br />Text label of this option displayed to the user.
 * @selected="boolean"@<br />Whether this item is selected, May also be specified in the container tag's @selected@ attribute. Available values: @1@ (yes) or @0@ (no).
 * @value="text"@<br />The value associated with this option when submitted. Default is the label.
 
@@ -460,6 +460,7 @@ h4. Attributes
 * @label_position="text"@<br />Position of the label in relation to the @<input>@ field. Available values: @before@ or @after@. Default is @after@.
 * @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
 * @required="boolean"@<br />Whether this checkbox must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
+* @value="text"@<br />Value to send in the email if the option is checked. Uses yes/no if not set.
 
 h4. Examples
 
@@ -494,6 +495,7 @@ h4. Attributes
 * @label="text"@ %(warning)required%<br />Text label displayed to the user as radio button option.
 * @name="value"@ %(warning)recommended%<br />Field name, as used in the HTML @<input>@ tag. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. If it hasn't been set at all, it will be derived from the @group@ attribute.
 * @required="boolean"@<br />Whether this radio set must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:zem_contact>@ tag's @required@ attribute - if neither attribute is set then default is @1@. *You should set the @required@ attribute on only the first radio button of the group, or set the same identical attribute value on all radio buttons in the group.*
+* @value="text"@<br />Value to send in the email if the option is checked. Uses label if not set.
 
 h4. Examples
 
