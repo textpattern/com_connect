@@ -1860,7 +1860,8 @@ Please report bugs and problems with this plugin at "the GitHub project's issues
 h2. Contents
 
 * "Features":#features
-* "Upgrading and uninstallation":#install
+* "Installing and upgrading":#install
+* "Differences from previous version":#differences
 * "Usage":#usage
 * "Tags":#tags
 ** "zem_contact tag":#zc
@@ -1896,17 +1897,24 @@ h2(#features). Features
 * UTF-8 safe.
 * Accessible form layout, including @<label>@, @<legend>@ and @<fieldset>@ tags.
 * Various classes and ids to allow easy styling of all parts of the form.
-* Spam prevention API (used by Tranquillo's @pap_contact_cleaner@ plugin) and delivery API.
+* Spam prevention API (used by Tranquillo's @pap_contact_cleaner@ plugin) and delivery API for altering or extending the plugin's capabilities.
 
-h2(#install). Upgrading and uninstallation
+h2(#install). Installing and upgrading
 
 *Requires Textpattern 4.5.0+*
 
-Download the latest version of the plugin from "the GitHub project page":https://github.com/Bloke/zem_contact_reborn/releases, paste the code into the Textpattern Admin → Plugins panel, install and enable the plugin. Visit the "forum thread":http://forum.textpattern.com/viewtopic.php?id=23728 for more info or to report on the success or otherwise of the plugin.
-
-Note that the language strings are part of the plugin itself, so if you are upgrading from v4.0.3.20 or earlier, disable or remove the zem_contact_lang plugin. If you have a translation Textpack available that is not yet incorporated, please submit it for inclusion.
+Download the latest release of the plugin from "the GitHub project page":https://github.com/Bloke/zem_contact_reborn/releases, paste the code into the Textpattern Admin → Plugins panel, install and enable the plugin. Visit the "forum thread":http://forum.textpattern.com/viewtopic.php?id=46798 for more info or to report on the success or otherwise of the plugin.
 
 To uninstall, delete from the Admin → Plugins panel.
+
+h2(#differences). Differences from previous version
+
+If upgrading from v4.0.3.20, please note these differences:
+
+* Disable or remove the zem_contact_lang plugin. Language strings are now bundled as part of the plugin itself. If you have a translation Textpack available that is not yet bundled, please submit it for inclusion.
+* Classes based on the input element @name@ are no longer automatically applied. Only default class names beginning with @zem@ are set. To employ custom classses, use the @class@ attribute for each tag, or the global @classes@ attribute to set nanes for error and information messages.
+* If your site's Doctype preference is set to @html5@ you may use HTML5 attributes in your tags. Otherwise, they will be ignored.
+* Validation of required elements and min/max constraints is done by the browser first, and the plugin second. So if you specify a field is required and it is left empty, the browser will usually prevent the form being submitted. To bypass (most of) the browser checks, specify @novalidate="1"@ in your @<txp:zem_contact />@ tag.
 
 h2(#usage). Usage
 
@@ -1996,6 +2004,8 @@ h4. Attributes
 * @from="email address"@<br />Email address used in the "From:" field when sending email. Defaults to the sender's email address. If specified, the sender's email address will be placed in the "Reply-To:" field instead.
 * @from_form="form name"@<br />Use specified form (overrides @from@ attribute).
 * @label="text"@<br />Label for the contact form. If set to an empty string, display of the fieldset and legend tags will be suppressed. Default is @Contact@.
+* @lang="lang-code"@<br />Override the language strings that would normally be used from the current admin-side language in force. e.g. @lang="fr-fr"@ would load the French language strings. A Textpack must already exist for the chosen language.
+* @novalidate="boolean"@<br />Set to 1 if you wish to prevent the browser from validating form field values and the required status of input elements. The plugin itself is then solely responsible for validation and will indicate error conditions after submission. Default is @0@.
 * @redirect="URL"@<br />Redirect to specified URL (overrides @thanks@ and @thanks_form@ attributes). URL must be relative to the Textpattern site URL. Example: @redirect="monkey"@ would redirect to @http://example.com/monkey@.
 * @required="boolean"@<br />Whether to require all tags in this contact form to be completed before the form can be submitted. Can be overridden on a field-by-field basis by using the @required@ attribute in the relevant tag. Available values: @1@ (yes) or @0@ (no). Default is @1@.
 * @send_article="boolean"@<br />Whether to use this form to send an article. Available values: @1@ (yes) or @0@ (no). Default is @0@.
@@ -2007,7 +2017,6 @@ h4. Attributes
 * @thanks_form="form name"@<br />Use specified form (overrides @thanks@ attribute).
 * @to="email address"@ %(warning)required%<br />Recipient email address. Multiple recipients can be specified, separated by commas.
 * @to_form="form name"@<br />Use specified form (overrides @to@ attribute).
-* @lang="lang-code"@<br />Override the language strings that would normally be used from the current admin-side language in force. e.g. @lang="fr-fr"@ would load the French language strings. A Textpack must already exist for the chosen language.
 
 h4. Examples
 
