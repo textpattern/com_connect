@@ -247,6 +247,7 @@ function zem_contact($atts, $thing = null)
         'from'         => '',
         'from_form'    => '',
         'label'        => null,
+        'novalidate'   => 0,
         'redirect'     => '',
         'required'     => '1',
         'show_error'   => 1,
@@ -538,6 +539,7 @@ END;
     if ($show_input && !$send_article || gps('zem_contact_send_article')) {
         $out = '<form method="post"' . ((!$show_error && $zem_contact_error) ? '' : ' id="zcr' . $zem_contact_form_id . '"') .
             ($class ? ' class="' . $class . '"' : '') .
+            ($novalidate ? ' novalidate' : '') .
             ' action="' . txpspecialchars(serverSet('REQUEST_URI')) . '#zcr' . $zem_contact_form_id . '">' .
             ($label ? n . '<fieldset>' : n . '<div>') .
             ($label ? n . '<legend>' . txpspecialchars($label) . '</legend>' : '') .
@@ -1213,34 +1215,38 @@ function zem_contact_radio($atts)
     static $cur_group = null;
 
     if (!$group) {
-        if ($cur_group !== null) {
-            $group = $cur_group;
-        } else {
+        if ($cur_group === null) {
             $group = gTxt('zem_contact_radio');
-        }
-    }
-
-    if (!isset($cur_name[$group])) {
-        if (!$name) {
-            $name = $cur_name[$group] = gTxt('zem_contact_radio');
         } else {
-            $cur_name[$group] = $name;
+            $group = $cur_group;
         }
     } else {
         if (!$name) {
-            $name = $cur_name[$group];
+            $name = $group;
         }
     }
 
-    if (!isset($cur_req[$group])) {
+    if (isset($cur_name[$group])) {
+        if (!$name) {
+            $name = $cur_name[$group];
+        }
+    } else {
+        if ($name) {
+            $cur_name[$group] = $name;
+        } else {
+            $name = $cur_name[$group] = gTxt('zem_contact_radio');
+        }
+    }
+
+    if (isset($cur_req[$group])) {
+        if ($required === null) {
+            $required = $cur_req[$group];
+        }
+    } else {
         if ($required === null) {
             $required = $cur_req[$group] = $zem_contact_flags['required'];
         } else {
             $cur_req[$group] = $required;
-        }
-    } else {
-        if ($required === null) {
-            $required = $cur_req[$group];
         }
     }
 
