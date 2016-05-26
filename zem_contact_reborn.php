@@ -59,13 +59,13 @@ $plugin['textpack'] = <<<EOT
 zem_contact_checkbox => Checkbox
 zem_contact_contact => Contact
 zem_contact_email => Email
-zem_contact_email_subject => {site} > Inquiry
+zem_contact_email_subject => {site} > Enquiry
 zem_contact_email_thanks => Thank you, your message has been sent.
 zem_contact_field_missing => Required field, &#8220;<strong>{field}</strong>&#8221; is missing.
 zem_contact_format_warning => Value {value} in &#8220;<strong>{field}</strong>&#8221; is not of the expected format.
 zem_contact_form_expired => The form has expired, please try again.
 zem_contact_form_used => The form was already submitted, please fill out a new form.
-zem_contact_general_inquiry => General inquiry
+zem_contact_general_inquiry => General enquiry
 zem_contact_invalid_email => &#8220;<strong>{email}</strong>&#8221; is not a valid email address.
 zem_contact_invalid_host => &#8220;<strong>{host}</strong>&#8221; is not a valid email host.
 zem_contact_invalid_utf8 => &#8220;<strong>{field}</strong>&#8221; contains invalid UTF-8 characters.
@@ -1946,7 +1946,7 @@ h2(#differences). Differences from previous version
 If upgrading from v4.0.3.20, please note these differences:
 
 * Disable or remove the zem_contact_lang plugin. Language strings are now bundled as part of the plugin itself. If you have a translation Textpack available that is not yet bundled, please submit it for inclusion.
-* Classes based on the input element @name@ are no longer automatically applied. Only default class names beginning with @zem@ are set. To employ custom classses, use the @class@ attribute for each tag, or the global @classes@ attribute to set nanes for error and information messages.
+* Classes based on the input element @name@ are no longer automatically applied. Only default class names beginning with @zem@ are set. To employ custom classes, use the @class@ attribute for each tag, or the global @classes@ attribute to set names for error and information messages.
 * If your site's Doctype preference is set to @html5@ you may use HTML5 attributes in your tags. Otherwise, they will be ignored.
 * Validation of required elements and min/max constraints is done by the browser first, and the plugin second. So if you specify a field is required and it is left empty, the browser will usually prevent the form being submitted. To bypass (most of) the browser checks, specify @browser_validate="0"@ in your @<txp:zem_contact />@ tag.
 
