@@ -1946,7 +1946,7 @@ h2(#differences). Differences from previous version
 If upgrading from v4.0.3.20, please note these differences:
 
 * Disable or remove the zem_contact_lang plugin. Language strings are now bundled as part of the plugin itself. If you have a translation Textpack available that is not yet bundled, please submit it for inclusion.
-* Classes based on the input element @name@ are no longer automatically applied. Only default class names beginning with @zem@ are set. To employ custom classses, use the @class@ attribute for each tag, or the global @classes@ attribute to set nanes for error and information messages.
+* Classes based on the input element @name@ are no longer automatically applied. Only default class names beginning with @zem@ are set. To employ custom classes, use the @class@ attribute for each tag, or the global @classes@ attribute to set names for error and information messages.
 * If your site's Doctype preference is set to @html5@ you may use HTML5 attributes in your tags. Otherwise, they will be ignored.
 * Validation of required elements and min/max constraints is done by the browser first, and the plugin second. So if you specify a field is required and it is left empty, the browser will usually prevent the form being submitted. To bypass (most of) the browser checks, specify @browser_validate="0"@ in your @<txp:zem_contact />@ tag.
 
