@@ -1,6 +1,6 @@
 h1. Changelog
 
-h2. 4.5.0.0 - 2015-01-26
+h2. 4.5.0.0 - 2016-12-02
 
 * Replace @split()@ (deprecated since PHP 5.3) with @explode()@.
 * Remove @zem_contact_mailheader()@ function, switch to using Textpattern's @encode_mailheader@ function (Textpattern 4.0.4+).
