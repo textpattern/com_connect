@@ -2680,7 +2680,7 @@ h2(#faq). Frequently asked questions
 ; Send article: can I show the contact form without having to click a link first?
 : Sure, put this just above the @zem_contact@ tag: @<txp:php>$_GET['zem_contact_send_article']='yes';</txp:php>@
 ; How can I use this form to upload files?
-: You can't, but have a look at the "sed_afu":http://txp-plugins.netcarving.com/ (anonymous file upload) and "mem_form":https://bitbucket.org/Manfre/txp-plugins/downloads/ plugins.
+: You can't, but have a look at the "zcr_file_attach":https://github.com/Bloke/zcr_file_attach/releases/ module, or "mem_form":https://bitbucket.org/Manfre/txp-plugins/downloads/ plugins.
 ; Can I use this plugin to send HTML email?
 : Not without a plugin like "mem_form":https://bitbucket.org/Manfre/txp-plugins/downloads or using the delivery callback.
 ; Can I use this plugin to send newsletters?
