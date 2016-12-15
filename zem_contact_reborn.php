@@ -189,6 +189,41 @@ zem_contact_send_article => Enviar artigo
 zem_contact_spam => Não aceitamos SPAM, obrigado!
 zem_contact_text => Texto
 zem_contact_to_missing => &#8220;<strong>To</strong>&#8221; falta o endereço de email.
+#@public
+#@language de-de
+zem_contact_checkbox => Checkbox
+zem_contact_contact => Kontakt
+zem_contact_email => E-Mail
+zem_contact_email_subject => {site} > Anfrage
+zem_contact_email_thanks => Vielen Dank, Ihre Nachricht wurde gesendet.
+zem_contact_field_missing => Erforderliche Eingabe im Feld &#8220;<strong>{field}</strong>&#8221; fehlt.
+zem_contact_format_warning => Eingabe {value} im Feld &#8220;<strong>{field}</strong>&#8221; entspricht nicht dem erwarteten Format.
+zem_contact_form_expired => Dieses Formular ist abgelaufen, bitte versuchen Sie es erneut.
+zem_contact_form_used => Dieses Formular wurde bereits gesendet. Bitte laden Sie das Formular noch einmal.
+zem_contact_general_inquiry => Allgemeine Anfrage
+zem_contact_invalid_email => &#8220;<strong>{email}</strong>&#8221; ist keine gültige E-Mailadresse.
+zem_contact_invalid_host => &#8220;<strong>{host}</strong>&#8221; ist kein gültiger E-Mail-Server.
+zem_contact_invalid_utf8 => &#8220;<strong>{field}</strong>&#8221; enthält ungültige UTF-8-Zeichen.
+zem_contact_invalid_value => Ungültiger Wert für &#8220;<strong>{field}</strong>&#8221;, &#8220;<strong>{value}</strong>&#8221; ist keine verfügbare Option.
+zem_contact_mail_sorry => Leider kann keine E-Mail gesendet werden.
+zem_contact_maxval_warning => &#8220;<strong>{field}</strong>&#8221; darf {value} nicht überschreiten.
+zem_contact_max_warning => &#8220;<strong>{field}</strong>&#8221; darf nicht länger als {value} Zeichen sein.
+zem_contact_message => Nachricht
+zem_contact_minval_warning => &#8220;<strong>{field}</strong>&#8221; darf {value} nicht unterschreiten.
+zem_contact_min_warning => &#8220;<strong>{field}</strong>&#8221; darf nicht kürzer als {value} Zeichen sein.
+zem_contact_name => Name
+zem_contact_option => Option
+zem_contact_pattern_warning => &#8220;<strong>{field}</strong>&#8221; entspricht nicht dem Muster {value}.
+zem_contact_radio => Radio
+zem_contact_recipient => Empfänger
+zem_contact_refresh => Bitte folgen Sie diesem Link, falls die Seite icht automatisch neu geladen wird.
+zem_contact_secret => Geheimnis
+zem_contact_send => Senden
+zem_contact_send_article => Artikel senden
+zem_contact_spam => Danke, wir brauchen keinen Spam!
+zem_contact_text => Text
+zem_contact_to_missing => &#8220;<strong>To</strong>&#8221; E-Mail-Adresse fehlt.
+
 EOT;
 
 if (!defined('txpinterface'))
@@ -541,14 +576,14 @@ END;
             ($class ? ' class="' . $class . '"' : '') .
             ($browser_validate ? '' : ' novalidate') .
             ' action="' . txpspecialchars(serverSet('REQUEST_URI')) . '#zcr' . $zem_contact_form_id . '">' .
-            ($label ? n . '<fieldset>' : n . '<div>') .
+            ($label ? n . '<fieldset>' : '') .
             ($label ? n . '<legend>' . txpspecialchars($label) . '</legend>' : '') .
             $out .
             n . '<input type="hidden" name="zem_contact_nonce" value="' . $zem_contact_nonce . '" />' .
             n . '<input type="hidden" name="zem_contact_form_id" value="' . $zem_contact_form_id . '" />' .
             $form .
             callback_event('zemcontact.form') .
-            ($label ? (n . '</fieldset>') : (n . '</div>')) .
+            ($label ? (n . '</fieldset>') : '') .
             n . '</form>';
 
         callback_event_ref('zemcontact.render', '', 0, $out, $atts);
