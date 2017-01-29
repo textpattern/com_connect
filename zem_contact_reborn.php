@@ -565,9 +565,16 @@ END;
                     '</div>';
             }
         } else {
-            // TODO: consider allowing zem_contact_error to be displayed here if third party plugin
-            // returned anything more specific.
-            $out .= graf(gTxt('zem_contact_mail_sorry'));
+            // Plugin modules may have set error messages: display if appropriate.
+            if ($zem_contact_error) {
+                $out .= n.doWrap(array_unique($zem_contact_error), 'ul', 'li', $zem_contact_flags['cls_wrapper']).n;
+            } else {
+                $out .= graf(gTxt('zem_contact_mail_sorry'));
+            }
+
+            if ($show_error || !$show_input) {
+                return $out;
+            }
         }
     }
 
@@ -2719,7 +2726,7 @@ h2(#faq). Frequently asked questions
 ; Can I use this plugin to send HTML email?
 : Not without a plugin like "mem_form":https://bitbucket.org/Manfre/txp-plugins/downloads or using the delivery callback.
 ; Can I use this plugin to send newsletters?
-: Not without a plugin, such as "mem_postmaster":https://bitbucket.org/Manfre/txp-plugins/downloads/.
+: Not without a plugin, such as "mem_postmaster":https://bitbucket.org/Manfre/txp-plugins/downloads/, "adi_contact":http://www.greatoceanmedia.com.au/txp/?plugin=adi_contact or "zcr_mailchimp":https://github.com/Bloke/zcr_mailchimp.
 ; I have a question that's not listed here
 : First read the plugin documentation (the page you're on right now) once more. If that doesn't answer your question, visit the "Textpattern forum":http://forum.textpattern.com.
 
