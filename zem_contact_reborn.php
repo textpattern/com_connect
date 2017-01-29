@@ -259,7 +259,8 @@ if (class_exists('\Textpattern\Tag\Registry')) {
  * Tag: encapsulate a contact form.
  *
  * Triggers the following callbacks:
- *  -> 'zemcontact.form' during form rendering so additional fields can be injected.
+ *  -> 'zemcontact.form' during form rendering so additional fields (e.g. spam honeypots) can be injected.
+ *  -> 'zemcontact.render' immediately prior to form rendering so other parts of the form content may be altered.
  *  -> 'zemcontact.submit' on successful posting of form data. Primarily of use for spam
  *     plugins: they can return a non-zero value to signal that the form should NOT be sent.
  *
@@ -571,15 +572,11 @@ END;
             } else {
                 $out .= graf(gTxt('zem_contact_mail_sorry'));
             }
-
-            if ($show_error || !$show_input) {
-                return $out;
-            }
         }
     }
 
     if ($show_input && !$send_article || gps('zem_contact_send_article')) {
-        $out = '<form method="post"' . ((!$show_error && $zem_contact_error) ? '' : ' id="zcr' . $zem_contact_form_id . '"') .
+        $contactForm = '<form method="post"' . ((!$show_error && $zem_contact_error) ? '' : ' id="zcr' . $zem_contact_form_id . '"') .
             ($class ? ' class="' . $class . '"' : '') .
             ($browser_validate ? '' : ' novalidate') .
             ' action="' . txpspecialchars(serverSet('REQUEST_URI')) . '#zcr' . $zem_contact_form_id . '">' .
@@ -593,9 +590,9 @@ END;
             ($label ? (n . '</fieldset>') : '') .
             n . '</form>';
 
-        callback_event_ref('zemcontact.render', '', 0, $out, $atts);
+        callback_event_ref('zemcontact.render', '', 0, $contactForm, $atts);
 
-        return $out;
+        return $contactForm;
     }
 
     return '';
