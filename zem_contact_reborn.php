@@ -450,7 +450,7 @@ function zem_contact($atts, $thing = null)
             $subject = parse_form($subject_form);
         }
 
-        $sep = is_windows() ? "\r\n" : "\n";
+        $sep = IS_WIN ? "\r\n" : "\n";
         $msg = array();
         $fields = array();
 
@@ -1697,7 +1697,7 @@ function zem_contact_deliver($to, $subject, $body, $headers, $fields, $flags)
             : gTxt('warn_mail_unavailable');
     }
 
-    $sep = (!empty($headers['separator'])) ? $headers['separator'] : (is_windows() ? "\r\n" : "\n");
+    $sep = (!empty($headers['separator'])) ? $headers['separator'] : (IS_WIN ? "\r\n" : "\n");
     $xfer_encoding = (!empty($headers['xfer_encoding'])) ? $headers['xfer_encoding'] : '8bit';
     $content_type = (!empty($headers['content_type'])) ? $headers['content_type'] : 'text/plain';
     $reply = (!empty($headers['reply'])) ? $headers['reply'] : '';
