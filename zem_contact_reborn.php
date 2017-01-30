@@ -90,38 +90,38 @@ zem_contact_text => Text
 zem_contact_to_missing => &#8220;<strong>To</strong>&#8221; email address is missing.
 #@public
 #@language es-es
-zem_contact_checkbox => Checkbox
+zem_contact_checkbox => Casilla de verificación
 zem_contact_contact => Contacto
-zem_contact_email => Email
+zem_contact_email => Correo electrónico
 zem_contact_email_subject => {site} > Consulta
 zem_contact_email_thanks => Gracias, tu mensaje ha sido enviado.
 zem_contact_field_missing => falta el campo obligatorio &#8220;<strong>{field}</strong>&#8221;.
-zem_contact_format_warning => El valor {value} en &#8220;<strong>{field}</strong>&#8221; no es el formato esperado.
+zem_contact_format_warning => El valor {value} en &#8220;<strong>{field}</strong>&#8221; no está en el formato esperado.
 zem_contact_form_expired => El formulario ha caducado, por favor inténtalo de nuevo.
 zem_contact_form_used => El formulario ya había sido enviado, por favor rellena el formulario de nuevo.
 zem_contact_general_inquiry => Consulta general
-zem_contact_invalid_email => &#8220;<strong>{email}</strong>&#8221; no es un email válido.
-zem_contact_invalid_host => &#8220;<strong>{host}</strong>&#8221; no es un dominio de email válido.
+zem_contact_invalid_email => La dirección de correo electrónico &#8220;<strong>{email}</strong>&#8221; no es válida.
+zem_contact_invalid_host => El dominio de correo electrónico &#8220;<strong>{host}</strong>&#8221; no es válido.
 zem_contact_invalid_utf8 => &#8220;<strong>{field}</strong>&#8221; contiene caracteres UTF-8 no válidos.
-zem_contact_invalid_value => Valor incorrecto para &#8220;<strong>{field}</strong>&#8221;, &#8220;<strong>{value}</strong>&#8221; No es una de las opciones disponibles.
-zem_contact_mail_sorry => Lo siento, no se pudo enviar el email.
+zem_contact_invalid_value => Valor incorrecto para &#8220;<strong>{field}</strong>&#8221;, &#8220;<strong>{value}</strong>&#8221; no es una de las opciones disponibles.
+zem_contact_mail_sorry => Lo siento, el correo electrónico no pudo ser enviado.
 zem_contact_maxval_warning => &#8220;<strong>{field}</strong>&#8221; no debe exceder {value}.
 zem_contact_max_warning => &#8220;<strong>{field}</strong>&#8221; no debe contener más de {value} caracteres.
-zem_contact_message => Message
+zem_contact_message => Mensaje
 zem_contact_minval_warning => &#8220;<strong>{field}</strong>&#8221; debe tener al menos {value}.
 zem_contact_min_warning => &#8220;<strong>{field}</strong>&#8221; debe contener al menos {value} caracteres.
-zem_contact_name => Name
-zem_contact_option => Option
+zem_contact_name => Nombre
+zem_contact_option => Opción
 zem_contact_pattern_warning => &#8220;<strong>{field}</strong>&#8221; no encaja con el patrón {value}.
-zem_contact_radio => Radio
-zem_contact_recipient => Recipient
-zem_contact_refresh => Pincha aquí si la página no se recarga automáticamente.
+zem_contact_radio => Botón de opción
+zem_contact_recipient => Destinatario
+zem_contact_refresh => Siga este enlace si la página no se recarga automáticamente.
 zem_contact_secret => Secreto
 zem_contact_send => Enviar
 zem_contact_send_article => Enviar artículo
-zem_contact_spam => Gracias, pero no aceptamos correo basura
+zem_contact_spam => Gracias, ¡pero no aceptamos correo basura!
 zem_contact_text => Texto
-zem_contact_to_missing => &#8220;<strong>To</strong>&#8221; falta la dirección de email.
+zem_contact_to_missing => Falta la dirección de correo electrónico del &#8220;<strong>destinatario</strong>&#8221;.
 #@public
 #@language fr-fr
 zem_contact_checkbox => Case à cocher
@@ -259,7 +259,8 @@ if (class_exists('\Textpattern\Tag\Registry')) {
  * Tag: encapsulate a contact form.
  *
  * Triggers the following callbacks:
- *  -> 'zemcontact.form' during form rendering so additional fields can be injected.
+ *  -> 'zemcontact.form' during form rendering so additional fields (e.g. spam honeypots) can be injected.
+ *  -> 'zemcontact.render' immediately prior to form rendering so other parts of the form content may be altered.
  *  -> 'zemcontact.submit' on successful posting of form data. Primarily of use for spam
  *     plugins: they can return a non-zero value to signal that the form should NOT be sent.
  *
@@ -449,7 +450,7 @@ function zem_contact($atts, $thing = null)
             $subject = parse_form($subject_form);
         }
 
-        $sep = is_windows() ? "\r\n" : "\n";
+        $sep = IS_WIN ? "\r\n" : "\n";
         $msg = array();
         $fields = array();
 
@@ -565,14 +566,17 @@ END;
                     '</div>';
             }
         } else {
-            // TODO: consider allowing zem_contact_error to be displayed here if third party plugin
-            // returned anything more specific.
-            $out .= graf(gTxt('zem_contact_mail_sorry'));
+            // Plugin modules may have set error messages: display if appropriate.
+            if ($zem_contact_error) {
+                $out .= n.doWrap(array_unique($zem_contact_error), 'ul', 'li', $zem_contact_flags['cls_wrapper']).n;
+            } else {
+                $out .= graf(gTxt('zem_contact_mail_sorry'));
+            }
         }
     }
 
     if ($show_input && !$send_article || gps('zem_contact_send_article')) {
-        $out = '<form method="post"' . ((!$show_error && $zem_contact_error) ? '' : ' id="zcr' . $zem_contact_form_id . '"') .
+        $contactForm = '<form method="post"' . ((!$show_error && $zem_contact_error) ? '' : ' id="zcr' . $zem_contact_form_id . '"') .
             ($class ? ' class="' . $class . '"' : '') .
             ($browser_validate ? '' : ' novalidate') .
             ' action="' . txpspecialchars(serverSet('REQUEST_URI')) . '#zcr' . $zem_contact_form_id . '">' .
@@ -586,9 +590,9 @@ END;
             ($label ? (n . '</fieldset>') : '') .
             n . '</form>';
 
-        callback_event_ref('zemcontact.render', '', 0, $out, $atts);
+        callback_event_ref('zemcontact.render', '', 0, $contactForm, $atts);
 
-        return $out;
+        return $contactForm;
     }
 
     return '';
@@ -1693,7 +1697,7 @@ function zem_contact_deliver($to, $subject, $body, $headers, $fields, $flags)
             : gTxt('warn_mail_unavailable');
     }
 
-    $sep = (!empty($headers['separator'])) ? $headers['separator'] : (is_windows() ? "\r\n" : "\n");
+    $sep = (!empty($headers['separator'])) ? $headers['separator'] : (IS_WIN ? "\r\n" : "\n");
     $xfer_encoding = (!empty($headers['xfer_encoding'])) ? $headers['xfer_encoding'] : '8bit';
     $content_type = (!empty($headers['content_type'])) ? $headers['content_type'] : 'text/plain';
     $reply = (!empty($headers['reply'])) ? $headers['reply'] : '';
@@ -2719,7 +2723,7 @@ h2(#faq). Frequently asked questions
 ; Can I use this plugin to send HTML email?
 : Not without a plugin like "mem_form":https://bitbucket.org/Manfre/txp-plugins/downloads or using the delivery callback.
 ; Can I use this plugin to send newsletters?
-: Not without a plugin, such as "mem_postmaster":https://bitbucket.org/Manfre/txp-plugins/downloads/.
+: Not without a plugin, such as "mem_postmaster":https://bitbucket.org/Manfre/txp-plugins/downloads/, "adi_contact":http://www.greatoceanmedia.com.au/txp/?plugin=adi_contact or "zcr_mailchimp":https://github.com/Bloke/zcr_mailchimp.
 ; I have a question that's not listed here
 : First read the plugin documentation (the page you're on right now) once more. If that doesn't answer your question, visit the "Textpattern forum":http://forum.textpattern.com.
 
