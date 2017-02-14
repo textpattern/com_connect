@@ -156,6 +156,40 @@ zem_contact_spam => Nous refusons catégoriquement les spam. Bien à vous.
 zem_contact_text => Texte
 zem_contact_to_missing => l'adresse mail &#8220;<strong>To</strong>&#8221; est manquante.
 #@public
+#@language nl-nl
+zem_contact_checkbox => Keuze
+zem_contact_contact => Contact
+zem_contact_email => E-mail adres
+zem_contact_email_subject => {site} > bericht via de site
+zem_contact_email_thanks => Hartelijk dank, je bericht is verzonden.
+zem_contact_field_missing => Je hebt bij &#8220;<strong>{field}</strong>&#8221; nog niets ingevuld.
+zem_contact_format_warning => De invoer {value} in &#8220;<strong>{field}</strong>&#8221; heeft niet de juiste vorm.
+zem_contact_form_expired => Het formulier is verlopen, probeer het opnieuw.
+zem_contact_form_used => Het formulier is reeds verstuurd, vul het opnieuw in.
+zem_contact_general_inquiry => Bericht van de site
+zem_contact_invalid_email => &#8220;<strong>{email}</strong>&#8221; is geen geldig e-mail addres.
+zem_contact_invalid_host => &#8220;<strong>{host}</strong>&#8221; is geen geldige e-mail host.
+zem_contact_invalid_utf8 => &#8220;<strong>{field}</strong>&#8221; bevat ongeldige lettertekens.
+zem_contact_invalid_value => Ongeldige invoer bij &#8220;<strong>{field}</strong>&#8221;, &#8220;<strong>{value}</strong>&#8221; is niet mogelijk.
+zem_contact_mail_sorry => Sorry, er kan geen e-mail verzonden worden.
+zem_contact_maxval_warning => &#8220;<strong>{field}</strong>&#8221; mag niet groter zijn dan {value}.
+zem_contact_max_warning => &#8220;<strong>{field}</strong>&#8221; mag niet meer dan {value} lettertekes bevatten.
+zem_contact_message => Berichttekst
+zem_contact_minval_warning => &#8220;<strong>{field}</strong>&#8221; moet minstens {value} zijn.
+zem_contact_min_warning => &#8220;<strong>{field}</strong>&#8221; moet minstens {value} lettertekens bevatten.
+zem_contact_name => Naam
+zem_contact_option => Optie
+zem_contact_pattern_warning => &#8220;<strong>{field}</strong>&#8221; komt niet overeen met de volgorde {value}.
+zem_contact_radio => Keuzeknop
+zem_contact_recipient => Ontvanger
+zem_contact_refresh => Je kunt deze link gebruiken als de pagina niet automatisch ververst.
+zem_contact_secret => Geheim
+zem_contact_send => Verzenden
+zem_contact_send_article => Artikel verzenden
+zem_contact_spam => We accepteren geen spam!
+zem_contact_text => Tekst
+zem_contact_to_missing => &#8220;<strong>Aan</strong>&#8221; e-mailadres ontbreekt.
+#@public
 #@language pt-br
 zem_contact_checkbox => Checkbox
 zem_contact_contact => Contato
