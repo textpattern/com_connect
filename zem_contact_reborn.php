@@ -1169,11 +1169,8 @@ function zem_contact_option($atts, $thing = null)
         'value'    => null,
     ), $atts));
 
-    $val = ($value !== null) ? $value : $thing;
-
-    if (empty($val)) {
-        $val = $label;
-    }
+    $val = ($value === null) ? (!empty($thing) ? $thing : (!empty($label) ? $label : null)) : $value;
+    $label = ($label === null) ? (!empty($thing) ? $thing : (!empty($value) ? $value : null)) : $label;
 
     $attr = array();
     $doctype = get_pref('doctype', 'xhtml');
@@ -1198,7 +1195,7 @@ function zem_contact_option($atts, $thing = null)
 
     $classStr = (($class) ? ' class="' . $class . '"' : '');
 
-    return '<option' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . '>' . txpspecialchars($val) . '</option>';
+    return '<option' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . '>' . txpspecialchars($label) . '</option>';
 }
 
 /**
@@ -2380,9 +2377,11 @@ Creates a drop-down selection option. May be used as a single (self-closing) or 
 h4. Attributes
 
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the option. Default: @zemOption@. To remove @class@ attribute from the element entirely, use @class=""@.
-* @label="text"@ %(warning)required%<br />Text label of this option displayed to the user.
+* @label="text"@<br />Text label of this option displayed to the user.
 * @selected="boolean"@<br />Whether this item is selected, May also be specified in the container tag's @selected@ attribute. Available values: @1@ (yes) or @0@ (no).
 * @value="text"@<br />The value associated with this option when submitted. Default is the label.
+
+Without a @label@, it will take on the container or, failing that, the given @value@. Without a @value@, it will take on the container or, failing that, the given @label@.
 
 h5. Example 1
 
