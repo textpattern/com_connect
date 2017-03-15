@@ -488,13 +488,13 @@ function zem_contact($atts, $thing = null)
         $msg = array();
         $fields = array();
 
-        foreach ($zem_contact_labels as $name => $label) {
+        foreach ($zem_contact_labels as $name => $lbl) {
             if (!is_array($zem_contact_values[$name])) {
                 if (trim($zem_contact_values[$name]) === false) {
                     continue;
                 }
 
-                $msg[] = $label . ': ' . $zem_contact_values[$name];
+                $msg[] = $lbl . ': ' . $zem_contact_values[$name];
             }
 
             $fields[$name] = $zem_contact_values[$name];
