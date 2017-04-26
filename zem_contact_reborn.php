@@ -579,15 +579,15 @@ function zem_contact($atts, $thing = null)
                     $uri = txpspecialchars($uri);
                     $refresh = gTxt('zem_contact_refresh');
                     echo <<<END
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html>
 <head>
+    <meta charset="utf-8">
     <title>$sitename</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="refresh" content="0;url=$uri" />
+    <meta http-equiv="refresh" content="0;url=$uri">
 </head>
 <body>
-<a href="$uri">$refresh</a>
+    <a href="$uri">$refresh</a>
 </body>
 </html>
 END;
