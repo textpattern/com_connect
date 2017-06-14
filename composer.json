@@ -10,7 +10,7 @@
     "source": "https://github.com/Bloke/zem_contact_reborn"
   },
   "require": {
-    "textpattern/lock": "4.5.*,4.6.*",
+    "textpattern/lock": ">=4.5.0",
     "textpattern/installer": "*"
   }
 }
