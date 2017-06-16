@@ -1,0 +1,16 @@
+{
+  "name": "bloke/zem_contact_reborn",
+  "description": "Form mailer plugin for Textpattern CMS",
+  "keywords": ["textpattern", "plugin", "forms"],
+  "homepage": "https://github.com/Bloke/zem_contact_reborn",
+  "license": "GPL-2.0",
+  "type": "textpattern-plugin",
+  "support": {
+    "issues": "https://github.com/Bloke/zem_contact_reborn/issues",
+    "source": "https://github.com/Bloke/zem_contact_reborn"
+  },
+  "require": {
+    "textpattern/lock": ">=4.5.0",
+    "textpattern/installer": "*"
+  }
+}
