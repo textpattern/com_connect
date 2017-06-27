@@ -1,6 +1,6 @@
 {
   "name": "bloke/zem_contact_reborn",
-  "description": "Form mailer plugin for Textpattern CMS",
+  "description": "Form mailer plugin for Textpattern CMS.",
   "keywords": ["textpattern", "plugin", "forms"],
   "homepage": "https://github.com/Bloke/zem_contact_reborn",
   "license": "GPL-2.0",

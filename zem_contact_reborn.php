@@ -17,8 +17,8 @@ $plugin['name'] = 'zem_contact_reborn';
 // 1 = Plugin help is in raw HTML.  Not recommended.
 # $plugin['allow_html_help'] = 1;
 
-$plugin['version'] = '4.5.0.0';
-$plugin['author'] = 'TXP Community';
+$plugin['version'] = '4.6.0-beta';
+$plugin['author'] = 'Textpattern Community';
 $plugin['author_uri'] = 'http://forum.textpattern.com/viewtopic.php?id=23728';
 $plugin['description'] = 'Form mailer for Textpattern';
 
