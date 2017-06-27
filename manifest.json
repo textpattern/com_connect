@@ -1,0 +1,11 @@
+{
+  "name": "zem_contact_reborn",
+  "description": "Form mailer for Textpattern",
+  "version": "4.6.0-beta",
+  "type": 0,
+  "author": "Textpattern Community",
+  "author_uri": "http://forum.textpattern.com/viewtopic.php?id=23728",
+  "order": 5,
+  "flags": 0,
+  "help": {"file" : ["./README.textile"]}
+}
