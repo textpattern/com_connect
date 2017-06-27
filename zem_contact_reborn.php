@@ -2011,6 +2011,10 @@ Download the latest release of the plugin from "the GitHub project page":https:/
 
 To uninstall, delete from the Admin → Plugins panel.
 
+Alternatively, this plugin can be installed using "Composer":https://getcomposer.org:
+
+bc. $ composer require bloke/zem_contact_reborn:*
+
 h2(#differences). Differences from previous version
 
 If upgrading from v4.0.3.20, please note these differences:
