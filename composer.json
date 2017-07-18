@@ -1,13 +1,13 @@
 {
-  "name": "bloke/zem_contact_reborn",
+  "name": "textpattern/com_connect",
   "description": "Form mailer plugin for Textpattern CMS.",
   "keywords": ["textpattern", "plugin", "forms"],
-  "homepage": "https://github.com/Bloke/zem_contact_reborn",
+  "homepage": "https://github.com/textpattern/com_connect",
   "license": "GPL-2.0",
   "type": "textpattern-plugin",
   "support": {
-    "issues": "https://github.com/Bloke/zem_contact_reborn/issues",
-    "source": "https://github.com/Bloke/zem_contact_reborn"
+    "issues": "https://github.com/textpattern/com_connect/issues",
+    "source": "https://github.com/textpattern/com_connect"
   },
   "require": {
     "textpattern/lock": ">=4.5.0",

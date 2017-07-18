@@ -1,5 +1,9 @@
 h1. Changelog
 
+h2. 4.6.0 - 2017-07-18
+
+* Renamed to com_connect and put under community control.
+
 h2. 4.5.0.0 - 2016-12-02
 
 * Replace @split()@ (deprecated since PHP 5.3) with @explode()@.
@@ -41,7 +45,7 @@ h2. 4.0.3.17 - 2006-03-12
 
 h2. 0.16 - 2006-02-11
 
-* Zem Contact Reborn now has it’s own built-in API. This means that it can be linked to by other plug-ins. Information about how plug-in developers can do that is included in the Help text.
+* Now has its own built-in API. This means that it can be linked to by other plug-ins. Information about how plug-in developers can do that is included in the Help text.
 * Fixed a validation problem in @Strict@ relating to the @for@ attribute used in the @label@ of the @select@ function.
 * Zem Contact Lang has also been updated to 0.02 with the addition of a new line @spam@.
 
