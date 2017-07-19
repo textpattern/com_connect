@@ -717,7 +717,7 @@ The list of error messages (if any) has a default @class@ of @comError@ set on t
 All form elements and corresponding labels have the following classes (or ids) set by default:
 
 # One of @comText@, @comEmail@, @comTextarea@, @comSelect@, @comOption@, @comRadio@, @comCheckbox@ or @comSubmit@. By default, it should be obvious which @class@ is used for which form element (and corresponding label). You can override these names by using your own @class@ attribute.
-# @comRequired@ and/or @errorElement@, depending on whether the form element is required, an error was found in whatever the visitor entered, or both. These can be overrode using the @classes@ attribute on the @com_connect@ tag.
+# @comRequired@ and/or @errorElement@, depending on whether the form element is required, an error was found in whatever the visitor entered, or both. Override these using the @classes@ attribute in the @com_connect@ tag.
 # An individual @id@ or @class@ set to the value of the @name@ attribute of the corresponding tag. When styling forms based on this @class@, you should explicitly set the @name@ attribute because automatically generated names may change in newer com_connect versions.
 
 h2(#api). Com Connect's API
