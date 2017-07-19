@@ -62,7 +62,7 @@ h2(#differences). Migrating from zem_contact_reborn
 
 If upgrading from zem_contact_reborn (the previous incarnation of this plugin), please note these differences:
 
-* Tags have been globally renamed from @<zem:contact ... />@ to @<com:connect ... />@ - please adjust your code accordingly.
+* Tags have been globally renamed from @<txp:zem_contact ... />@ to @<txp:com_connect ... />@ - please adjust your code accordingly.
 * Classes @zemConnectForm@, @zemError@, @zemRequired@, @zemThanks@, @zemText@, @zemEmail@, @zemTextarea@, @zemSubmit@, @zemSelect@, @zemOption@, @zemCheckbox@ and @zemRadio@ have been renamed to @comConnectForm@, @comError@, @comRequired@, @comThanks@, @comText@, @comEmail@, @comTextarea@, @comSubmit@, @comSelect@, @comOption@, @comCheckbox@ and @comRadio@ respectively - please adjust your code accordingly.
 * Disable or remove the zem_contact_lang plugin. Language strings are now bundled as part of the plugin itself. If you have a translation Textpack available that is not yet bundled, please submit it for inclusion.
 * Classes based on the input element @name@ are no longer automatically applied. Only default class names beginning with @com@ are set. To employ custom classes, use the @class@ attribute for each tag, or the global @classes@ attribute to set names for error and information messages.
