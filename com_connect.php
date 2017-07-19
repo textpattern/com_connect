@@ -1967,7 +1967,7 @@ h2. Contents
 
 * "Features":#features
 * "Installing and upgrading":#install
-* "Differences from previous version":#differences
+* "Migrating from zem_contact_reborn":#differences
 * "Usage":#usage
 * "Tags":#tags
 ** "com_connect tag":#cc
@@ -2009,9 +2009,9 @@ h2(#install). Installing and upgrading
 
 *Requires Textpattern 4.5.0+*
 
-Download the latest release of the plugin from "the GitHub project page":https://github.com/textpattern/com_connect/releases, paste the code into the Textpattern Admin → Plugins panel, install and enable the plugin. Visit the "forum thread":https://forum.textpattern.io/viewtopic.php?id=47913 for more info or to report on the success or otherwise of the plugin.
+Download the latest release of the plugin from "the GitHub project page":https://github.com/textpattern/com_connect/releases, paste the code into the Textpattern Plugins administration panel, install and enable the plugin. Visit the "forum thread":https://forum.textpattern.io/viewtopic.php?id=47913 for more info or to report on the success or otherwise of the plugin.
 
-To uninstall, delete from the Admin → Plugins panel.
+To uninstall, delete from the Plugins administration panel.
 
 Alternatively, this plugin can be installed using "Composer":https://getcomposer.org:
 
@@ -2751,7 +2751,7 @@ Set the @label@ attribute to an empty value (@label=""@) in the @com_connect@ ta
 
 h5. No email is sent. How do I diagnose and fix the problem?
 
-First try a simple contact form, using only the @com_connect@ tag with the @to@ attribute set to a valid email address. If that doesn't send email, fill out the 'SMTP envelope sender address' field in Textpattern's Admin → Preferences panel on the admin tab. If that doesn't help either, take a look at your mail server log files to see what the problem is.
+First try a simple contact form, using only the @com_connect@ tag with the @to@ attribute set to a valid email address. If that doesn't send email, fill out the 'SMTP envelope sender address' field in Textpattern's Preferences administration panel on the admin tab. If that doesn't help either, take a look at your mail server log files to see what the problem is.
 
 h5. Which tag do I use to create the submit button?
 
