@@ -1,7 +1,7 @@
 {
   "name": "textpattern/com_connect",
   "description": "Form mailer plugin for Textpattern CMS.",
-  "keywords": ["textpattern", "plugin", "forms"],
+  "keywords": ["textpattern", "plugin", "forms", "html-forms", "email-sender"],
   "homepage": "https://github.com/textpattern/com_connect",
   "license": "GPL-2.0",
   "type": "textpattern-plugin",

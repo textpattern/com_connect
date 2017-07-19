@@ -1,6 +1,6 @@
 h1. Changelog
 
-h2. 4.6.0 - 2017-07-18
+h2. 4.6.0-beta - 2017-07-18
 
 * Renamed to com_connect and put under community control.
 

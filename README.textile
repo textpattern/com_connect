@@ -1,4 +1,4 @@
-h1. Com Connect
+h1. com_connect
 
 A Textpattern CMS form mailer plugin. @<txp:com_connect />@ produces a flexible, customisable email contact form. It is intended for use as an enquiry form for commercial and private sites, and includes several features to help reduce common problems with such forms (invalid email addresses, missing information).
 
@@ -58,13 +58,15 @@ Alternatively, this plugin can be installed using "Composer":https://getcomposer
 
 bc. $ composer require textpattern/com_connect:*
 
-h2(#differences). Differences from previous version
+h2(#differences). Migrating from zem_contact_reborn
 
-If upgrading from v4.0.3.20, please note these differences:
+If upgrading from zem_contact_reborn (the previous incarnation of this plugin), please note these differences:
 
-* Disable or remove the com_connect_lang plugin. Language strings are now bundled as part of the plugin itself. If you have a translation Textpack available that is not yet bundled, please submit it for inclusion.
+* Tags have been globally renamed from @<zem:contact ... />@ to @<com:connect ... />@ - please adjust your code accordingly.
+* Classes @zemConnectForm@, @zemError@, @zemRequired@, @zemThanks@, @zemText@, @zemEmail@, @zemTextarea@, @zemSubmit@, @zemSelect@, @zemOption@, @zemCheckbox@ and @zemRadio@ have been renamed to @comConnectForm@, @comError@, @comRequired@, @comThanks@, @comText@, @comEmail@, @comTextarea@, @comSubmit@, @comSelect@, @comOption@, @comCheckbox@ and @comRadio@ respectively - please adjust your code accordingly.
+* Disable or remove the zem_contact_lang plugin. Language strings are now bundled as part of the plugin itself. If you have a translation Textpack available that is not yet bundled, please submit it for inclusion.
 * Classes based on the input element @name@ are no longer automatically applied. Only default class names beginning with @com@ are set. To employ custom classes, use the @class@ attribute for each tag, or the global @classes@ attribute to set names for error and information messages.
-* If your site's Doctype preference is set to @html5@ you may use HTML5 attributes in your tags. Otherwise, they will be ignored.
+* If your site's 'Doctype' preference is set to @html5@ you may use HTML5 attributes in your tags. Otherwise, they will be ignored.
 * Validation of required elements and min/max constraints is done by the browser first, and the plugin second. So if you specify a field is required and it is left empty, the browser will usually prevent the form being submitted. To bypass (most of) the browser checks, specify @browser_validate="0"@ in your @<txp:com_connect />@ tag.
 
 h2(#usage). Usage
@@ -706,14 +708,16 @@ p(alert-block warning). *Warning:* Never use tags like @com_connect_text@, @com_
 
 h2(#styling). Styling
 
-The form itself has a @class@ of @comConnectForm@ set on the @form@ HTML tag.
+The form itself has a default @class@ of @comConnectForm@ set on the @<form>@ HTML tag.
 
-The list of error messages (if any) has a @class@ of @comError@ set on the @ul@ HTML tag that encloses the list of errors. This class name may be overridden using the @classes@ attribute of the @com_connect@ tag.
+If a @thanks_form@ template is used, the wrapper around that template has a default @class@ of @comThanks@.
+
+The list of error messages (if any) has a default @class@ of @comError@ set on the @ul@ HTML tag that encloses the list of errors. This class name may be overridden using the @classes@ attribute of the @com_connect@ tag.
 
 All form elements and corresponding labels have the following classes (or ids set by default):
 
 # One of @comText@, @comEmail@, @comTextarea@, @comSelect@, @comOption@, @comRadio@, @comCheckbox@ or @comSubmit@. By default, it should be obvious which @class@ is used for which form element (and corresponding label). You can override these names by using your own @class@ attribute.
-# @comRequired@ and/or @errorElement@, depending on whether the form element is required, an error was found in whatever the visitor entered, or both. These can be overriden using the @classes@ attribute on the @com_connect@ tag.
+# @comRequired@ and/or @errorElement@, depending on whether the form element is required, an error was found in whatever the visitor entered, or both. These can be overrode using the @classes@ attribute on the @com_connect@ tag.
 # An individual @id@ or @class@ set to the value of the @name@ attribute of the corresponding tag. When styling forms based on this @class@, you should explicitly set the @name@ attribute because automatically generated names may change in newer com_connect versions.
 
 h2(#api). Com Connect's API
