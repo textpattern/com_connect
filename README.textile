@@ -814,7 +814,7 @@ bc. <txp:php>$_GET['com_connect_send_article']='yes';</txp:php>
 
 h5. How can I use this form to upload files?
 
-You can't, but have a look at the "zcr_file_attach":https://github.com/Bloke/zcr_file_attach/releases/ module, or "mem_form":https://bitbucket.org/Manfre/txp-plugins/downloads/ plugins.
+You can't, but have a look at the "ext_file_attach":https://github.com/Bloke/ext_file_attach/releases/ module, or "mem_form":https://bitbucket.org/Manfre/txp-plugins/downloads/ plugins.
 
 h5. Can I use this plugin to send HTML email?
 
