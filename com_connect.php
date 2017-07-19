@@ -2673,7 +2673,7 @@ If a @thanks_form@ template is used, the wrapper around that template has a defa
 
 The list of error messages (if any) has a default @class@ of @comError@ set on the @ul@ HTML tag that encloses the list of errors. This class name may be overridden using the @classes@ attribute of the @com_connect@ tag.
 
-All form elements and corresponding labels have the following classes (or ids set by default):
+All form elements and corresponding labels have the following classes (or ids) set by default:
 
 # One of @comText@, @comEmail@, @comTextarea@, @comSelect@, @comOption@, @comRadio@, @comCheckbox@ or @comSubmit@. By default, it should be obvious which @class@ is used for which form element (and corresponding label). You can override these names by using your own @class@ attribute.
 # @comRequired@ and/or @errorElement@, depending on whether the form element is required, an error was found in whatever the visitor entered, or both. These can be overrode using the @classes@ attribute on the @com_connect@ tag.
