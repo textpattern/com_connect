@@ -17,7 +17,7 @@ $plugin['name'] = 'com_connect';
 // 1 = Plugin help is in raw HTML.  Not recommended.
 # $plugin['allow_html_help'] = 1;
 
-$plugin['version'] = '4.6.0-beta';
+$plugin['version'] = '4.7.0';
 $plugin['author'] = 'Textpattern Community';
 $plugin['author_uri'] = 'https://forum.textpattern.io/viewtopic.php?id=47913';
 $plugin['description'] = 'Form and contact mailer for Textpattern';
@@ -303,7 +303,7 @@ if (class_exists('\Textpattern\Tag\Registry')) {
  */
 function com_connect($atts, $thing = null)
 {
-    global $sitename, $textarray, $com_connect_flags, $com_connect_from,
+    global $sitename, $com_connect_flags, $com_connect_from,
         $com_connect_recipient, $com_connect_error, $com_connect_submit,
         $com_connect_form, $com_connect_labels, $com_connect_values;
 
@@ -333,7 +333,9 @@ function com_connect($atts, $thing = null)
 
     if (!empty($lang)) {
         $strings = com_connect_load_lang($lang);
-        $textarray = array_merge($textarray, $strings);
+        $current = Txp::get('\Textpattern\L10n\Lang')->getStrings();
+        $textarray = array_merge($current, $strings);
+        Txp::get('\Textpattern\L10n\Lang')->setPack($textarray);
     }
 
     // Set defaults, in the local language if necessary.
@@ -1857,14 +1859,13 @@ function com_connect_store($name, $label, $value)
  * Override the language strings if necessary.
  *
  * @param  string $lang Language designator (e.g. fr-fr)
- * @return array        Partial language array to merge with $textarray
+ * @return array        Partial language array to merge with current loaded strings
  */
 function com_connect_load_lang($lang = LANG)
 {
     $out = array();
 
     if ($lang != LANG) {
-
         $rs = safe_rows("name, data", 'txp_lang', "lang = '" . doSlash($lang) . "' AND name like 'com\_connect\_%'");
 
         if (!empty($rs)) {
