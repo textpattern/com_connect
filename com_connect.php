@@ -486,7 +486,7 @@ function com_connect($atts, $thing = null)
             $subject = parse_form($subject_form);
         }
 
-        $sep = IS_WIN ? "\r\n" : "\n";
+        $sep = PHP_EOL;
         $msg = array();
         $fields = array();
 
@@ -1732,7 +1732,7 @@ function com_connect_deliver($to, $subject, $body, $headers, $fields, $flags)
             : gTxt('warn_mail_unavailable');
     }
 
-    $sep = (!empty($headers['separator'])) ? $headers['separator'] : (IS_WIN ? "\r\n" : "\n");
+    $sep = (!empty($headers['separator'])) ? $headers['separator'] : PHP_EOL;
     $xfer_encoding = (!empty($headers['xfer_encoding'])) ? $headers['xfer_encoding'] : '8bit';
     $content_type = (!empty($headers['content_type'])) ? $headers['content_type'] : 'text/plain';
     $reply = (!empty($headers['reply'])) ? $headers['reply'] : '';
