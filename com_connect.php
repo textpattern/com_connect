@@ -1959,43 +1959,13 @@ if (0) {
 # --- BEGIN PLUGIN HELP ---
 h1. com_connect
 
+h2(#introduction). Introduction
+
 A Textpattern CMS form mailer plugin. @<txp:com_connect />@ produces a flexible, customisable email contact form. It is intended for use as an enquiry form for commercial and private sites, and includes several features to help reduce common problems with such forms (invalid email addresses, missing information).
 
 Please report bugs and problems with this plugin at "the GitHub project's issues page":https://github.com/textpattern/com_connect/issues.
 
-h2. Contents
-
-* "Features":#features
-* "Installing and upgrading":#install
-* "Migrating from zem_contact_reborn":#differences
-* "Usage":#usage
-* "Tags":#tags
-** "com_connect tag":#cc
-** "com_connect_text tag":#cc_text
-** "com_connect_email tag":#cc_email
-** "com_connect_textarea tag":#cc_textarea
-** "com_connect_submit tag":#cc_submit
-** "com_connect_select tag":#cc_select
-** "com_connect_option tag":#cc_option
-** "com_connect_checkbox tag":#cc_checkbox
-** "com_connect_radio tag":#cc_radio
-** "com_connect_secret tag":#cc_secret
-** "com_connect_serverinfo tag":#cc_serverinfo
-** "com_connect_send_article tag":#cc_send_article
-** "com_connect_label tag":#cc_label
-** "com_connect_value tag":#cc_value
-** "com_connect_if tag":#cc_if
-* "Advanced examples":#advanced
-** "Separate input and error forms":#advanced1
-** "User selectable subject field":#advanced2
-** "User selectable recipient, without showing email address":#advanced3
-* "Styling":#styling
-* "Plugin API and callback events":#api
-* "Frequently asked questions":#faq
-* "History":#history
-* "Authors/credits":#credits
-
-h2(#features). Features
+h3. Features
 
 * Arbitrary HTML5 text fields can be specified, with min/max/required settings for validation.
 * Email address validation, including a check for a valid MX record (Unix only).
@@ -2004,6 +1974,10 @@ h2(#features). Features
 * Accessible form layout, including @<label>@, @<legend>@ and @<fieldset>@ tags.
 * Various classes and ids to allow easy styling of all parts of the form.
 * Spam prevention API (used by Tranquillo's @pap_contact_cleaner@ plugin) and delivery API for altering or extending the plugin's capabilities.
+
+h3. History
+
+Please see the "changelog on GitHub":https://github.com/textpattern/com_connect/blob/master/CHANGELOG.textile.
 
 h2(#install). Installing and upgrading
 
@@ -2790,10 +2764,6 @@ Not without a plugin, such as "mem_postmaster":https://bitbucket.org/Manfre/txp-
 h5. I have a question that's not listed here
 
 First read the plugin documentation (the page you're on right now) once more. If that doesn't answer your question, visit the "Textpattern forum":https://forum.textpattern.io.
-
-h2. History
-
-Please see the "changelog on GitHub":https://github.com/textpattern/com_connect/blob/master/CHANGELOG.textile.
 
 h2. Authors/credits
 
