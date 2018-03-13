@@ -756,7 +756,13 @@ p. Multiple plugins can be active at the same time and each of them can mark the
 
 h4. Examples
 
-bc.. register_callback('pap_comconnect_form','comconnect.form');
+bc.. if (class_exists('\Textpattern\Tag\Registry')) {
+    Txp::get('\Textpattern\Tag\Registry')
+        ->register('pap_comconnect_form')
+        ->register('pap_comconnect_submit');
+}
+
+register_callback('pap_comconnect_form','comconnect.form');
 register_callback('pap_comconnect_submit','comconnect.submit');
 
 function pap_comconnect_form()
@@ -764,7 +770,7 @@ function pap_comconnect_form()
     $field = '<div style="display:none">'.
         finput('text','phone',ps('phone'),'','','','','','phone').'<br />'.
         finput('text','mail',ps('mail'),'','','','','','mail').'</div>';
-    return $field;</code>
+    return $field;
 }
 
 function pap_comconnect_submit()
