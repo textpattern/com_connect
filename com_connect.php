@@ -1989,7 +1989,7 @@ To uninstall, delete from the Plugins administration panel.
 
 Alternatively, this plugin can be installed using "Composer":https://getcomposer.org:
 
-bc. $ composer require textpattern/com_connect:*
+bc(language-bash). $ composer require textpattern/com_connect:*
 
 h2(#differences). Migrating from zem_contact_reborn
 
@@ -2008,11 +2008,11 @@ h3. Contact form
 
 The simplest form is shown below, which produces a default form with 'Name', 'Email' and 'Message' fields. Email will be delivered to <code>recipient@example.com</code>, with the user's supplied email as the @From:@ address.
 
-bc. <txp:com_connect to="recipient@example.com" />
+bc(language-markup). <txp:com_connect to="recipient@example.com" />
 
 To specify fields explicitly, use something like this:
 
-bc. <txp:com_connect to="recipient@example.com">
+bc(language-markup). <txp:com_connect to="recipient@example.com">
     <txp:com_connect_email />
     <txp:com_connect_text label="Phone" min="7" max="15" />
     <txp:com_connect_textarea label="Your question" />
@@ -2021,7 +2021,7 @@ bc. <txp:com_connect to="recipient@example.com">
 
 Alternatively, place the field specifications in a Textpattern form, and call it like this:
 
-bc. <txp:com_connect to="recipient@example.com" form="my-contact-form" />
+bc(language-markup). <txp:com_connect to="recipient@example.com" form="my-contact-form" />
 
 h3. Send article
 
@@ -2030,7 +2030,7 @@ Within the context of an individual article, this plugin can be used to send the
 # @com_connect@, to create form that is initially hidden by setting the @send_article@ attribute.
 # @com_connect_send_article@, to create a 'Send article' link which reveals the aforementioned form when clicked.
 
-bc. <txp:com_connect send_article="1" />
+bc(language-markup). <txp:com_connect send_article="1" />
 <txp:com_connect_send_article />
 
 By default the form contains fields for your name and email address, the recipient's email address and a personal message, but similar to contact forms you can create your own form layout. Some things you need to know:
@@ -2038,7 +2038,7 @@ By default the form contains fields for your name and email address, the recipie
 # Set the @send_article@ attribute to @1@ in the @com_connect@ tag.
 # Use a @com_connect_email@ tag with the @send_article@ attribute set to @1@. This field will be used as the recipient email address.
 
-bc.. <txp:com_connect to="you@example.com" send_article="1">
+bc(language-markup).. <txp:com_connect to="you@example.com" send_article="1">
     <txp:com_connect_email label="Recipient Email" send_article="1" />
     <txp:com_connect_email label="Your Email" />
     <txp:com_connect_submit label="Send Article" />
@@ -2071,7 +2071,7 @@ In addition to the tags detailed in the following sections, every tag accepts a 
 
 h3(#cc). com_connect tag
 
-bc. <txp:com_connect />
+bc(language-markup). <txp:com_connect />
 
 May be used as a single (self-closing) or container tag. Place this where you want the input form to go. Status and error messages, if any, will be displayed before the form.
 
@@ -2110,13 +2110,13 @@ h5. Example 1
 
 When used as a single tag, produces a default form with 'Name', 'Email' and 'Message' fields. Email will be delivered to <code>recipient@example.com</code>, with the user's supplied email as the @From:@ address:
 
-bc. <txp:com_connect to="recipient@example.com" />
+bc(language-markup). <txp:com_connect to="recipient@example.com" />
 
 h5. Example 2
 
 When used as a container tag, much more flexibility is allowed, for example:
 
-bc. <txp:com_connect to="recipient@example.com">
+bc(language-markup). <txp:com_connect to="recipient@example.com">
     <txp:com_connect_email />
     <txp:com_connect_text type="tel" label="Phone" min="7" max="15" />
     <txp:com_connect_textarea label="Your question" />
@@ -2127,7 +2127,7 @@ h5. Example 3
 
 Example with custom email message formatting, called via the @body_form@ attribute:
 
-bc. <txp:com_connect to="recipient@example.com" body_form="message-formatting" />
+bc(language-markup). <txp:com_connect to="recipient@example.com" body_form="message-formatting" />
 
 And the @body_form@ form template named @message-formatting@ is as follows:
 
@@ -2142,7 +2142,7 @@ Email received.
 
 h3(#cc_text). com_connect_text tag
 
-bc. <txp:com_connect_text />
+bc(language-markup). <txp:com_connect_text />
 
 Creates a text @<input>@ field and corresponding @<label>@ tag. The input value will be included in the email, preceded by the label.
 Creates a text @<input>@ field. The input value will be included in the email, preceded by the label.
@@ -2196,21 +2196,21 @@ h4. Examples
 
 h5. Example 1
 
-bc. <txp:com_connect_text label="Your name" />
+bc(language-markup). <txp:com_connect_text label="Your name" />
 
 h5. Example 2
 
-bc. <txp:com_connect_text type="range" label="UK shoe size" min="1" max="15" />
+bc(language-markup). <txp:com_connect_text type="range" label="UK shoe size" min="1" max="15" />
 
 h5. Example 3
 
 Create a telephone field with a "validation pattern for UK telephone number":http://html5pattern.com/Phones format:
 
-bc. <txp:com_connect_text type="tel" label="Telephone" pattern="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" required="1" />
+bc(language-markup). <txp:com_connect_text type="tel" label="Telephone" pattern="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" required="1" />
 
 h3(#cc_email). com_connect_email tag
 
-bc. <txp:com_connect_email />
+bc(language-markup). <txp:com_connect_email />
 
 @<input>@ field for user's email address.
 
@@ -2237,11 +2237,11 @@ h4. Examples
 
 h5. Example 1
 
-bc. <txp:com_connect_email label="Your email address" />
+bc(language-markup). <txp:com_connect_email label="Your email address" />
 
 h3(#cc_textarea). com_connect_textarea tag
 
-bc. <txp:com_connect_textarea />
+bc(language-markup). <txp:com_connect_textarea />
 
 Creates a @<textarea>@.
 
@@ -2269,11 +2269,11 @@ h5. Example 1
 
 Create a text area that is 40 characters wide, 10 lines high, with a customised label:
 
-bc. <txp:com_connect_textarea cols="40" rows="10" label="Your question" />
+bc(language-markup). <txp:com_connect_textarea cols="40" rows="10" label="Your question" />
 
 h3(#cc_submit). com_connect_submit tag
 
-bc. <txp:com_connect_submit />
+bc(language-markup). <txp:com_connect_submit />
 
 Creates a submit button. When used as a container tag, a @<button>@ element will be used instead of an @<input>@ element.
 
@@ -2289,31 +2289,31 @@ h5. Example 1
 
 Standard submit button:
 
-bc. <txp:com_connect_submit />
+bc(language-markup). <txp:com_connect_submit />
 
 h5. Example 2
 
 Submit button with your own text:
 
-bc. <txp:com_connect_submit label="To the moooon" />
+bc(language-markup). <txp:com_connect_submit label="To the moooon" />
 
 h5. Example 3
 
 Usage as a container tag, which allows you to use Textpattern tags and HTML markup in the submit button:
 
-bc. <txp:com_connect_submit><strong>Send</strong> question</txp:com_connect_submit>
+bc(language-markup). <txp:com_connect_submit><strong>Send</strong> question</txp:com_connect_submit>
 
 h5. Example 4
 
 As example 3 above, but using an image as the button:
 
-bc. <txp:com_connect_submit>
+bc(language-markup). <txp:com_connect_submit>
     <img src="path/to/img.png" alt="submit">
 </txp:com_connect_submit>
 
 h3(#cc_select). com_connect_select tag
 
-bc. <txp:com_connect_select />
+bc(language-markup). <txp:com_connect_select />
 
 Container tag that creates a drop-down selection @<select>@ list, or scrolled @<select>@ list box (by utilising the @size@ attribute).
 
@@ -2337,11 +2337,11 @@ h5. Example 1
 
 Drop-down selection list labeled 'Department', containing three options and a blank option (due to the comma before 'Marketing') shown by default, forcing the user to make a selection.
 
-bc. <txp:com_connect_select label="Department" options=",Marketing,Sales,Support" />
+bc(language-markup). <txp:com_connect_select label="Department" options=",Marketing,Sales,Support" />
 
 h5. Example 2
 
-bc. <txp:com_connect_select label="Department" selected="Sales">
+bc(language-markup). <txp:com_connect_select label="Department" selected="Sales">
     <txp:com_connect_option />
     <txp:com_connect_option label="Marketing" />
     <txp:com_connect_option label="Sales" />
@@ -2352,7 +2352,7 @@ Drop-down selection list containing three options plus a blank option (also see 
 
 h3(#cc_option). com_connect_option tag
 
-bc. <txp:com_connect_option />
+bc(language-markup). <txp:com_connect_option />
 
 Creates a drop-down selection option. May be used as a single (self-closing) or container tag. Also see @com_connect_select@ tag above.
 
@@ -2365,7 +2365,7 @@ h4. Attributes
 
 h5. Example 1
 
-bc. <txp:com_connect_select label="Department">
+bc(language-markup). <txp:com_connect_select label="Department">
     <txp:com_connect_option label="Marketing" />
     <txp:com_connect_option label="Sales" />
     <txp:com_connect_option label="Support" />
@@ -2375,7 +2375,7 @@ Drop-down selection list containing three options as single tags.
 
 h5. Example 2
 
-bc. <txp:com_connect_select label="Department">
+bc(language-markup). <txp:com_connect_select label="Department">
     <txp:com_connect_option value="contact-marketing">Marketing</txp:com_connect_option>
     <txp:com_connect_option value="contact-sales" selected="1">Sales</txp:com_connect_option>
     <txp:com_connect_option value="contact-support">Support</txp:com_connect_option>
@@ -2385,7 +2385,7 @@ Drop-down selection list containing three options as container tags with 'Sales'
 
 h3(#cc_checkbox). com_connect_checkbox tag
 
-bc. <txp:com_connect_checkbox />
+bc(language-markup). <txp:com_connect_checkbox />
 
 Creates a checkbox.
 
@@ -2407,20 +2407,20 @@ h5. Example 1
 
 Shrink-wrap agreement which must be checked by the user before the email will be sent.
 
-bc. <txp:com_connect_checkbox label="I accept the terms and conditions" />
+bc(language-markup). <txp:com_connect_checkbox label="I accept the terms and conditions" />
 
 h5. Example 2
 
 Optional checkboxes:
 
-bc. With which operating systems are you familiar?<br />
+bc(language-markup). With which operating systems are you familiar?<br />
 <txp:com_connect_checkbox label="Windows" required="0" /><br />
 <txp:com_connect_checkbox label="Unix/Linux/BSD" required="0" /><br />
 <txp:com_connect_checkbox label="MacOS" required="0" />
 
 h3(#cc_radio). com_connect_radio tag
 
-bc. <txp:com_connect_radio />
+bc(language-markup). <txp:com_connect_radio />
 
 Creates a radio button.
 
@@ -2442,7 +2442,7 @@ h5. Example 1
 
 Group mutually exclusive radio buttons by setting the @group@ attribute on the first radio button in a group. Only the chosen radio button from each group will be used in the email message. The message will be output in the form @group: label@ for each of the chosen radio buttons.
 
-bc. <txp:com_connect_radio label="Medium" group="I like my steak" />
+bc(language-markup). <txp:com_connect_radio label="Medium" group="I like my steak" />
 <txp:com_connect_radio label="Rare" />
 <txp:com_connect_radio label="Well done" />
 <txp:com_connect_radio label="Wine" group="With a glass of" />
@@ -2451,7 +2451,7 @@ bc. <txp:com_connect_radio label="Medium" group="I like my steak" />
 
 h3(#cc_secret). com_connect_secret tag
 
-bc. <txp:com_connect_secret />
+bc(language-markup). <txp:com_connect_secret />
 
 This tag has no effect on the form or HTML output, but will include additional information in the email. It can be used as a single (self-closing) tag or as a container tag.
 
@@ -2467,19 +2467,19 @@ h5. Example 1
 
 Usage as a single (self-closing) tag:
 
-bc. <txp:com_connect_secret value="The answer is 42" />
+bc(language-markup). <txp:com_connect_secret value="The answer is 42" />
 
 h5. Example 2
 
 Usage as a container tag:
 
-bc. <txp:com_connect_secret label="Dear user">
+bc(language-markup). <txp:com_connect_secret label="Dear user">
     Please provide a useful example for this tag!
 </txp:com_connect_secret>
 
 h3(#cc_serverinfo). com_connect_serverinfo tag
 
-bc. <txp:com_connect_serverinfo />
+bc(language-markup). <txp:com_connect_serverinfo />
 
 This tag has no effect on the form or HTML output, but will include additional information in the email based on the PHP @$_SERVER@ variable.
 
@@ -2494,17 +2494,17 @@ h5. Example 1
 
 Add the IP address of the visitor to the email:
 
-bc. <txp:com_connect_serverinfo name="REMOTE_ADDR" label="IP number" />
+bc(language-markup). <txp:com_connect_serverinfo name="REMOTE_ADDR" label="IP number" />
 
 h5. Example 2
 
 Add the name of the visitor's browser to the email:
 
-bc. <txp:com_connect_serverinfo name="HTTP_USER_AGENT" label="Browser" />
+bc(language-markup). <txp:com_connect_serverinfo name="HTTP_USER_AGENT" label="Browser" />
 
 h3(#cc_send_article). com_connect_send_article tag
 
-bc. <txp:com_connect_send_article />
+bc(language-markup). <txp:com_connect_send_article />
 
 Use this tag in your individual article form, where you want the "send article" link to be displayed.
 
@@ -2518,11 +2518,11 @@ h5. Example 1
 
 On an article form:
 
-bc. <txp:com_connect_send_article linktext="Send this article" />
+bc(language-markup). <txp:com_connect_send_article linktext="Send this article" />
 
 h3(#cc_label). com_connect_label tag
 
-bc. <txp:com_connect_label />
+bc(language-markup). <txp:com_connect_label />
 
 Return the label for the given attribute name.
 
@@ -2532,7 +2532,7 @@ h4. Attributes
 
 h3(#cc_value). com_connect_value tag
 
-bc. <txp:com_connect_value />
+bc(language-markup). <txp:com_connect_value />
 
 Return the value of the given attribute, by name or its label.
 
@@ -2543,7 +2543,7 @@ h4. Attributes
 
 h3(#cc_if). com_connect_if tag
 
-bc. <txp:com_connect_if />
+bc(language-markup). <txp:com_connect_if />
 
 Conditional tag for checking variable conditions, either by name or label.
 
@@ -2559,7 +2559,7 @@ h5. Example 1
 
 Take action if the visitor has entered a particular value.
 
-bc. <txp:com_connect_if name="delivery" value="courier">
+bc(language-markup). <txp:com_connect_if name="delivery" value="courier">
 
 Please note, this option incurs an additional charge, @</txp:com_connect_if>@.
 
@@ -2569,7 +2569,7 @@ h3(#advanced1). Separate input and error forms
 
 Using @show_input@ and @show_error@ to display the form and error messages on different parts of a page. A form is used to make sure the contents of both forms are identical, otherwise they would be seen as two independent forms. The first form only shows errors (no input), the second form only shows the input fields (no errors).
 
-bc. <div id="error">
+bc(language-markup). <div id="error">
     <txp:com_connect form="contact_form" show_input="0" />
 </div>
 <div id="inputform">
@@ -2582,7 +2582,7 @@ h3(#advanced2). User selectable subject field
 
 Specify the @subject_form@ attribute and create a form which includes a @com_connect_select@ tag:
 
-bc. <txp:com_connect to="you@example.com" subject_form="my_subject_form" />
+bc(language-markup). <txp:com_connect to="you@example.com" subject_form="my_subject_form" />
     <txp:com_connect_text label="Name" /><br />
     <txp:com_connect_email /><br />
     <txp:com_connect_select label="Choose Subject" options=",Question,Feedback" /><br />
@@ -2591,7 +2591,7 @@ bc. <txp:com_connect to="you@example.com" subject_form="my_subject_form" />
 
 Create a Textpattern form called "my_subject_form", containing:
 
-bc. <txp:php>
+bc(language-markup). <txp:php>
     global $com_connect_form;
     echo $com_connect_form['Choose Subject'];
 </txp:php>
@@ -2600,7 +2600,7 @@ The @label@ used in the @com_connect_select@ tag must be identical to the corres
 
 If you'd prefer to add a common prefix for all subjects, use a @subject_form@ containing:
 
-bc. <txp:php>
+bc(language-markup). <txp:php>
     global $com_connect_form;
     echo 'My common prefix - ' . $com_connect_form['Choose Subject'];
 </txp:php>
@@ -2609,7 +2609,7 @@ h3(#advanced3). User selectable recipient, without showing email address
 
 Specify the @to_form@ attribute and create a form which includes a @com_connect_select@ tag:
 
-bc. <txp:com_connect to_form="my_com_connect_to_form">
+bc(language-markup). <txp:com_connect to_form="my_com_connect_to_form">
     <txp:com_connect_text label="Name" /><br />
     <txp:com_connect_email /><br />
     <txp:com_connect_select label="Department" options=",Support,Sales" /><br />
@@ -2618,7 +2618,7 @@ bc. <txp:com_connect to_form="my_com_connect_to_form">
 
 Create a Textpattern form called "my_com_connect_to_form", containing:
 
-bc. <txp:php>
+bc(language-markup). <txp:php>
     global $com_connect_form;
     switch($com_connect_form['Department'])
     {
@@ -2666,7 +2666,7 @@ Four callback events exist in com_connect:
 
 For reference here are the commands that will be interesting to plugin developers:
 
-bc.. // This will call your function before the form is submitted so you can analyse the submitted data
+bc(language-php).. // This will call your function before the form is submitted so you can analyse the submitted data
 register_callback('abc_myfunction', 'comconnect.submit');
 
 // This will call your function and add the output (use @return $mystuff;@) to the contact-form.
@@ -2684,7 +2684,7 @@ p. Multiple plugins can be active at the same time and each of them can mark the
 
 h4. Examples
 
-bc.. register_callback('pap_comconnect_form','comconnect.form');
+bc(language-php).. register_callback('pap_comconnect_form','comconnect.form');
 register_callback('pap_comconnect_submit','comconnect.submit');
 
 function pap_comconnect_form()
@@ -2747,7 +2747,7 @@ h5. Send article: can I show the contact form without having to click a link fir
 
 Sure, put this just above the @com_connect@ tag:
 
-bc. <txp:php>$_GET['com_connect_send_article']='yes';</txp:php>
+bc(language-markup). <txp:php>$_GET['com_connect_send_article']='yes';</txp:php>
 
 h5. How can I use this form to upload files?
 
