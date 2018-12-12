@@ -10,7 +10,7 @@
     "source": "https://github.com/textpattern/com_connect"
   },
   "require": {
-    "textpattern/lock": ">=4.5.0",
-    "textpattern/installer": "*"
+    "textpattern/composer-lock": ">=4.5.0",
+    "textpattern/composer-installer": "*"
   }
 }

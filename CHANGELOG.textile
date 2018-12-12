@@ -1,5 +1,15 @@
 h1. Changelog
 
+h2. 4.6.0-beta.3 - 2018-10-05
+
+* Updated Composer installation.
+* Added code syntax highlighting.
+
+h2. 4.6.0-beta.2 - 2018-04-11
+
+* @zcr_file_attach@ has been renamed with @ext_@ prefix.
+* Documentation updates and typos.
+
 h2. 4.6.0-beta - 2017-07-18
 
 * Renamed to com_connect and put under community control.

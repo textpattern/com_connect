@@ -1,12 +1,8 @@
 h1. com_connect
 
-A Textpattern CMS form mailer plugin. @<txp:com_connect />@ produces a flexible, customisable email contact form. It is intended for use as an enquiry form for commercial and private sites, and includes several features to help reduce common problems with such forms (invalid email addresses, missing information).
-
-Please report bugs and problems with this plugin at "the GitHub project's issues page":https://github.com/textpattern/com_connect/issues.
-
 h2. Contents
 
-* "Features":#features
+* "Introduction":#introduction
 * "Installing and upgrading":#install
 * "Migrating from zem_contact_reborn":#differences
 * "Usage":#usage
@@ -33,10 +29,15 @@ h2. Contents
 * "Styling":#styling
 * "Plugin API and callback events":#api
 * "Frequently asked questions":#faq
-* "History":#history
 * "Authors/credits":#credits
 
-h2(#features). Features
+h2(#introduction). Introduction
+
+A Textpattern CMS form mailer plugin. @<txp:com_connect />@ produces a flexible, customisable email contact form. It is intended for use as an enquiry form for commercial and private sites, and includes several features to help reduce common problems with such forms (invalid email addresses, missing information).
+
+Please report bugs and problems with this plugin at "the GitHub project's issues page":https://github.com/textpattern/com_connect/issues.
+
+h3. Features
 
 * Arbitrary HTML5 text fields can be specified, with min/max/required settings for validation.
 * Email address validation, including a check for a valid MX record (Unix only).
@@ -45,6 +46,10 @@ h2(#features). Features
 * Accessible form layout, including @<label>@, @<legend>@ and @<fieldset>@ tags.
 * Various classes and ids to allow easy styling of all parts of the form.
 * Spam prevention API (used by Tranquillo's @pap_contact_cleaner@ plugin) and delivery API for altering or extending the plugin's capabilities.
+
+h3. History
+
+Please see the "changelog on GitHub":https://github.com/textpattern/com_connect/blob/master/CHANGELOG.textile.
 
 h2(#install). Installing and upgrading
 
@@ -751,7 +756,13 @@ p. Multiple plugins can be active at the same time and each of them can mark the
 
 h4. Examples
 
-bc.. register_callback('pap_comconnect_form','comconnect.form');
+bc.. if (class_exists('\Textpattern\Tag\Registry')) {
+    Txp::get('\Textpattern\Tag\Registry')
+        ->register('pap_comconnect_form')
+        ->register('pap_comconnect_submit');
+}
+
+register_callback('pap_comconnect_form','comconnect.form');
 register_callback('pap_comconnect_submit','comconnect.submit');
 
 function pap_comconnect_form()
@@ -759,7 +770,7 @@ function pap_comconnect_form()
     $field = '<div style="display:none">'.
         finput('text','phone',ps('phone'),'','','','','','phone').'<br />'.
         finput('text','mail',ps('mail'),'','','','','','mail').'</div>';
-    return $field;</code>
+    return $field;
 }
 
 function pap_comconnect_submit()
@@ -831,10 +842,6 @@ Not without a plugin, such as "mem_postmaster":https://bitbucket.org/Manfre/txp-
 h5. I have a question that's not listed here
 
 First read the plugin documentation (the page you're on right now) once more. If that doesn't answer your question, visit the "Textpattern forum":https://forum.textpattern.io.
-
-h2. History
-
-Please see the "changelog on GitHub":https://github.com/textpattern/com_connect/blob/master/CHANGELOG.textile.
 
 h2. Authors/credits
 
