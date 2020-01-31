@@ -56,6 +56,7 @@ $plugin['flags'] = '0';
 
 $plugin['textpack'] = <<<EOT
 #@public
+#@language en, en-gb, en-us
 com_connect_checkbox => Checkbox
 com_connect_contact => Contact
 com_connect_email => Email
