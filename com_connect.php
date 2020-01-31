@@ -17,7 +17,7 @@ $plugin['name'] = 'com_connect';
 // 1 = Plugin help is in raw HTML.  Not recommended.
 # $plugin['allow_html_help'] = 1;
 
-$plugin['version'] = '4.6.0-beta.3';
+$plugin['version'] = '4.6.0';
 $plugin['author'] = 'Textpattern Community';
 $plugin['author_uri'] = 'https://forum.textpattern.io/viewtopic.php?id=47913';
 $plugin['description'] = 'Form and contact mailer for Textpattern';
@@ -2767,15 +2767,16 @@ First read the plugin documentation (the page you're on right now) once more. If
 
 h2. Authors/credits
 
-* *zem* wrote the com_connect 0.6 plugin on which this plugin was initially based.
+* *zem* wrote the zem_contact 0.6 plugin on which this plugin was initially based.
 * *Mary* completely revised the plugin code.
 * *Stuart* turned it into a plugin, added a revised help text and additional code. Maintained all plugin versions until 4.0.3.17.
 * *wet* added the @com_connect_radio@ tag.
-* *Tranquillo* added the anti-spam API and @com_connect_send_article@ functionality.
+* *Tranquillo* added the anti-spam API and @zem_contact_send_article@ functionality.
 * *aslsw66*, *jdykast* and others provided additional code.
 * *Ruud* cleaned up and audited the code to weed out bugs and completely revised the help text. Maintained all versions until 4.0.3.20.
-* *Bloke* is the maintainer of v4.5.0.0 and up. Many thanks to "all additional contributors":https://github.com/textpattern/com_connect/graphs/contributors.
-* Supported and tested to destruction by the Textpattern community.
+* *Bloke* was the maintainer of v4.5.0.0.
+* Adopted as a community plugin and now maintained by the core development team.
+* Supported and tested to destruction by the Textpattern community. Many thanks to "all additional contributors":https://github.com/textpattern/com_connect/graphs/contributors.
 # --- END PLUGIN HELP ---
 -->
 <?php
