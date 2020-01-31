@@ -1,18 +1,27 @@
 h1. Changelog
 
+h2. 4.6.0 - 2020-01-31
+
+* Final Textpattern 4.6-compatible release.
+
 h2. 4.6.0-beta.3 - 2018-10-05
 
-* Updated Composer installation.
-* Added code syntax highlighting.
+* Update Composer installation.
+* Add code syntax highlighting.
 
 h2. 4.6.0-beta.2 - 2018-04-11
 
 * @zcr_file_attach@ has been renamed with @ext_@ prefix.
 * Documentation updates and typos.
 
-h2. 4.6.0-beta - 2017-07-18
+h2. 4.6.0-beta - 2017-07-19
 
-* Renamed to com_connect and put under community control.
+* Rename to com_connect and put under community control.
+* Fix zem_contact_options and labels. Thanks, trenc.
+* Remove call to is_windows().
+* Third party plugins can return error info.
+* Remove unnecessary div in fieldset. Thanks, NicolasGraph.
+* Add nl-nl and de-de Textpacks. Thanks, keesbran and rwetzlmayr.
 
 h2. 4.5.0.0 - 2016-12-02
 
