@@ -1,5 +1,11 @@
 h1. Changelog
 
+h2. 4.7.0 - YYYY-MM-DD
+
+* Load lang strings in a Textpattern 4.7.0-ish way.
+* Use PHP_EOL instead of manual newlines.
+* Add en language designators to Textpack (thanks, cara-tm).
+
 h2. 4.6.0 - 2020-01-31
 
 * Final Textpattern 4.6-compatible release.
