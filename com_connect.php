@@ -1581,7 +1581,11 @@ function com_connect_group_validate()
  */
 function com_connect_lAtts($pairs, $atts)
 {
-    lAtts(array('label' => ''), $atts, false);
+    // Prevent these global attributes from interfering.
+    // See https://github.com/textpattern/textpattern/pull/893
+    lAtts(array(
+        'label' => '',
+    ), $atts, false);
 
     foreach (array('button', 'copysender', 'checked', 'required', 'send_article', 'show_input', 'show_error') as $key) {
         if (isset($atts[$key])) {
@@ -1851,6 +1855,7 @@ function com_connect_store($name, $label, $value)
 {
     global $com_connect_form, $com_connect_labels, $com_connect_values;
 
+    $label = (empty($label)) ? $name : $label;
     $com_connect_form[$label] = $value;
     $com_connect_labels[$name] = $label;
     $com_connect_values[$name] = $value;
