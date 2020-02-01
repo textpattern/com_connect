@@ -708,8 +708,11 @@ function com_connect_text($atts)
         $name = com_connect_label2name($label);
     }
 
+    $name = sanitizeForUrl($name);
+
     if ($com_connect_submit) {
         $value = trim(ps($name));
+
         $utf8len = preg_match_all("/./su", $value, $utf8ar);
         $hlabel = txpspecialchars($label);
         $datetime_ok = true;
@@ -881,6 +884,7 @@ function com_connect_email($atts)
         $name = com_connect_label2name($label);
     }
 
+    $name = sanitizeForUrl($name);
     $email = $com_connect_submit ? trim(ps($name)) : $default;
 
     if ($com_connect_submit && strlen($email)) {
@@ -952,6 +956,7 @@ function com_connect_textarea($atts)
         $name = com_connect_label2name($label);
     }
 
+    $name = sanitizeForUrl($name);
     $doctype = get_pref('doctype', 'xhtml');
 
     if ($com_connect_submit) {
@@ -991,6 +996,7 @@ function com_connect_textarea($atts)
 
     // HTML5 attributes.
     $required = ($required) ? 'required' : '';
+
     if ($doctype !== 'xhtml') {
         $attr += com_connect_build_atts(array(
             'autocomplete' => $autocomplete,
@@ -1065,6 +1071,7 @@ function com_connect_select($atts, $thing = null)
         $name = com_connect_label2name($label);
     }
 
+    $name = sanitizeForUrl($name);
     $value = ($com_connect_submit) ? trim(ps($name)) : $selected;
     $doctype = get_pref('doctype', 'xhtml');
 
@@ -1230,6 +1237,7 @@ function com_connect_checkbox($atts)
         $name = com_connect_label2name($label);
     }
 
+    $name = sanitizeForUrl($name);
     $doctype = get_pref('doctype', 'xhtml');
 
     if ($com_connect_submit) {
@@ -1260,6 +1268,7 @@ function com_connect_checkbox($atts)
 
     // HTML5 attributes.
     $required = ($required) ? 'required' : '';
+
     if ($doctype !== 'xhtml') {
         $attr += com_connect_build_atts(array(
             'form'     => $html_form,
@@ -1361,6 +1370,7 @@ function com_connect_radio($atts)
 
     $id = 'q' . md5($name . '=>' . $label);
     $name = com_connect_label2name($name);
+    $name = sanitizeForUrl($name);
     $doctype = get_pref('doctype', 'xhtml');
     $com_connect_group[$name][$id]['req'] = $required;
     $com_connect_group[$name][$id]['label'] = $group;
@@ -1386,6 +1396,7 @@ function com_connect_radio($atts)
 
     // HTML5 attributes.
     $required = ($required) ? 'required' : '';
+
     if ($doctype !== 'xhtml') {
         $attr += com_connect_build_atts(array(
             'form'     => $html_form,
@@ -1431,6 +1442,8 @@ function com_connect_serverinfo($atts)
         $name = com_connect_label2name($label);
     }
 
+    $name = sanitizeForUrl($name);
+
     if (strlen($name) && $com_connect_submit) {
         if (!$label) {
             $label = $name;
@@ -1456,6 +1469,7 @@ function com_connect_secret($atts, $thing = null)
     ), $atts));
 
     $name = com_connect_label2name($name ? $name : $label);
+    $name = sanitizeForUrl($name);
 
     if ($com_connect_submit) {
         if ($thing) {
