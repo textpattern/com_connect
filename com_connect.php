@@ -807,6 +807,7 @@ function com_connect_text($atts)
 
     // HTML5 attributes.
     $required = ($required) ? 'required' : '';
+
     if ($doctype !== 'xhtml') {
         $attr += com_connect_build_atts(array(
             'autocomplete' => $autocomplete,
@@ -836,11 +837,11 @@ function com_connect_text($atts)
     }
 
     $classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
-    $labelStr = '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
+    $labelStr = ($label) ? '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>' : '';
 
-    return ($label_position === 'before' ? $labelStr . $break : '') .
+    return ($labelStr && $label_position === 'before' ? $labelStr . $break : '') .
         '<input' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . ' />' .
-        ($label_position === 'after' ? $break . $labelStr : '');
+        ($labelStr && $label_position === 'after' ? $break . $labelStr : '');
 }
 
 /**
@@ -1017,11 +1018,11 @@ function com_connect_textarea($atts)
     }
 
     $classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
-    $labelStr = '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
+    $labelStr = ($label) ? '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>' : '';
 
-    return ($label_position === 'before' ? $labelStr . $break : '') .
+    return ($labelStr && $label_position === 'before' ? $labelStr . $break : '') .
         '<textarea' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . '>' . txpspecialchars($value) . '</textarea>' .
-        ($label_position === 'after' ? $break . $labelStr : '');
+        ($labelStr && $label_position === 'after' ? $break . $labelStr : '');
 }
 
 /**
@@ -1133,13 +1134,13 @@ function com_connect_select($atts, $thing = null)
     }
 
     $classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
-    $labelStr = '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
+    $labelStr = ($label) ? '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>' : '';
 
-    return ($label_position === 'before' ? $labelStr . $break : '') .
+    return ($labelStr && $label_position === 'before' ? $labelStr . $break : '') .
         n . '<select' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . '>' .
             $out .
         n . '</select>' .
-        ($label_position === 'after' ? $break . $labelStr : '');
+        ($labelStr && $label_position === 'after' ? $break . $labelStr : '');
 }
 
 /**
@@ -1284,12 +1285,12 @@ function com_connect_checkbox($atts)
     }
 
     $classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
-    $labelStr = '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
+    $labelStr = ($label) ? '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>' : '';
 
-    return ($label_position === 'before' ? $labelStr . $break : '') .
+    return ($labelStr && $label_position === 'before' ? $labelStr . $break : '') .
         '<input type="checkbox"' . $classStr .
             ($theValue ? ' checked' . (($doctype === 'xhtml') ? '="checked"' : '') : '') . ($attr ? ' ' . implode(' ', $attr) : '') . ' />' .
-        ($label_position === 'after' ? $break . $labelStr : '');
+        ($labelStr && $label_position === 'after' ? $break . $labelStr : '');
 }
 
 /**
@@ -1404,12 +1405,12 @@ function com_connect_radio($atts)
     }
 
     $classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
-    $labelStr = '<label for="' . $id . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
+    $labelStr = ($label) ? '<label for="' . $id . '"' . $classStr . '>' . txpspecialchars($label) . '</label>' : '';
 
-    return ($label_position === 'before' ? $labelStr . $break : '') .
+    return ($labelStr && $label_position === 'before' ? $labelStr . $break : '') .
         '<input type="radio"'. $classStr . ($attr ? ' ' . implode(' ', $attr) : '') .
             ( $is_checked ? ' checked' . (($doctype === 'xhtml') ? '="checked"' : ''). ' />' : ' />') .
-        ($label_position === 'after' ? $break . $labelStr : '');
+        ($labelStr && $label_position === 'after' ? $break . $labelStr : '');
 }
 
 /**
