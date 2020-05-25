@@ -3,6 +3,9 @@ h1. Changelog
 h2. 4.7.0 - YYYY-MM-DD
 
 * Load lang strings in a Textpattern 4.7.0-ish way.
+* Only display labels if they've been specified (thanks, dragondz and jools-r).
+* Fallback on name if label is empty.
+* Sanitize field names so forms still submit if names contain spaces.
 * Use PHP_EOL instead of manual newlines.
 * Add en language designators to Textpack (thanks, cara-tm).
 
