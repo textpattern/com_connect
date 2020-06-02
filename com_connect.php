@@ -1084,7 +1084,16 @@ function com_connect_select($atts, $thing = null)
         $out = '';
 
         foreach ($options as $item) {
-            $out .= n.t.'<option' . ($item == $value ? ' selected' . (($doctype === 'xhtml') ? '="selected"' : '') . '>' : '>') . (strlen($item) ? txpspecialchars($item) : ' ') . '</option>';
+            $safeItem = txpspecialchars($item);
+            $sel = ($item == $value) ? ' selected' . (($doctype === 'xhtml') ? '="selected"' : '') : '';
+            $val = '';
+
+            if (preg_match('@^\{(.*)\}$@', $safeItem, $emptyLabel)) {
+                $val = ' value=""';
+                $safeItem = $emptyLabel[1];
+            }
+
+            $out .= n.t.'<option' . $sel . $val . '>' . (strlen($item) ? $safeItem : ' ') . '</option>';
         }
     }
 
@@ -1196,10 +1205,17 @@ function com_connect_option($atts, $thing = null)
         $attr[] = 'selected' . (($doctype === 'xhtml') ? '="selected"' : '');
     }
 
+    $defaults = array();
+
+    if (preg_match('@^\{(.*)\}$@', $label, $emptyLabel)) {
+        $val = $defaults['value'] = "";
+        $label = $emptyLabel[1];
+    }
+
     // Core attributes.
     $attr += com_connect_build_atts(array(
         'value' => $val,
-    ));
+    ), $defaults);
 
     // Global attributes.
     $attr += com_connect_build_atts($com_connect_globals, $atts);
@@ -2003,7 +2019,7 @@ Please see the "changelog on GitHub":https://github.com/textpattern/com_connect/
 
 h2(#install). Installing and upgrading
 
-*Requires Textpattern 4.5.0+*
+*Requires Textpattern 4.7.0+*
 
 Download the latest release of the plugin from "the GitHub project page":https://github.com/textpattern/com_connect/releases, paste the code into the Textpattern Plugins administration panel, install and enable the plugin. Visit the "forum thread":https://forum.textpattern.io/viewtopic.php?id=47913 for more info or to report on the success or otherwise of the plugin.
 
@@ -2348,7 +2364,7 @@ h4. Attributes
 * @label_position="text"@<br />Position of the label in relation to the @<select>@ field. Available values: @before@ or @after@. Default is @before@.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the @<select>@ is attached. Associated with the contained form by default.
 * @name="value"@<br />Field name, as used in the HTML @<select>@ tag.
-* @options="comma-separated values"@<br /> List of items (previously @list@) to show in the select box. May also use the @<txp:com_connect_option />@ tag inside this tag's container.
+* @options="comma-separated values"@<br /> List of items (previously @list@) to show in the select box. Surround the first entry with @{Braces}@ to indicate it is an 'empty' placeholder. Alternatively, the @<txp:com_connect_option />@ tag may be used inside this tag's container.
 * @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:com_connect>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
 * @selected="value"@<br />List item that is selected by default.
 * @size="value"@<br/>If the @<select>@ is to be presented as a scrolled list box, this attribute represents the number of rows in the list that should be visible at one time. Default is unset (i.e., a drop-down selection @<select>@ list).
@@ -2357,14 +2373,14 @@ h4. Examples
 
 h5. Example 1
 
-Drop-down selection list labeled 'Department', containing three options and a blank option (due to the comma before 'Marketing') shown by default, forcing the user to make a selection.
+Drop-down selection list labeled 'Department', containing three options and a blank option shown by default and labelled with 'Choose dept', forcing the user to make a selection.
 
-bc(language-markup). <txp:com_connect_select label="Department" options=",Marketing,Sales,Support" />
+bc(language-markup). <txp:com_connect_select label="Department" options="{Choose dept},Marketing,Sales,Support" />
 
 h5. Example 2
 
 bc(language-markup). <txp:com_connect_select label="Department" selected="Sales">
-    <txp:com_connect_option />
+    <txp:com_connect_option label="{Choose dept}" />
     <txp:com_connect_option label="Marketing" />
     <txp:com_connect_option label="Sales" />
     <txp:com_connect_option label="Support" />
@@ -2381,7 +2397,7 @@ Creates a drop-down selection option. May be used as a single (self-closing) or 
 h4. Attributes
 
 * @class="space-separated values"@<br /> Set the CSS @class@ name of the option. Default: @comOption@. To remove @class@ attribute from the element entirely, use @class=""@.
-* @label="text"@ %(warning)required%<br />Text label of this option displayed to the user.
+* @label="text"@ %(warning)required%<br />Text label of this option displayed to the user. Surround the label with {braces} to indicate it is an empty placeholder at the start of the list. Note if you use this braces syntax, the value will be forced to @value=""@, i.e. any supplied value will be ignored.
 * @selected="boolean"@<br />Whether this item is selected, May also be specified in the container tag's @selected@ attribute. Available values: @1@ (yes) or @0@ (no).
 * @value="text"@<br />The value associated with this option when submitted. Default is the label.
 
@@ -2399,7 +2415,7 @@ h5. Example 2
 
 bc(language-markup). <txp:com_connect_select label="Department">
     <txp:com_connect_option value="contact-marketing">Marketing</txp:com_connect_option>
-    <txp:com_connect_option value="contact-sales" selected="1">Sales</txp:com_connect_option>
+    <txp:com_connect_option value="contact-sales" selected>Sales</txp:com_connect_option>
     <txp:com_connect_option value="contact-support">Support</txp:com_connect_option>
 </txp:com_connect_select>
 

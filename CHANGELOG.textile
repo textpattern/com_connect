@@ -3,11 +3,13 @@ h1. Changelog
 h2. 4.7.0 - YYYY-MM-DD
 
 * Load lang strings in a Textpattern 4.7.0-ish way.
+* Add en language designators to Textpack (thanks, cara-tm).
 * Only display labels if they've been specified (thanks, dragondz and jools-r).
 * Fallback on name if label is empty.
 * Sanitize field names so forms still submit if names contain spaces.
+* Permit {Option label} syntax to specify empty select entry that validates
+  (thanks, phiw13 and colak).
 * Use PHP_EOL instead of manual newlines.
-* Add en language designators to Textpack (thanks, cara-tm).
 
 h2. 4.6.0 - 2020-01-31
 
