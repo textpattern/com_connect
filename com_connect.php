@@ -1089,11 +1089,11 @@ function com_connect_select($atts, $thing = null)
             $val = '';
 
             if (preg_match('@^\{(.*)\}$@', $safeItem, $emptyLabel)) {
-                $val = ' value=""';
-                $safeItem = $emptyLabel[1];
+                $val = ' value="" label="' . $emptyLabel[1] . '"';
+                $safeItem = '';
             }
 
-            $out .= n.t.'<option' . $sel . $val . '>' . (strlen($item) ? $safeItem : ' ') . '</option>';
+            $out .= n.t.'<option' . $sel . $val . '>' . (strlen($safeItem) ? $safeItem : '') . '</option>';
         }
     }
 
@@ -1209,12 +1209,14 @@ function com_connect_option($atts, $thing = null)
 
     if (preg_match('@^\{(.*)\}$@', $label, $emptyLabel)) {
         $val = $defaults['value'] = "";
-        $label = $emptyLabel[1];
+        $defaults['label'] = $emptyLabel[1];
+        $label = '';
     }
 
     // Core attributes.
     $attr += com_connect_build_atts(array(
         'value' => $val,
+        'label' => $label,
     ), $defaults);
 
     // Global attributes.
