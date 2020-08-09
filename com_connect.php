@@ -1991,7 +1991,7 @@ function com_connect_if($atts, $thing = null)
         $cond = false;
     }
 
-    return parse(EvalElse($thing, $cond));
+    return parse($thing, $cond);
 }
 # --- END PLUGIN CODE ---
 if (0) {
