@@ -9,6 +9,8 @@ h2. 4.7.0 - YYYY-MM-DD
 * Sanitize field names so forms still submit if names contain spaces.
 * Permit {Option label} syntax to specify empty select entry that validates
   (thanks, phiw13 and colak).
+* Fix @<txp:com_connect_value>@ to actually match labels.
+* Remove use of deprecated EvalElse().
 * Use PHP_EOL instead of manual newlines.
 
 h2. 4.6.0 - 2020-01-31
