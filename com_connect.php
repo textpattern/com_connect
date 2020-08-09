@@ -1085,13 +1085,14 @@ function com_connect_select($atts, $thing = null)
 
         foreach ($options as $item) {
             $safeItem = txpspecialchars($item);
-            $sel = ($item == $value) ? ' selected' . (($doctype === 'xhtml') ? '="selected"' : '') : '';
             $val = '';
 
             if (preg_match('@^\{(.*)\}$@', $safeItem, $emptyLabel)) {
                 $val = ' value="" label="' . $emptyLabel[1] . '"';
                 $safeItem = '';
             }
+
+            $sel = ($safeItem == $value) ? ' selected' . (($doctype === 'xhtml') ? '="selected"' : '') : '';
 
             $out .= n.t.'<option' . $sel . $val . '>' . (strlen($safeItem) ? $safeItem : '') . '</option>';
         }
