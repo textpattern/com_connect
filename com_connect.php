@@ -1938,7 +1938,7 @@ function com_connect_value($atts)
     if ($name) {
         $str = isset($com_connect_values[$name]) ? $com_connect_values[$name] : '';
     } elseif ($label) {
-        $str = isset($com_connect_form[$name]) ? $com_connect_form[$name] : '';
+        $str = isset($com_connect_form[$label]) ? $com_connect_form[$label] : '';
     }
 
     return trim($str);
