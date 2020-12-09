@@ -548,8 +548,7 @@ function com_connect($atts, $thing = null)
             $charset = 'UTF-8';
         }
 
-        // TODO: function deprecated in 4.6.0.
-        $subject = encode_mailheader($subject, 'text');
+        $subject = Txp::get('\Textpattern\Mail\Encode')->header($subject, 'text');
 
         $headers = array(
             'from'          => $from,
@@ -1708,8 +1707,7 @@ function com_connect_build_atts($pairs, $defaults = array())
 function com_connect_strip($str, $header = true)
 {
     if ($header) {
-        // TODO: strip_rn will be deprecated in 4.6.0.
-        $str = strip_rn($str);
+        $str = Txp::get('\Textpattern\Mail\Encode')->escapeHeader($str);
     }
 
     return preg_replace('/[\x00]/', ' ', $str);
@@ -1752,7 +1750,6 @@ function com_connect_deliver($to, $subject, $body, $headers, $fields, $flags)
     $flavour = ($flags['isCopy'] === true) ? 'copysender' : 'send';
 
     // Allow plugins to override or alter default action (mail) if required.
-    // TODO: use has_handler() from 4.6.0+.
     $ret = callback_event_ref('comconnect.deliver', $flavour, 0, $payload);
 
     if (in_array('comconnect.fail', $ret)) {
