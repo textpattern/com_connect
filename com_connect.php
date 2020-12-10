@@ -403,10 +403,10 @@ function com_connect($atts, $thing = null)
     $renonce = false;
 
     if ($com_connect_submit) {
-        // Could use "interval $expire second" but multiple com_connect forms could delete data
-        // that might be in use by other forms.
-        // TODO: use max(600, $expire)? Not perfect, but ensures a safe minimum deletion rate.
-        safe_delete('txp_discuss_nonce', "issue_time < date_sub('$now_date', interval 10 minute)");
+        // Since multiple com_connect forms could delete data that might be in use by other forms,
+        // protect them by using a well-known minimum value of 10 minutes. Not perfect.
+        // Using multiple forms on a page will result in them all adopting the lowest expiry time.
+        safe_delete('txp_discuss_nonce', "issue_time < date_sub('$now_date', interval ".max(600, $expire)." second)");
         if ($rs = safe_row('used', 'txp_discuss_nonce', "nonce = '$nonce'")) {
             if ($rs['used']) {
                 unset($com_connect_error);
