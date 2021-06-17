@@ -55,6 +55,7 @@ $plugin['flags'] = '0';
 // abc_string_name => Localized String
 
 $plugin['textpack'] = <<<EOT
+#@owner com_connect
 #@public
 #@language en, en-gb, en-us
 com_connect_checkbox => Checkbox
@@ -476,7 +477,7 @@ function com_connect($atts, $thing = null)
         $clean = $evaluation->get_comconnect_status();
 
         if ($clean != 0) {
-            return gTxt('com_connect_spam');
+            return $evaluation->get_comconnect_reason();
         }
 
         if ($from_form) {
@@ -492,13 +493,13 @@ function com_connect($atts, $thing = null)
         $fields = array();
 
         foreach ($com_connect_labels as $name => $lbl) {
-            if (!is_array($com_connect_values[$name])) {
-                if (trim($com_connect_values[$name]) === false) {
-                    continue;
-                }
+            $com_connect_values[$name] = doArray($com_connect_values[$name], 'trim');
 
-                $msg[] = $lbl . ': ' . $com_connect_values[$name];
+            if ($com_connect_values[$name] === false) {
+                continue;
             }
+
+            $msg[] = $lbl . ': ' . (is_array($com_connect_values[$name]) ? implode(',', $com_connect_values[$name]) : $com_connect_values[$name]);
 
             $fields[$name] = $com_connect_values[$name];
         }
@@ -1040,7 +1041,6 @@ function com_connect_select($atts, $thing = null)
 {
     global $com_connect_error, $com_connect_submit, $com_connect_flags;
 
-    // TODO: multiple attribute?
     extract(com_connect_lAtts(array(
         'break'          => br,
         'class'          => 'comSelect',
@@ -1050,6 +1050,7 @@ function com_connect_select($atts, $thing = null)
         'label'          => gTxt('com_connect_option'),
         'label_position' => 'before',
         'list'           => '', // TODO: remove from here in favour of the global list attribute.
+        'multiple'       => '',
         'options'        => gTxt('com_connect_general_inquiry'),
         'name'           => '',
         'required'       => $com_connect_flags['required'],
@@ -1071,7 +1072,7 @@ function com_connect_select($atts, $thing = null)
     }
 
     $name = sanitizeForUrl($name);
-    $value = ($com_connect_submit) ? trim(ps($name)) : $selected;
+    $value = ($com_connect_submit) ? (array)doArray(ps($name), 'trim') : do_list_unique($selected);
     $doctype = get_pref('doctype', 'xhtml');
 
     if ($thing) {
@@ -1091,18 +1092,18 @@ function com_connect_select($atts, $thing = null)
                 $safeItem = '';
             }
 
-            $sel = ($safeItem == $value) ? ' selected' . (($doctype === 'xhtml') ? '="selected"' : '') : '';
+            $sel = (in_array($safeItem, $value)) ? ' selected' . (($doctype === 'xhtml') ? '="selected"' : '') : '';
 
             $out .= n.t.'<option' . $sel . $val . '>' . (strlen($safeItem) ? $safeItem : '') . '</option>';
         }
     }
 
     if ($com_connect_submit) {
-        if (strlen($value)) {
-            if (in_array($value, $options)) {
+        if ($value) {
+            if (com_connect_in_array($value, $options)) {
                 com_connect_store($name, $label, $value);
             } else {
-                $com_connect_error[] = gTxt('com_connect_invalid_value', array('{field}' => txpspecialchars($label), '{value}' => txpspecialchars($value)));
+                $com_connect_error[] = gTxt('com_connect_invalid_value', array('{field}' => txpspecialchars($label), '{value}' => doArray($value, 'txpspecialchars')));
                 $isError = $com_connect_flags['cls_element'];
             }
         } elseif ($required) {
@@ -1115,8 +1116,9 @@ function com_connect_select($atts, $thing = null)
 
     // Core attributes.
     $attr = com_connect_build_atts(array(
-        'id'   => (isset($id) ? $id : $name),
-        'name' => $name,
+        'id'       => (isset($id) ? $id : $name),
+        'name'     => $name.($multiple ? '[]' : ''),
+        'multiple' => $multiple,
     ));
 
     if ($size && is_numeric($size)) {
@@ -1198,10 +1200,10 @@ function com_connect_option($atts, $thing = null)
     if ($com_connect_submit) {
         $options[] = $val;
 
-        if ($val !== null && ((string)$val === (string)$match)) {
+        if ($val !== null && (in_array((string)$val, (array)$match))) {
             $attr[] = 'selected' . (($doctype === 'xhtml') ? '="selected"' : '');
         }
-    } elseif ($selected || ($val !== null && ((string)$val === (string)$match))) {
+    } elseif ($selected || ($val !== null && (in_array((string)$val, (array)$match)))) {
         $attr[] = 'selected' . (($doctype === 'xhtml') ? '="selected"' : '');
     }
 
@@ -1810,11 +1812,28 @@ function com_connect_deliver($to, $subject, $body, $headers, $fields, $flags)
 }
 
 /**
+ * Checks if a value or values are in the haystack.
+ *
+ * @param  string|array $needles  Scalar or array of values to check
+ * @param  array        $haystack Set of things to compare them against
+ * @return bool
+ */
+function com_connect_in_array($needles, $haystack)
+{
+    if (is_array($needles)) {
+        return (count(array_intersect($needles, $haystack)) === count($needles));
+    } else {
+        return in_array($needles, $haystack);
+    }
+}
+
+/**
  * Evaluate return values from plugins.
  */
 class comconnect_evaluation
 {
     private $status;
+    private $reason = array();
 
     /**
      * Constructor.
@@ -1833,11 +1852,31 @@ class comconnect_evaluation
     }
 
     /**
+     * Append the given reason to the array.
+     */
+    function add_comconnect_reason($reason)
+    {
+        $this->reason[] = $reason;
+    }
+
+    /**
      * Fetch the current evaluator status.
      */
     function get_comconnect_status()
     {
         return $this->status;
+    }
+
+    /**
+     * Fetch the current evaluator reason.
+     */
+    function get_comconnect_reason()
+    {
+        if (empty($this->reason)) {
+            $this->reason[] = gTxt('com_connect_spam');
+        }
+
+        return join(br, $this->reason);
     }
 }
 
@@ -1938,7 +1977,7 @@ function com_connect_value($atts)
         $str = isset($com_connect_form[$label]) ? $com_connect_form[$label] : '';
     }
 
-    return trim($str);
+    return doArray($str, 'trim');
 }
 
 /**
@@ -2691,7 +2730,7 @@ All form elements and corresponding labels have the following classes (or ids) s
 # @comRequired@ and/or @errorElement@, depending on whether the form element is required, an error was found in whatever the visitor entered, or both. Override these using the @classes@ attribute in the @com_connect@ tag.
 # An individual @id@ or @class@ set to the value of the @name@ attribute of the corresponding tag. When styling forms based on this @class@, you should explicitly set the @name@ attribute because automatically generated names may change in newer com_connect versions.
 
-h2(#api). Com Connect's API
+h2(#api). com_connect's API
 
 The plugin API of com_connect, originally developed by Tranquillo, allows other plugins to interact with contact forms. This permits extra functionality such as combatting comment cpam, HTML email, newsletter delivery and so forth to be bolted onto the base plugin.
 
@@ -2747,13 +2786,13 @@ function pap_comconnect_submit()
     return;
 }
 
-p. For the delivery callback, you signal back to the plugin your intentions so that Com Connect knows what to do after your delivery plugin has executed. Return the following strings:
+p. For the delivery callback, you signal back to the plugin your intentions so that com_connect knows what to do after your delivery plugin has executed. Return the following strings:
 
-* @comconnect.send@ (or no return value) to allow Com Connect to continue mailing the content.
+* @comconnect.send@ (or no return value) to allow com_connect to continue mailing the content.
 * @comconnect.skip@ to skip com_connect's mailing (i.e., the third party handles the mail process) and return 'success' to the visitor.
 * @comconnect.fail@ to skip com_connect's mailing and return 'fail' to the visitor.
 
-Or simply @exit@ your plugin to halt the entire operation so no Com Connect feedback is given.
+Or simply @exit@ your plugin to halt the entire operation so no com_connect feedback is given.
 
 h2. Frequently asked questions
 
