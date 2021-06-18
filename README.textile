@@ -643,7 +643,7 @@ bc(language-markup). <txp:com_connect_fields wraptag="ul" break="li">
    <txp:com_connect_label /> = <txp:com_connect_value />
 </txp:com_connect_fields>
 
-h3(#cc_fields). com_connect_mime tag
+h3(#cc_mime). com_connect_mime tag
 
 bc(language-markup). <txp:com_connect_mime />
 
