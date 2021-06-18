@@ -2548,7 +2548,7 @@ This allows you to use Textpattern tags and HTML markup in the submit button:
 bc(language-markup). <txp:com_connect_submit><strong>Send</strong> question</txp:com_connect_submit>
 
 h5. Example 4: Image button
-s
+
 As example 3 above, but using an image as the button:
 
 bc(language-markup). <txp:com_connect_submit>
