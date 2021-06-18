@@ -56,7 +56,6 @@ $plugin['flags'] = '0';
 
 $plugin['textpack'] = <<<EOT
 #@owner com_connect
-#@public
 #@language en, en-gb, en-us
 com_connect_checkbox => Checkbox
 com_connect_contact => Contact
@@ -90,142 +89,6 @@ com_connect_send_article => Send article
 com_connect_spam => We do not accept spam, thank you!
 com_connect_text => Text
 com_connect_to_missing => <strong>To</strong> email address is missing.
-#@public
-#@language es-es
-com_connect_checkbox => Casilla de verificación
-com_connect_contact => Contacto
-com_connect_email => Correo electrónico
-com_connect_email_subject => {site} > Consulta
-com_connect_email_thanks => Gracias, tu mensaje ha sido enviado.
-com_connect_field_missing => falta el campo obligatorio <strong>{field}</strong>.
-com_connect_format_warning => El valor {value} en <strong>{field}</strong> no está en el formato esperado.
-com_connect_form_expired => El formulario ha caducado, por favor inténtalo de nuevo.
-com_connect_form_used => El formulario ya había sido enviado, por favor rellena el formulario de nuevo.
-com_connect_general_inquiry => Consulta general
-com_connect_invalid_email => La dirección de correo electrónico <strong>{email}</strong> no es válida.
-com_connect_invalid_host => El dominio de correo electrónico <strong>{host}</strong> no es válido.
-com_connect_invalid_utf8 => <strong>{field}</strong> contiene caracteres UTF-8 no válidos.
-com_connect_invalid_value => Valor incorrecto para <strong>{field}</strong>: <strong>{value}</strong> no es una de las opciones disponibles.
-com_connect_mail_sorry => Lo siento, el correo electrónico no pudo ser enviado.
-com_connect_maxval_warning => <strong>{field}</strong> no debe exceder {value}.
-com_connect_max_warning => <strong>{field}</strong> no debe contener más de {value} caracteres.
-com_connect_message => Mensaje
-com_connect_minval_warning => <strong>{field}</strong> debe tener al menos {value}.
-com_connect_min_warning => <strong>{field}</strong> debe contener al menos {value} caracteres.
-com_connect_name => Nombre
-com_connect_option => Opción
-com_connect_pattern_warning => <strong>{field}</strong> no encaja con el patrón {value}.
-com_connect_radio => Botón de opción
-com_connect_recipient => Destinatario
-com_connect_refresh => Siga este enlace si la página no se recarga automáticamente.
-com_connect_secret => Secreto
-com_connect_send => Enviar
-com_connect_send_article => Enviar artículo
-com_connect_spam => Gracias, ¡pero no aceptamos correo basura!
-com_connect_text => Texto
-com_connect_to_missing => Falta la dirección de correo electrónico del <strong>destinatario</strong>.
-#@public
-#@language fr-fr
-com_connect_checkbox => Case à cocher
-com_connect_contact => Contact
-com_connect_email => Email
-com_connect_email_subject => {site} > Demande
-com_connect_email_thanks => Merci, votre message a bien été envoyé.
-com_connect_field_missing => Champ obligatoire <strong>{field}</strong> manquant.
-com_connect_form_expired => Le délai du formulaire vient d’expirer. Veuillez recommencer.
-com_connect_form_used => Le formulaire a déjà été soumis. Veuillez en remplir un nouveau.
-com_connect_general_inquiry => Demande d’ordre général
-com_connect_invalid_email => <strong>{email}</strong> n’est pas une adresse email valide.
-com_connect_invalid_host => <strong>{host}</strong> n’est pas correctement rédigé.
-com_connect_invalid_utf8 => <strong>{field}</strong> contient des caractères invalides.
-com_connect_invalid_value => Cette valeur : <strong>{value}</strong> n’est pas correcte pour <strong>{field}</strong>.
-com_connect_mail_sorry => Désolé, impossible d’envoyer votre message dans l’immédiat.
-com_connect_maxval_warning => <strong>{field}</strong> ne peux pas être plus grand que {value}.
-com_connect_max_warning => <strong>{field}</strong> dépasse {value} caractères.
-com_connect_message => Message
-com_connect_minval_warning => <strong>{field}</strong> doit être au moins {value}.
-com_connect_min_warning => <strong>{field}</strong> doit contenir au moins {value} caractères.
-com_connect_name => Nom
-com_connect_option => Option
-com_connect_pattern_warning =><strong>{field}</strong> doit correspondre à ce modèle {value}.
-com_connect_radio => Bouton radio
-com_connect_recipient => Destinataire
-com_connect_refresh => Cliquez sur ce lien si la page ne se rafraîchissait pas automatiquement.
-com_connect_secret => Secret
-com_connect_send => Envoyer
-com_connect_send_article => Envoyer l’article
-com_connect_spam => Nous refusons catégoriquement les spam. Bien à vous!
-com_connect_text => Texte
-com_connect_to_missing => l’adresse mail <strong>To</strong> est manquante.
-#@public
-#@language nl-nl
-com_connect_checkbox => Keuze
-com_connect_contact => Contact
-com_connect_email => E-mail adres
-com_connect_email_subject => {site} > bericht via de site
-com_connect_email_thanks => Hartelijk dank, je bericht is verzonden.
-com_connect_field_missing => Je hebt bij <strong>{field}</strong> nog niets ingevuld.
-com_connect_format_warning => De invoer {value} in <strong>{field}</strong> heeft niet de juiste vorm.
-com_connect_form_expired => Het formulier is verlopen, probeer het opnieuw.
-com_connect_form_used => Het formulier is reeds verstuurd, vul het opnieuw in.
-com_connect_general_inquiry => Bericht van de site
-com_connect_invalid_email => <strong>{email}</strong> is geen geldig e-mail addres.
-com_connect_invalid_host => <strong>{host}</strong> is geen geldige e-mail host.
-com_connect_invalid_utf8 => <strong>{field}</strong> bevat ongeldige lettertekens.
-com_connect_invalid_value => Ongeldige invoer bij <strong>{field}</strong>, <strong>{value}</strong> is niet mogelijk.
-com_connect_mail_sorry => Sorry, er kan geen e-mail verzonden worden.
-com_connect_maxval_warning => <strong>{field}</strong> mag niet groter zijn dan {value}.
-com_connect_max_warning => <strong>{field}</strong> mag niet meer dan {value} lettertekes bevatten.
-com_connect_message => Berichttekst
-com_connect_minval_warning => <strong>{field}</strong> moet minstens {value} zijn.
-com_connect_min_warning => <strong>{field}</strong> moet minstens {value} lettertekens bevatten.
-com_connect_name => Naam
-com_connect_option => Optie
-com_connect_pattern_warning => <strong>{field}</strong> komt niet overeen met de volgorde {value}.
-com_connect_radio => Keuzeknop
-com_connect_recipient => Ontvanger
-com_connect_refresh => Je kunt deze link gebruiken als de pagina niet automatisch ververst.
-com_connect_secret => Geheim
-com_connect_send => Verzenden
-com_connect_send_article => Artikel verzenden
-com_connect_spam => We accepteren geen spam!
-com_connect_text => Tekst
-com_connect_to_missing => <strong>Aan</strong> e-mailadres ontbreekt.
-#@public
-#@language pt-br
-com_connect_checkbox => Checkbox
-com_connect_contact => Contato
-com_connect_email => Email
-com_connect_email_subject => {site} > Contato
-com_connect_email_thanks => Obrigado, sua mensagem foi enviada.
-com_connect_field_missing => Faltou preencher o campo requerido <strong>{field}</strong>.
-com_connect_format_warning => O valor {value} em <strong>{field}</strong> não está formato esperado.
-com_connect_form_expired => O formulário expirou, por favor tente novamente.
-com_connect_form_used => O formulário já foi enviado, por favor preencha o formulário novamente.
-com_connect_general_inquiry => Assuntos gerais
-com_connect_invalid_email => <strong>{email}</strong> não é um endereço de email válido.
-com_connect_invalid_host => <strong>{host}</strong> não é um domínio de email válido.
-com_connect_invalid_utf8 => <strong>{field}</strong> contém caracteres UTF-8 inválidos.
-com_connect_invalid_value => Valor incorreto para <strong>{field}</strong>, <strong>{value}</strong> não é uma das opções disponíveis.
-com_connect_mail_sorry => Desculpe, não foi possível enviar o email.
-com_connect_maxval_warning => <strong>{field}</strong> não pode exceder {value}.
-com_connect_max_warning => <strong>{field}</strong> não pode conter mais que {value} caracteres.
-com_connect_message => Mensagem
-com_connect_minval_warning => <strong>{field}</strong> deve ter ao menos {value}.
-com_connect_min_warning => <strong>{field}</strong> deve conter ao menos {value} caracteres.
-com_connect_name => Nome
-com_connect_option => Opção
-com_connect_pattern_warning => <strong>{field}</strong> não se encaixa no formato {value}.
-com_connect_radio => Rádio
-com_connect_recipient => Destinatário
-com_connect_refresh => Clique neste link caso a página não se atualize automaticamente.
-com_connect_secret => Secreto
-com_connect_send => Enviar
-com_connect_send_article => Enviar artigo
-com_connect_spam => Não aceitamos spam, obrigado!
-com_connect_text => Texto
-com_connect_to_missing => <strong>To</strong> falta o endereço de email.
-#@public
 #@language de-de
 com_connect_checkbox => Checkbox
 com_connect_contact => Kontakt
@@ -259,7 +122,137 @@ com_connect_send_article => Artikel senden
 com_connect_spam => Danke, wir brauchen keinen Spam!
 com_connect_text => Text
 com_connect_to_missing => <strong>To</strong> E-Mail-Adresse fehlt.
-
+#@language es-es
+com_connect_checkbox => Casilla de verificación
+com_connect_contact => Contacto
+com_connect_email => Correo electrónico
+com_connect_email_subject => {site} > Consulta
+com_connect_email_thanks => Gracias, tu mensaje ha sido enviado.
+com_connect_field_missing => falta el campo obligatorio <strong>{field}</strong>.
+com_connect_format_warning => El valor {value} en <strong>{field}</strong> no está en el formato esperado.
+com_connect_form_expired => El formulario ha caducado, por favor inténtalo de nuevo.
+com_connect_form_used => El formulario ya había sido enviado, por favor rellena el formulario de nuevo.
+com_connect_general_inquiry => Consulta general
+com_connect_invalid_email => La dirección de correo electrónico <strong>{email}</strong> no es válida.
+com_connect_invalid_host => El dominio de correo electrónico <strong>{host}</strong> no es válido.
+com_connect_invalid_utf8 => <strong>{field}</strong> contiene caracteres UTF-8 no válidos.
+com_connect_invalid_value => Valor incorrecto para <strong>{field}</strong>: <strong>{value}</strong> no es una de las opciones disponibles.
+com_connect_mail_sorry => Lo siento, el correo electrónico no pudo ser enviado.
+com_connect_maxval_warning => <strong>{field}</strong> no debe exceder {value}.
+com_connect_max_warning => <strong>{field}</strong> no debe contener más de {value} caracteres.
+com_connect_message => Mensaje
+com_connect_minval_warning => <strong>{field}</strong> debe tener al menos {value}.
+com_connect_min_warning => <strong>{field}</strong> debe contener al menos {value} caracteres.
+com_connect_name => Nombre
+com_connect_option => Opción
+com_connect_pattern_warning => <strong>{field}</strong> no encaja con el patrón {value}.
+com_connect_radio => Botón de opción
+com_connect_recipient => Destinatario
+com_connect_refresh => Siga este enlace si la página no se recarga automáticamente.
+com_connect_secret => Secreto
+com_connect_send => Enviar
+com_connect_send_article => Enviar artículo
+com_connect_spam => Gracias, ¡pero no aceptamos correo basura!
+com_connect_text => Texto
+com_connect_to_missing => Falta la dirección de correo electrónico del <strong>destinatario</strong>.
+#@language fr-fr
+com_connect_checkbox => Case à cocher
+com_connect_contact => Contact
+com_connect_email => Email
+com_connect_email_subject => {site} > Demande
+com_connect_email_thanks => Merci, votre message a bien été envoyé.
+com_connect_field_missing => Champ obligatoire <strong>{field}</strong> manquant.
+com_connect_form_expired => Le délai du formulaire vient d’expirer. Veuillez recommencer.
+com_connect_form_used => Le formulaire a déjà été soumis. Veuillez en remplir un nouveau.
+com_connect_general_inquiry => Demande d’ordre général
+com_connect_invalid_email => <strong>{email}</strong> n’est pas une adresse email valide.
+com_connect_invalid_host => <strong>{host}</strong> n’est pas correctement rédigé.
+com_connect_invalid_utf8 => <strong>{field}</strong> contient des caractères invalides.
+com_connect_invalid_value => Cette valeur : <strong>{value}</strong> n’est pas correcte pour <strong>{field}</strong>.
+com_connect_mail_sorry => Désolé, impossible d’envoyer votre message dans l’immédiat.
+com_connect_maxval_warning => <strong>{field}</strong> ne peux pas être plus grand que {value}.
+com_connect_max_warning => <strong>{field}</strong> dépasse {value} caractères.
+com_connect_message => Message
+com_connect_minval_warning => <strong>{field}</strong> doit être au moins {value}.
+com_connect_min_warning => <strong>{field}</strong> doit contenir au moins {value} caractères.
+com_connect_name => Nom
+com_connect_option => Option
+com_connect_pattern_warning =><strong>{field}</strong> doit correspondre à ce modèle {value}.
+com_connect_radio => Bouton radio
+com_connect_recipient => Destinataire
+com_connect_refresh => Cliquez sur ce lien si la page ne se rafraîchissait pas automatiquement.
+com_connect_secret => Secret
+com_connect_send => Envoyer
+com_connect_send_article => Envoyer l’article
+com_connect_spam => Nous refusons catégoriquement les spam. Bien à vous!
+com_connect_text => Texte
+com_connect_to_missing => l’adresse mail <strong>To</strong> est manquante.
+#@language nl-nl
+com_connect_checkbox => Keuze
+com_connect_contact => Contact
+com_connect_email => E-mail adres
+com_connect_email_subject => {site} > bericht via de site
+com_connect_email_thanks => Hartelijk dank, je bericht is verzonden.
+com_connect_field_missing => Je hebt bij <strong>{field}</strong> nog niets ingevuld.
+com_connect_format_warning => De invoer {value} in <strong>{field}</strong> heeft niet de juiste vorm.
+com_connect_form_expired => Het formulier is verlopen, probeer het opnieuw.
+com_connect_form_used => Het formulier is reeds verstuurd, vul het opnieuw in.
+com_connect_general_inquiry => Bericht van de site
+com_connect_invalid_email => <strong>{email}</strong> is geen geldig e-mail addres.
+com_connect_invalid_host => <strong>{host}</strong> is geen geldige e-mail host.
+com_connect_invalid_utf8 => <strong>{field}</strong> bevat ongeldige lettertekens.
+com_connect_invalid_value => Ongeldige invoer bij <strong>{field}</strong>, <strong>{value}</strong> is niet mogelijk.
+com_connect_mail_sorry => Sorry, er kan geen e-mail verzonden worden.
+com_connect_maxval_warning => <strong>{field}</strong> mag niet groter zijn dan {value}.
+com_connect_max_warning => <strong>{field}</strong> mag niet meer dan {value} lettertekes bevatten.
+com_connect_message => Berichttekst
+com_connect_minval_warning => <strong>{field}</strong> moet minstens {value} zijn.
+com_connect_min_warning => <strong>{field}</strong> moet minstens {value} lettertekens bevatten.
+com_connect_name => Naam
+com_connect_option => Optie
+com_connect_pattern_warning => <strong>{field}</strong> komt niet overeen met de volgorde {value}.
+com_connect_radio => Keuzeknop
+com_connect_recipient => Ontvanger
+com_connect_refresh => Je kunt deze link gebruiken als de pagina niet automatisch ververst.
+com_connect_secret => Geheim
+com_connect_send => Verzenden
+com_connect_send_article => Artikel verzenden
+com_connect_spam => We accepteren geen spam!
+com_connect_text => Tekst
+com_connect_to_missing => <strong>Aan</strong> e-mailadres ontbreekt.
+#@language pt-br
+com_connect_checkbox => Checkbox
+com_connect_contact => Contato
+com_connect_email => Email
+com_connect_email_subject => {site} > Contato
+com_connect_email_thanks => Obrigado, sua mensagem foi enviada.
+com_connect_field_missing => Faltou preencher o campo requerido <strong>{field}</strong>.
+com_connect_format_warning => O valor {value} em <strong>{field}</strong> não está formato esperado.
+com_connect_form_expired => O formulário expirou, por favor tente novamente.
+com_connect_form_used => O formulário já foi enviado, por favor preencha o formulário novamente.
+com_connect_general_inquiry => Assuntos gerais
+com_connect_invalid_email => <strong>{email}</strong> não é um endereço de email válido.
+com_connect_invalid_host => <strong>{host}</strong> não é um domínio de email válido.
+com_connect_invalid_utf8 => <strong>{field}</strong> contém caracteres UTF-8 inválidos.
+com_connect_invalid_value => Valor incorreto para <strong>{field}</strong>, <strong>{value}</strong> não é uma das opções disponíveis.
+com_connect_mail_sorry => Desculpe, não foi possível enviar o email.
+com_connect_maxval_warning => <strong>{field}</strong> não pode exceder {value}.
+com_connect_max_warning => <strong>{field}</strong> não pode conter mais que {value} caracteres.
+com_connect_message => Mensagem
+com_connect_minval_warning => <strong>{field}</strong> deve ter ao menos {value}.
+com_connect_min_warning => <strong>{field}</strong> deve conter ao menos {value} caracteres.
+com_connect_name => Nome
+com_connect_option => Opção
+com_connect_pattern_warning => <strong>{field}</strong> não se encaixa no formato {value}.
+com_connect_radio => Rádio
+com_connect_recipient => Destinatário
+com_connect_refresh => Clique neste link caso a página não se atualize automaticamente.
+com_connect_secret => Secreto
+com_connect_send => Enviar
+com_connect_send_article => Enviar artigo
+com_connect_spam => Não aceitamos spam, obrigado!
+com_connect_text => Texto
+com_connect_to_missing => <strong>To</strong> falta o endereço de email.
 EOT;
 
 if (!defined('txpinterface'))
@@ -288,6 +281,8 @@ if (class_exists('\Textpattern\Tag\Registry')) {
         ->register('com_connect_send_article')
         ->register('com_connect_value')
         ->register('com_connect_label')
+        ->register('com_connect_fields')
+        ->register('com_connect_mime')
         ->register('com_connect_if');
 }
 
@@ -480,6 +475,9 @@ function com_connect($atts, $thing = null)
             return $evaluation->get_comconnect_reason();
         }
 
+        $semi_rand = md5(time());
+        $com_connect_flags['boundary'] = "Multipart_Boundary_x{$semi_rand}x";
+
         if ($from_form) {
             $from = parse_form($from_form);
         }
@@ -527,26 +525,25 @@ function com_connect($atts, $thing = null)
             }
         }
 
-        $msg = implode("\n\n", $msg);
-
-        if ($body_form) {
-            $msg = parse_form($body_form);
-        }
-
-        $msg = str_replace(array("\r\n", "\r", "\n"), array("\n", "\n", $sep), $msg);
-
+        $com_connect_flags['charset'] = $override_email_charset ? 'ISO-8859-1' : 'UTF-8';
+        $com_connect_flags['content_type'] = 'text/plain';
+        $com_connect_flags['xfer_encoding'] = '8bit';
         $reply   = com_connect_strip($from ? $com_connect_from : '');
         $from    = com_connect_strip($from ? $from : $com_connect_from);
         $to      = com_connect_strip($to);
         $subject = com_connect_strip($subject);
-        $msg     = com_connect_strip($msg, false);
+        $body    = implode("\n\n", $msg);
+
+        if ($body_form) {
+            $body = parse_form($body_form);
+        }
+
+        $body = str_replace(array("\r\n", "\r", "\n"), array("\n", "\n", $sep), $body);
+        $body = com_connect_strip($body, false);
 
         if ($override_email_charset) {
-            $charset = 'ISO-8859-1';
             $subject = utf8_decode($subject);
-            $msg     = utf8_decode($msg);
-        } else {
-            $charset = 'UTF-8';
+            $body    = utf8_decode($body);
         }
 
         $subject = Txp::get('\Textpattern\Mail\Encode')->header($subject, 'text');
@@ -555,18 +552,18 @@ function com_connect($atts, $thing = null)
             'from'          => $from,
             'separator'     => $sep,
             'reply'         => $reply,
-            'charset'       => $charset,
-            'content_type'  => 'text/plain',
-            'xfer_encoding' => '8bit',
+            'charset'       => $com_connect_flags['charset'],
+            'content_type'  => $com_connect_flags['content_type'],
+            'xfer_encoding' => $com_connect_flags['xfer_encoding'],
         );
 
         safe_update('txp_discuss_nonce', "used = '1', issue_time = '$now_date'", "nonce = '$nonce'");
 
-        if (com_connect_deliver($to, $subject, $msg, $headers, $fields, array('isCopy' => false))) {
+        if (com_connect_deliver($to, $subject, $body, $headers, $fields, array('isCopy' => false))) {
             $_POST = array();
 
             if ($copysender && $com_connect_from) {
-                com_connect_deliver(com_connect_strip($com_connect_from), $subject, $msg, $headers, $fields, array('isCopy' => true));
+                com_connect_deliver(com_connect_strip($com_connect_from), $subject, $body, $headers, $fields, array('isCopy' => true));
             }
 
             if ($redirect) {
@@ -1103,7 +1100,8 @@ function com_connect_select($atts, $thing = null)
             if (com_connect_in_array($value, $options)) {
                 com_connect_store($name, $label, $value);
             } else {
-                $com_connect_error[] = gTxt('com_connect_invalid_value', array('{field}' => txpspecialchars($label), '{value}' => doArray($value, 'txpspecialchars')));
+                $val = doArray($value, 'txpspecialchars');
+                $com_connect_error[] = gTxt('com_connect_invalid_value', array('{field}' => txpspecialchars($label), '{value}' => is_array($val) ? $val[0] : $val));
                 $isError = $com_connect_flags['cls_element'];
             }
         } elseif ($required) {
@@ -1566,6 +1564,61 @@ function com_connect_send_article($atts)
 }
 
 /**
+ * Replace mime tags with boundary text
+ *
+ * @param  array $atts Tag attributes
+ * @return string      Boundary
+ */
+function com_connect_mime($atts)
+{
+    global $com_connect_flags;
+
+    $boundary = $com_connect_flags['boundary'];
+    $charset  = $com_connect_flags['charset'];
+    $encoding = $com_connect_flags['xfer_encoding'];
+
+    extract(lAtts(array(
+        'type' => 'text',
+    ), $atts));
+
+    // Build mimes - trailing blank line is necessary.
+    $text_mime = <<<text_mime
+--$boundary
+Content-Type: text/plain; charset=$charset
+Content-Transfer-Encoding: $encoding
+
+text_mime;
+
+    $html_mime = <<<html_mime
+--$boundary
+Content-Type: text/html; charset=$charset
+Content-Transfer-Encoding: $encoding
+
+html_mime;
+
+    $end_mime = <<<end_mime
+--$boundary--
+end_mime;
+
+    // Overwrite default content-type header.
+    $com_connect_flags['content_type'] = 'multipart/alternative; boundary="'.$boundary.'"';
+
+    if ($type === 'text') {
+        return $text_mime;
+    }
+
+    if ($type === 'html') {
+        return $html_mime;
+    }
+
+    if ($type === 'end') {
+        return $end_mime;
+    }
+
+    return;
+}
+
+/**
  * Perform post-processing for aggregate (group) controls like radio sets.
  *
  * @todo Can this be done any neater?
@@ -1777,12 +1830,13 @@ function com_connect_deliver($to, $subject, $body, $headers, $fields, $flags)
     $charset = (!empty($headers['charset'])) ? $headers['charset'] : 'UTF-8';
     $x_mailer = (!empty($headers['x_mailer'])) ? $headers['x_mailer'] : 'Textpattern (com_connect)';
 
+    // @todo remove enforced charset in content-type declaration if it's multipart.
     $header_string = 'From: ' . $headers['from'] .
         ($reply ? ($sep . 'Reply-To: ' . $reply) : '') .
         $sep . 'X-Mailer: ' . $x_mailer .
         $sep . 'X-Originating-IP: ' . com_connect_strip((!empty($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] . ' via ' : '') . $_SERVER['REMOTE_ADDR']) .
         $sep . 'Content-Transfer-Encoding: ' . $xfer_encoding .
-        $sep . 'Content-Type: ' . $content_type . '; charset="' . $charset . '"';
+        $sep . 'Content-Type: ' . $content_type . (strpos($content_type, 'boundary=') !== false ? '' : '; charset="' . $charset . '"');
 
     // Remove all the header entries that have already been handled.
     unset(
@@ -1962,14 +2016,21 @@ function com_connect_load_lang($lang = LANG)
  */
 function com_connect_value($atts)
 {
-    global $com_connect_values, $com_connect_form;
+    global $com_connect_values, $com_connect_form, $com_connect_item;
 
     extract(lAtts(array(
-        'label' => '',
-        'name'  => '',
+        'break'   => ', ',
+        'class'   => '',
+        'label'   => '',
+        'name'    => '',
+        'wraptag' => '',
     ), $atts));
 
     $str = '';
+
+    if (empty($name) && !empty($com_connect_item)) {
+        $name = $com_connect_item;
+    }
 
     if ($name) {
         $str = isset($com_connect_values[$name]) ? $com_connect_values[$name] : '';
@@ -1977,7 +2038,9 @@ function com_connect_value($atts)
         $str = isset($com_connect_form[$label]) ? $com_connect_form[$label] : '';
     }
 
-    return doArray($str, 'trim');
+    $str = doArray($str, 'trim');
+
+    return doWrap($str, $wraptag, $break, $class);
 }
 
 /**
@@ -1988,11 +2051,15 @@ function com_connect_value($atts)
  */
 function com_connect_label($atts)
 {
-    global $com_connect_labels;
+    global $com_connect_labels, $com_connect_item;
 
     extract(lAtts(array(
         'name' => '',
     ), $atts));
+
+    if (empty($name) && !empty($com_connect_item)) {
+        $name = $com_connect_item;
+    }
 
     if ($name) {
         return isset($com_connect_labels[$name]) ? $com_connect_labels[$name] : '';
@@ -2010,11 +2077,17 @@ function com_connect_label($atts)
  */
 function com_connect_if($atts, $thing = null)
 {
+    global $com_connect_item;
+
     extract(lAtts(array(
         'label' => '',
         'name'  => '',
         'value' => null,
     ), $atts));
+
+    if (empty($label) && empty($name) && !empty($com_connect_item)) {
+        $name = $com_connect_item;
+    }
 
     $val = com_connect_value(array(
         'label' => $label,
@@ -2028,6 +2101,42 @@ function com_connect_if($atts, $thing = null)
     }
 
     return parse($thing, $cond);
+}
+
+/**
+ * Iterate over the submitted fields
+ *
+ * @param  array  $atts  Tag attributes
+ * @param  string $thing Container content
+ * @return HTML
+ */
+function com_connect_fields($atts, $thing = null)
+{
+    global $com_connect_labels, $com_connect_item;
+
+    extract(lAtts(array(
+        'break'   => ', ',
+        'class'   => '',
+        'label'   => '',
+        'name'    => '',
+        'wraptag' => '',
+    ), $atts));
+
+    $out = array();
+
+    $labels = do_list($label);
+    $names = do_list($name);
+
+    foreach ($com_connect_labels as $nm => $lbl) {
+        if ((empty($label) && empty($name)) || ($label && in_array($lbl, $labels)) || ($name && in_array($nm, $names))) {
+            $com_connect_item = $nm;
+            $out[] = parse($thing);
+        }
+    }
+
+    $com_connect_item = null;
+
+    return doWrap($out, $wraptag, $break, $class);
 }
 # --- END PLUGIN CODE ---
 if (0) {
