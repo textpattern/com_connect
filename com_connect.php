@@ -2145,6 +2145,39 @@ if (0) {
 # --- BEGIN PLUGIN HELP ---
 h1. com_connect
 
+h2. Contents
+
+* "Introduction":#introduction
+* "Installing and upgrading":#install
+* "Migrating from zem_contact_reborn":#differences
+* "Usage":#usage
+* "Tags":#tags
+** "com_connect tag":#cc
+** "com_connect_text tag":#cc_text
+** "com_connect_email tag":#cc_email
+** "com_connect_textarea tag":#cc_textarea
+** "com_connect_submit tag":#cc_submit
+** "com_connect_select tag":#cc_select
+** "com_connect_option tag":#cc_option
+** "com_connect_checkbox tag":#cc_checkbox
+** "com_connect_radio tag":#cc_radio
+** "com_connect_secret tag":#cc_secret
+** "com_connect_serverinfo tag":#cc_serverinfo
+** "com_connect_send_article tag":#cc_send_article
+** "com_connect_mime tag":#cc_mime
+** "com_connect_fields tag":#cc_fields
+** "com_connect_label tag":#cc_label
+** "com_connect_value tag":#cc_value
+** "com_connect_if tag":#cc_if
+* "Advanced examples":#advanced
+** "Separate input and error forms":#advanced1
+** "User selectable subject field":#advanced2
+** "User selectable recipient, without showing email address":#advanced3
+* "Styling":#styling
+* "Plugin API and callback events":#api
+* "Frequently asked questions":#faq
+* "Authors/credits":#credits
+
 h2(#introduction). Introduction
 
 A Textpattern CMS form mailer plugin. @<txp:com_connect />@ produces a flexible, customisable email contact form. It is intended for use as an enquiry form for commercial and private sites, and includes several features to help reduce common problems with such forms (invalid email addresses, missing information).
@@ -2163,15 +2196,15 @@ h3. Features
 
 h3. History
 
-Please see the "changelog on GitHub":https://github.com/textpattern/com_connect/blob/master/CHANGELOG.textile.
+Please see the "changelog on GitHub":https://github.com/textpattern/com_connect/blob/main/CHANGELOG.textile.
 
 h2(#install). Installing and upgrading
 
 *Requires Textpattern 4.7.0+*
 
-Download the latest release of the plugin from "the GitHub project page":https://github.com/textpattern/com_connect/releases, paste the code into the Textpattern Plugins administration panel, install and enable the plugin. Visit the "forum thread":https://forum.textpattern.io/viewtopic.php?id=47913 for more info or to report on the success or otherwise of the plugin.
+Download the latest release of the plugin from "the GitHub project page":https://github.com/textpattern/com_connect/releases, paste the code into the Textpattern Admin>Plugins panel, install and enable the plugin. Visit the "forum thread":https://forum.textpattern.io/viewtopic.php?id=47913 for more info or to report on the success or otherwise of the plugin.
 
-To uninstall, delete from the Plugins administration panel.
+To uninstall, delete from the Plugins panel.
 
 Alternatively, this plugin can be installed using "Composer":https://getcomposer.org:
 
@@ -2213,7 +2246,7 @@ h3. Send article
 
 Within the context of an individual article, this plugin can be used to send the article (or excerpt, if it exists) to an email address specified by the visitor. This requires at least two tags:
 
-# @com_connect@, to create form that is initially hidden by setting the @send_article@ attribute.
+# @com_connect@, to create a form that is initially hidden by setting the @send_article@ attribute.
 # @com_connect_send_article@, to create a 'Send article' link which reveals the aforementioned form when clicked.
 
 bc(language-markup). <txp:com_connect send_article="1" />
@@ -2292,13 +2325,13 @@ h4. Attributes
 
 h4. Examples
 
-h5. Example 1
+h5. Example 1: Built-in contact form
 
 When used as a single tag, produces a default form with 'Name', 'Email' and 'Message' fields. Email will be delivered to <code>recipient@example.com</code>, with the user's supplied email as the @From:@ address:
 
 bc(language-markup). <txp:com_connect to="recipient@example.com" />
 
-h5. Example 2
+h5. Example 2: Building a custom form container
 
 When used as a container tag, much more flexibility is allowed, for example:
 
@@ -2309,9 +2342,9 @@ bc(language-markup). <txp:com_connect to="recipient@example.com">
     <txp:com_connect_submit label="Send" />
 </txp:com_connect>
 
-h5. Example 3
+h5. Example 3: Custom message formatting
 
-Example with custom email message formatting, called via the @body_form@ attribute:
+Use the @body_form@ attribute to build custom content that is emailed to the recipient:
 
 bc(language-markup). <txp:com_connect to="recipient@example.com" body_form="message-formatting" />
 
@@ -2326,12 +2359,41 @@ Email received.
 
 ============
 
+h5. Example 4: HTML and plaintext email content
+
+Use the @body_form@ attribute to build custom content in both plaintext and HTML formats that is emailed to the recipient:
+
+bc(language-markup). <txp:com_connect to="recipient@example.com" body_form="message-formatting" />
+
+Use the @body_form@ form template named @message-formatting@ as follows, and note the @<txp:com_connect_mime>@ tags which indicate that the content of the given @type@ immediately follows. Use the tag with @type="end"@ to signify that the content is complete.
+
+bc.. ============
+<txp:com_connect_mime type="text" />
+Fields submitted:
+<txp:com_connect_fields break="">
+<txp:com_connect_label />: <txp:com_connect_value />
+</txp:com_connect_fields>
+
+<txp:com_connect_mime type="html" />
+<table width="600" style="font-family:Arial, Helvetica, sans-serif; font-size:12px;">
+<txp:com_connect_fields wraptag="tr" break="">
+<td style="padding:10px 0">
+   <txp:com_connect_label />
+</td>
+<td style="padding:10px 0">
+   <txp:com_connect_value />
+</td>
+</txp:com_connect_fields>
+</table>
+
+<txp:com_connect_mime type="end" />
+============
+
 h3(#cc_text). com_connect_text tag
 
 bc(language-markup). <txp:com_connect_text />
 
 Creates a text @<input>@ field and corresponding @<label>@ tag. The input value will be included in the email, preceded by the label.
-Creates a text @<input>@ field. The input value will be included in the email, preceded by the label.
 
 h4. Attributes
 
@@ -2380,15 +2442,15 @@ h4. Attributes
 
 h4. Examples
 
-h5. Example 1
+h5. Example 1: Text input box
 
 bc(language-markup). <txp:com_connect_text label="Your name" />
 
-h5. Example 2
+h5. Example 2: Range slider
 
 bc(language-markup). <txp:com_connect_text type="range" label="UK shoe size" min="1" max="15" />
 
-h5. Example 3
+h5. Example 3: Telephone input with validation
 
 Create a telephone field with a "validation pattern for UK telephone number":http://html5pattern.com/Phones format:
 
@@ -2421,7 +2483,7 @@ h4. Attributes
 
 h4. Examples
 
-h5. Example 1
+h5. Example 1: Standard email field
 
 bc(language-markup). <txp:com_connect_email label="Your email address" />
 
@@ -2451,7 +2513,7 @@ h4. Attributes
 
 h4. Examples
 
-h5. Example 1
+h5. Example 1: Standard textarea
 
 Create a text area that is 40 characters wide, 10 lines high, with a customised label:
 
@@ -2471,26 +2533,22 @@ h4. Attributes:
 
 h4. Examples
 
-h5. Example 1
-
-Standard submit button:
+h5. Example 1: Standard submit button
 
 bc(language-markup). <txp:com_connect_submit />
 
-h5. Example 2
-
-Submit button with your own text:
+h5. Example 2: Submit button with custom text
 
 bc(language-markup). <txp:com_connect_submit label="To the moooon" />
 
-h5. Example 3
+h5. Example 3:  Usage as a container tag
 
-Usage as a container tag, which allows you to use Textpattern tags and HTML markup in the submit button:
+This allows you to use Textpattern tags and HTML markup in the submit button:
 
 bc(language-markup). <txp:com_connect_submit><strong>Send</strong> question</txp:com_connect_submit>
 
-h5. Example 4
-
+h5. Example 4: Image button
+s
 As example 3 above, but using an image as the button:
 
 bc(language-markup). <txp:com_connect_submit>
@@ -2511,21 +2569,24 @@ h4. Attributes
 * @label="text"@<br />Text label displayed to the user. Default is @Option@.
 * @label_position="text"@<br />Position of the label in relation to the @<select>@ field. Available values: @before@ or @after@. Default is @before@.
 * @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the @<select>@ is attached. Associated with the contained form by default.
+* @multiple="boolean"@<br />Whether to allow multiple selections to be made from the set of options. Default: unset.
 * @name="value"@<br />Field name, as used in the HTML @<select>@ tag.
 * @options="comma-separated values"@<br /> List of items (previously @list@) to show in the select box. Surround the first entry with @{Braces}@ to indicate it is an 'empty' placeholder. Alternatively, the @<txp:com_connect_option />@ tag may be used inside this tag's container.
 * @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:com_connect>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
 * @selected="value"@<br />List item that is selected by default.
-* @size="value"@<br/>If the @<select>@ is to be presented as a scrolled list box, this attribute represents the number of rows in the list that should be visible at one time. Default is unset (i.e., a drop-down selection @<select>@ list).
+* @size="value"@<br/>If the @<select>@ is to be presented as a scrolled list box, this attribute represents the number of rows in the list that should be visible at one time. Default is unset (i.e. a drop-down selection @<select>@ list).
 
 h4. Examples
 
-h5. Example 1
+h5. Example 1: Single drop-down select list
 
-Drop-down selection list labeled 'Department', containing three options and a blank option shown by default and labelled with 'Choose dept', forcing the user to make a selection.
+A list labeled 'Department', containing three options and a blank option shown by default and labelled with 'Choose dept', forcing the user to make a selection.
 
 bc(language-markup). <txp:com_connect_select label="Department" options="{Choose dept},Marketing,Sales,Support" />
 
-h5. Example 2
+h5. Example 2: Using the com_connect option tag
+
+Same as the above example, but with 'Sales' selected by default.
 
 bc(language-markup). <txp:com_connect_select label="Department" selected="Sales">
     <txp:com_connect_option label="{Choose dept}" />
@@ -2534,7 +2595,18 @@ bc(language-markup). <txp:com_connect_select label="Department" selected="Sales"
     <txp:com_connect_option label="Support" />
 </txp:com_connect_select>
 
-Drop-down selection list containing three options plus a blank option (also see @com_connect_option@ tag below), with 'Sales' selected by default.
+The advantage to use the option tag is that you can name the options independently of the label. You could also add a boolean @selected@ attribute to the individual option tag, instead of to the containing select tag.
+
+h5. Example 3: Multiple select
+
+bc(language-markup). <txp:com_connect_select label="Ice cream flavours" multiple>
+    <txp:com_connect_option label="{Choose your favourites}" />
+    <txp:com_connect_option label="Vanilla" />
+    <txp:com_connect_option label="Strawberry" />
+    <txp:com_connect_option label="Raspberry" />
+    <txp:com_connect_option label="Chocolate" />
+    <txp:com_connect_option label="Mint choc-chip" name="mint-with-chocolate-chips" />
+</txp:com_connect_select>
 
 h3(#cc_option). com_connect_option tag
 
@@ -2549,7 +2621,7 @@ h4. Attributes
 * @selected="boolean"@<br />Whether this item is selected, May also be specified in the container tag's @selected@ attribute. Available values: @1@ (yes) or @0@ (no).
 * @value="text"@<br />The value associated with this option when submitted. Default is the label.
 
-h5. Example 1
+h5. Example 1: Drop-down select list containing three options
 
 bc(language-markup). <txp:com_connect_select label="Department">
     <txp:com_connect_option label="Marketing" />
@@ -2557,17 +2629,15 @@ bc(language-markup). <txp:com_connect_select label="Department">
     <txp:com_connect_option label="Support" />
 </txp:com_connect_select>
 
-Drop-down selection list containing three options as single tags.
+h5. Example 2: Pass different values instead of label
 
-h5. Example 2
+'Sales' is selected by default.
 
 bc(language-markup). <txp:com_connect_select label="Department">
     <txp:com_connect_option value="contact-marketing">Marketing</txp:com_connect_option>
     <txp:com_connect_option value="contact-sales" selected>Sales</txp:com_connect_option>
     <txp:com_connect_option value="contact-support">Support</txp:com_connect_option>
 </txp:com_connect_select>
-
-Drop-down selection list containing three options as container tags with 'Sales' selected by default.
 
 h3(#cc_checkbox). com_connect_checkbox tag
 
@@ -2589,20 +2659,18 @@ h4. Attributes
 
 h4. Examples
 
-h5. Example 1
+h5. Example 1: Accept terms of service
 
 Shrink-wrap agreement which must be checked by the user before the email will be sent.
 
 bc(language-markup). <txp:com_connect_checkbox label="I accept the terms and conditions" />
 
-h5. Example 2
-
-Optional checkboxes:
+h5. Example 2: Optional checkboxes
 
 bc(language-markup). With which operating systems are you familiar?<br />
 <txp:com_connect_checkbox label="Windows" required="0" /><br />
 <txp:com_connect_checkbox label="Unix/Linux/BSD" required="0" /><br />
-<txp:com_connect_checkbox label="MacOS" required="0" />
+<txp:com_connect_checkbox label="macOS" required="0" />
 
 h3(#cc_radio). com_connect_radio tag
 
@@ -2624,7 +2692,7 @@ h4. Attributes
 
 h4. Examples
 
-h5. Example 1
+h5. Example 1: Radio set
 
 Group mutually exclusive radio buttons by setting the @group@ attribute on the first radio button in a group. Only the chosen radio button from each group will be used in the email message. The message will be output in the form @group: label@ for each of the chosen radio buttons.
 
@@ -2649,15 +2717,11 @@ h4. Attributes
 
 h4. Examples
 
-h5. Example 1
-
-Usage as a single (self-closing) tag:
+h5. Example 1: As a single (self-closing) tag
 
 bc(language-markup). <txp:com_connect_secret value="The answer is 42" />
 
-h5. Example 2
-
-Usage as a container tag:
+h5. Example 2: As a container tag
 
 bc(language-markup). <txp:com_connect_secret label="Dear user">
     Please provide a useful example for this tag!
@@ -2676,15 +2740,11 @@ h4. Attributes
 
 h4. Examples
 
-h5. Example 1
-
-Add the IP address of the visitor to the email:
+h5. Example 1: Add the IP address of the visitor to the email
 
 bc(language-markup). <txp:com_connect_serverinfo name="REMOTE_ADDR" label="IP number" />
 
-h5. Example 2
-
-Add the name of the visitor's browser to the email:
+h5. Example 2: Add the name of the visitor's browser to the email
 
 bc(language-markup). <txp:com_connect_serverinfo name="HTTP_USER_AGENT" label="Browser" />
 
@@ -2700,11 +2760,65 @@ h4. Attributes
 
 h4. Examples
 
-h5. Example 1
-
-On an article form:
+h5. Example 1: On an article form
 
 bc(language-markup). <txp:com_connect_send_article linktext="Send this article" />
+
+h3(#cc_fields). com_connect_fields tag
+
+bc(language-markup). <txp:com_connect_fields />
+
+Iterate over the set of submitted fields. Only really of use in the designated @body_form@ to format the user-supplied content in the email body.
+
+h4. Attributes
+
+* @break="text or tag"@<br />Break tag or text to use as a separator between each item. Default is @, @. Use @break=""@ to remove the effect of this attribute.
+* @class="space-separated values"@<br />Set the CSS @class@ name of the wraptag. Default: unset.
+* @label="text"@<br />Comma-separated list of field labels to iterate over.
+* @name="text"@<br />Comma-separated list of field names to iterate over.
+* @wraptag="tag"@<br />HTML tag (without angle brackets) to wrap the set of fields. Default: unset.
+
+Note that @label@ and @name@ may be used individually or in tandem. If both are omitted, the entire set of fields are iterated.
+
+h4. Examples
+
+h5. Example 1: Create an unordered list of submitted fields
+
+bc(language-markup). <txp:com_connect_fields wraptag="ul" break="li">
+   <txp:com_connect_label /> = <txp:com_connect_value />
+</txp:com_connect_fields>
+
+h3(#cc_fields). com_connect_mime tag
+
+bc(language-markup). <txp:com_connect_mime />
+
+Use this in the body_form to delineate sections of the message for use in plaintext email clients and/or html-capable email clients.
+
+h4. Attributes
+
+* @type="value"@<br />The type of content that follows the tag. Choose from @text@ (plaintext), @html@, or @end@ (to signify the end of the blocks).
+
+h4. Examples
+
+h5. Example 1: Plaintext and HTML body content
+
+bc(language-markup). <txp:com_connect_mime type="text" />
+<txp:com_connect_fields break="">
+   <txp:com_connect_label />: <txp:com_connect_value />
+</txp:com_connect_fields>
+<txp:com_connect_mime type="html" />
+<txp:com_connect_fields wraptag="ul" break="li">
+   <txp:com_connect_label /> = <txp:com_connect_value />
+</txp:com_connect_fields>
+<txp:com_connect_mime type="end" />
+
+Note that there are three uses of the new <txp:com_connect_mime> tag:
+
+* One to signify the start of the plaintext content (@type="text"@).
+* One to signify the start of the html content (@type="html"@).
+* One to signify the end of all the content (@type="end"@).
+
+Whether you use one or both of the text/html types, you require the 'end' or you’ll just get garbage messages.
 
 h3(#cc_label). com_connect_label tag
 
@@ -2714,7 +2828,7 @@ Return the label for the given attribute name.
 
 h4. Attributes
 
-* @name="text"@<br />The name of the field for which you wish to retrieve the label.
+* @name="text"@<br />The name of the field for which you wish to retrieve the label. If used within a @<txp:com_connect_fields>@ container, the @name@ is optional and will return the current field in the set.
 
 h3(#cc_value). com_connect_value tag
 
@@ -2724,8 +2838,13 @@ Return the value of the given attribute, by name or its label.
 
 h4. Attributes
 
+* @break="text or tag"@<br />Break tag or text to use as a separator between each item, if the value is a multiple (e.g. a multi-select option list). Default is @, @. Use @break=""@ to remove the effect of this attribute.
+* @class="space-separated values"@<br />Set the CSS @class@ name of the wraptag. Default: unset.
 * @label="text"@<br />The label of the field for which you wish to retrieve the value.
 * @name="text"@<br />The name of the field for which you wish to retrieve the value.
+* @wraptag="tag"@<br />HTML tag (without angle brackets) to wrap the field. Default: unset.
+
+If used within a @<txp:com_connect_fields>@ container, the @name@ and @label@ are optional and the tag will use the current field in the set.
 
 h3(#cc_if). com_connect_if tag
 
@@ -2739,15 +2858,15 @@ h4. Attributes
 * @name="text"@<br />The name of the field you wish to check.
 * @value="text"@<br />The value against which to test the given field. Leave blank to just test if there is any value assigned to the field.
 
+If used within a @<txp:com_connect_fields>@ container, the @name@ and @label@ are optional and the tag will test the current field in the set.
+
 h4. Examples
 
-h5. Example 1
-
-Take action if the visitor has entered a particular value.
+h5. Example 1: Take action if the visitor has entered a particular value
 
 bc(language-markup). <txp:com_connect_if name="delivery" value="courier">
-
-Please note, this option incurs an additional charge, @</txp:com_connect_if>@.
+   <txp:com_connect_label name="delivery" />: <txp:com_connect_value name="delivery" />
+</txp:com_connect_if>.
 
 h2(#advanced). Advanced examples
 
@@ -2839,7 +2958,7 @@ All form elements and corresponding labels have the following classes (or ids) s
 # @comRequired@ and/or @errorElement@, depending on whether the form element is required, an error was found in whatever the visitor entered, or both. Override these using the @classes@ attribute in the @com_connect@ tag.
 # An individual @id@ or @class@ set to the value of the @name@ attribute of the corresponding tag. When styling forms based on this @class@, you should explicitly set the @name@ attribute because automatically generated names may change in newer com_connect versions.
 
-h2(#api). com_connect's API
+h2(#api). com_onnect's API
 
 The plugin API of com_connect, originally developed by Tranquillo, allows other plugins to interact with contact forms. This permits extra functionality such as combatting comment cpam, HTML email, newsletter delivery and so forth to be bolted onto the base plugin.
 
@@ -2903,7 +3022,7 @@ p. For the delivery callback, you signal back to the plugin your intentions so t
 
 Or simply @exit@ your plugin to halt the entire operation so no com_connect feedback is given.
 
-h2. Frequently asked questions
+h2(#faq). Frequently asked questions
 
 h5. How do I remove the legend and fieldset surrounding the contact form?
 
@@ -2911,7 +3030,7 @@ Set the @label@ attribute to an empty value (@label=""@) in the @com_connect@ ta
 
 h5. No email is sent. How do I diagnose and fix the problem?
 
-First try a simple contact form, using only the @com_connect@ tag with the @to@ attribute set to a valid email address. If that doesn't send email, fill out the 'SMTP envelope sender address' field in Textpattern's Preferences administration panel on the admin tab. If that doesn't help either, take a look at your mail server log files to see what the problem is.
+First try a simple contact form, using only the @com_connect@ tag with the @to@ attribute set to a valid email address. If that doesn't send email, fill out the 'SMTP envelope sender address' field in Textpattern's Admin>Preferences. If that doesn't help either, take a look at your mail server log files to see what the problem is.
 
 h5. Which tag do I use to create the submit button?
 
@@ -2941,7 +3060,7 @@ You can't, but have a look at the "ext_file_attach":https://github.com/Bloke/ext
 
 h5. Can I use this plugin to send HTML email?
 
-Not without a plugin like "mem_form":https://bitbucket.org/Manfre/txp-plugins/downloads or using the delivery callback.
+Yes.
 
 h5. Can I use this plugin to send newsletters?
 
