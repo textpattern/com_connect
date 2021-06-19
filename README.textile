@@ -231,7 +231,7 @@ Fields submitted:
 
 <txp:com_connect_mime type="html" />
 <table width="600" style="font-family:Arial, Helvetica, sans-serif; font-size:12px;">
-<txp:com_connect_fields wraptag="tr" break="">
+<txp:com_connect_fields break="tr">
 <td style="padding:10px 0">
    <txp:com_connect_label />
 </td>
