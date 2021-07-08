@@ -2273,20 +2273,34 @@ All other tags provided by this plugin can only be used inside a @<txp:com_conne
 
 In addition to the tags detailed in the following sections, every tag accepts a core set of common attributes. These are:
 
-* @accesskey="character"@<br />Shortcut key to set focus on the field.
-* @autofocus="boolean"@<br />To automatically focus the cursor in this field on page load. Only one field may have this property.
-* @dir="value"@<br />Text direction (@ltr@, @rtl@ or @auto@).
-* @disabled="boolean"@<br />Whether the input control accepts user input. If set, the element does not get submitted with the form, nor is it subject to any @checkValidity()@ JavaScript calls.
-* @hidden="boolean"@<br />The visibility of the input control.
-* @id="id"@<br />The HTML identifier for the control.
-* @lang="value"@<br />The ISO 639 language short code (e.g. @en-gb@, @de-de@) that govern the field.
-* @list="id"@<br />Used in conjunction with the @<datalist>@ tag to specify a set of options. The id is the reference to the datalist to use.
-* @readonly="boolean"@<br />Control does not accept user input, but will be processed on form submission and can be validated.
-* @spellcheck="value"@<br />Whether the field is subject to spell checking (@true@ = yes, @default@ = browser decides, or @false@ = no).
-* @style="style rules"@<br />Inline CSS @style@ rules to apply to the input control.
-* @tabindex="number"@<br />The order in which the cursor jumps between elements when using the tab key.
-* @title="value"@<br />Usually used for hover tooltip describing the input control's use in your application.
-* @translate="boolean"@<br />Whether to subject the attribute content to language translation.
+; @accesskey="character"@
+: Shortcut key to set focus on the field.
+; @autofocus="boolean"@
+: To automatically focus the cursor in this field on page load. Only one field may have this property.
+; @dir="value"@
+: Text direction (@ltr@, @rtl@ or @auto@).
+; @disabled="boolean"@
+: Whether the input control accepts user input. If set, the element does not get submitted with the form, nor is it subject to any @checkValidity()@ JavaScript calls.
+; @hidden="boolean"@
+: The visibility of the input control.
+; @id="id"@
+: The HTML identifier for the control.
+; @lang="value"@
+: The ISO 639 language short code (e.g. @en-gb@, @de-de@) that governs the field.
+; @list="id"@
+: Used in conjunction with the @<datalist>@ tag to specify a set of options. The id is the reference to the datalist to use.
+; @readonly="boolean"@
+: Control does not accept user input, but will be processed on form submission and can be validated.
+; @spellcheck="value"@
+: Whether the field is subject to spell checking (@true@ = yes, @default@ = browser decides, or @false@ = no).
+; @style="style rules"@
+: Inline CSS @style@ rules to apply to the input control.
+; @tabindex="number"@
+: The order in which the cursor jumps between elements when using the tab key.
+; @title="value"@
+: Usually used for hover tooltip describing the input control's use in your application.
+; @translate="boolean"@
+: Whether to subject the attribute content to language translation.
 
 h3(#cc). com_connect tag
 
@@ -2296,32 +2310,54 @@ May be used as a single (self-closing) or container tag. Place this where you wa
 
 h4. Attributes
 
-* @body_form="form name"@<br />Use specified form for the message body text.
-* @class="space-separated values"@<br />Set the CSS @class@ name of the tag. Default: @comConnectForm@. To remove @class@ attribute from the element entirely, use @class=""@.
-* @classes="comma-separated key:value pairs"@<br />Set the CSS classes for error / information conditions. Specify each as a pair of values separated by a colon, e.g. @classes="required: req_field, element: warn_field"@. There are up to four available to customise:
-** @element@: Set for each form field that fails validation for any reason. Default: @errorElement@.
-** @wrapper@: The class to surround the list of errors shown above the form. Default: @comError@.
-** @required@: Class assigned when a required element is not completed. Default: @comRequired@.
-** @thanks@: Class applied to the wrapper around the @thanks_form@. Default: @comThanks@.
-* @copysender="boolean"@<br />Whether to send a copy of the email to the sender's address. Available values: @1@ (yes) or @0@ (no). Default is @0@.
-* @expire="number"@<br />Number of seconds after which the form will expire, thus requiring a page refresh before sending. Default is @600@.
-* @form="form name"@<br />Use specified form, containing the layout of the contact form fields.
-* @from="email address"@<br />Email address used in the "From:" field when sending email. Defaults to the sender's email address. If specified, the sender's email address will be placed in the "Reply-To:" field instead.
-* @from_form="form name"@<br />Use specified form (overrides @from@ attribute).
-* @label="text"@<br />Label for the contact form. If set to an empty string, display of the fieldset and legend tags will be suppressed. Default is @Contact@.
-* @lang="lang-code"@<br />Override the language strings that would normally be used from the current admin-side language in force. e.g. @lang="fr-fr"@ would load the French language strings. A Textpack must already exist for the chosen language.
-* @browser_validate="boolean"@<br />Set to 0 if you wish to stop the browser from validating form field values and 'required' status of input elements. The plugin itself is then solely responsible for validation and will indicate error conditions after submission. Default is @1@.
-* @redirect="URL"@<br />Redirect to specified URL (overrides @thanks@ and @thanks_form@ attributes). URL must be relative to the Textpattern site URL. Example: @redirect="monkey"@ would redirect to @http://example.com/monkey@.
-* @required="boolean"@<br />Whether to require all tags in this contact form to be completed before the form can be submitted. Can be overridden on a field-by-field basis by using the @required@ attribute in the relevant tag. Available values: @1@ (yes) or @0@ (no). Default is @1@.
-* @send_article="boolean"@<br />Whether to use this form to send an article. Available values: @1@ (yes) or @0@ (no). Default is @0@.
-* @show_error="boolean"@<br />Whether to display error and status messages. Available values: @1@ (yes) or @0@ (no). Default is @1@.
-* @show_input="boolean"@<br />Whether to display the form @<input>@ fields. Available values: @1@ (yes) or @0@ (no). Default is @1@.
-* @subject="subject text"@<br />Subject used when sending an email. Default is the site name.
-* @subject_form="form name"@<br />Use specified form (overrides @subject@ attribute).
-* @thanks="text"@<br />Message shown after successfully submitting a message. Default is @Thank you, your message has been sent@.
-* @thanks_form="form name"@<br />Use specified form (overrides @thanks@ attribute).
-* @to="email address"@ %(warning)required%<br />Recipient email address. Multiple recipients can be specified, separated by commas.
-* @to_form="form name"@<br />Use specified form (overrides @to@ attribute).
+; @body_form="form name"@
+: Use specified form for the message body text.
+; @class="space-separated values"@
+: Set the CSS @class@ name of the tag. Default: @comConnectForm@. To remove @class@ attribute from the element entirely, use @class=""@.
+; @classes="comma-separated key:value pairs"@
+: Set the CSS classes for error / information conditions. Specify each as a pair of values separated by a colon, e.g. @classes="required: req_field, element: warn_field"@. There are up to four available to customise:
+: @element@: Set for each form field that fails validation for any reason. Default: @errorElement@.
+: @wrapper@: The class to surround the list of errors shown above the form. Default: @comError@.
+: @required@: Class assigned when a required element is not completed. Default: @comRequired@.
+: @thanks@: Class applied to the wrapper around the @thanks_form@. Default: @comThanks@.
+; @copysender="boolean"@
+: Whether to send a copy of the email to the sender's address. Available values: @1@ (yes) or @0@ (no). Default is @0@.
+; @expire="number"@
+: Number of seconds after which the form will expire, thus requiring a page refresh before sending. Default is @600@.
+; @form="form name"@
+: Use specified form, containing the layout of the contact form fields.
+; @from="email address"@
+: Email address used in the "From:" field when sending email. Defaults to the sender's email address. If specified, the sender's email address will be placed in the "Reply-To:" field instead.
+; @from_form="form name"@
+: Use specified form (overrides @from@ attribute).
+; @label="text"@
+: Label for the contact form. If set to an empty string, display of the fieldset and legend tags will be suppressed. Default is @Contact@.
+; @lang="lang-code"@
+: Override the language strings that would normally be used from the current admin-side language in force. e.g. @lang="fr-fr"@ would load the French language strings. A Textpack must already exist for the chosen language.
+; @browser_validate="boolean"@
+: Set to 0 if you wish to stop the browser from validating form field values and 'required' status of input elements. The plugin itself is then solely responsible for validation and will indicate error conditions after submission. Default is @1@.
+; @redirect="URL"@
+: Redirect to specified URL (overrides @thanks@ and @thanks_form@ attributes). URL must be relative to the Textpattern site URL. Example: @redirect="monkey"@ would redirect to @http://example.com/monkey@.
+; @required="boolean"@
+: Whether to require all tags in this contact form to be completed before the form can be submitted. Can be overridden on a field-by-field basis by using the @required@ attribute in the relevant tag. Available values: @1@ (yes) or @0@ (no). Default is @1@.
+; @send_article="boolean"@
+: Whether to use this form to send an article. Available values: @1@ (yes) or @0@ (no). Default is @0@.
+; @show_error="boolean"@
+: Whether to display error and status messages. Available values: @1@ (yes) or @0@ (no). Default is @1@.
+; @show_input="boolean"@
+: Whether to display the form @<input>@ fields. Available values: @1@ (yes) or @0@ (no). Default is @1@.
+; @subject="subject text"@
+: Subject used when sending an email. Default is the site name.
+; @subject_form="form name"@
+: Use specified form (overrides @subject@ attribute).
+; @thanks="text"@
+: Message shown after successfully submitting a message. Default is @Thank you, your message has been sent@.
+; @thanks_form="form name"@
+: Use specified form (overrides @thanks@ attribute).
+; @to="email address"@ %(warning)required%
+: Recipient email address. Multiple recipients can be specified, separated by commas.
+; @to_form="form name"@
+: Use specified form (overrides @to@ attribute).
 
 h4. Examples
 
@@ -2397,48 +2433,64 @@ Creates a text @<input>@ field and corresponding @<label>@ tag. The input value 
 
 h4. Attributes
 
-* @autocomplete="value"@<br />Indicates whether the value of the control can be automatically completed by the browser. This attribute is ignored if the value of the type attribute is @password@. Possible values are: @off@ (the browser does not automatically complete the entry) or @on@ (the browser can automatically complete the value based on values that the user has entered during previous uses). Default is unset.
-* @break="tag"@<br />Break tag between the @<label>@ and @<input>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @comText@. To remove @class@ attribute from the element entirely, use @class=""@.
-* @default="value"@<br />Default value when no input is provided.
-* @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the field is attached. Associated with the contained form by default.
-* @inputmode="value"@<br />A hint to the browser for which keyboard to display. This attribute applies when the value of the type attribute is @text@, @password@ or @url@. Possible values are:
-** @verbatim@: Alphanumeric, non-prose content such as usernames and passwords.
-** @latin@: Latin-script input in the user's preferred language with typing aids such as text prediction enabled. For human-to-computer communication such as search boxes.
-** @latin-name@: As latin, but for human names.
-** @latin-prose@: As latin, but with more aggressive typing aids. For human-to-human communication such as instant messaging for email.
-** @full-width-latin@: As latin-prose, but for the user's secondary languages.
-** @kana@: Kana or romaji input, typically hiragana input, using full-width characters, with support for converting to kanji. Intended for Japanese text input.
-** @katakana@: Katakana input, using full-width characters, with support for converting to kanji. Intended for Japanese text input.
-** @numeric@: Numeric input, including keys for the digits 0 to 9, the user's preferred thousands separator character, and the character for indicating negative numbers. Intended for numeric codes, e.g. credit card numbers. For actual numbers, prefer using @type="number"@.
-** @tel@: Telephone input, including asterisk and pound key. Use @type="tel"@ if possible instead.
-** @email@: Email input. Use @<txp:com_connect_email />@ if possible instead.
-** @url@: URL input. Use @type="url"@ if possible instead.
-* @label="text"@<br />Text label displayed to the user. Default is @Text@.
-* @label_position="text"@<br />Position of the label in relation to the @<input>@ field. Available values: @before@ or @after@. Default is @before@.
-* @max=value"@<br />For character-based inputs, the maximum input value length in characters, using the HTML5 @maxlength@ attribute. To remove @maxlength@ attribute from the element entirely (not recommended), use @max=""@. For numeric-based inputs, the maximum input value the field accepts, using the HTML5 @max@ attribute (can be a negative value). Default is @100@. To remove @max@ attribute from the numerical input element entirely, use @max=""@.
-* @min="value"@<br />For character-based inputs, the minimum input value length in characters, using the HTML5 @minlength@ attribute. Default is unset, i.e., no minimum limit. For numeric-based inputs, the minimum input value the field accepts, using the HTML5 @min@ attribute (can be a negative value). Default is @0@. To remove @min@ attribute from the numerical input element entirely, use @min=""@.
-* @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
-* @pattern="regex"@<br />Regular expression that governs the format in which the field data is expected. Only used for character-based inputs.
-* @placeholder="text"@<br />Text to show as a guide, when the @<input>@ field is empty.
-* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:com_connect>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
-* @size="value"@<br/>The size, in characters, of the @<input>@ field.
-* @step="value"@<br />For numeric-based inputs, the interval between min and max.
-* @type="value"@<br />Type of text input. Default is @text@. Choose from:
-** @color@
-** @date@
-** @datetime@
-** @datetime-local@
-** @month@
-** @number@
-** @password@
-** @range@
-** @search@
-** @tel@
-** @text@
-** @time@
-** @url@
-** @week@
+; @autocomplete="value"@
+: Indicates whether the value of the control can be automatically completed by the browser. This attribute is ignored if the value of the type attribute is @password@. Possible values are: @off@ (the browser does not automatically complete the entry) or @on@ (the browser can automatically complete the value based on values that the user has entered during previous uses). Default is unset.
+; @break="tag"@
+: Break tag between the @<label>@ and @<input>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
+; @class="space-separated values"@
+: Set the CSS @class@ name of the tag. Default: @comText@. To remove @class@ attribute from the element entirely, use @class=""@.
+; @default="value"@
+: Default value when no input is provided.
+; @html_form="id"@
+: The HTML @id@ of the @<form>@ tag to which the field is attached. Associated with the contained form by default.
+; @inputmode="value"@
+: A hint to the browser for which keyboard to display. This attribute applies when the value of the type attribute is @text@, @password@ or @url@. Possible values are:
+: @verbatim@: Alphanumeric, non-prose content such as usernames and passwords.
+: @latin@: Latin-script input in the user's preferred language with typing aids such as text prediction enabled. For human-to-computer communication such as search boxes.
+: @latin-name@: As latin, but for human names.
+: @latin-prose@: As latin, but with more aggressive typing aids. For human-to-human communication such as instant messaging for email.
+: @full-width-latin@: As latin-prose, but for the user's secondary languages.
+: @kana@: Kana or romaji input, typically hiragana input, using full-width characters, with support for converting to kanji. Intended for Japanese text input.
+: @katakana@: Katakana input, using full-width characters, with support for converting to kanji. Intended for Japanese text input.
+: @numeric@: Numeric input, including keys for the digits 0 to 9, the user's preferred thousands separator character, and the character for indicating negative numbers. Intended for numeric codes, e.g. credit card numbers. For actual numbers, prefer using @type="number"@.
+: @tel@: Telephone input, including asterisk and pound key. Use @type="tel"@ if possible instead.
+: @email@: Email input. Use @<txp:com_connect_email />@ if possible instead.
+: @url@: URL input. Use @type="url"@ if possible instead.
+; @label="text"@
+: Text label displayed to the user. Default is @Text@.
+; @label_position="text"@
+: Position of the label in relation to the @<input>@ field. Available values: @before@ or @after@. Default is @before@.
+; @max=value"@
+: For character-based inputs, the maximum input value length in characters, using the HTML5 @maxlength@ attribute. To remove @maxlength@ attribute from the element entirely (not recommended), use @max=""@. For numeric-based inputs, the maximum input value the field accepts, using the HTML5 @max@ attribute (can be a negative value). Default is @100@. To remove @max@ attribute from the numerical input element entirely, use @max=""@.
+; @min="value"@
+: For character-based inputs, the minimum input value length in characters, using the HTML5 @minlength@ attribute. Default is unset, i.e., no minimum limit. For numeric-based inputs, the minimum input value the field accepts, using the HTML5 @min@ attribute (can be a negative value). Default is @0@. To remove @min@ attribute from the numerical input element entirely, use @min=""@.
+; @name="value"@
+: Field name, as used in the HTML @<input>@ tag.
+; @pattern="regex"@
+: Regular expression that governs the format in which the field data is expected. Only used for character-based inputs.
+; @placeholder="text"@
+: Text to show as a guide, when the @<input>@ field is empty.
+; @required="boolean"@
+: Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:com_connect>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
+; @size="value"@<br/>The size, in characters, of the @<input>@ field.
+; @step="value"@
+: For numeric-based inputs, the interval between min and max.
+; @type="value"@
+: Type of text input. Default is @text@. Choose from:
+: @color@
+: @date@
+: @datetime@
+: @datetime-local@
+: @month@
+: @number@
+: @password@
+: @range@
+: @search@
+: @tel@
+: @text@
+: @time@
+: @url@
+: @week@
 
 h4. Examples
 
@@ -2466,20 +2518,34 @@ The entered email address will automatically be validated to make sure it is of 
 
 h4. Attributes
 
-* @autocomplete="value"@<br />Indicates whether the value of the control can be automatically completed by the browser. Possible values are: @off@ (the browser does not automatically complete the entry) or @on@ (the browser can automatically complete the value based on values that the user has entered during previous uses). Default is unset.
-* @break="tag"@<br />Break tag between the @<label>@ and @<input>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @comEmail@. To remove @class@ attribute from the element entirely, use @class=""@.
-* @default="value"@<br />Default value when no input is provided.
-* @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the field is attached. Associated with the contained form by default.
-* @label="text"@<br />Text label displayed to the user. Default is @Email@.
-* @label_position="text"@<br />Position of the label in relation to the @<input>@ field. Available values: @before@ or @after@. Default is @before@.
-* @max="integer"@<br />Maximum input value length in characters, using the HTML5 @maxlength@ attribute. Default is @100@. To remove @maxlength@ attribute from the element entirely (not recommended), use @max=""@.
-* @min="integer"@<br />Minimum input value length in characters, using the HTML5 @minlength@ attribute. Default is unset, i.e., no minimum limit.
-* @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
-* @placeholder="text"@<br />Text to show as a guide, when the @<input>@ field is empty.
-* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:com_connect>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
-* @send_article="boolean"@<br />Whether this field is used as the recipient email address when using the send_article function. Available values: @1@ (yes) or @0@ (no). Default is @0@.
-* @size="value"@<br/>The size, in characters, of the @<input>@ field.
+; @autocomplete="value"@
+: Indicates whether the value of the control can be automatically completed by the browser. Possible values are: @off@ (the browser does not automatically complete the entry) or @on@ (the browser can automatically complete the value based on values that the user has entered during previous uses). Default is unset.
+; @break="tag"@
+: Break tag between the @<label>@ and @<input>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
+; @class="space-separated values"@
+: Set the CSS @class@ name of the tag. Default: @comEmail@. To remove @class@ attribute from the element entirely, use @class=""@.
+; @default="value"@
+: Default value when no input is provided.
+; @html_form="id"@
+: The HTML @id@ of the @<form>@ tag to which the field is attached. Associated with the contained form by default.
+; @label="text"@
+: Text label displayed to the user. Default is @Email@.
+; @label_position="text"@
+: Position of the label in relation to the @<input>@ field. Available values: @before@ or @after@. Default is @before@.
+; @max="integer"@
+: Maximum input value length in characters, using the HTML5 @maxlength@ attribute. Default is @100@. To remove @maxlength@ attribute from the element entirely (not recommended), use @max=""@.
+; @min="integer"@
+: Minimum input value length in characters, using the HTML5 @minlength@ attribute. Default is unset, i.e., no minimum limit.
+; @name="value"@
+: Field name, as used in the HTML @<input>@ tag.
+; @placeholder="text"@
+: Text to show as a guide, when the @<input>@ field is empty.
+; @required="boolean"@
+: Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:com_connect>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
+; @send_article="boolean"@
+: Whether this field is used as the recipient email address when using the send_article function. Available values: @1@ (yes) or @0@ (no). Default is @0@.
+; @size="value"@
+: The size, in characters, of the @<input>@ field.
 
 h4. Examples
 
@@ -2495,21 +2561,35 @@ Creates a @<textarea>@.
 
 h4. Attributes
 
-* @autocomplete="value"@<br />Indicates whether the value of the control can be automatically completed by the browser. Possible values are: @off@ (the browser does not automatically complete the entry) or @on@ (the browser can automatically complete the value based on values that the user has entered during previous uses). Default is unset.
-* @break="tag"@<br />Break tag between the @<label>@ and @<textarea>@. Default is @<br />@. Use @break=""@ to put the @<label>@ and @<input>@ field on the same line.
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the  @<textarea>@. Default: @comTextarea@. To remove @class@ attribute from the element entirely, use @class=""@.
-* @cols="integer"@<br/>Number of columns, in characters, of the @<textarea>@. Default is @58@.
-* @default="value"@<br />Default value when no input is provided.
-* @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the @<textarea>@ is attached. Associated with the contained form by default.
-* @label="text"@<br />Text label displayed to the user. Default is @Message@.
-* @label_position="text"@<br />Position of the label in relation to the @<textarea>@ field. Available values: @before@ or @after@. Default is @before@.
-* @max="integer"@<br />Maximum input value length in characters, using the HTML5 @maxlength@ attribute. Default is @10000@. To remove @maxlength@ attribute from the element entirely (not recommended), use @max=""@.
-* @min="integer"@<br />Minimum input value length in characters, using the HTML5 @minlength@ attribute. Default is unset, i.e., no minimum limit.
-* @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
-* @placeholder="text"@<br />Text to show as a guide to users, when the  @<textarea>@ is empty.
-* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:com_connect>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
-* @rows="integer"@<br/>Number of rows, in characters, of the @<textarea>@. Default is @8@.
-* @wrap="value"@<br/>Governs word-wrap. Available values: @hard@ or @soft@. If this attribute is not specified, @soft@ is its default value.
+; @autocomplete="value"@
+: Indicates whether the value of the control can be automatically completed by the browser. Possible values are: @off@ (the browser does not automatically complete the entry) or @on@ (the browser can automatically complete the value based on values that the user has entered during previous uses). Default is unset.
+; @break="tag"@
+: Break tag between the @<label>@ and @<textarea>@. Default is @<br />@. Use @break=""@ to put the @<label>@ and @<input>@ field on the same line.
+; @class="space-separated values"@
+: Set the CSS @class@ name of the  @<textarea>@. Default: @comTextarea@. To remove @class@ attribute from the element entirely, use @class=""@.
+; @cols="integer"@<br/>Number of columns, in characters, of the @<textarea>@. Default is @58@.
+; @default="value"@
+: Default value when no input is provided.
+; @html_form="id"@
+: The HTML @id@ of the @<form>@ tag to which the @<textarea>@ is attached. Associated with the contained form by default.
+; @label="text"@
+: Text label displayed to the user. Default is @Message@.
+; @label_position="text"@
+: Position of the label in relation to the @<textarea>@ field. Available values: @before@ or @after@. Default is @before@.
+; @max="integer"@
+: Maximum input value length in characters, using the HTML5 @maxlength@ attribute. Default is @10000@. To remove @maxlength@ attribute from the element entirely (not recommended), use @max=""@.
+; @min="integer"@
+: Minimum input value length in characters, using the HTML5 @minlength@ attribute. Default is unset, i.e., no minimum limit.
+; @name="value"@
+: Field name, as used in the HTML @<input>@ tag.
+; @placeholder="text"@
+: Text to show as a guide to users, when the  @<textarea>@ is empty.
+; @required="boolean"@
+: Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:com_connect>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
+; @rows="integer"@
+: Number of rows, in characters, of the @<textarea>@. Default is @8@.
+; @wrap="value"@
+: Governs word-wrap. Available values: @hard@ or @soft@. If this attribute is not specified, @soft@ is its default value.
 
 h4. Examples
 
@@ -2527,9 +2607,12 @@ Creates a submit button. When used as a container tag, a @<button>@ element will
 
 h4. Attributes:
 
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the tag. Default: @comSubmit@. To remove @class@ attribute from the element entirely, use @class=""@.
-* @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the button is attached. Associated with the contained form by default.
-* @label="text"@<br />Text shown on the submit button. Default is @Send@.
+; @class="space-separated values"@
+: Set the CSS @class@ name of the tag. Default: @comSubmit@. To remove @class@ attribute from the element entirely, use @class=""@.
+; @html_form="id"@
+: The HTML @id@ of the @<form>@ tag to which the button is attached. Associated with the contained form by default.
+; @label="text"@
+: Text shown on the submit button. Default is @Send@.
 
 h4. Examples
 
@@ -2563,18 +2646,30 @@ Container tag that creates a drop-down selection @<select>@ list, or scrolled @<
 
 h4. Attributes
 
-* @break="tag"@<br />Break tag between the label and @<select>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the list. Default: @comSelect@. To remove @class@ attribute from the element entirely, use @class=""@.
-* @delimiter="character"@<br />Separator character between list items if using the @options@ attribute. Default is @,@ (comma). Ignored if this tag is used as a container.
-* @label="text"@<br />Text label displayed to the user. Default is @Option@.
-* @label_position="text"@<br />Position of the label in relation to the @<select>@ field. Available values: @before@ or @after@. Default is @before@.
-* @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the @<select>@ is attached. Associated with the contained form by default.
-* @multiple="boolean"@<br />Whether to allow multiple selections to be made from the set of options. Default: unset.
-* @name="value"@<br />Field name, as used in the HTML @<select>@ tag.
-* @options="comma-separated values"@<br /> List of items (previously @list@) to show in the select box. Surround the first entry with @{Braces}@ to indicate it is an 'empty' placeholder. Alternatively, the @<txp:com_connect_option />@ tag may be used inside this tag's container.
-* @required="boolean"@<br />Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:com_connect>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
-* @selected="value"@<br />List item that is selected by default.
-* @size="value"@<br/>If the @<select>@ is to be presented as a scrolled list box, this attribute represents the number of rows in the list that should be visible at one time. Default is unset (i.e. a drop-down selection @<select>@ list).
+; @break="tag"@
+: Break tag between the label and @<select>@ field. Default is @<br />@. Use @break=""@ to put the label and input field on the same line.
+; @class="space-separated values"@
+: Set the CSS @class@ name of the list. Default: @comSelect@. To remove @class@ attribute from the element entirely, use @class=""@.
+; @delimiter="character"@
+: Separator character between list items if using the @options@ attribute. Default is @,@ (comma). Ignored if this tag is used as a container.
+; @label="text"@
+: Text label displayed to the user. Default is @Option@.
+; @label_position="text"@
+: Position of the label in relation to the @<select>@ field. Available values: @before@ or @after@. Default is @before@.
+; @html_form="id"@
+: The HTML @id@ of the @<form>@ tag to which the @<select>@ is attached. Associated with the contained form by default.
+; @multiple="boolean"@
+: Whether to allow multiple selections to be made from the set of options. Default: unset.
+; @name="value"@
+: Field name, as used in the HTML @<select>@ tag.
+; @options="comma-separated values"@
+: List of items (previously @list@) to show in the select box. Surround the first entry with @{Braces}@ to indicate it is an 'empty' placeholder. Alternatively, the @<txp:com_connect_option />@ tag may be used inside this tag's container.
+; @required="boolean"@
+: Whether this field must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:com_connect>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
+; @selected="value"@
+: List item that is selected by default.
+; @size="value"@
+: If the @<select>@ is to be presented as a scrolled list box, this attribute represents the number of rows in the list that should be visible at one time. Default is unset (i.e. a drop-down selection @<select>@ list).
 
 h4. Examples
 
@@ -2616,10 +2711,14 @@ Creates a drop-down selection option. May be used as a single (self-closing) or 
 
 h4. Attributes
 
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the option. Default: @comOption@. To remove @class@ attribute from the element entirely, use @class=""@.
-* @label="text"@ %(warning)required%<br />Text label of this option displayed to the user. Surround the label with {braces} to indicate it is an empty placeholder at the start of the list. Note if you use this braces syntax, the value will be forced to @value=""@, i.e. any supplied value will be ignored.
-* @selected="boolean"@<br />Whether this item is selected, May also be specified in the container tag's @selected@ attribute. Available values: @1@ (yes) or @0@ (no).
-* @value="text"@<br />The value associated with this option when submitted. Default is the label.
+; @class="space-separated values"@
+: Set the CSS @class@ name of the option. Default: @comOption@. To remove @class@ attribute from the element entirely, use @class=""@.
+; @label="text"@ %(warning)required%
+: Text label of this option displayed to the user. Surround the label with {braces} to indicate it is an empty placeholder at the start of the list. Note if you use this braces syntax, the value will be forced to @value=""@, i.e. any supplied value will be ignored.
+; @selected="boolean"@
+: Whether this item is selected, May also be specified in the container tag's @selected@ attribute. Available values: @1@ (yes) or @0@ (no).
+; @value="text"@
+: The value associated with this option when submitted. Default is the label.
 
 h5. Example 1: Drop-down select list containing three options
 
@@ -2647,15 +2746,24 @@ Creates a checkbox.
 
 h4. Attributes
 
-* @break="tag"@<br />Break tag between the checkbox button and label. Default is one space. Use @break="br"@ to put the checkbox and label on separate lines.
-* @checked="boolean"@<br />Whether this box is checked when first displayed. Available values: @1@ (yes) or @0@ (no). Default is @0@.
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the option. Default: @comCheckbox@. To remove @class@ attribute from the element entirely, use @class=""@.
-* @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the checkbox is attached. Associated with the contained form by default.
-* @label="text"@<br />Text label displayed to the user. Default is @Checkbox@.
-* @label_position="text"@<br />Position of the label in relation to the @<input>@ field. Available values: @before@ or @after@. Default is @after@.
-* @name="value"@<br />Field name, as used in the HTML @<input>@ tag.
-* @required="boolean"@<br />Whether this checkbox must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:com_connect>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
-* @value="text"@<br />Value to send in the email if the option is checked. Uses yes/no if not set.
+; @break="tag"@
+: Break tag between the checkbox button and label. Default is one space. Use @break="br"@ to put the checkbox and label on separate lines.
+; @checked="boolean"@
+: Whether this box is checked when first displayed. Available values: @1@ (yes) or @0@ (no). Default is @0@.
+; @class="space-separated values"@
+: Set the CSS @class@ name of the option. Default: @comCheckbox@. To remove @class@ attribute from the element entirely, use @class=""@.
+; @html_form="id"@
+: The HTML @id@ of the @<form>@ tag to which the checkbox is attached. Associated with the contained form by default.
+; @label="text"@
+: Text label displayed to the user. Default is @Checkbox@.
+; @label_position="text"@
+: Position of the label in relation to the @<input>@ field. Available values: @before@ or @after@. Default is @after@.
+; @name="value"@
+: Field name, as used in the HTML @<input>@ tag.
+; @required="boolean"@
+: Whether this checkbox must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:com_connect>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
+; @value="text"@
+: Value to send in the email if the option is checked. Uses yes/no if not set.
 
 h4. Examples
 
@@ -2680,15 +2788,24 @@ Creates a radio button.
 
 h4. Attributes
 
-* @break="tag"@<br />Break tag between the radio button and label. Default is one space. Use @break="br"@ to put the radio button and label on separate lines.
-* @checked="boolean"@<br />Whether this radio option is checked when the form is first displayed. Available values: @1@ (yes) or @0@ (no). Default is @0@.
-* @class="space-separated values"@<br /> Set the CSS @class@ name of the radio button. Default: @comRadio@. To remove @class@ attribute from the element entirely, use @class=""@.
-* @group="text"@ %(warning)required%<br />Text used in the email to describe this group of radio buttons. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. Default is @Radio@.
-* @html_form="id"@<br />The HTML @id@ of the @<form>@ tag to which the radio button is attached. Associated with the contained form by default.
-* @label="text"@ %(warning)required%<br />Text label displayed to the user as radio button option.
-* @name="value"@ %(warning)recommended%<br />Field name, as used in the HTML @<input>@ tag. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. If it hasn't been set at all, it will be derived from the @group@ attribute.
-* @required="boolean"@<br />Whether this radio set must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:com_connect>@ tag's @required@ attribute - if neither attribute is set then default is @1@. *You should set the @required@ attribute on only the first radio button of the group, or set the same identical attribute value on all radio buttons in the group.*
-* @value="text"@<br />Value to send in the email if the option is checked. Uses label if not set.
+; @break="tag"@
+: Break tag between the radio button and label. Default is one space. Use @break="br"@ to put the radio button and label on separate lines.
+; @checked="boolean"@
+: Whether this radio option is checked when the form is first displayed. Available values: @1@ (yes) or @0@ (no). Default is @0@.
+; @class="space-separated values"@
+:  Set the CSS @class@ name of the radio button. Default: @comRadio@. To remove @class@ attribute from the element entirely, use @class=""@.
+; @group="text"@ %(warning)required%
+: Text used in the email to describe this group of radio buttons. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. Default is @Radio@.
+; @html_form="id"@
+: The HTML @id@ of the @<form>@ tag to which the radio button is attached. Associated with the contained form by default.
+; @label="text"@ %(warning)required%
+: Text label displayed to the user as radio button option.
+; @name="value"@ %(warning)recommended%
+: Field name, as used in the HTML @<input>@ tag. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. If it hasn't been set at all, it will be derived from the @group@ attribute.
+; @required="boolean"@
+: Whether this radio set must be filled out. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:com_connect>@ tag's @required@ attribute - if neither attribute is set then default is @1@. *You should set the @required@ attribute on only the first radio button of the group, or set the same identical attribute value on all radio buttons in the group.*
+; @value="text"@
+: Value to send in the email if the option is checked. Uses label if not set.
 
 h4. Examples
 
@@ -2711,9 +2828,12 @@ This tag has no effect on the form or HTML output, but will include additional i
 
 h4. Attributes
 
-* @label="text"@<br />Used to identify the field in the email. Default is @Secret@.
-* @name="text"@<br />Used internally. Set this only if you have multiple 'secret' form elements with identical labels.
-* @value="value"@<br />Some text you want to add to the email.
+; @label="text"@
+: Used to identify the field in the email. Default is @Secret@.
+; @name="text"@
+: Used internally. Set this only if you have multiple 'secret' form elements with identical labels.
+; @value="value"@
+: Some text you want to add to the email.
 
 h4. Examples
 
@@ -2735,8 +2855,10 @@ This tag has no effect on the form or HTML output, but will include additional i
 
 h4. Attributes
 
-* @label="text"@<br />Used to identify the field in the email. Defaults to the value of the @name@ attribute.
-* @name="value"@ %(warning)required%<br />Name of the server variable. See the "PHP manual":https://php.net/manual/reserved.variables.php#reserved.variables.server for a full list.
+; @label="text"@
+: Used to identify the field in the email. Defaults to the value of the @name@ attribute.
+; @name="value"@ %(warning)required%
+: Name of the server variable. See the "PHP manual":https://php.net/manual/reserved.variables.php#reserved.variables.server for a full list.
 
 h4. Examples
 
@@ -2756,7 +2878,8 @@ Use this tag in your individual article form, where you want the "send article" 
 
 h4. Attributes
 
-* @linktext="text"@<br />Text displayed for the link. Default is @send article@.
+; @linktext="text"@
+: Text displayed for the link. Default is @send article@.
 
 h4. Examples
 
@@ -2772,11 +2895,16 @@ Iterate over the set of submitted fields. Only really of use in the designated @
 
 h4. Attributes
 
-* @break="text or tag"@<br />Break tag or text to use as a separator between each item. Default is @, @. Use @break=""@ to remove the effect of this attribute.
-* @class="space-separated values"@<br />Set the CSS @class@ name of the wraptag. Default: unset.
-* @label="text"@<br />Comma-separated list of field labels to iterate over.
-* @name="text"@<br />Comma-separated list of field names to iterate over.
-* @wraptag="tag"@<br />HTML tag (without angle brackets) to wrap the set of fields. Default: unset.
+; @break="text or tag"@
+: Break tag or text to use as a separator between each item. Default is @, @. Use @break=""@ to remove the effect of this attribute.
+; @class="space-separated values"@
+: Set the CSS @class@ name of the wraptag. Default: unset.
+; @label="text"@
+: Comma-separated list of field labels to iterate over.
+; @name="text"@
+: Comma-separated list of field names to iterate over.
+; @wraptag="tag"@
+: HTML tag (without angle brackets) to wrap the set of fields. Default: unset.
 
 Note that @label@ and @name@ may be used individually or in tandem. If both are omitted, the entire set of fields are iterated.
 
@@ -2796,7 +2924,8 @@ Use this in the body_form to delineate sections of the message for use in plaint
 
 h4. Attributes
 
-* @type="value"@<br />The type of content that follows the tag. Choose from @text@ (plaintext), @html@, or @end@ (to signify the end of the blocks).
+; @type="value"@
+: The type of content that follows the tag. Choose from @text@ (plaintext), @html@, or @end@ (to signify the end of the blocks).
 
 h4. Examples
 
@@ -2828,7 +2957,8 @@ Return the label for the given attribute name.
 
 h4. Attributes
 
-* @name="text"@<br />The name of the field for which you wish to retrieve the label. If used within a @<txp:com_connect_fields>@ container, the @name@ is optional and will return the current field in the set.
+; @name="text"@
+: The name of the field for which you wish to retrieve the label. If used within a @<txp:com_connect_fields>@ container, the @name@ is optional and will return the current field in the set.
 
 h3(#cc_value). com_connect_value tag
 
@@ -2838,11 +2968,16 @@ Return the value of the given attribute, by name or its label.
 
 h4. Attributes
 
-* @break="text or tag"@<br />Break tag or text to use as a separator between each item, if the value is a multiple (e.g. a multi-select option list). Default is @, @. Use @break=""@ to remove the effect of this attribute.
-* @class="space-separated values"@<br />Set the CSS @class@ name of the wraptag. Default: unset.
-* @label="text"@<br />The label of the field for which you wish to retrieve the value.
-* @name="text"@<br />The name of the field for which you wish to retrieve the value.
-* @wraptag="tag"@<br />HTML tag (without angle brackets) to wrap the field. Default: unset.
+; @break="text or tag"@
+: Break tag or text to use as a separator between each item, if the value is a multiple (e.g. a multi-select option list). Default is @, @. Use @break=""@ to remove the effect of this attribute.
+; @class="space-separated values"@
+: Set the CSS @class@ name of the wraptag. Default: unset.
+; @label="text"@
+: The label of the field for which you wish to retrieve the value.
+; @name="text"@
+: The name of the field for which you wish to retrieve the value.
+; @wraptag="tag"@
+: HTML tag (without angle brackets) to wrap the field. Default: unset.
 
 If used within a @<txp:com_connect_fields>@ container, the @name@ and @label@ are optional and the tag will use the current field in the set.
 
@@ -2854,9 +2989,12 @@ Conditional tag for checking variable conditions, either by name or label.
 
 h4. Attributes
 
-* @label="text"@<br />The label of the field you wish to check.
-* @name="text"@<br />The name of the field you wish to check.
-* @value="text"@<br />The value against which to test the given field. Leave blank to just test if there is any value assigned to the field.
+; @label="text"@
+: The label of the field you wish to check.
+; @name="text"@
+: The name of the field you wish to check.
+; @value="text"@
+: The value against which to test the given field. Leave blank to just test if there is any value assigned to the field.
 
 If used within a @<txp:com_connect_fields>@ container, the @name@ and @label@ are optional and the tag will test the current field in the set.
 
