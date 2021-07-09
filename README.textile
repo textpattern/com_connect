@@ -951,9 +951,9 @@ All form elements and corresponding labels have the following classes (or ids) s
 # @comRequired@ and/or @errorElement@, depending on whether the form element is required, an error was found in whatever the visitor entered, or both. Override these using the @classes@ attribute in the @com_connect@ tag.
 # An individual @id@ or @class@ set to the value of the @name@ attribute of the corresponding tag. When styling forms based on this @class@, you should explicitly set the @name@ attribute because automatically generated names may change in newer com_connect versions.
 
-h2(#api). com_onnect's API
+h2(#api). com_connect's API
 
-The plugin API of com_connect, originally developed by Tranquillo, allows other plugins to interact with contact forms. This permits extra functionality such as combatting comment cpam, HTML email, newsletter delivery and so forth to be bolted onto the base plugin.
+The plugin API of com_connect, originally developed by Tranquillo, allows other plugins to interact with contact forms. This permits extra functionality such as combatting comment spam, HTML email, newsletter delivery and so forth to be bolted onto the base plugin.
 
 Four callback events exist in com_connect:
 
