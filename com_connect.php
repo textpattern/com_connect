@@ -1669,11 +1669,9 @@ function com_connect_group_validate()
  */
 function com_connect_lAtts($pairs, $atts)
 {
-    // Prevent these global attributes from interfering.
+    // Prevent global attributes from interfering.
     // See https://github.com/textpattern/textpattern/pull/893
-    lAtts(array(
-        'label' => '',
-    ), $atts, false);
+    lAtts($pairs, $atts, false);
 
     foreach (array('button', 'copysender', 'checked', 'required', 'send_article', 'show_input', 'show_error') as $key) {
         if (isset($atts[$key])) {
