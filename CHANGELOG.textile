@@ -1,6 +1,6 @@
 h1. Changelog
 
-h2. 4.7.0 - YYYY-MM-DD
+h2. 4.7.0 - 2022-01-28
 
 * Fix a few PHP 8.x warnings.
 * Load lang strings in a Textpattern 4.7.0-ish way.
@@ -15,7 +15,7 @@ h2. 4.7.0 - YYYY-MM-DD
 * Fix @<txp:com_connect_value>@ to actually match labels.
 * Remove use of deprecated EvalElse().
 * Replace deprecated Txp core functions with Txp::get().
-* Use PHP_EOL instead of manual newlines.
+* Pass @$redirect@ into delivery callback.
 
 h2. 4.6.0 - 2020-01-31
 
