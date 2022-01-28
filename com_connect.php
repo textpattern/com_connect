@@ -547,11 +547,11 @@ function com_connect($atts, $thing = null)
 
         safe_update('txp_discuss_nonce', "used = '1', issue_time = '$now_date'", "nonce = '$nonce'");
 
-        if (com_connect_deliver($from, $to, $reply, $subject, $bodyContent, $fields, array('isCopy' => false))) {
+        if (com_connect_deliver($from, $to, $reply, $subject, $bodyContent, $fields, array('isCopy' => false, 'redirect' => $redirect))) {
             $_POST = array();
 
             if ($copysender && $com_connect_from) {
-                com_connect_deliver($from, com_connect_strip($com_connect_from), $reply, $subject, $bodyContent, $fields, array('isCopy' => true));
+                com_connect_deliver($from, com_connect_strip($com_connect_from), $reply, $subject, $bodyContent, $fields, array('isCopy' => true, 'redirect' => $redirect));
             }
 
             if ($redirect) {
@@ -1775,6 +1775,7 @@ function com_connect_deliver($from, $to, $reply, $subject, $body, $fields, $flag
         'subject' => $subject,
         'body'    => $body,
         'fields'  => $fields,
+        'flags'   => $flags,
     );
 
     $flavour = ($flags['isCopy'] === true) ? 'copysender' : 'send';
