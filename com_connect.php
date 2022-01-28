@@ -299,7 +299,7 @@ if (class_exists('\Textpattern\Tag\Registry')) {
  * @param array  $atts  Tag attributes
  * @param string $thing Tag's container content
  */
-function com_connect($atts, $thing = null)
+function com_connect($atts, $thing = '')
 {
     global $sitename, $com_connect_flags, $com_connect_from,
         $com_connect_recipient, $com_connect_error, $com_connect_submit,
@@ -1035,7 +1035,7 @@ function com_connect_textarea($atts)
  * @param  array  $atts Tag attributes
  * @return string HTML
  */
-function com_connect_select($atts, $thing = null)
+function com_connect_select($atts, $thing = '')
 {
     global $com_connect_error, $com_connect_submit, $com_connect_flags;
 
@@ -1477,7 +1477,7 @@ function com_connect_serverinfo($atts)
  *
  * @param  array  $atts  Tag attributes
  */
-function com_connect_secret($atts, $thing = null)
+function com_connect_secret($atts, $thing = '')
 {
     global $com_connect_submit;
 
@@ -1511,7 +1511,7 @@ function com_connect_secret($atts, $thing = null)
  * @param  string $thing Tag's container
  * @return string HTML
  */
-function com_connect_submit($atts, $thing = null)
+function com_connect_submit($atts, $thing = '')
 {
     global $com_connect_flags;
 
@@ -1538,7 +1538,7 @@ function com_connect_submit($atts, $thing = null)
 
     $classStr = ($class ? ' class="' . $class . '"' : '');
 
-    if (strlen($thing)) {
+    if ($thing) {
         return '<button type="submit"' . $classStr . ' name="com_connect_submit" value="' . $label . '"' . ($attr ? ' ' . implode(' ', $attr) : '') . '>' . ($thing ? trim(parse($thing)) : $label) . '</button>';
     } else {
         return '<input type="submit"' . $classStr . ' name="com_connect_submit" value="' . $label . '"' . ($attr ? ' ' . implode(' ', $attr) : '') . ' />';
@@ -2075,7 +2075,7 @@ function com_connect_label($atts)
  * @param  string $thing Tag's container content
  * @return string
  */
-function com_connect_if($atts, $thing = null)
+function com_connect_if($atts, $thing = '')
 {
     global $com_connect_item;
 
@@ -2110,7 +2110,7 @@ function com_connect_if($atts, $thing = null)
  * @param  string $thing Container content
  * @return HTML
  */
-function com_connect_fields($atts, $thing = null)
+function com_connect_fields($atts, $thing = '')
 {
     global $com_connect_labels, $com_connect_item;
 
