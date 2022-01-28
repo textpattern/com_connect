@@ -3036,16 +3036,16 @@ Create a Textpattern form called "my_subject_form", containing:
 
 bc(language-markup). <txp:php>
     global $com_connect_form;
-    echo $com_connect_form['Choose Subject'];
+    echo $com_connect_form['Choose Subject'][0];
 </txp:php>
 
-The @label@ used in the @com_connect_select@ tag must be identical to the corresponding variable in the @subject_form@. Here we used @Choose subject@.
+The @label@ used in the @com_connect_select@ tag must be identical to the corresponding variable in the @subject_form@. Here we used @Choose Subject@.
 
 If you'd prefer to add a common prefix for all subjects, use a @subject_form@ containing:
 
 bc(language-markup). <txp:php>
     global $com_connect_form;
-    echo 'My common prefix - ' . $com_connect_form['Choose Subject'];
+    echo 'My common prefix - ' . $com_connect_form['Choose Subject'][0];
 </txp:php>
 
 h3(#advanced3). User selectable recipient, without showing email address
