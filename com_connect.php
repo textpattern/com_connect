@@ -485,7 +485,7 @@ function com_connect($atts, $thing = null)
             $subject = parse_form($subject_form);
         }
 
-        $sep = PHP_EOL;
+        $sep = IS_WIN ? "\r\n" : "\n";
         $msg = array();
         $fields = array();
 
