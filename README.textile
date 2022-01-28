@@ -19,7 +19,7 @@ h2. Contents
 ** "com_connect_secret tag":#cc_secret
 ** "com_connect_serverinfo tag":#cc_serverinfo
 ** "com_connect_send_article tag":#cc_send_article
-** "com_connect_mime tag":#cc_mime
+** "com_connect_body tag":#cc_body
 ** "com_connect_fields tag":#cc_fields
 ** "com_connect_label tag":#cc_label
 ** "com_connect_value tag":#cc_value
@@ -256,16 +256,17 @@ Use the @body_form@ attribute to build custom content in both plaintext and HTML
 
 bc(language-markup). <txp:com_connect to="recipient@example.com" body_form="message-formatting" />
 
-Use the @body_form@ form template named @message-formatting@ as follows, and note the @<txp:com_connect_mime>@ tags which indicate that the content of the given @type@ immediately follows. Use the tag with @type="end"@ to signify that the content is complete.
+Use the @body_form@ form template named @message-formatting@ as follows, and note the @<txp:com_connect_body>@ tags which indicate that the content of the given @type@ is present in its contained content.
 
 bc.. ============
-<txp:com_connect_mime type="text" />
+<txp:com_connect_body>
 Fields submitted:
 <txp:com_connect_fields break="">
 <txp:com_connect_label />: <txp:com_connect_value />
 </txp:com_connect_fields>
+</txp:com_connect_body />
 
-<txp:com_connect_mime type="html" />
+<txp:com_connect_body type="html">
 <table width="600" style="font-family:Arial, Helvetica, sans-serif; font-size:12px;">
 <txp:com_connect_fields break="tr">
 <td style="padding:10px 0">
@@ -277,7 +278,7 @@ Fields submitted:
 </txp:com_connect_fields>
 </table>
 
-<txp:com_connect_mime type="end" />
+</txp:com_connect_body />
 ============
 
 h3(#cc_text). com_connect_text tag
@@ -771,38 +772,31 @@ bc(language-markup). <txp:com_connect_fields wraptag="ul" break="li">
    <txp:com_connect_label /> = <txp:com_connect_value />
 </txp:com_connect_fields>
 
-h3(#cc_mime). com_connect_mime tag
+h3(#cc_body). com_connect_body tag
 
-bc(language-markup). <txp:com_connect_mime />
+bc(language-markup). <txp:com_connect_body type="text|html" />
 
-Use this in the body_form to delineate sections of the message for use in plaintext email clients and/or html-capable email clients.
+Use this in the body_form to wrap sections of the message for use in plaintext email clients and/or html-capable email clients.
 
 h4. Attributes
 
 ; @type="value"@
-: The type of content that follows the tag. Choose from @text@ (plaintext), @html@, or @end@ (to signify the end of the blocks).
+: The type of content that is contained between the tag's opening and closing pair. Choose from @text@ (plaintext), or @html@. Default is @text@.
 
 h4. Examples
 
 h5. Example 1: Plaintext and HTML body content
 
-bc(language-markup). <txp:com_connect_mime type="text" />
+bc(language-markup). <txp:com_connect_body>
 <txp:com_connect_fields break="">
    <txp:com_connect_label />: <txp:com_connect_value />
 </txp:com_connect_fields>
-<txp:com_connect_mime type="html" />
+</txp:com_connect_body>
+<txp:com_connect_body type="html">
 <txp:com_connect_fields wraptag="ul" break="li">
    <txp:com_connect_label /> = <txp:com_connect_value />
 </txp:com_connect_fields>
-<txp:com_connect_mime type="end" />
-
-Note that there are three uses of the new <txp:com_connect_mime> tag:
-
-* One to signify the start of the plaintext content (@type="text"@).
-* One to signify the start of the html content (@type="html"@).
-* One to signify the end of all the content (@type="end"@).
-
-Whether you use one or both of the text/html types, you require the 'end' or you’ll just get garbage messages.
+</txp:com_connect_body>
 
 h3(#cc_label). com_connect_label tag
 

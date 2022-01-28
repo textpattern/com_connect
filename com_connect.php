@@ -17,7 +17,7 @@ $plugin['name'] = 'com_connect';
 // 1 = Plugin help is in raw HTML.  Not recommended.
 # $plugin['allow_html_help'] = 1;
 
-$plugin['version'] = '4.7.0';
+$plugin['version'] = '4.9.0';
 $plugin['author'] = 'Textpattern Community';
 $plugin['author_uri'] = 'https://forum.textpattern.io/viewtopic.php?id=47913';
 $plugin['description'] = 'Form and contact mailer for Textpattern';
@@ -284,6 +284,7 @@ if (class_exists('\Textpattern\Tag\Registry')) {
         ->register('com_connect_label')
         ->register('com_connect_fields')
         ->register('com_connect_mime')
+        ->register('com_connect_body')
         ->register('com_connect_if');
 }
 
@@ -476,9 +477,6 @@ function com_connect($atts, $thing = null)
             return $evaluation->get_comconnect_reason();
         }
 
-        $semi_rand = md5(time());
-        $com_connect_flags['boundary'] = "Multipart_Boundary_x{$semi_rand}x";
-
         if ($from_form) {
             $from = parse_form($from_form);
         }
@@ -526,9 +524,6 @@ function com_connect($atts, $thing = null)
             }
         }
 
-        $com_connect_flags['charset'] = $override_email_charset ? 'ISO-8859-1' : 'UTF-8';
-        $com_connect_flags['content_type'] = 'text/plain';
-        $com_connect_flags['xfer_encoding'] = '8bit';
         $reply   = com_connect_strip($from ? $com_connect_from : '');
         $from    = com_connect_strip($from ? $from : $com_connect_from);
         $to      = com_connect_strip($to);
@@ -542,29 +537,21 @@ function com_connect($atts, $thing = null)
         $body = str_replace(array("\r\n", "\r", "\n"), array("\n", "\n", $sep), $body);
         $body = com_connect_strip($body, false);
 
-        if ($override_email_charset) {
-            $subject = utf8_decode($subject);
-            $body    = utf8_decode($body);
+        $bodyContent['html'] = empty($com_connect_flags['body_html']) ? '' : $com_connect_flags['body_html'];
+
+        if (empty($com_connect_flags['body_plain']) && !empty($com_connect_flags['body_html'])) {
+            $bodyContent['plain'] = strip_tags($com_connect_flags['body_html']);
+        } else {
+            $bodyContent['plain'] = empty($com_connect_flags['body_plain']) ? $body : $com_connect_flags['body_plain'];
         }
-
-        $subject = Txp::get('\Textpattern\Mail\Encode')->header($subject, 'text');
-
-        $headers = array(
-            'from'          => $from,
-            'separator'     => $sep,
-            'reply'         => $reply,
-            'charset'       => $com_connect_flags['charset'],
-            'content_type'  => $com_connect_flags['content_type'],
-            'xfer_encoding' => $com_connect_flags['xfer_encoding'],
-        );
 
         safe_update('txp_discuss_nonce', "used = '1', issue_time = '$now_date'", "nonce = '$nonce'");
 
-        if (com_connect_deliver($to, $subject, $body, $headers, $fields, array('isCopy' => false))) {
+        if (com_connect_deliver($from, $to, $reply, $subject, $bodyContent, $fields, array('isCopy' => false))) {
             $_POST = array();
 
             if ($copysender && $com_connect_from) {
-                com_connect_deliver(com_connect_strip($com_connect_from), $subject, $body, $headers, $fields, array('isCopy' => true));
+                com_connect_deliver($from, com_connect_strip($com_connect_from), $reply, $subject, $bodyContent, $fields, array('isCopy' => true));
             }
 
             if ($redirect) {
@@ -1569,51 +1556,36 @@ function com_connect_send_article($atts)
  *
  * @param  array $atts Tag attributes
  * @return string      Boundary
+ * @deprecated 4.9.0
+ * @see com_connect_body
  */
-function com_connect_mime($atts)
+function com_connect_mime($atts, $thing)
+{
+    trigger_error(gTxt('deprecated_tag'), E_USER_NOTICE);
+
+    return;
+}
+
+/**
+ * Indicate body content of a particular type
+ *
+ * @param  array $atts Tag attributes
+ */
+function com_connect_body($atts, $thing)
 {
     global $com_connect_flags;
-
-    $boundary = $com_connect_flags['boundary'];
-    $charset  = $com_connect_flags['charset'];
-    $encoding = $com_connect_flags['xfer_encoding'];
 
     extract(lAtts(array(
         'type' => 'text',
     ), $atts));
 
-    // Build mimes - trailing blank line is necessary.
-    $text_mime = <<<text_mime
---$boundary
-Content-Type: text/plain; charset=$charset
-Content-Transfer-Encoding: $encoding
-
-text_mime;
-
-    $html_mime = <<<html_mime
---$boundary
-Content-Type: text/html; charset=$charset
-Content-Transfer-Encoding: $encoding
-
-html_mime;
-
-    $end_mime = <<<end_mime
---$boundary--
-end_mime;
-
-    // Overwrite default content-type header.
-    $com_connect_flags['content_type'] = 'multipart/alternative; boundary="'.$boundary.'"';
-
-    if ($type === 'text') {
-        return $text_mime;
-    }
-
-    if ($type === 'html') {
-        return $html_mime;
-    }
-
-    if ($type === 'end') {
-        return $end_mime;
+    switch ($type) {
+        case 'text':
+            $com_connect_flags['body_plain'] = parse($thing);
+            break;
+        case 'html':
+            $com_connect_flags['body_html'] = parse($thing);
+            break;
     }
 
     return;
@@ -1784,19 +1756,23 @@ function com_connect_strip($str, $header = true)
  * -> Subscribe people to mailing lists.
  * -> Handle the mailing process independently of Textpattern.
  *
+ * @param string $from    Sender address
  * @param string $to      Delivery address
+ * @param string $reply   Reply-to address
  * @param string $subject Subject of message
- * @param string $body    Message content
- * @param array  $headers Message headers as tuples
+ * @param array  $body    Message content as an array of plain and html components
  * @param array  $fields  Message field names and content as tuples
  * @param array  $flags   Signals to govern delivery / callback behaviour
  */
-function com_connect_deliver($to, $subject, $body, $headers, $fields, $flags)
+function com_connect_deliver($from, $to, $reply, $subject, $body, $fields, $flags)
 {
+    global $com_connect_error;
+
     $payload = array(
+        'from'    => $from,
         'to'      => $to,
+        'reply'   => $reply,
         'subject' => $subject,
-        'headers' => $headers,
         'body'    => $body,
         'fields'  => $fields,
     );
@@ -1814,54 +1790,30 @@ function com_connect_deliver($to, $subject, $body, $headers, $fields, $flags)
 
     extract($payload);
 
-    $smtp_from = get_pref('smtp_from');
+    try {
+        $message = Txp::get('\Textpattern\Mail\Compose')->getDefaultAdapter();
+        $message->from($from)
+            ->to($to)
+            ->subject($subject)
+            ->body($body);
 
-    if (!is_callable('mail')) {
-        return (get_pref('production_status') === 'live')
-            ? gTxt('com_connect_mail_sorry')
-            : gTxt('warn_mail_unavailable');
-    }
-
-    $sep = (!empty($headers['separator'])) ? $headers['separator'] : PHP_EOL;
-    $xfer_encoding = (!empty($headers['xfer_encoding'])) ? $headers['xfer_encoding'] : '8bit';
-    $content_type = (!empty($headers['content_type'])) ? $headers['content_type'] : 'text/plain';
-    $reply = (!empty($headers['reply'])) ? $headers['reply'] : '';
-    $charset = (!empty($headers['charset'])) ? $headers['charset'] : 'UTF-8';
-    $x_mailer = (!empty($headers['x_mailer'])) ? $headers['x_mailer'] : 'Textpattern (com_connect)';
-
-    // @todo remove enforced charset in content-type declaration if it's multipart.
-    $header_string = 'From: ' . $headers['from'] .
-        ($reply ? ($sep . 'Reply-To: ' . $reply) : '') .
-        $sep . 'X-Mailer: ' . $x_mailer .
-        $sep . 'X-Originating-IP: ' . com_connect_strip((!empty($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] . ' via ' : '') . $_SERVER['REMOTE_ADDR']) .
-        $sep . 'Content-Transfer-Encoding: ' . $xfer_encoding .
-        $sep . 'Content-Type: ' . $content_type . (strpos($content_type, 'boundary=') !== false ? '' : '; charset="' . $charset . '"');
-
-    // Remove all the header entries that have already been handled.
-    unset(
-        $headers['separator'],
-        $headers['xfer_encoding'],
-        $headers['content_type'],
-        $headers['reply'],
-        $headers['charset'],
-        $headers['x_mailer'],
-        $headers['from']
-    );
-
-    // Any remaining headers set by plugins are appended as-is.
-    foreach ($headers as $name => $value) {
-        $header_string .= $sep . $name . ': ' . $value;
-    }
-
-    if (is_valid_email($smtp_from)) {
-        if (IS_WIN) {
-            ini_set('sendmail_from', $smtp_from);
-        } elseif (!ini_get('safe_mode')) {
-            return mail($to, $subject, $body, $header_string, '-f'.$smtp_from);
+        if ($reply) {
+            $message->replyTo($reply);
         }
+
+        return $message->send();
+    } catch (\Textpattern\Mail\Exception $e) {
+        $com_connect_error[] = $e->getMessage();
+        return false;
+    } catch (\PHPMailer\PHPMailer\Exception $e) {
+        $com_connect_error[] = $e->errorMessage();
+        return false;
+    } catch (\Exception $e) {
+        $com_connect_error[] = $e->getMessage();
+        return false;
     }
 
-    return mail($to, $subject, $body, $header_string);
+    return true;
 }
 
 /**
@@ -2163,7 +2115,7 @@ h2. Contents
 ** "com_connect_secret tag":#cc_secret
 ** "com_connect_serverinfo tag":#cc_serverinfo
 ** "com_connect_send_article tag":#cc_send_article
-** "com_connect_mime tag":#cc_mime
+** "com_connect_body tag":#cc_body
 ** "com_connect_fields tag":#cc_fields
 ** "com_connect_label tag":#cc_label
 ** "com_connect_value tag":#cc_value
@@ -2400,16 +2352,17 @@ Use the @body_form@ attribute to build custom content in both plaintext and HTML
 
 bc(language-markup). <txp:com_connect to="recipient@example.com" body_form="message-formatting" />
 
-Use the @body_form@ form template named @message-formatting@ as follows, and note the @<txp:com_connect_mime>@ tags which indicate that the content of the given @type@ immediately follows. Use the tag with @type="end"@ to signify that the content is complete.
+Use the @body_form@ form template named @message-formatting@ as follows, and note the @<txp:com_connect_body>@ tags which indicate that the content of the given @type@ is present in its contained content.
 
 bc.. ============
-<txp:com_connect_mime type="text" />
+<txp:com_connect_body>
 Fields submitted:
 <txp:com_connect_fields break="">
 <txp:com_connect_label />: <txp:com_connect_value />
 </txp:com_connect_fields>
+</txp:com_connect_body />
 
-<txp:com_connect_mime type="html" />
+<txp:com_connect_body type="html">
 <table width="600" style="font-family:Arial, Helvetica, sans-serif; font-size:12px;">
 <txp:com_connect_fields break="tr">
 <td style="padding:10px 0">
@@ -2421,7 +2374,7 @@ Fields submitted:
 </txp:com_connect_fields>
 </table>
 
-<txp:com_connect_mime type="end" />
+</txp:com_connect_body />
 ============
 
 h3(#cc_text). com_connect_text tag
@@ -2915,38 +2868,31 @@ bc(language-markup). <txp:com_connect_fields wraptag="ul" break="li">
    <txp:com_connect_label /> = <txp:com_connect_value />
 </txp:com_connect_fields>
 
-h3(#cc_mime). com_connect_mime tag
+h3(#cc_body). com_connect_body tag
 
-bc(language-markup). <txp:com_connect_mime />
+bc(language-markup). <txp:com_connect_body type="text|html" />
 
-Use this in the body_form to delineate sections of the message for use in plaintext email clients and/or html-capable email clients.
+Use this in the body_form to wrap sections of the message for use in plaintext email clients and/or html-capable email clients.
 
 h4. Attributes
 
 ; @type="value"@
-: The type of content that follows the tag. Choose from @text@ (plaintext), @html@, or @end@ (to signify the end of the blocks).
+: The type of content that is contained between the tag's opening and closing pair. Choose from @text@ (plaintext), or @html@. Default is @text@.
 
 h4. Examples
 
 h5. Example 1: Plaintext and HTML body content
 
-bc(language-markup). <txp:com_connect_mime type="text" />
+bc(language-markup). <txp:com_connect_body>
 <txp:com_connect_fields break="">
    <txp:com_connect_label />: <txp:com_connect_value />
 </txp:com_connect_fields>
-<txp:com_connect_mime type="html" />
+</txp:com_connect_body>
+<txp:com_connect_body type="html">
 <txp:com_connect_fields wraptag="ul" break="li">
    <txp:com_connect_label /> = <txp:com_connect_value />
 </txp:com_connect_fields>
-<txp:com_connect_mime type="end" />
-
-Note that there are three uses of the new <txp:com_connect_mime> tag:
-
-* One to signify the start of the plaintext content (@type="text"@).
-* One to signify the start of the html content (@type="html"@).
-* One to signify the end of all the content (@type="end"@).
-
-Whether you use one or both of the text/html types, you require the 'end' or you’ll just get garbage messages.
+</txp:com_connect_body>
 
 h3(#cc_label). com_connect_label tag
 
