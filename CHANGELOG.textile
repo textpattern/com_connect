@@ -2,8 +2,10 @@ h1. Changelog
 
 h2. 4.7.0 - YYYY-MM-DD
 
+* Fix a few PHP 8.x warnings.
 * Load lang strings in a Textpattern 4.7.0-ish way.
 * Add en language designators to Textpack (thanks, cara-tm).
+* Introduce @<txp:com_connect_mime>@ for supporting HTML content.
 * Only display labels if they've been specified (thanks, dragondz and jools-r).
 * Fallback on name if label is empty.
 * Use 'expire' attribute value in deletion of old tokens.
