@@ -2338,14 +2338,11 @@ bc(language-markup). <txp:com_connect to="recipient@example.com" body_form="mess
 
 And the @body_form@ form template named @message-formatting@ is as follows:
 
-bc.. ============
-Email received.
+bc.. Email received.
 
 <txp:com_connect_if name="email"><txp:com_connect_label name="email" />: <txp:com_connect_value name="email" /><txp:else />Mr. Nobody</txp:com_connect_if> wrote:
 
 <txp:com_connect_if name="message"><txp:com_connect_value name="message" /><txp:else />Nothing much :(</txp:com_connect_if>
-
-============
 
 h5. Example 4: HTML and plaintext email content
 
@@ -2355,8 +2352,7 @@ bc(language-markup). <txp:com_connect to="recipient@example.com" body_form="mess
 
 Use the @body_form@ form template named @message-formatting@ as follows, and note the @<txp:com_connect_body>@ tags which indicate that the content of the given @type@ is present in its contained content.
 
-bc.. ============
-<txp:com_connect_body>
+bc.. <txp:com_connect_body>
 Fields submitted:
 <txp:com_connect_fields break="">
 <txp:com_connect_label />: <txp:com_connect_value />
@@ -2376,7 +2372,6 @@ Fields submitted:
 </table>
 
 </txp:com_connect_body />
-============
 
 h3(#cc_text). com_connect_text tag
 
