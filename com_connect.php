@@ -329,6 +329,8 @@ function com_connect($atts, $thing = '')
         'thanks_form'      => ''
     ), $atts));
 
+    $doctype = get_pref('doctype', 'xhtml');
+
     if (!empty($lang)) {
         $strings = com_connect_load_lang($lang);
         $current = Txp::get('\Textpattern\L10n\Lang')->getStrings();
@@ -430,12 +432,13 @@ function com_connect($atts, $thing = '')
     $form = ($form) ? fetch_form($form) : $thing;
 
     if (empty($form)) {
+        $br = ($doctype === 'xhtml') ? '<br />' : '<br>';
         $form = '
-<txp:com_connect_text label="'.gTxt('com_connect_name').'" /><br />
-<txp:com_connect_email /><br />'.
-($send_article ? '<txp:com_connect_email send_article="1" label="'.gTxt('com_connect_recipient').'" /><br />' : '').
-'<txp:com_connect_textarea /><br />
-<txp:com_connect_submit />
+<txp:com_connect_text label="'.gTxt('com_connect_name').'" />'.$br.
+'<txp:com_connect_email />'.$br.
+($send_article ? '<txp:com_connect_email send_article="1" label="'.gTxt('com_connect_recipient').'" />'.$br : '').
+'<txp:com_connect_textarea />'.$br.
+'<txp:com_connect_submit />
 ';
     }
 
@@ -618,8 +621,8 @@ END;
             ($label ? n . '<fieldset>' : '') .
             ($label ? n . '<legend>' . txpspecialchars($label) . '</legend>' : '') .
             $out .
-            n . '<input type="hidden" name="com_connect_nonce" value="' . $com_connect_nonce . '" />' .
-            n . '<input type="hidden" name="com_connect_form_id" value="' . $com_connect_form_id . '" />' .
+            n . '<input type="hidden" name="com_connect_nonce" value="' . $com_connect_nonce . '"' . (($doctype === 'xhtml') ? ' />' : '>') .
+            n . '<input type="hidden" name="com_connect_form_id" value="' . $com_connect_form_id . '"' . (($doctype === 'xhtml') ? ' />' : '>') .
             $form .
             callback_event('comconnect.form') .
             ($label ? (n . '</fieldset>') : '') .
@@ -841,7 +844,7 @@ function com_connect_text($atts)
     $labelStr = ($label) ? '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>' : '';
 
     return ($labelStr && $label_position === 'before' ? $labelStr . $break : '') .
-        '<input' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . ' />' .
+        '<input' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . (($doctype === 'xhtml') ? ' />' : '>') .
         ($labelStr && $label_position === 'after' ? $break . $labelStr : '');
 }
 
@@ -1317,7 +1320,7 @@ function com_connect_checkbox($atts)
 
     return ($labelStr && $label_position === 'before' ? $labelStr . $break : '') .
         '<input type="checkbox"' . $classStr .
-            ($theValue ? ' checked' . (($doctype === 'xhtml') ? '="checked"' : '') : '') . ($attr ? ' ' . implode(' ', $attr) : '') . ' />' .
+            ($theValue ? ' checked' . (($doctype === 'xhtml') ? '="checked"' : '') : '') . ($attr ? ' ' . implode(' ', $attr) : '') . (($doctype === 'xhtml') ? ' />' : '>') .
         ($labelStr && $label_position === 'after' ? $break . $labelStr : '');
 }
 
@@ -1439,7 +1442,7 @@ function com_connect_radio($atts)
 
     return ($labelStr && $label_position === 'before' ? $labelStr . $break : '') .
         '<input type="radio"'. $classStr . ($attr ? ' ' . implode(' ', $attr) : '') .
-            ( $is_checked ? ' checked' . (($doctype === 'xhtml') ? '="checked"' : ''). ' />' : ' />') .
+            ( $is_checked ? ' checked' . (($doctype === 'xhtml') ? '="checked"' : '') : '') . (($doctype === 'xhtml') ? ' />' : '>') .
         ($labelStr && $label_position === 'after' ? $break . $labelStr : '');
 }
 
@@ -1541,7 +1544,7 @@ function com_connect_submit($atts, $thing = '')
     if ($thing) {
         return '<button type="submit"' . $classStr . ' name="com_connect_submit" value="' . $label . '"' . ($attr ? ' ' . implode(' ', $attr) : '') . '>' . ($thing ? trim(parse($thing)) : $label) . '</button>';
     } else {
-        return '<input type="submit"' . $classStr . ' name="com_connect_submit" value="' . $label . '"' . ($attr ? ' ' . implode(' ', $attr) : '') . ' />';
+        return '<input type="submit"' . $classStr . ' name="com_connect_submit" value="' . $label . '"' . ($attr ? ' ' . implode(' ', $attr) : '') . (($doctype === 'xhtml') ? ' />' : '>');
     }
 }
 
@@ -1677,7 +1680,7 @@ function com_connect_lAtts($pairs, $atts)
     }
 
     if (isset($atts['break']) && $atts['break'] === 'br') {
-        $atts['break'] = '<br />';
+        $atts['break'] = ($doctype === 'xhtml') ? '<br />' : '<br>';
     }
 
     $com_connect_globals = array(
