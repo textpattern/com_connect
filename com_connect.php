@@ -392,6 +392,7 @@ function com_connect($atts, $thing = '')
     $expire = abs(assert_int($expire));
 
     static $headers_sent = false;
+
     if (!$headers_sent) {
         header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $now - (3600 * 24 * 7)) . ' GMT');
         header('Expires: ' . gmdate('D, d M Y H:i:s', $now + $expire) . ' GMT');
@@ -1645,6 +1646,8 @@ function com_connect_group_validate()
  */
 function com_connect_lAtts($pairs, $atts)
 {
+    $doctype = get_pref('doctype', 'xhtml');
+
     foreach (array('button', 'copysender', 'checked', 'required', 'send_article', 'show_input', 'show_error') as $key) {
         if (isset($atts[$key])) {
             $atts[$key] = ($atts[$key] === 'yes' || intval($atts[$key])) ? 1 : 0;
