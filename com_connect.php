@@ -1673,6 +1673,8 @@ function com_connect_group_validate()
  */
 function com_connect_lAtts($pairs, $atts)
 {
+    $doctype = get_pref('doctype', 'xhtml');
+
     foreach (array('button', 'copysender', 'checked', 'required', 'send_article', 'show_input', 'show_error') as $key) {
         if (isset($atts[$key])) {
             $atts[$key] = ($atts[$key] === 'yes' || intval($atts[$key])) ? 1 : 0;
