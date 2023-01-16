@@ -1464,8 +1464,6 @@ function com_connect_serverinfo($atts)
         $name = com_connect_label2name($label);
     }
 
-    $name = sanitizeForUrl($name);
-
     if (strlen($name) && $com_connect_submit) {
         if (!$label) {
             $label = $name;
