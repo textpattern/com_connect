@@ -17,7 +17,7 @@ $plugin['name'] = 'com_connect';
 // 1 = Plugin help is in raw HTML.  Not recommended.
 # $plugin['allow_html_help'] = 1;
 
-$plugin['version'] = '4.9.0';
+$plugin['version'] = '4.9.0-beta';
 $plugin['author'] = 'Textpattern Community';
 $plugin['author_uri'] = 'https://forum.textpattern.io/viewtopic.php?id=47913';
 $plugin['description'] = 'Form and contact mailer for Textpattern';
@@ -3010,7 +3010,7 @@ Create a Textpattern form called "my_com_connect_to_form", containing:
 
 bc(language-markup). <txp:php>
     global $com_connect_form;
-    switch($com_connect_form['Department'])
+    switch($com_connect_form['Department'][0])
     {
         case 'Support':
             echo 'crew@example.com';
@@ -3023,7 +3023,7 @@ bc(language-markup). <txp:php>
     }
 </txp:php>
 
-The @label@ used in the @com_connect_select@ tag must be identical to the corresponsing variable in the @to_form@. Here we used @Department@.
+The @label@ used in the @com_connect_select@ tag must be identical to the corresponding variable in the @to_form@. Here we used @Department@.
 
 A 'default' email address in the @to_form@ is specified to ensure that a valid email address is used in cases where you add or change a select/radio option and forget to update the @to_form@.
 
