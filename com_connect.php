@@ -300,7 +300,7 @@ if (class_exists('\Textpattern\Tag\Registry')) {
  * @param array  $atts  Tag attributes
  * @param string $thing Tag's container content
  */
-function com_connect($atts, $thing = '')
+function com_connect($atts, $thing = 'empty')
 {
     global $sitename, $com_connect_flags, $com_connect_from,
         $com_connect_recipient, $com_connect_error, $com_connect_submit,
@@ -361,7 +361,7 @@ function com_connect($atts, $thing = '')
         'thanks'   => 'comThanks',
         );
 
-    $com_connect_form_id = md5(serialize($atts) . preg_replace('/[\t\s\r\n]/', '', $thing));
+    $com_connect_form_id = md5(serialize($atts) . preg_replace('/[\t\s\r\n]/', '', (string)$thing));
     $com_connect_submit = (ps('com_connect_form_id') == $com_connect_form_id);
     $override_email_charset = (get_pref('override_emailcharset') && is_callable('utf8_decode'));
     $userClassNames = do_list($classes);
