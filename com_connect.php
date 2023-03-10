@@ -300,7 +300,7 @@ if (class_exists('\Textpattern\Tag\Registry')) {
  * @param array  $atts  Tag attributes
  * @param string $thing Tag's container content
  */
-function com_connect($atts, $thing = 'empty')
+function com_connect($atts, $thing = '')
 {
     global $sitename, $com_connect_flags, $com_connect_from,
         $com_connect_recipient, $com_connect_error, $com_connect_submit,
