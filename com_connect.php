@@ -1452,14 +1452,14 @@ function com_connect_serverinfo($atts)
         $name = com_connect_label2name($label);
     }
 
-    $name = sanitizeForUrl($name);
+    $safeName = sanitizeForUrl($name);
 
-    if (strlen($name) && $com_connect_submit) {
+    if (strlen($safeName) && $com_connect_submit) {
         if (!$label) {
-            $label = $name;
+            $label = $safeName;
         }
 
-        com_connect_store($name, $label, serverSet($name));
+        com_connect_store($safeName, $label, serverSet($name));
     }
 }
 
