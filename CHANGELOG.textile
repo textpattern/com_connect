@@ -1,10 +1,16 @@
 h1. Changelog
 
-h2. 4.9.0-beta - 2023-02-27
+h2. 4.9.0-beta - 2023-03-13
 
 * For Textpattern 4.9.0+ only.
 * Hook into core's email workflow, sending via internal mail or SMTP accordingly.
+* Bake spam-protection tools into the plugin:
+** @action@ attribute for the @<txp:com_connect>@ tag.
+** @delay@ attribute to foil automated form-filling scripts.
+** @<txp:com_connect_expect>@ and @expected@ attribute to check submitted values.
 * Deprecate @<txp:com_connect_mime>@ in favour of the wrapper @<txp:com_connect_body>@ tag.
+* Fix com_connect_serverinfo not returning values (thanks, whocarez).
+* Fix Passing null to function in PHP 8 (thanks, peterj and jools-r).
 
 h2. 4.7.0 - 2022-01-28
 

@@ -285,8 +285,11 @@ if (class_exists('\Textpattern\Tag\Registry')) {
         ->register('com_connect_fields')
         ->register('com_connect_mime')
         ->register('com_connect_body')
-        ->register('com_connect_if');
+        ->register('com_connect_if')
+        ->register('com_connect_expect');
 }
+
+register_callback('com_connect_verify', 'comconnect.submit');
 
 /**
  * Tag: encapsulate a contact form.
@@ -304,13 +307,15 @@ function com_connect($atts, $thing = '')
 {
     global $sitename, $com_connect_flags, $com_connect_from,
         $com_connect_recipient, $com_connect_error, $com_connect_submit,
-        $com_connect_form, $com_connect_labels, $com_connect_values;
+        $com_connect_form, $com_connect_labels, $com_connect_values, $com_connect_js;
 
     extract(com_connect_lAtts(array(
+        'action'           => '',
         'body_form'        => '',
         'class'            => 'comConnectForm',
         'classes'          => '',
         'copysender'       => 0,
+        'delay'            => '5-10',
         'expire'           => 600,
         'form'             => '',
         'from'             => '',
@@ -327,7 +332,7 @@ function com_connect($atts, $thing = '')
         'to'               => '',
         'to_form'          => '',
         'thanks'           => null,
-        'thanks_form'      => ''
+        'thanks_form'      => '',
     ), $atts));
 
     $doctype = get_pref('doctype', 'xhtml');
@@ -390,6 +395,9 @@ function com_connect($atts, $thing = '')
     $now_date = date('Y-m-d H:i:s', $now);
 
     $expire = abs(assert_int($expire));
+
+    $range = do_list($delay, array(',', '-'));
+    $com_connect_flags['delay'] = $range;
 
     static $headers_sent = false;
 
@@ -602,10 +610,34 @@ END;
     }
 
     if ($show_input && !$send_article || gps('com_connect_send_article')) {
+        $fragment = '#com' . $com_connect_form_id;
+        $req_uri = txpspecialchars(serverSet('REQUEST_URI'));
+
+        if ($action) {
+            $endpoints = (array)doArray(do_list($action), 'txpspecialchars');
+            $destination = $endpoints[0];
+
+            if (count($endpoints) === 2) {
+                $jsRange = json_encode($range);
+                $encodedDestination = base64_encode((empty($endpoints[1]) ? $req_uri : $endpoints[1]) . $fragment);
+
+                // 32 chars should be enough entropy to guarantee at least one non-numeric character.
+                $varname = preg_replace('/\d/', '', Txp::get('\Textpattern\Password\Random')->generate(32));
+                $com_connect_js['action'] = <<<EOJS
+setTimeout(function() {
+    let {$varname} = document.getElementById('com{$com_connect_form_id}');
+    {$varname}.action = atob('{$encodedDestination}');
+}, {$jsRange}[{$jsRange}.length * Math.random() | 0] * 1000);
+EOJS;
+            }
+        } else {
+            $destination = $req_uri;
+        }
+
         $contactForm = '<form method="post"' . ((!$show_error && $com_connect_error) ? '' : ' id="com' . $com_connect_form_id . '"') .
             ($class ? ' class="' . $class . '"' : '') .
             ($browser_validate ? '' : ' novalidate') .
-            ' action="' . txpspecialchars(serverSet('REQUEST_URI')) . '#com' . $com_connect_form_id . '">' .
+            ' action="' . $destination . $fragment . '">' .
             ($label ? n . '<fieldset>' : '') .
             ($label ? n . '<legend>' . txpspecialchars($label) . '</legend>' : '') .
             $out .
@@ -615,6 +647,19 @@ END;
             callback_event('comconnect.form') .
             ($label ? (n . '</fieldset>') : '') .
             n . '</form>';
+
+        if ($com_connect_js) {
+            $concat = implode(n, $com_connect_js);
+            $contactForm .= script_js(<<<EOJS
+document.addEventListener("DOMContentLoaded", () => {
+    let theForm = document.getElementById('com{$com_connect_form_id}');
+    theForm.addEventListener("focusin", (ev) => {
+    {$concat}
+}, { once: true })
+});
+EOJS
+            );
+        }
 
         callback_event_ref('comconnect.render', '', 0, $contactForm, $atts);
 
@@ -642,13 +687,15 @@ END;
  */
 function com_connect_text($atts)
 {
-    global $com_connect_error, $com_connect_submit, $com_connect_flags;
+    global $com_connect_error, $com_connect_submit, $com_connect_flags, $com_connect_js;
 
     extract(com_connect_lAtts(array(
         'autocomplete'   => '',
         'break'          => br,
         'class'          => 'comText',
         'default'        => '',
+        'delay'          => null,
+        'expected'       => null,
         'html_form'      => $com_connect_flags['this_form'],
         'isError'        => '',
         'inputmode'      => '',
@@ -758,7 +805,7 @@ function com_connect_text($atts)
                 $com_connect_error[] = gTxt('com_connect_pattern_warning', array('{field}' => $hlabel, '{value}' => $pattern));
                 $isError = $com_connect_flags['cls_element'];
             } else {
-                com_connect_store($name, $label, $value);
+                com_connect_store($name, $label, $value, $expected);
             }
         } elseif ($required) {
             $com_connect_error[] = gTxt('com_connect_field_missing', array('{field}' => $hlabel));
@@ -831,9 +878,30 @@ function com_connect_text($atts)
     $classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
     $labelStr = ($label) ? '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>' : '';
 
-    return ($labelStr && $label_position === 'before' ? $labelStr . $break : '') .
+    $out = ($labelStr && $label_position === 'before' ? $labelStr . $break : '') .
         '<input' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . (($doctype === 'xhtml') ? ' />' : '>') .
         ($labelStr && $label_position === 'after' ? $break . $labelStr : '');
+
+    if ($delay) {
+        // 32 chars should be enough entropy to guarantee at least one non-numeric character.
+        $varname = preg_replace('/\d/', '', Txp::get('\Textpattern\Password\Random')->generate(32));
+        $positions = array('beforeend', 'afterbegin');
+        $range = $delay === true ? $com_connect_flags['delay'] : do_list((string)$delay, array(',', '-'));
+        $jsRange = json_encode($range);
+
+        $com_connect_js[] = <<<EOJS
+setTimeout(function() {
+    let {$varname} = document.getElementById("{$com_connect_flags['this_form']}");
+    {$varname}.insertAdjacentHTML('{$positions[array_rand($positions)]}', '{$out}');
+}, ({$jsRange}[{$jsRange}.length * Math.random() | 0]) * 1000);
+EOJS;
+        com_connect_expect(array(
+            'name'  => $name,
+            'value' => $expected,
+        ));
+    } else {
+        return $out;
+    }
 }
 
 /**
@@ -1024,6 +1092,7 @@ function com_connect_textarea($atts)
  * Tag: Render a select/option input list.
  *
  * @param  array  $atts Tag attributes
+ * @param  string $thing Tag's container content
  * @return string HTML
  */
 function com_connect_select($atts, $thing = '')
@@ -1467,6 +1536,7 @@ function com_connect_serverinfo($atts)
  * Tag: Store a secret value in the payload.
  *
  * @param  array  $atts  Tag attributes
+ * @param  string $thing Tag's container content
  */
 function com_connect_secret($atts, $thing = '')
 {
@@ -1558,8 +1628,9 @@ function com_connect_send_article($atts)
 /**
  * Replace mime tags with boundary text
  *
- * @param  array $atts Tag attributes
- * @return string      Boundary
+ * @param  array  $atts  Tag attributes
+ * @param  string $thing Tag's container content
+ * @return string        Boundary
  * @deprecated 4.9.0
  * @see com_connect_body
  */
@@ -1574,6 +1645,7 @@ function com_connect_mime($atts, $thing)
  * Indicate body content of a particular type
  *
  * @param  array $atts Tag attributes
+ * @param string $thing Tag's container content
  */
 function com_connect_body($atts, $thing)
 {
@@ -1929,18 +2001,23 @@ function com_connect_label2name($label)
 /**
  * Store the given names/values in the global arrays.
  *
- * @param  string $name  Parameter name
- * @param  string $label Parameter label
- * @param  string $value Parameter value
+ * @param  string $name   Parameter name
+ * @param  string $label  Parameter label
+ * @param  string $value  Parameter value
+ * @param  string $expect Expected parameter value for comparison
  */
-function com_connect_store($name, $label, $value)
+function com_connect_store($name, $label, $value, $expect = null)
 {
-    global $com_connect_form, $com_connect_labels, $com_connect_values;
+    global $com_connect_form, $com_connect_labels, $com_connect_values, $com_connect_expect;
 
     $label = (empty($label)) ? $name : $label;
     $com_connect_form[$label] = $value;
     $com_connect_labels[$name] = $label;
     $com_connect_values[$name] = $value;
+
+    if ($expect !== null) {
+        $com_connect_expect[$name] = $expect;
+    }
 }
 
 /**
@@ -2062,7 +2139,7 @@ function com_connect_if($atts, $thing = '')
 }
 
 /**
- * Iterate over the submitted fields
+ * Iterate over the submitted fields.
  *
  * @param  array  $atts  Tag attributes
  * @param  string $thing Container content
@@ -2096,6 +2173,57 @@ function com_connect_fields($atts, $thing = '')
 
     return doWrap($out, $wraptag, $break, $class);
 }
+
+/**
+ * Tell the form to expect the given response in the $name field.
+ *
+ * @param  array $atts Tag atributes
+ */
+function com_connect_expect($atts)
+{
+    global $com_connect_expect;
+
+    extract(lAtts(array(
+        'name'  => '',
+        'value' => null,
+    ), $atts));
+
+    if ($name) {
+        $com_connect_expect[$name] = $value;
+    }
+
+    return '';
+}
+
+/**
+ * Evaluator for checking expected values against those submitted.
+ *
+ * Primarily used for built-in spam prevention.
+ *
+ * @param string $evt Textpattern event
+ * @param string $stp Textpattern step
+ * @return bool
+ */
+function com_connect_verify($evt, $stp)
+{
+    global $com_connect_expect, $com_connect_values;
+
+    if (is_array($com_connect_expect)) {
+        $evaluation = &get_comconnect_evaluator();
+
+        foreach ($com_connect_expect as $name => $expected) {
+            $values = do_list($expected);
+
+            if ((!empty($com_connect_values[$name]) && $expected === null) ||
+                (empty($com_connect_values[$name]) && $expected !== null) ||
+                (!empty($com_connect_values[$name]) && !in_array($com_connect_values[$name], $values))) {
+                $evaluation->add_comconnect_status(1);
+            }
+        }
+    }
+
+    return;
+}
 # --- END PLUGIN CODE ---
 if (0) {
 ?>
@@ -2127,6 +2255,7 @@ h2. Contents
 ** "com_connect_label tag":#cc_label
 ** "com_connect_value tag":#cc_value
 ** "com_connect_if tag":#cc_if
+** "com_connect_expect tag":#cc_expect
 * "Advanced examples":#advanced
 ** "Separate input and error forms":#advanced1
 ** "User selectable subject field":#advanced2
@@ -2150,7 +2279,7 @@ h3. Features
 * UTF-8 safe.
 * Accessible form layout, including @<label>@, @<legend>@ and @<fieldset>@ tags.
 * Various classes and ids to allow easy styling of all parts of the form.
-* Spam prevention API (used by Tranquillo's @pap_contact_cleaner@ plugin) and delivery API for altering or extending the plugin's capabilities.
+* Built-in spam prevention options, and a spam/delivery API for altering or extending the plugin's capabilities.
 
 h3. History
 
@@ -2158,7 +2287,7 @@ Please see the "changelog on GitHub":https://github.com/textpattern/com_connect/
 
 h2(#install). Installing and upgrading
 
-*Requires Textpattern 4.7.0+*
+*Requires Textpattern 4.9.0+*
 
 Download the latest release of the plugin from "the GitHub project page":https://github.com/textpattern/com_connect/releases, paste the code into the Textpattern Admin>Plugins panel, install and enable the plugin. Visit the "forum thread":https://forum.textpattern.io/viewtopic.php?id=47913 for more info or to report on the success or otherwise of the plugin.
 
@@ -2229,7 +2358,7 @@ h2(#tags). Tags
 
 All other tags provided by this plugin can only be used inside a @<txp:com_connect>@ - @</txp:com_connect>@ container tag or in a Textpattern form used as the @form@ attribute in the @<txp:com_connect />@ tag.
 
-In addition to the tags detailed in the following sections, every tag accepts a core set of common attributes. These are:
+In addition to the attributes detailed in the following sections, every tag accepts a core set of common attributes. These are:
 
 ; @accesskey="character"@
 : Shortcut key to set focus on the field.
@@ -2268,6 +2397,9 @@ May be used as a single (self-closing) or container tag. Place this where you wa
 
 h4. Attributes
 
+; @action="destination URL(s)"@
+: If you wish to divert the submission to a different URL endpoint, specify it here. Otherwise, omit this to default to the current page URL.
+: To aid with spam prevention, this attribute accepts up to two comma-separated URLs, the first being a 'fake' submission endpoint, and the second being the 'real' endpoint. Combined with the @delay@ attribute this can be used to trick automated form-filling scripts into submitting to the wrong place. If you omit the second URL after the comma (e.g. action="https://fake.example.org/spam-here,") then the 'real' destination will default to the current page URL.
 ; @body_form="form name"@
 : Use specified form for the message body text.
 ; @class="space-separated values"@
@@ -2280,6 +2412,9 @@ h4. Attributes
 : @thanks@: Class applied to the wrapper around the @thanks_form@. Default: @comThanks@.
 ; @copysender="boolean"@
 : Whether to send a copy of the email to the sender's address. Available values: @1@ (yes) or @0@ (no). Default is @0@.
+; @delay="integer or range"@
+: Set a global delay, in seconds, after which any secondary @action@ and delayed form fields will be revealed. Use this feature to catch out automated form-filling scripts by adding fields you do/do not want to be filled out by human visitors after a short delay.
+: Default: 5-10.
 ; @expire="number"@
 : Number of seconds after which the form will expire, thus requiring a page refresh before sending. Default is @600@.
 ; @form="form name"@
@@ -2395,6 +2530,10 @@ h4. Attributes
 : Set the CSS @class@ name of the tag. Default: @comText@. To remove @class@ attribute from the element entirely, use @class=""@.
 ; @default="value"@
 : Default value when no input is provided.
+; @delay="integer or range"@
+: Length of time, in seconds, before the input field is added to the form. Requires JavaScript. If a range is specified, the delay will be randomly chosen between the minimum and maximum values. If the attribute is supplied without a value, the global @delay@ value set in the form itself will be used.
+; @expected="value"@
+: This feature can be used to add honeypot fields that are either required to be submitted with the form, or designed to be hidden and filled in by over-zealous scripts. See "com_connect_expect":#cc_expect.
 ; @html_form="id"@
 : The HTML @id@ of the @<form>@ tag to which the field is attached. Associated with the contained form by default.
 ; @inputmode="value"@
@@ -2461,6 +2600,18 @@ h5. Example 3: Telephone input with validation
 Create a telephone field with a "validation pattern for UK telephone number":http://html5pattern.com/Phones format:
 
 bc(language-markup). <txp:com_connect_text type="tel" label="Telephone" pattern="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" required="1" />
+
+h5. Example 4: Delayed input field to trap automated form-filling scripts
+
+bc(language-markup). <txp:com_connect_text hidden label="" name="r_u_human" default="yes" expected="yes" delay="6-15" required="0" />
+
+When the page is loaded, this field will not be in the markup. Between 6 and 15 seconds after the visitor begins interacting with the form, the (hidden) field will be added inside the form. If a bot or automated script submits the form before his field is added, it will not be in the payload and the expected criteria will not be met, so the form submission will be rejected.
+
+h5. Example 5: Human test
+
+bc(language-markup). <txp:com_connect_text label="What is five times six?" name="humancheck" expected="30, thirty" />
+
+If the visitor does not type in one of the correct expected values, the form will be rejected.
 
 h3(#cc_email). com_connect_email tag
 
@@ -2952,6 +3103,30 @@ h5. Example 1: Take action if the visitor has entered a particular value
 bc(language-markup). <txp:com_connect_if name="delivery" value="courier">
    <txp:com_connect_label name="delivery" />: <txp:com_connect_value name="delivery" />
 </txp:com_connect_if>.
+
+h3(#cc_expect). com_connect_expect tag
+
+bc(language-markup). <txp:com_connect_expect />
+
+Provide name=value pairs that your form expects (or doesn't expect) to be filled out.
+
+h4. Attributes
+
+; @name="text"@
+: The name of the field you're expecting to see in the results.
+; @value="text"@
+: The value you're expecting the field to contain. Omit this attribute if you _don't_ expect the field to be in the submitted form data.
+
+This tag is called internally if you specify the @expected@ attribute of the "com_connect_text tag":#cc_text so there's no need to call it by hand. Use it only if you're expecting something out of the ordinary, or for trapping particular circumstances.
+
+h4. Examples
+
+h5. Example 1: Provide a hidden honeypot field that humans will never see or fill out
+
+bc(language-markup). <txp:com_connect_text hidden label="" name="office_phone" required="0" />
+<txp:com_connect_expect name="office_phone" />
+
+This behaves in a similar manner to how pap_comconnect_cleaner works, but native to the plugin. Omitting the @value@ attribute means you're expecting the field to _not_ be in the submitted data.
 
 h2(#advanced). Advanced examples
 
