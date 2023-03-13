@@ -1731,20 +1731,22 @@ function com_connect_lAtts($pairs, $atts)
     }
 
     $com_connect_globals = array(
-        'accesskey'  => '',
-        'autofocus'  => '',
-        'dir'        => '',
-        'disabled'   => '',
-        'hidden'     => '',
-        'id'         => '',
-        'lang'       => '',
-        'list'       => '',
-        'readonly'   => '',
-        'spellcheck' => '',
-        'style'      => '',
-        'tabindex'   => '',
-        'title'      => '',
-        'translate'  => '',
+        'accesskey'      => '',
+        'autocapitalize' => '',
+        'autofocus'      => '',
+        'dir'            => '',
+        'disabled'       => '',
+        'hidden'         => '',
+        'id'             => '',
+        'lang'           => '',
+        'list'           => '',
+        'readonly'       => '',
+        'role'           => '',
+        'spellcheck'     => '',
+        'style'          => '',
+        'tabindex'       => '',
+        'title'          => '',
+        'translate'      => '',
     );
 
     foreach ($atts as $name => $value) {
@@ -2362,6 +2364,8 @@ In addition to the attributes detailed in the following sections, every tag acce
 
 ; @accesskey="character"@
 : Shortcut key to set focus on the field.
+; @autocapitalize="value"@
+: To automatically alter the capitalization of words in the input field. Options: 1) @off@ (or @none@), 2) @on@ (or @sentences@), 3) @words@, or 4) @characters@.
 ; @autofocus="boolean"@
 : To automatically focus the cursor in this field on page load. Only one field may have this property.
 ; @dir="value"@
@@ -2378,6 +2382,8 @@ In addition to the attributes detailed in the following sections, every tag acce
 : Used in conjunction with the @<datalist>@ tag to specify a set of options. The id is the reference to the datalist to use.
 ; @readonly="boolean"@
 : Control does not accept user input, but will be processed on form submission and can be validated.
+; @role="value"@
+: Define the semantic meaning of content. Specify the appropriate role_type for an element, as defined in the "ARIA role specification":https://www.w3.org/TR/wai-aria/#roles.
 ; @spellcheck="value"@
 : Whether the field is subject to spell checking (@true@ = yes, @default@ = browser decides, or @false@ = no).
 ; @style="style rules"@
