@@ -17,7 +17,7 @@ $plugin['name'] = 'com_connect';
 // 1 = Plugin help is in raw HTML.  Not recommended.
 # $plugin['allow_html_help'] = 1;
 
-$plugin['version'] = '4.7.0';
+$plugin['version'] = '4.7.1';
 $plugin['author'] = 'Textpattern Community';
 $plugin['author_uri'] = 'https://forum.textpattern.io/viewtopic.php?id=47913';
 $plugin['description'] = 'Form and contact mailer for Textpattern';
@@ -1829,6 +1829,7 @@ function com_connect_deliver($to, $subject, $body, $headers, $fields, $flags)
     }
 
     $sep = (!empty($headers['separator'])) ? $headers['separator'] : (IS_WIN ? "\r\n" : "\n");
+    $sep = !IS_WIN && ini_get('cgi.rfc2616_headers') != 0 ? "\r\n": $sep;
     $xfer_encoding = (!empty($headers['xfer_encoding'])) ? $headers['xfer_encoding'] : '8bit';
     $content_type = (!empty($headers['content_type'])) ? $headers['content_type'] : 'text/plain';
     $reply = (!empty($headers['reply'])) ? $headers['reply'] : '';
