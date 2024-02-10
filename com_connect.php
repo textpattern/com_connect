@@ -285,6 +285,7 @@ if (class_exists('\Textpattern\Tag\Registry')) {
         ->register('com_connect_fields')
         ->register('com_connect_mime')
         ->register('com_connect_body')
+        ->register('com_connect_header')
         ->register('com_connect_if')
         ->register('com_connect_expect');
 }
@@ -1668,6 +1669,34 @@ function com_connect_body($atts, $thing)
 }
 
 /**
+ * Add custom headers to the payload
+ *
+ * @param  array $atts Tag attributes
+ * @param string $thing Tag's container content
+ */
+function com_connect_header($atts, $thing = '')
+{
+    global $com_connect_submit;
+
+    extract(com_connect_lAtts(array(
+        'name'  => '',
+        'value' => '',
+    ), $atts));
+
+    $name = sanitizeForUrl($name);
+
+    if ($com_connect_submit) {
+        if ($thing) {
+            $value = trim(parse($thing));
+        }
+
+        com_connect_store_header($name, $value);
+    }
+
+    return '';
+}
+
+/**
  * Perform post-processing for aggregate (group) controls like radio sets.
  *
  * @todo Can this be done any neater?
@@ -1846,7 +1875,7 @@ function com_connect_strip($str, $header = true)
  */
 function com_connect_deliver($from, $to, $reply, $subject, $body, $fields, $flags)
 {
-    global $com_connect_error;
+    global $com_connect_error, $com_connect_headers;
 
     $payload = array(
         'from'    => $from,
@@ -1856,6 +1885,7 @@ function com_connect_deliver($from, $to, $reply, $subject, $body, $fields, $flag
         'body'    => $body,
         'fields'  => $fields,
         'flags'   => $flags,
+        'headers' => $com_connect_headers,
     );
 
     $flavour = ($flags['isCopy'] === true) ? 'copysender' : 'send';
@@ -1873,6 +1903,13 @@ function com_connect_deliver($from, $to, $reply, $subject, $body, $fields, $flag
 
     try {
         $message = Txp::get('\Textpattern\Mail\Compose')->getDefaultAdapter();
+
+        if (is_array($headers)) {
+            foreach ($headers as $hkey => $hval) {
+                $message->header($hkey, $hval);
+            }
+        }
+
         $message->from($from)
             ->to($to)
             ->subject($subject)
@@ -2020,6 +2057,19 @@ function com_connect_store($name, $label, $value, $expect = null)
     if ($expect !== null) {
         $com_connect_expect[$name] = $expect;
     }
+}
+
+/**
+ * Store the given name/value header pairs in the global array.
+ *
+ * @param  string $name   Header name
+ * @param  string $value  Header value
+ */
+function com_connect_store_header($name, $value)
+{
+    global $com_connect_headers;
+
+    $com_connect_headers[$name] = $value;
 }
 
 /**
@@ -2258,6 +2308,7 @@ h2. Contents
 ** "com_connect_value tag":#cc_value
 ** "com_connect_if tag":#cc_if
 ** "com_connect_expect tag":#cc_expect
+** "com_connect_header tag":#cc_header
 * "Advanced examples":#advanced
 ** "Separate input and error forms":#advanced1
 ** "User selectable subject field":#advanced2
@@ -2611,7 +2662,7 @@ h5. Example 4: Delayed input field to trap automated form-filling scripts
 
 bc(language-markup). <txp:com_connect_text hidden label="" name="r_u_human" default="yes" expected="yes" delay="6-15" required="0" />
 
-When the page is loaded, this field will not be in the markup. Between 6 and 15 seconds after the visitor begins interacting with the form, the (hidden) field will be added inside the form. If a bot or automated script submits the form before his field is added, it will not be in the payload and the expected criteria will not be met, so the form submission will be rejected.
+When the page is loaded, this field will not be in the markup. Between 6 and 15 seconds after the visitor begins interacting with the form, the (hidden) field will be added inside the form. If a bot or automated script submits the form before this field is added, it will not be in the payload and the expected criteria will not be met, so the form submission will be rejected.
 
 h5. Example 5: Human test
 
@@ -3133,6 +3184,33 @@ bc(language-markup). <txp:com_connect_text hidden label="" name="office_phone" r
 <txp:com_connect_expect name="office_phone" />
 
 This behaves in a similar manner to how pap_comconnect_cleaner works, but native to the plugin. Omitting the @value@ attribute means you're expecting the field to _not_ be in the submitted data.
+
+h3(#cc_header). com_connect_header tag
+
+bc(language-markup). <txp:com_connect_header />
+
+This tag has no effect on the form or HTML output, but will include additional headers in the email. It can be used as a single (self-closing) tag or as a container tag.
+
+h4. Attributes
+
+; @name="text"@
+: The name of the custom header you wish to add (e.g. Reply-By, Importance, List-Unsubscribe, etc).
+; @value="value"@
+: The value to supply for the named header.
+
+See "RFC 4021":https://www.rfc-editor.org/rfc/rfc4021.html for a list of available headers.
+
+h4. Examples
+
+h5. Example 1: As a single (self-closing) tag
+
+bc(language-markup). <txp:com_connect_header name="Reply-By" value="2025-12-24" />
+
+h5. Example 2: As a container tag
+
+bc(language-markup). <txp:com_connect_header name="Comments">
+    Here are some comments about the email you're receiving
+</txp:com_connect_header>
 
 h2(#advanced). Advanced examples
 
