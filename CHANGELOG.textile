@@ -1,6 +1,6 @@
 h1. Changelog
 
-h2. 4.9.0-beta - 2024-02-10
+h2. 4.9.0 - 2024-mm-dd
 
 * For Textpattern 4.9.0+ only.
 * Hook into core's email workflow, sending via internal mail or SMTP accordingly.
@@ -12,6 +12,12 @@ h2. 4.9.0-beta - 2024-02-10
 * Deprecate @<txp:com_connect_mime>@ in favour of the wrapper @<txp:com_connect_body>@ tag.
 * Fix com_connect_serverinfo not returning values (thanks, whocarez).
 * Fix Passing null to function in PHP 8 (thanks, peterj and jools-r).
+
+h2. 4.7.1 - 2024-02-28
+
+* Use self-closing tags to keep validators happy (thanks, jools-r).
+* Fix for concatenated headers/line endings on some servers (thanks, hidalgo, Kjeld, Gallex, and phiw13).
+* Add @replyto@ attribute.
 
 h2. 4.7.0 - 2022-01-28
 

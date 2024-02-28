@@ -205,6 +205,11 @@ h4. Attributes
 : Set to 0 if you wish to stop the browser from validating form field values and 'required' status of input elements. The plugin itself is then solely responsible for validation and will indicate error conditions after submission. Default is @1@.
 ; @redirect="URL"@
 : Redirect to specified URL (overrides @thanks@ and @thanks_form@ attributes). URL must be relative to the Textpattern site URL. Example: @redirect="monkey"@ would redirect to @http://example.com/monkey@.
+; @replyto=boolean|email address@
+: Governs the email address of who the message reply should go to. Options:
+: @true@ (default): Use the email address from the form itself (value from the @<txp:com_connect_email>@ tag) if the @from@ address has been specified. Blank otherwise.
+: @false@: Always use the @from@ email address as reply-to. Note that if the @from@ is omitted the email will be from nobody and may be rejected by the receiving server.
+: @email address@: Use the specified email address as the reply-to, if it's a valid address.
 ; @required="boolean"@
 : Whether to require all tags in this contact form to be completed before the form can be submitted. Can be overridden on a field-by-field basis by using the @required@ attribute in the relevant tag. Available values: @1@ (yes) or @0@ (no). Default is @1@.
 ; @send_article="boolean"@
