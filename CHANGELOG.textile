@@ -1,5 +1,11 @@
 h1. Changelog
 
+h2. 4.7.1 - 2024-02-28
+
+* Use self-closing tags to keep validators happy (thanks, jools-r).
+* Fix for concatenated headers/line endings on some servers (thanks, hidalgo, Kjeld, Gallex, and phiw13).
+* Add @replyto@ attribute.
+
 h2. 4.7.0 - 2022-01-28
 
 * Fix a few PHP 8.x warnings.

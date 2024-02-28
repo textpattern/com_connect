@@ -317,6 +317,7 @@ function com_connect($atts, $thing = '')
         'label'            => null,
         'browser_validate' => 1,
         'redirect'         => '',
+        'replyto'          => true,
         'required'         => '1',
         'show_error'       => 1,
         'show_input'       => 1,
@@ -532,8 +533,18 @@ function com_connect($atts, $thing = '')
         $com_connect_flags['charset'] = $override_email_charset ? 'ISO-8859-1' : 'UTF-8';
         $com_connect_flags['content_type'] = 'text/plain';
         $com_connect_flags['xfer_encoding'] = '8bit';
-        $reply   = com_connect_strip($from ? $com_connect_from : '');
-        $from    = com_connect_strip($from ? $from : $com_connect_from);
+
+        if ($replyto === true) {
+            $reply = com_connect_strip($from ? $com_connect_from : '');
+            $from = com_connect_strip($from ? $from : $com_connect_from);
+        } elseif ($replyto === false || !is_valid_email($replyto)) {
+            $reply = com_connect_strip($from ? $from : '');
+            $from = com_connect_strip($from ? $from : '');
+        } else {
+            $reply = com_connect_strip($replyto);
+            $from = com_connect_strip($from ? $from : $replyto);
+        }
+
         $to      = com_connect_strip($to);
         $subject = com_connect_strip($subject);
         $body    = implode("\n\n", $msg);
@@ -2344,6 +2355,11 @@ h4. Attributes
 : Set to 0 if you wish to stop the browser from validating form field values and 'required' status of input elements. The plugin itself is then solely responsible for validation and will indicate error conditions after submission. Default is @1@.
 ; @redirect="URL"@
 : Redirect to specified URL (overrides @thanks@ and @thanks_form@ attributes). URL must be relative to the Textpattern site URL. Example: @redirect="monkey"@ would redirect to @http://example.com/monkey@.
+; @replyto=boolean|email address@
+: Governs the email address of who the message reply should go to. Options:
+: @true@ (default): Use the email address from the form itself (value from the @<txp:com_connect_email>@ tag) if the @from@ address has been specified. Blank otherwise.
+: @false@: Always use the @from@ email address as reply-to. Note that if the @from@ is omitted the email will be from nobody and may be rejected by the receiving server.
+: @email address@: Use the specified email address as the reply-to, if it's a valid address.
 ; @required="boolean"@
 : Whether to require all tags in this contact form to be completed before the form can be submitted. Can be overridden on a field-by-field basis by using the @required@ attribute in the relevant tag. Available values: @1@ (yes) or @0@ (no). Default is @1@.
 ; @send_article="boolean"@
