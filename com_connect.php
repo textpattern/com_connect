@@ -19,7 +19,7 @@ $plugin['name'] = 'com_connect';
 
 $plugin['version'] = '4.9.0-beta';
 $plugin['author'] = 'Textpattern Community';
-$plugin['author_uri'] = 'https://forum.textpattern.io/viewtopic.php?id=47913';
+$plugin['author_uri'] = 'https://forum.textpattern.com/viewtopic.php?id=47913';
 $plugin['description'] = 'Form and contact mailer for Textpattern';
 
 // Plugin load order:
@@ -64,12 +64,14 @@ com_connect_email => Email
 com_connect_email_subject => {site} > Enquiry
 com_connect_email_thanks => Thank you, your message has been sent.
 com_connect_field_missing => Required field <strong>{field}</strong> is missing.
+com_connect_file => Attach file
 com_connect_format_warning => Value {value} in <strong>{field}</strong> is not of the expected format.
 com_connect_form_expired => The form has expired, please try again.
 com_connect_form_used => The form was already submitted, please fill out a new form.
 com_connect_general_inquiry => General enquiry
 com_connect_invalid_email => <strong>{email}</strong> is not a valid email address.
 com_connect_invalid_host => <strong>{host}</strong> is not a valid email host.
+com_connect_invalid_type => Field <strong>{field}</strong> is not of the expected type.
 com_connect_invalid_utf8 => <strong>{field}</strong> contains invalid UTF-8 characters.
 com_connect_invalid_value => Invalid value for <strong>{field}</strong>: <strong>{value}</strong> is not one of the available options.
 com_connect_mail_sorry => Sorry, unable to send email.
@@ -97,12 +99,14 @@ com_connect_email => E-Mail
 com_connect_email_subject => {site} > Anfrage
 com_connect_email_thanks => Vielen Dank, Ihre Nachricht wurde gesendet.
 com_connect_field_missing => Erforderliche Eingabe im Feld <strong>{field}</strong> fehlt.
+com_connect_file =>
 com_connect_format_warning => Eingabe {value} im Feld <strong>{field}</strong> entspricht nicht dem erwarteten Format.
 com_connect_form_expired => Dieses Formular ist abgelaufen, bitte versuchen Sie es erneut.
 com_connect_form_used => Dieses Formular wurde bereits gesendet. Bitte laden Sie das Formular noch einmal.
 com_connect_general_inquiry => Allgemeine Anfrage
 com_connect_invalid_email => <strong>{email}</strong> ist keine gültige E-Mailadresse.
 com_connect_invalid_host => <strong>{host}</strong> ist kein gültiger E-Mail-Server.
+com_connect_invalid_type =>
 com_connect_invalid_utf8 => <strong>{field}</strong> enthält ungültige UTF-8-Zeichen.
 com_connect_invalid_value => Ungültiger Wert für <strong>{field}</strong>, <strong>{value}</strong> ist keine verfügbare Option.
 com_connect_mail_sorry => Leider kann keine E-Mail gesendet werden.
@@ -130,12 +134,14 @@ com_connect_email => Correo electrónico
 com_connect_email_subject => {site} > Consulta
 com_connect_email_thanks => Gracias, tu mensaje ha sido enviado.
 com_connect_field_missing => falta el campo obligatorio <strong>{field}</strong>.
+com_connect_file => 
 com_connect_format_warning => El valor {value} en <strong>{field}</strong> no está en el formato esperado.
 com_connect_form_expired => El formulario ha caducado, por favor inténtalo de nuevo.
 com_connect_form_used => El formulario ya había sido enviado, por favor rellena el formulario de nuevo.
 com_connect_general_inquiry => Consulta general
 com_connect_invalid_email => La dirección de correo electrónico <strong>{email}</strong> no es válida.
 com_connect_invalid_host => El dominio de correo electrónico <strong>{host}</strong> no es válido.
+com_connect_invalid_type =>
 com_connect_invalid_utf8 => <strong>{field}</strong> contiene caracteres UTF-8 no válidos.
 com_connect_invalid_value => Valor incorrecto para <strong>{field}</strong>: <strong>{value}</strong> no es una de las opciones disponibles.
 com_connect_mail_sorry => Lo siento, el correo electrónico no pudo ser enviado.
@@ -163,11 +169,13 @@ com_connect_email => Email
 com_connect_email_subject => {site} > Demande
 com_connect_email_thanks => Merci, votre message a bien été envoyé.
 com_connect_field_missing => Champ obligatoire <strong>{field}</strong> manquant.
+com_connect_file =>
 com_connect_form_expired => Le délai du formulaire vient d’expirer. Veuillez recommencer.
 com_connect_form_used => Le formulaire a déjà été soumis. Veuillez en remplir un nouveau.
 com_connect_general_inquiry => Demande d’ordre général
 com_connect_invalid_email => <strong>{email}</strong> n’est pas une adresse email valide.
 com_connect_invalid_host => <strong>{host}</strong> n’est pas correctement rédigé.
+com_connect_invalid_type =>
 com_connect_invalid_utf8 => <strong>{field}</strong> contient des caractères invalides.
 com_connect_invalid_value => Cette valeur : <strong>{value}</strong> n’est pas correcte pour <strong>{field}</strong>.
 com_connect_mail_sorry => Désolé, impossible d’envoyer votre message dans l’immédiat.
@@ -195,12 +203,14 @@ com_connect_email => E-mail adres
 com_connect_email_subject => {site} > bericht via de site
 com_connect_email_thanks => Hartelijk dank, je bericht is verzonden.
 com_connect_field_missing => Je hebt bij <strong>{field}</strong> nog niets ingevuld.
+com_connect_file =>
 com_connect_format_warning => De invoer {value} in <strong>{field}</strong> heeft niet de juiste vorm.
 com_connect_form_expired => Het formulier is verlopen, probeer het opnieuw.
 com_connect_form_used => Het formulier is reeds verstuurd, vul het opnieuw in.
 com_connect_general_inquiry => Bericht van de site
 com_connect_invalid_email => <strong>{email}</strong> is geen geldig e-mail addres.
 com_connect_invalid_host => <strong>{host}</strong> is geen geldige e-mail host.
+com_connect_invalid_type =>
 com_connect_invalid_utf8 => <strong>{field}</strong> bevat ongeldige lettertekens.
 com_connect_invalid_value => Ongeldige invoer bij <strong>{field}</strong>, <strong>{value}</strong> is niet mogelijk.
 com_connect_mail_sorry => Sorry, er kan geen e-mail verzonden worden.
@@ -228,12 +238,14 @@ com_connect_email => Email
 com_connect_email_subject => {site} > Contato
 com_connect_email_thanks => Obrigado, sua mensagem foi enviada.
 com_connect_field_missing => Faltou preencher o campo requerido <strong>{field}</strong>.
+com_connect_file =>
 com_connect_format_warning => O valor {value} em <strong>{field}</strong> não está formato esperado.
 com_connect_form_expired => O formulário expirou, por favor tente novamente.
 com_connect_form_used => O formulário já foi enviado, por favor preencha o formulário novamente.
 com_connect_general_inquiry => Assuntos gerais
 com_connect_invalid_email => <strong>{email}</strong> não é um endereço de email válido.
 com_connect_invalid_host => <strong>{host}</strong> não é um domínio de email válido.
+com_connect_invalid_type =>
 com_connect_invalid_utf8 => <strong>{field}</strong> contém caracteres UTF-8 inválidos.
 com_connect_invalid_value => Valor incorreto para <strong>{field}</strong>, <strong>{value}</strong> não é uma das opções disponíveis.
 com_connect_mail_sorry => Desculpe, não foi possível enviar o email.
@@ -276,6 +288,7 @@ if (class_exists('\Textpattern\Tag\Registry')) {
         ->register('com_connect_option')
         ->register('com_connect_checkbox')
         ->register('com_connect_radio')
+        ->register('com_connect_file')
         ->register('com_connect_serverinfo')
         ->register('com_connect_secret')
         ->register('com_connect_submit')
@@ -393,6 +406,9 @@ function com_connect($atts, $thing = '')
     // Global toggle for required attribute.
     $com_connect_flags['required'] = $required;
 
+    // Global encoding type. 0 = application/x-www-form-urlencoded, 1 = multipart/form-data
+    $com_connect_flags['enctype'] = 0;
+
     $now = time();
     $now_date = date('Y-m-d H:i:s', $now);
 
@@ -503,16 +519,18 @@ function com_connect($atts, $thing = '')
         $msg = array();
         $fields = array();
 
-        foreach ($com_connect_labels as $name => $lbl) {
-            $com_connect_values[$name] = doArray($com_connect_values[$name], 'trim');
+        foreach ($com_connect_labels as $key => $lbl) {
+            $com_connect_values[$key] = doArray($com_connect_values[$key], 'trim');
 
-            if ($com_connect_values[$name] === false) {
+            if ($com_connect_values[$key] === false) {
                 continue;
             }
 
-            $msg[] = $lbl . ': ' . (is_array($com_connect_values[$name]) ? implode(',', $com_connect_values[$name]) : $com_connect_values[$name]);
+            if (strpos($key, 'com_connect_file_') === false) {
+                $msg[] = $lbl . ': ' . (is_array($com_connect_values[$key]) ? implode(',', $com_connect_values[$key]) : $com_connect_values[$key]);
+            }
 
-            $fields[$name] = $com_connect_values[$name];
+            $fields[$key] = $com_connect_values[$key];
         }
 
         if ($send_article) {
@@ -1515,6 +1533,181 @@ function com_connect_radio($atts)
 }
 
 /**
+ * Tag: Render a file input field.
+ *
+ * @param  array  $atts Tag attributes
+ * @return string HTML
+ */
+function com_connect_file($atts)
+{
+    global $com_connect_error, $com_connect_submit, $com_connect_flags;
+
+    $max_upload_size = com_connect_file_max();
+
+    extract(com_connect_lAtts(array(
+        'accept'         => '',
+        'break'          => br,
+        'class'          => 'comFile',
+        'html_form'      => $com_connect_flags['this_form'],
+        'isError'        => '',
+        'label'          => gTxt('com_connect_file'),
+        'label_position' => 'before',
+        'max'            => $max_upload_size,
+        'multiple'       => '',
+        'name'           => '',
+        'required'       => $com_connect_flags['required'],
+        'type'           => 'file',
+    ), $atts));
+
+    $doctype = get_pref('doctype', 'xhtml');
+    $com_connect_flags['enctype'] = 1;
+
+    // Convert to bytes if not already
+    $max = com_connect_parse_size($max);
+
+    if (empty($name)) {
+        $name = com_connect_label2name($label);
+    }
+
+    if (empty($_FILES) && empty($_POST) && isset($_SERVER['REQUEST_METHOD']) && strtolower($_SERVER['REQUEST_METHOD']) === 'post') {
+        // Pretend it submitted okay, to render errors.
+        $com_connect_submit = 1;
+    }
+
+    if ($com_connect_submit) {
+        $hlabel = txpspecialchars($label);
+
+        if (array_key_exists($name, $_FILES)) {
+            $fileBlock = com_connect_standardize_files($_FILES[$name]);
+            $acceptableTypes = $accept ? doArray(do_list($accept), 'trim') : array();
+            $acceptableMime = $acceptableExt = array();
+
+            // Build arrays of acceptable file extensions/mime types.
+            foreach ($acceptableTypes as $type) {
+                if (strpos($type, '.') === 0) {
+                    // File extension, minus leading dot.
+                    $acceptableExt[] = str_replace('.', '', $type);
+                } else {
+                    // Assume mime type. Remove wildcards.
+                    $acceptableMime[] = str_replace('*', '', $type);
+                }
+            }
+
+            // Validate each incoming file as best we can.
+            foreach ($fileBlock as $fileInfo) {
+                $safeName = sanitizeForFile($fileInfo['name']);
+
+                if (empty($safeName) || !isset($fileInfo['error']) || is_array($fileInfo['error'])) {
+                    continue;
+                }
+
+                switch ($fileInfo['error']) {
+                    case UPLOAD_ERR_INI_SIZE:
+                    case UPLOAD_ERR_FORM_SIZE:
+                        $com_connect_error[] = gTxt('com_connect_maxval_warning', array('{field}' => $hlabel . ' (' . $safeName . ')', '{value}' => $max));
+                        $isError = "errorElement";
+                        break;
+                    case UPLOAD_ERR_OK:
+                        break;
+                    case UPLOAD_ERR_PARTIAL:
+                    case UPLOAD_ERR_NO_FILE:
+                    case UPLOAD_ERR_NO_TMP_DIR:
+                    case UPLOAD_ERR_CANT_WRITE:
+                    case UPLOAD_ERR_EXTENSION:
+                    default:
+                        // Do nothing for now. Option to report in future.
+                        break;
+                }
+
+                $mimeOK = $extOK = false;
+
+                // If both mime and file extensions are supplied in the accept attribute,
+                // they must BOTH pass to move forward.
+                if (class_exists('finfo') && $acceptableMime) {
+                    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                    $mtype = finfo_file($finfo, $fileInfo['tmp_name']);
+                    finfo_close($finfo);
+
+                    $mimeOK = com_connect_strposa($acceptableMime, $mtype);
+                } else {
+                    $mimeOK = true;
+                }
+
+                if ($acceptableExt) {
+                    $ext = pathinfo($fileInfo['name'], PATHINFO_EXTENSION);
+                    $extOK = com_connect_strposa($acceptableExt, $ext);
+                } else {
+                    $extOK = true;
+                }
+
+                if ($mimeOK && $extOK) {
+                    // Not using Txp's temp directory on purpose. System only.
+                    $uploadfile = tempnam(sys_get_temp_dir(), hash('sha256', $fileInfo['name'])) . (!empty($ext) ? '.' . $ext : '');
+
+                    if (move_uploaded_file($fileInfo['tmp_name'], $uploadfile)) {
+                        $fileInfo['filepath'] = $uploadfile;
+                        com_connect_store('com_connect_file_' . $name . '_' . $safeName, $label, $fileInfo);
+                    } else {
+                        $com_connect_error[] = gTxt('com_connect_invalid_type', array('{field}' => $hlabel));
+                        $isError = "errorElement";
+                    }
+                } else {
+                    $com_connect_error[] = gTxt('com_connect_invalid_type', array('{field}' => $hlabel . ' (' . $safeName . ')'));
+                    $isError = "errorElement";
+                }
+            }
+        } elseif ($required && empty($_FILES)) {
+            $com_connect_error[] = gTxt('com_connect_maxval_warning', array('{field}' => $hlabel, '{value}' => $max));
+            $isError = "errorElement";
+        } elseif ($required) {
+            $com_connect_error[] = gTxt('com_connect_field_missing', array('{field}' => $hlabel));
+            $isError = "errorElement";
+        }
+    }
+
+    // PHP max file size helper. Not infallible but useful.
+    $maxhidden = ($max) ? parse('<txp:com_connect_text type="hidden" name="MAX_FILE_SIZE" class="comHidden" min="" max="" default="'.$max.'" required="0" label="" />') : '';
+    unset($atts['max']);
+
+    // Core attributes.
+    $attr = com_connect_build_atts(array(
+        'accept'   => $accept,
+        'id'       => (isset($id) ? $id : $name),
+        'name'     => $name.($multiple ? '[]' : ''),
+        'multiple' => $multiple,
+        'type'     => $type,
+    ));
+
+    // HTML5 attributes.
+    $required = ($required) ? 'required' : '';
+
+    if ($doctype !== 'xhtml') {
+        $attr += com_connect_build_atts(array(
+            'form'     => $html_form,
+            'required' => $required,
+        ));
+    }
+
+    // Global attributes.
+    $attr += com_connect_build_atts($com_connect_globals, $atts);
+
+    $classes = array();
+
+    foreach (array($class, ($required ? 'comRequired' : ''), $isError) as $cls) {
+        if ($cls) {
+            $classes[] = $cls;
+        }
+    }
+
+    $classStr = ($classes ? ' class="' . implode(' ', $classes) . '"' : '');
+    $labelStr = '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
+
+    return ($label_position === 'before' ? $labelStr . $break : '') .
+        '<input' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . ' />' .
+        ($label_position === 'after' ? $break . $labelStr : '');
+}
+
+/**
  * Tag: Store server information in the payload.
  *
  * @param  array  $atts  Tag attributes
@@ -1607,6 +1800,11 @@ function com_connect_submit($atts, $thing = '')
 
     // Global attributes.
     $attr += com_connect_build_atts($com_connect_globals, $atts);
+
+    // Handle form encoding type.
+    if ($com_connect_flags['enctype']) {
+        $attr['formenctype'] = 'formenctype="multipart/form-data"';
+    }
 
     $classStr = ($class ? ' class="' . $class . '"' : '');
 
@@ -1859,6 +2057,99 @@ function com_connect_strip($str, $header = true)
 }
 
 /**
+ * Returns a file size limit in bytes.
+ */
+function com_connect_file_max()
+{
+    // Start with post_max_size.
+    $max_size = com_connect_parse_size(ini_get('post_max_size'));
+
+    $upload_max = com_connect_parse_size(ini_get('upload_max_filesize'));
+
+    // If upload_max_filesize is less, then reduce. Except if
+    // zero, which indicates no limit.
+    if ($upload_max > 0 && $upload_max < $max_size) {
+        $max_size = $upload_max;
+    }
+
+    // If Textpattern's file_max_upload_size is less, then reduce. Except if
+    // zero, which indicates no limit.
+    $upload_max = get_pref('file_max_upload_size');
+
+    if ($upload_max > 0 && $upload_max < $max_size) {
+        $max_size = $upload_max;
+    }
+
+    return $max_size;
+}
+
+/**
+ * Convert a size value with suffix (K, M, G, T, etc) to bytes.
+ *
+ * @param  string $size The string that contains a size and multipler units
+ * @return int          The size converted to bytes
+ * @example
+ * com_connect_parse_size('2M');
+ * // Returns: 2048000
+ */
+function com_connect_parse_size($size)
+{
+    $multipliers = 'bkmgtpezy';
+
+    $unit = preg_replace('/[^'.$multipliers.']/i', '', $size); // Remove the non-unit characters from the size.
+    $size = preg_replace('/[^0-9\.\,]/', '', $size); // Remove the non-numeric characters from the size.
+
+   if ($unit) {
+        // Find the position of the unit in the ordered string which is
+        // the power of magnitude to multiply a kilobyte by.
+        return round($size * pow(1024, stripos($multipliers, $unit[0])));
+    } else {
+        return round($size);
+    }
+}
+
+/**
+ * Convert the $_FILES array into a standard form, regardless how many are presented
+ *
+ * @param  array $files_entry The item from the $_FILES superglobal
+ * @return array
+ */
+function com_connect_standardize_files($files_entry)
+{
+    $isMulti = is_array($files_entry['name']);
+    $file_count = $isMulti ? count($files_entry['name']) : 1;
+    $file_keys = array_keys($files_entry);
+
+    $out = array();
+
+    for ($idx = 0; $idx < $file_count; $idx++) {
+        foreach($file_keys as $key) {
+            if($isMulti) {
+                $out[$idx][$key] = $files_entry[$key][$idx];
+            } else {
+                $out[$idx][$key] = $files_entry[$key];
+            }
+        }
+    }
+
+    return $out;
+}
+
+/**
+ * Find entries in an array that match the given pattern
+ *
+ * @param  string $pattern A regex pattern to match the array keys against
+ * @param  array  $input   The array to search
+ * @param  int    $flags   Flags to control how the matches are performed
+ * @return array
+ */
+function com_connect_match_keys($pattern, $input, $flags = 0) {
+    return array_filter($input, function($key) use ($pattern, $flags) {
+           return preg_match($pattern, $key, $flags);
+    }, ARRAY_FILTER_USE_KEY);
+}
+
+/**
  * Handle content delivery of payload.
  *
  * Triggers a 'comconnect.deliver' callback event to override or augment the
@@ -1929,7 +2220,24 @@ function com_connect_deliver($from, $to, $reply, $subject, $body, $fields, $flag
             $message->replyTo($reply);
         }
 
-        return $message->send();
+        $attachments = com_connect_match_keys('/^com_connect_file_/', $fields);
+
+        if ($attachments) {
+            foreach ($attachments as $key => $fileInfo) {
+                $message->attach($fileInfo);
+            }
+        }
+
+        $ret = $message->send();
+
+        // Tidy up attachments.
+        if ($attachments) {
+            foreach ($attachments as $fileInfo) {
+                unlink($fileInfo['filepath']);
+            }
+        }
+
+        return $ret;
     } catch (\Textpattern\Mail\Exception $e) {
         $com_connect_error[] = $e->getMessage();
         return false;
@@ -1957,6 +2265,24 @@ function com_connect_in_array($needles, $haystack)
         return (count(array_intersect($needles, $haystack)) === count($needles));
     } else {
         return in_array($needles, $haystack);
+    }
+}
+
+/**
+ * Checks if any of the values are in the haystack.
+ *
+ * @param  array  $arrayOfNeedles  Set of values to check
+ * @param  string $haystack Thing to compare them against
+ * @return bool
+ */
+function com_connect_strposa($arrayOfNeedles, $haystack)
+{
+    if (count(array_filter($arrayOfNeedles, function($needle) use ($haystack) {
+        return strpos($haystack, $needle) !== false;
+    })) > 0) {
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -2309,6 +2635,7 @@ h2. Contents
 ** "com_connect_option tag":#cc_option
 ** "com_connect_checkbox tag":#cc_checkbox
 ** "com_connect_radio tag":#cc_radio
+** "com_connect_file tag":#cc_file
 ** "com_connect_secret tag":#cc_secret
 ** "com_connect_serverinfo tag":#cc_serverinfo
 ** "com_connect_send_article tag":#cc_send_article
@@ -2352,7 +2679,7 @@ h2(#install). Installing and upgrading
 
 *Requires Textpattern 4.9.0+*
 
-Download the latest release of the plugin from "the GitHub project page":https://github.com/textpattern/com_connect/releases, paste the code into the Textpattern Admin>Plugins panel, install and enable the plugin. Visit the "forum thread":https://forum.textpattern.io/viewtopic.php?id=47913 for more info or to report on the success or otherwise of the plugin.
+Download the latest release of the plugin from "the GitHub project page":https://github.com/textpattern/com_connect/releases, paste the code into the Textpattern Admin>Plugins panel, install and enable the plugin. Visit the "forum thread":https://forum.textpattern.com/viewtopic.php?id=47913 for more info or to report on the success or otherwise of the plugin.
 
 To uninstall, delete from the Plugins panel.
 
@@ -2970,7 +3297,7 @@ h4. Attributes
 ; @checked="boolean"@
 : Whether this radio option is checked when the form is first displayed. Available values: @1@ (yes) or @0@ (no). Default is @0@.
 ; @class="space-separated values"@
-:  Set the CSS @class@ name of the radio button. Default: @comRadio@. To remove @class@ attribute from the element entirely, use @class=""@.
+: Set the CSS @class@ name of the radio button. Default: @comRadio@. To remove @class@ attribute from the element entirely, use @class=""@.
 ; @group="text"@ %(warning)required%
 : Text used in the email to describe this group of radio buttons. This attribute value is remembered for subsequent radio buttons, so you only have to set it on the first radio button of a group. Default is @Radio@.
 ; @html_form="id"@
@@ -2996,6 +3323,43 @@ bc(language-markup). <txp:com_connect_radio label="Medium" group="I like my stea
 <txp:com_connect_radio label="Wine" group="With a glass of" />
 <txp:com_connect_radio label="Beer" />
 <txp:com_connect_radio label="Water" />
+
+h3(#cc_file). com_connect_file tag
+
+bc(language-markup). <txp:com_connect_file />
+
+Creates a file upload form to send attachments.
+
+h4. Attributes
+
+; @accept="mime types or extensions list"@
+: List of specific mime types, mime type wildcards, or file extensions to allow in the upload control.
+; @break="tag"@
+: Break tag between the button and label. Default is one space. Use @break="br"@ to put the control and label on separate lines.
+; @class="space-separated values"@
+: Set the CSS @class@ name of the input control. Default: @comFile@. To remove @class@ attribute from the element entirely, use @class=""@.
+; @html_form="id"@
+: The HTML @id@ of the @<form>@ tag to which the input is attached. Associated with the contained form by default.
+; @label="text"@ %(warning)required%
+: Text label displayed to the user as radio button option.
+; @label_position="text"@
+: Position of the label in relation to the field. Available values: @before@ or @after@. Default is @before@.
+; @max="integer"@
+: Maximum input file size, in bytes.
+; @min="integer"@
+: Minimum input file size, in bytes. Default is unset, i.e. no minimum limit.
+; @multiple="boolean"@
+: Whether to accept more than one file. Default is unset (i.e. one file limit).
+; @name="value"@ %(warning)recommended%
+: Field name, as used in the HTML @<input>@ tag.
+; @required="boolean"@
+: Whether this file must be supplied. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:com_connect>@ tag's @required@ attribute - if neither attribute is set then default is @1@. *You should set the @required@ attribute on only the first radio button of the group, or set the same identical attribute value on all radio buttons in the group.*
+
+h4. Examples
+
+h5. Example 1: Allow multiple image uploads
+
+bc(language-markup). <txp:com_connect_file label="Upload image" accept="image/*" multiple />
 
 h3(#cc_secret). com_connect_secret tag
 
@@ -3325,7 +3689,7 @@ Four callback events exist in com_connect:
 
 * @comconnect.submit@ is called after the form is submitted and the values are checked if empty or valid email addresses, but before the mail is sent.
 * @comconnect.form@ lets you inject content (fields) in the contact form as displayed to the visitor.
-* @comconnect.render@ lets you inject or alter markup of the entire @<form>@. Useful for editing things like @enctype@ (e.g. for file attachment modules that link into this plugin).
+* @comconnect.render@ lets you inject or alter markup of the entire @<form>@.
 * @comconnect.deliver@ is called immediately prior to delivery and advertises the intended payload so you may manipulate it. For example, you could do something as simple as adding CC: or BCC: fields. Or change the MIME type header to @text/html@ and add some HTML content based on the given body data, then let com_connect handle the mailing. Or you could intercept the entire mail process, handle mailing yourself with a third party system, and tell com_connect to skip its internal mailing process.
 
 For reference here are the commands that will be interesting to plugin developers:
@@ -3413,9 +3777,9 @@ Sure, put this just above the @com_connect@ tag:
 
 bc(language-markup). <txp:php>$_GET['com_connect_send_article']='yes';</txp:php>
 
-h5. How can I use this form to upload files?
+h5. How can I use this form to upload file attachments?
 
-You can't, but have a look at the "ext_file_attach":https://github.com/Bloke/ext_file_attach/releases/ module, or "mem_form":https://bitbucket.org/Manfre/txp-plugins/downloads/ plugins.
+Use the <txp:com_connect_file> tag.
 
 h5. Can I use this plugin to send HTML email?
 
@@ -3427,7 +3791,7 @@ Not without a plugin, such as "mem_postmaster":https://bitbucket.org/Manfre/txp-
 
 h5. I have a question that's not listed here
 
-First read the plugin documentation (the page you're on right now) once more. If that doesn't answer your question, visit the "Textpattern forum":https://forum.textpattern.io.
+First read the plugin documentation (the page you're on right now) once more. If that doesn't answer your question, visit the "Textpattern forum":https://forum.textpattern.com.
 
 h2. Authors/credits
 

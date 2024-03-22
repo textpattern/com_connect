@@ -59,7 +59,7 @@ h2(#install). Installing and upgrading
 
 *Requires Textpattern 4.9.0+*
 
-Download the latest release of the plugin from "the GitHub project page":https://github.com/textpattern/com_connect/releases, paste the code into the Textpattern Admin>Plugins panel, install and enable the plugin. Visit the "forum thread":https://forum.textpattern.io/viewtopic.php?id=47913 for more info or to report on the success or otherwise of the plugin.
+Download the latest release of the plugin from "the GitHub project page":https://github.com/textpattern/com_connect/releases, paste the code into the Textpattern Admin>Plugins panel, install and enable the plugin. Visit the "forum thread":https://forum.textpattern.com/viewtopic.php?id=47913 for more info or to report on the success or otherwise of the plugin.
 
 To uninstall, delete from the Plugins panel.
 
@@ -704,6 +704,43 @@ bc(language-markup). <txp:com_connect_radio label="Medium" group="I like my stea
 <txp:com_connect_radio label="Beer" />
 <txp:com_connect_radio label="Water" />
 
+h3(#cc_file). com_connect_file tag
+
+bc(language-markup). <txp:com_connect_file />
+
+Creates a file upload form to send attachments.
+
+h4. Attributes
+
+; @accept="mime types or extensions list"@
+: List of specific mime types, mime type wildcards, or file extensions to allow in the upload control.
+; @break="tag"@
+: Break tag between the button and label. Default is one space. Use @break="br"@ to put the control and label on separate lines.
+; @class="space-separated values"@
+: Set the CSS @class@ name of the input control. Default: @comFile@. To remove @class@ attribute from the element entirely, use @class=""@.
+; @html_form="id"@
+: The HTML @id@ of the @<form>@ tag to which the input is attached. Associated with the contained form by default.
+; @label="text"@ %(warning)required%
+: Text label displayed to the user as radio button option.
+; @label_position="text"@
+: Position of the label in relation to the field. Available values: @before@ or @after@. Default is @before@.
+; @max="integer"@
+: Maximum input file size, in bytes.
+; @min="integer"@
+: Minimum input file size, in bytes. Default is unset, i.e. no minimum limit.
+; @multiple="boolean"@
+: Whether to accept more than one file. Default is unset (i.e. one file limit).
+; @name="value"@ %(warning)recommended%
+: Field name, as used in the HTML @<input>@ tag.
+; @required="boolean"@
+: Whether this file must be supplied. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:com_connect>@ tag's @required@ attribute - if neither attribute is set then default is @1@. *You should set the @required@ attribute on only the first radio button of the group, or set the same identical attribute value on all radio buttons in the group.*
+
+h4. Examples
+
+h5. Example 1: Allow multiple image uploads
+
+bc(language-markup). <txp:com_connect_file label="Upload image" accept="image/*" multiple />
+
 h3(#cc_secret). com_connect_secret tag
 
 bc(language-markup). <txp:com_connect_secret />
@@ -1120,9 +1157,9 @@ Sure, put this just above the @com_connect@ tag:
 
 bc(language-markup). <txp:php>$_GET['com_connect_send_article']='yes';</txp:php>
 
-h5. How can I use this form to upload files?
+h5. How can I use this form to upload file attachments?
 
-You can't, but have a look at the "ext_file_attach":https://github.com/Bloke/ext_file_attach/releases/ module, or "mem_form":https://bitbucket.org/Manfre/txp-plugins/downloads/ plugins.
+Use the <txp:com_connect_file> tag.
 
 h5. Can I use this plugin to send HTML email?
 
@@ -1134,7 +1171,7 @@ Not without a plugin, such as "mem_postmaster":https://bitbucket.org/Manfre/txp-
 
 h5. I have a question that's not listed here
 
-First read the plugin documentation (the page you're on right now) once more. If that doesn't answer your question, visit the "Textpattern forum":https://forum.textpattern.io.
+First read the plugin documentation (the page you're on right now) once more. If that doesn't answer your question, visit the "Textpattern forum":https://forum.textpattern.com.
 
 h2. Authors/credits
 
