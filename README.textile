@@ -733,8 +733,7 @@ h4. Attributes
 ; @name="value"@ %(warning)recommended%
 : Field name, as used in the HTML @<input>@ tag.
 ; @required="boolean"@
-: Whether this file must be supplied. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:com_connect>@ tag's @required@ attribute - if neither attribute is set then default is @1@. *You should set the @required@ attribute on only the first radio button of the group, or set the same identical attribute value on all radio buttons in the group.*
-
+: Whether this file must be supplied. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:com_connect>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
 h4. Examples
 
 h5. Example 1: Allow multiple image uploads

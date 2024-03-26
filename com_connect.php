@@ -70,6 +70,7 @@ com_connect_form_expired => The form has expired, please try again.
 com_connect_form_used => The form was already submitted, please fill out a new form.
 com_connect_general_inquiry => General enquiry
 com_connect_invalid_email => <strong>{email}</strong> is not a valid email address.
+com_connect_invalid_file => <strong>{field}</strong> is not uploaded.
 com_connect_invalid_host => <strong>{host}</strong> is not a valid email host.
 com_connect_invalid_type => Field <strong>{field}</strong> is not of the expected type.
 com_connect_invalid_utf8 => <strong>{field}</strong> contains invalid UTF-8 characters.
@@ -105,6 +106,7 @@ com_connect_form_expired => Dieses Formular ist abgelaufen, bitte versuchen Sie 
 com_connect_form_used => Dieses Formular wurde bereits gesendet. Bitte laden Sie das Formular noch einmal.
 com_connect_general_inquiry => Allgemeine Anfrage
 com_connect_invalid_email => <strong>{email}</strong> ist keine gültige E-Mailadresse.
+com_connect_invalid_file =>
 com_connect_invalid_host => <strong>{host}</strong> ist kein gültiger E-Mail-Server.
 com_connect_invalid_type =>
 com_connect_invalid_utf8 => <strong>{field}</strong> enthält ungültige UTF-8-Zeichen.
@@ -140,6 +142,7 @@ com_connect_form_expired => El formulario ha caducado, por favor inténtalo de n
 com_connect_form_used => El formulario ya había sido enviado, por favor rellena el formulario de nuevo.
 com_connect_general_inquiry => Consulta general
 com_connect_invalid_email => La dirección de correo electrónico <strong>{email}</strong> no es válida.
+com_connect_invalid_file =>
 com_connect_invalid_host => El dominio de correo electrónico <strong>{host}</strong> no es válido.
 com_connect_invalid_type =>
 com_connect_invalid_utf8 => <strong>{field}</strong> contiene caracteres UTF-8 no válidos.
@@ -174,6 +177,7 @@ com_connect_form_expired => Le délai du formulaire vient d’expirer. Veuillez 
 com_connect_form_used => Le formulaire a déjà été soumis. Veuillez en remplir un nouveau.
 com_connect_general_inquiry => Demande d’ordre général
 com_connect_invalid_email => <strong>{email}</strong> n’est pas une adresse email valide.
+com_connect_invalid_file =>
 com_connect_invalid_host => <strong>{host}</strong> n’est pas correctement rédigé.
 com_connect_invalid_type =>
 com_connect_invalid_utf8 => <strong>{field}</strong> contient des caractères invalides.
@@ -209,6 +213,7 @@ com_connect_form_expired => Het formulier is verlopen, probeer het opnieuw.
 com_connect_form_used => Het formulier is reeds verstuurd, vul het opnieuw in.
 com_connect_general_inquiry => Bericht van de site
 com_connect_invalid_email => <strong>{email}</strong> is geen geldig e-mail addres.
+com_connect_invalid_file =>
 com_connect_invalid_host => <strong>{host}</strong> is geen geldige e-mail host.
 com_connect_invalid_type =>
 com_connect_invalid_utf8 => <strong>{field}</strong> bevat ongeldige lettertekens.
@@ -244,6 +249,7 @@ com_connect_form_expired => O formulário expirou, por favor tente novamente.
 com_connect_form_used => O formulário já foi enviado, por favor preencha o formulário novamente.
 com_connect_general_inquiry => Assuntos gerais
 com_connect_invalid_email => <strong>{email}</strong> não é um endereço de email válido.
+com_connect_invalid_file =>
 com_connect_invalid_host => <strong>{host}</strong> não é um domínio de email válido.
 com_connect_invalid_type =>
 com_connect_invalid_utf8 => <strong>{field}</strong> contém caracteres UTF-8 inválidos.
@@ -1623,7 +1629,7 @@ function com_connect_file($atts)
 
                 // If both mime and file extensions are supplied in the accept attribute,
                 // they must BOTH pass to move forward.
-                if (class_exists('finfo') && $acceptableMime) {
+                if (class_exists('finfo') && !empty($fileInfo['tmp_name']) && $acceptableMime) {
                     $finfo = finfo_open(FILEINFO_MIME_TYPE);
                     $mtype = finfo_file($finfo, $fileInfo['tmp_name']);
                     finfo_close($finfo);
@@ -1644,12 +1650,16 @@ function com_connect_file($atts)
                     // Not using Txp's temp directory on purpose. System only.
                     $uploadfile = tempnam(sys_get_temp_dir(), hash('sha256', $fileInfo['name'])) . (!empty($ext) ? '.' . $ext : '');
 
-                    if (move_uploaded_file($fileInfo['tmp_name'], $uploadfile)) {
-                        $fileInfo['filepath'] = $uploadfile;
-                        com_connect_store('com_connect_file_' . $name . '_' . $safeName, $label, $fileInfo);
+                    if (empty($fileInfo['tmp_name'])) {
+                        $com_connect_error[] = gTxt('com_connect_invalid_file', array('{field}' => $hlabel));
                     } else {
-                        $com_connect_error[] = gTxt('com_connect_invalid_type', array('{field}' => $hlabel));
-                        $isError = "errorElement";
+                        if (move_uploaded_file($fileInfo['tmp_name'], $uploadfile)) {
+                            $fileInfo['filepath'] = $uploadfile;
+                            com_connect_store('com_connect_file_' . $name . '_' . $safeName, $label, $fileInfo);
+                        } else {
+                            $com_connect_error[] = gTxt('com_connect_invalid_type', array('{field}' => $hlabel));
+                            $isError = "errorElement";
+                        }
                     }
                 } else {
                     $com_connect_error[] = gTxt('com_connect_invalid_type', array('{field}' => $hlabel . ' (' . $safeName . ')'));
@@ -1703,6 +1713,7 @@ function com_connect_file($atts)
     $labelStr = '<label for="' . $name . '"' . $classStr . '>' . txpspecialchars($label) . '</label>';
 
     return ($label_position === 'before' ? $labelStr . $break : '') .
+        $maxhidden.
         '<input' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . ' />' .
         ($label_position === 'after' ? $break . $labelStr : '');
 }
@@ -3353,7 +3364,7 @@ h4. Attributes
 ; @name="value"@ %(warning)recommended%
 : Field name, as used in the HTML @<input>@ tag.
 ; @required="boolean"@
-: Whether this file must be supplied. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:com_connect>@ tag's @required@ attribute - if neither attribute is set then default is @1@. *You should set the @required@ attribute on only the first radio button of the group, or set the same identical attribute value on all radio buttons in the group.*
+: Whether this file must be supplied. Available values: @1@ (yes) or @0@ (no). Default is whatever is set in the @<txp:com_connect>@ tag's @required@ attribute - if neither attribute is set then default is @1@.
 
 h4. Examples
 
