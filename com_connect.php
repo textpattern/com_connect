@@ -1575,6 +1575,8 @@ function com_connect_file($atts)
         $name = com_connect_label2name($label);
     }
 
+    $name = sanitizeForUrl($name);
+
     if (empty($_FILES) && empty($_POST) && isset($_SERVER['REQUEST_METHOD']) && strtolower($_SERVER['REQUEST_METHOD']) === 'post') {
         // Pretend it submitted okay, to render errors.
         $com_connect_submit = 1;
