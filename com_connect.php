@@ -726,7 +726,7 @@ function com_connect_text($atts)
 
     extract(com_connect_lAtts(array(
         'autocomplete'   => '',
-        'break'          => br,
+        'break'          => 'br',
         'class'          => 'comText',
         'default'        => '',
         'delay'          => null,
@@ -952,7 +952,7 @@ function com_connect_email($atts)
     // TODO: 'multiple' attribute?
     $defaults = array(
         'autocomplete'   => '',
-        'break'          => br,
+        'break'          => 'br',
         'class'          => 'comEmail',
         'default'        => '',
         'html_form'      => $com_connect_flags['this_form'],
@@ -1024,7 +1024,7 @@ function com_connect_textarea($atts)
 
     extract(com_connect_lAtts(array(
         'autocomplete'   => '',
-        'break'          => br,
+        'break'          => 'br',
         'class'          => 'comTextarea',
         'cols'           => 58,
         'default'        => '',
@@ -1135,7 +1135,7 @@ function com_connect_select($atts, $thing = '')
     global $com_connect_error, $com_connect_submit, $com_connect_flags;
 
     extract(com_connect_lAtts(array(
-        'break'          => br,
+        'break'          => 'br',
         'class'          => 'comSelect',
         'delimiter'      => ',',
         'html_form'      => $com_connect_flags['this_form'],
@@ -1552,7 +1552,7 @@ function com_connect_file($atts)
 
     extract(com_connect_lAtts(array(
         'accept'         => '',
-        'break'          => br,
+        'break'          => 'br',
         'class'          => 'comFile',
         'html_form'      => $com_connect_flags['this_form'],
         'isError'        => '',
@@ -1976,7 +1976,8 @@ function com_connect_lAtts($pairs, $atts)
         }
     }
 
-    if (isset($atts['break']) && $atts['break'] === 'br') {
+    if ((isset($atts['break']) && $atts['break'] === 'br') ||
+        (!isset($atts['break']) && isset($pairs['break']) && $pairs['break'] === 'br')) {
         $atts['break'] = ($doctype === 'xhtml') ? '<br />' : '<br>';
     }
 
