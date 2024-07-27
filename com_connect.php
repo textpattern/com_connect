@@ -1716,7 +1716,7 @@ function com_connect_file($atts)
 
     return ($label_position === 'before' ? $labelStr . $break : '') .
         $maxhidden.
-        '<input' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . ' />' .
+        '<input' . $classStr . ($attr ? ' ' . implode(' ', $attr) : '') . (($doctype === 'xhtml') ? ' />' : '>') .
         ($label_position === 'after' ? $break . $labelStr : '');
 }
 
