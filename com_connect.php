@@ -521,7 +521,14 @@ function com_connect($atts, $thing = '')
             $subject = parse_form($subject_form);
         }
 
-        $sep = IS_WIN ? "\r\n" : "\n";
+        $sep = "\n";
+
+        if (IS_WIN) {
+            $sep = "\r\n";
+        } elseif (ini_get('cgi.rfc2616_headers') != 0) {
+            $sep = "\r\n";
+        }
+
         $msg = array();
         $fields = array();
 
