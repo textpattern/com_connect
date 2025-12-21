@@ -1,6 +1,6 @@
 h1. Changelog
 
-h2. 4.9.0 - 2024-mm-dd
+h2. 4.9.0 - 2025-12-21
 
 * For Textpattern 4.9.0+ only.
 * Hook into core's email workflow, sending via internal mail or SMTP accordingly.
