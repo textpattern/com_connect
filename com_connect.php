@@ -17,7 +17,7 @@ $plugin['name'] = 'com_connect';
 // 1 = Plugin help is in raw HTML.  Not recommended.
 # $plugin['allow_html_help'] = 1;
 
-$plugin['version'] = '4.9.0-beta';
+$plugin['version'] = '4.9.0';
 $plugin['author'] = 'Textpattern Community';
 $plugin['author_uri'] = 'https://forum.textpattern.com/viewtopic.php?id=47913';
 $plugin['description'] = 'Form and contact mailer for Textpattern';
