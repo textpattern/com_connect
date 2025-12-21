@@ -1641,7 +1641,10 @@ function com_connect_file($atts)
                 if (class_exists('finfo') && !empty($fileInfo['tmp_name']) && $acceptableMime) {
                     $finfo = finfo_open(FILEINFO_MIME_TYPE);
                     $mtype = finfo_file($finfo, $fileInfo['tmp_name']);
-                    finfo_close($finfo);
+
+                    if (version_compare(PHP_VERSION, '8.5.0') < 0) {
+                        finfo_close($finfo);
+                    }
 
                     $mimeOK = com_connect_strposa($acceptableMime, $mtype);
                 } else {
